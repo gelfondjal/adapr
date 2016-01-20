@@ -1,0 +1,44 @@
+#' Collect trees from dependency directory
+#' @param dependency.dir Directory with dependency files
+#' @return data frame of stacked dependency files
+#' @details adapts to relative or absolute directories
+#' @export
+#' 
+Harvest.trees <- function(dependency.dir){
+  
+  #collects all trees in dependency.dir
+  
+  dep.files <- list.files(dependency.dir,full.names=TRUE)
+  
+  trees <- NULL
+  
+  if(length(dep.files)>0){
+    
+  list.deps <- lapply(dep.files,read.dependency)
+  
+  trees <- rbind.fill(list.deps)
+    
+  project.id <-  list.deps[[1]]$project.id[1] 
+  
+  new.path <- get.project.path(project.id)
+  
+  if(project.id==""){
+    
+    shaved.variables <- c("path","source.file.path","target.path","project.path")
+    
+    for(char.shave in shaved.variables){
+      
+        trees[[char.shave]] <- file.path(new.path,trees[[char.shave]])  
+      
+    }
+    
+    return(trees)
+    
+  }
+    
+  
+  } # if there exist dependency files
+  
+  
+  return(trees)
+}

@@ -1,0 +1,9 @@
+Package: adapr
+Type: Package
+Title: Tracks reading and writing within R scripts that are organized into a directed acyclic graph.
+Version: 1.0
+Date: 2015-12-21
+Author: Jon Gelfond
+Maintainer: Who to complain to <yourfault@somewhere.net>
+Description: Used Git and Pander
+License: Don't know
