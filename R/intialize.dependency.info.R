@@ -30,7 +30,7 @@ initialize_dependency_info <- function(source_info_arg){
   #  write.dependency(dependency.out,dependency.file)	
   
   
-  if(source_info$option$git){
+  if(source_info_arg$option$git){
   
   try({
     
@@ -67,10 +67,13 @@ initialize_dependency_info <- function(source_info_arg){
   load.source.directory(source_info_arg$source.support.dir)
   
   
-  support.files <- unlist(lapply(c(source_info_arg$support.dir,source_info_arg$source.support.dir),list.files,full.names=TRUE))
+  support.files <- unlist(lapply(c(source_info_arg$support.dir,source_info_arg$source.support.dir)
+  										,list.files,recursive=TRUE,full.names=TRUE,include.dirs=FALSE))
     
+    
+  #print(support.files)  
   
-  print(dependency.file)
+  #print(dependency.file)
   
   #	return(NULL)	
   
@@ -78,7 +81,7 @@ initialize_dependency_info <- function(source_info_arg){
   
   for(file.name in support.files){
     
-    if(source_info$option$git){try({ git.add(project.path,file.name) })}
+    if(source_info_arg$option$git){try({ git.add(project.path,file.name) })}
     
     Read.cap(Create.file.info(dirname(file.name),basename(file.name),"Support file"),I,source_info_arg)
     

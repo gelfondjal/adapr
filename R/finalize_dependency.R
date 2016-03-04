@@ -1,31 +1,29 @@
 #' Writes dependency data to file in "Dependency" directory
-#' @param source_info The source information list that contains dependency object
 #' @param write Logical indicated to write the dependency object
 #' @details Operates git tracking of program and dependency file. 
 #' @details Strips project directory out of dependency file
 #' @return dependency.object 
 #' @export
 
-finalize_dependency <- function(source_info,write=TRUE){
+finalize_dependency <- function(write=TRUE){
   
   # read in dependency object from dependency.file in source_info
   # return dependency object
+  require(rmarkdown)
   
+  # Copy and render Rmd file
+  file.copy(source_info$rmdfile$fullname,file.path(source_info$results.dir,source_info$rmdfile$file),overwrite=TRUE)
+  outputfile <- rmarkdown::render(file.path(source_info$results.dir,source_info$rmdfile$file))
+  Read.cap(source_info$rmdfile, I, source_info)
+  outfile <- Create.file.info(source_info$results.dir, basename(outputfile), paste("rendered Rmarkdown of", source_info$file$file))
+  Write.cap(NULL, outfile, I, source_info)
+
   current.dir <- getwd()
   
   Write(sessionInfo(),paste0("Session_info_",source_info$file$db.name,".RObj"),paste0("sessionInfo for", source_info$file[["file"]]),save)
   
-  if(source_info$pandoc){
-    panderOptions("table.split.table",Inf)
-    evalsOptions("cache.dir",source_info$tex.dir)
-    setwd(source_info$tex.dir)
-    source_info$report$format<-'html'
-    source_info$report$export(source_info$file$db.name,open=FALSE)
-    pandocInfo <- Create.file.info(source_info$tex.dir,paste0(source_info$file$db.name,".html"),"html markdown")
-    Write.cap(NULL,pandocInfo,I,source_info)
-    setwd(current.dir)
-  }
-  
+  # Render the markdown
+    
   dependency.file <- file.path(source_info$dependency.dir,source_info$dependency.file)
   
   
@@ -60,6 +58,8 @@ finalize_dependency <- function(source_info,write=TRUE){
     
   }
 
+
+  dependency.out <- subset(dependency.out,""!=target.hash)	
 
   setwd(current.dir)
     

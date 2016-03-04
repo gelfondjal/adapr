@@ -4,20 +4,19 @@
 \alias{create_source_file_dir}
 \title{Create source file directories}
 \usage{
-create_source_file_dir(project.id = "", source.file,
-  source.description = "", project.path = get.project.path(project.id),
-  git.path = NULL, git.log = TRUE)
+create_source_file_dir(project.id0 = project.id, source.file0 = source.file,
+  source.description = "", git.path = NULL, git.log = TRUE)
 }
 \arguments{
-\item{project.id}{is the project id name string}
+\item{project.id0}{is the project id name string}
 
-\item{source.file}{is the filename of the source}
-
-\item{project.path}{is the home directory of the project}
+\item{source.file0}{is the filename of the source}
 
 \item{git.path}{path to git version control command}
 
 \item{description}{is the string description of what the source file does}
+
+\item{project.path}{is the home directory of the project}
 }
 \value{
 source_info list describing the project

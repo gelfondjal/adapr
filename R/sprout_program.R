@@ -8,7 +8,7 @@
 #' @details Will not overwrite existing program
 #' @export
 #' 
-sprout.program <- function(project.id=NA,source.file.name=NA,description="",seed=2011,capture.load.command="library(IT2)",controller=FALSE){
+sprout.program <- function(project.id=NA,source.file.name=NA,description="",seed=2011,capture.load.command="library(adapr)",controller=FALSE){
   
   
   if(controller){
@@ -22,12 +22,11 @@ sprout.program <- function(project.id=NA,source.file.name=NA,description="",seed
   start.lines.specific <- c(paste0("source.file <-","\"",source.file.name,"\""),paste0("project.id <- \"",project.id,"\""))
   
   
-  initialize.lines <- paste0("source_info <- create.source.file.dir(project.id=project.id,source.file=source.file,get.project.path(project.id),","\n",
-                             "source.description=",paste0("\"",description,"\")"))
+  initialize.lines <- paste0("source_info <- create_source_file_dir(","source.description=",paste0("\"",description,"\")"))
   
   body.lines <- c(rep("\n",1),"# Program body here",rep("\n",2),"# End Program Body",rep("\n",1))
   
-  final.line <- "dependency.out <- finalize.dependency.si(source_info,commit=\"\",effort.hours=0)"
+  final.line <- "dependency.out <- finalize_dependency()"
   
 
   

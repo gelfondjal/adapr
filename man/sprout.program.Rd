@@ -5,7 +5,8 @@
 \title{Generates the shell of a code that is project specific}
 \usage{
 sprout.program(project.id = NA, source.file.name = NA, description = "",
-  seed = 2011, capture.load.command = "library(IT2)", controller = FALSE)
+  seed = 2011, capture.load.command = "library(adapr)",
+  controller = FALSE)
 }
 \arguments{
 \item{project.id}{Name of project}

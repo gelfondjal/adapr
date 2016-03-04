@@ -6,6 +6,12 @@ Digest <- function (object, algo = c("md5", "sha1", "crc32", "sha256",
                                      "sha512"), serialize = TRUE, file = FALSE, length = Inf, 
                     skip = "auto", ascii = FALSE, raw = FALSE) 
 {
+	
+  val <- ""
+  
+  
+  try({	
+	
   algo <- match.arg(algo)
   if (is.infinite(length)) {
     length <- -1
@@ -49,6 +55,11 @@ Digest <- function (object, algo = c("md5", "sha1", "crc32", "sha256",
     skip <- 0
   val <- .Call("digest", object, as.integer(algoint), as.integer(length), 
                as.integer(skip), as.integer(raw), PACKAGE = "digest")
+               
+  })             
+    
+  if(val=="")  {warning(paste("Digest hash compute Fail",object))}
+               
   return(val)
 }
     

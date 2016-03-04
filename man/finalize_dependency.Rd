@@ -4,11 +4,9 @@
 \alias{finalize_dependency}
 \title{Writes dependency data to file in "Dependency" directory}
 \usage{
-finalize_dependency(source_info, write = TRUE)
+finalize_dependency(write = TRUE)
 }
 \arguments{
-\item{source_info}{The source information list that contains dependency object}
-
 \item{write}{Logical indicated to write the dependency object}
 }
 \value{

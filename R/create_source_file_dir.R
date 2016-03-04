@@ -1,6 +1,6 @@
 #' Create source file directories 
-#' @param project.id is the project id name string
-#' @param source.file is the filename of the source
+#' @param project.id0 is the project id name string
+#' @param source.file0 is the filename of the source
 #' @param description is the string description of what the source file does 
 #' @param project.path is the home directory of the project
 #' @param git.path path to git version control command
@@ -8,9 +8,7 @@
 #' @details Intializes git for the project, adds program git tracking, and initializes dependency tracking
 #' @export
 #' 
-create_source_file_dir <- function(project.id="",source.file,source.description="",project.path=get.project.path(project.id),
-                                   
-                                   git.path=NULL,git.log = TRUE){
+create_source_file_dir <- function(project.id0=project.id,source.file0=source.file,source.description="",git.path=NULL,git.log = TRUE){
   require(devtools)
   require(plyr)
   require(igraph)
@@ -18,33 +16,36 @@ create_source_file_dir <- function(project.id="",source.file,source.description=
   require(rCharts)
   require(pander)
   
+  project.path <- get.project.path(project.id0)
+  project.tree <- project.directory.tree
+  
   
   analysis.dir <- file.path(project.path,project.tree$analysis) # where the programs are
   data.dir <- file.path(project.path,project.tree$data)  # where the data are
-  results.dir <- file.path(project.path,project.tree$results,source.file) # Standard output
+  results.dir <- file.path(project.path,project.tree$results,source.file0) # Standard output
   tex.dir <- file.path(results.dir,project.directory.tree$tex.dir) # Publication quality output
   dependency.dir <- file.path(project.path,project.tree$dependency.dir)
   support.dir <- file.path(project.path,project.tree$support)
   library.dir <- file.path(support.dir,project.tree$library.bank)
-  source.support.dir <- file.path(support.dir,source.file)
+  source.support.dir <- file.path(support.dir,source.file0)
   apps.dir <- file.path(support.dir,"Apps")
   
   project.tree <- project.directory.tree
   
   # Create necessary directories
   
-  apply(matrix(c(analysis.dir,data.dir,results.dir,tex.dir,dependency.dir,support.dir,library.dir,apps.dir,source.library.dir   )),1,dir.create,showWarnings=FALSE,recursive=TRUE)
+  apply(matrix(c(analysis.dir,data.dir,results.dir,tex.dir,dependency.dir,support.dir,library.dir,apps.dir,source.support.dir   )),1,dir.create,showWarnings=FALSE,recursive=TRUE)
   
-  source.file.info <- Create.file.info(analysis.dir,source.file,description=source.description)	
+  source.file.info <- Create.file.info(analysis.dir,source.file0,description=source.description)	
   
   source_info <- list(analysis.dir=analysis.dir,data.dir=data.dir,tex.dir=tex.dir,results.dir=results.dir,support.dir = support.dir,library.dir=library.dir,
                       dependency.dir=dependency.dir,file=source.file.info,source.support.dir=source.support.dir,support.library.file="common_libs.csv")
   
-  source_info$project.id <- project.id
+  source_info$project.id <- project.id0
   source_info$project.path <- project.path	
   
   try({
-    not.this.source <- subset(Harvest.trees(dependency.dir),(source.file!=source_info$file[["file"]])&(!is.na(dependency)))
+    not.this.source <- subset(Harvest.trees(dependency.dir),(source.file0!=source_info$file[["file"]])&(!is.na(dependency)))
     if (nrow(not.this.source)){source_info$all.files<- Condense.file.info(not.this.source)}
   },silent=TRUE)
   
@@ -58,19 +59,15 @@ create_source_file_dir <- function(project.id="",source.file,source.description=
   
   source_info$dependency <- dependency(data= data.frame())
   
+  source_info$option$git <- TRUE
+  
+  
+  
   initialize_dependency_info(source_info)
   
   #Start html markup tracking
   
-  if(source_info$option$pandoc){
- 
-  panderOptions("table.split.table",Inf)
-  evalsOptions("cache.dir",source_info$tex.dir)
-  setwd(source_info$tex.dir)
-  source_info$report <- Pandoc$new()
-  source_info$pandoc <- FALSE
-  author <- ""
-  
+    
   if(source_info$option$git){
   
   try({
@@ -80,20 +77,15 @@ create_source_file_dir <- function(project.id="",source.file,source.description=
   
   }# if git
   
-  #try(pandocinstalled <- source_info$report$export("tester",open=FALSE))
-  if(!source_info$option$pandoc){
-    return("Warning: Pandoc is not installed on this computer")}else {
-      source_info$pandoc <- TRUE
-      source_info$report$title <- paste(source_info$project.id,source.file)
-      source_info$report$author <-paste("ADAPR",author)
-      source_info$report$add.paragraph(paste("Script description:",source.description))
-      # Remove leftover plots      
-      file.remove(list.files(file.path(source_info$tex.dir,"plots"),full.names=TRUE))
-      
-    }
-    
-    
-    }#if pandoc
+  # Creat markdown partner
+  
+  targetfile <- paste0(source_info$file$file,"md")
+  targetdir <- source_info$analysis.dir
+
+  source_info$rmdfile <- create_markdown(target.file= targetfile,target.dir=targetdir,style="html_document",description=source_info$file$description,source_info)
+  
+  #print(source_info)
+  
   return(source_info)
   
 }	
