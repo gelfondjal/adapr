@@ -6,7 +6,7 @@
 \usage{
 create_markdown(target.file = paste0(source_info$file$file, "md"),
   target.dir = source_info$analysis.dir, style = "html_document",
-  description = "Markdown", si)
+  description = "Markdown", si, overwrite = FALSE)
 }
 \arguments{
 \item{target.file}{Markdown file to create}
@@ -16,6 +16,8 @@ create_markdown(target.file = paste0(source_info$file$file, "md"),
 \item{description}{Markdown description}
 
 \item{si}{source_info object for tracking}
+
+\item{overwrite}{overwrite existing R markdown?}
 
 \item{tyle}{Markdown target style}
 }

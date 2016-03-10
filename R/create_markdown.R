@@ -4,13 +4,14 @@
 #' @param tyle Markdown target style
 #' @param description Markdown description
 #' @param si source_info object for tracking
+#' @param overwrite overwrite existing R markdown?
 #' @return File information
 #' @details Uses rmarkdown library to access objects in the R script. Will track dependencies for objects used within Rmd file.
 #' @export
 #' 
 #' 
 
-create_markdown <- function(target.file=paste0(source_info$file$file,"md"),target.dir=source_info$analysis.dir,style="html_document",description="Markdown",si){
+create_markdown <- function(target.file=paste0(source_info$file$file,"md"),target.dir=source_info$analysis.dir,style="html_document",description="Markdown",si,overwrite=FALSE){
 	
 
 	
@@ -22,7 +23,7 @@ create_markdown <- function(target.file=paste0(source_info$file$file,"md"),targe
 #	Read.cap(file.information,read.fcn=I,source_info=si)
   
 	
-	if(file.exists(target.file)){return(file.information)}
+	if((!overwrite)&file.exists(target.file)){return(file.information)}
 	
 	
 	git_binary_path <- git_path(NULL)
@@ -32,9 +33,11 @@ create_markdown <- function(target.file=paste0(source_info$file$file,"md"),targe
 	start.lines.generic <- c("---",
 							paste("title:",paste0("\"",si$project.id," ",basename(target.file),": ",description,"\"")),
 							paste("author:",paste0("\"",author,"\"")),
-							paste("date:",Sys.time()),
 							paste("output:",style),
 							"---",
+							"```{r,echo=FALSE}\n
+							paste(\"Created on\",(Sys.time() ))\n
+							```",
 							"```{r}\n```")
 								
 	start.lines.generic <- paste(start.lines.generic,collapse="\n")

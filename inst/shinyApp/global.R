@@ -2,9 +2,8 @@
 if(!require(shinyIncubator)){devtools::install_github("shiny-incubator", "rstudio")}
 require(shinyIncubator)
 library(devtools)
-library(pander)
-library(IT2)
-panderOptions("table.split.table",Inf)
+library(adapr)
+
 all.orchards <-get_orchard()
 
 

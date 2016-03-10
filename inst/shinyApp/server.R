@@ -1,10 +1,11 @@
 ## server.R
 library(shiny)
 require(rCharts)
-library(IT2)
+library(adapr)
 library(plyr) 
 library(devtools)
 library(shinyIncubator)
+library(knitr)
 source("helpers.R")
 
 
@@ -123,7 +124,7 @@ shinyServer(function(input, output,session) {
     if(input$submitReport!=0){                                             
       isolate({  
         source_info <- pull_source_info(input$project.id)
-        project_reporter_pander(source_info) 
+        project_report_markdown(source_info) 
         browseURL(paste0("file://",(file.path(source_info$results.dir,"project_summary.html"))))
         paste("Creating report",input$project.id)   
       })
@@ -327,34 +328,7 @@ shinyServer(function(input, output,session) {
   })   
   
   
-  ##########################################################################################
-  ### GRAFT TAB
-
-
-  output$projectselected6<-renderUI({
-    helpText(paste(input$project.id,"project selected."))
-  })
-  
-  output$Branches <- renderTable({
-    input$submitSend
-    source_info <- pull_source_info(input$project.id)
-    branch.directory <- file.path(get.project.swap.directory(source_info$project.id),"Branches")
-    branches <- sort(list.files(branch.directory))
-    data.frame(Branches=branches)
-  })
-  
-  output$Grafted<- renderText({ 
-    if(input$submitGraft!=0){                                             
-      isolate({  
-        source_info <- pull_source_info(input$project.id)
-        graft.branch(input$graft.branch_name,run=as.logical(input$graft.run),start.up=TRUE,
-                     input$project.id,as.logical(input$graft.overwriteTF))
-        paste("Grafted",input$graft.branch_name,Sys.time()) 
-      })
-    }
-  }) 
-  
-  
+    
   ##########################################################################################
   ###CONFIGURE TAB
   

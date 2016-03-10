@@ -22,7 +22,7 @@ Harvest.trees <- function(dependency.dir){
   
   new.path <- get.project.path(project.id)
   
-  if(project.id==""){
+  if(is.na(list.deps[[1]]$project.path[1])){
     
     shaved.variables <- c("path","source.file.path","target.path","project.path")
     

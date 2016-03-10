@@ -85,21 +85,9 @@ shinyUI(fluidPage(theme="style.css",pageWithSidebar(
                      br(),br(),
                      img(src="sendBranch.jpg",height=275,width=450)
                      ),
-    
-    conditionalPanel(condition="input.conditionedPanels == 'Graft'",
-                     htmlOutput("projectselected6"),
-                     textInput('graft.branch_name', "Branch to get:", value = "GetBranch"),
-                     br(),br(),
-                     selectInput('graft.run', "Run Branch", c("FALSE","TRUE"),"FALSE"),
-                     br(),br(),
-                     selectInput('graft.overwriteTF', "Overwrite existing programs", c("FALSE","TRUE"),"FALSE"),
-                     br(),br(),
-                     actionButton("submitGraft","Graft"),
-                     br(),br(),
-                     img(src="graftBranch.jpg",height=300,width=360)
-                     ),
-    
-    conditionalPanel(condition="input.conditionedPanels == 'Configure'", 
+  
+  
+      conditionalPanel(condition="input.conditionedPanels == 'Configure'", 
                      helpText(h3("See if Git is working")),
                      actionButton("submitGitCheck","Check Git"),
                      br(),br(),
@@ -128,7 +116,6 @@ shinyUI(fluidPage(theme="style.css",pageWithSidebar(
       tabPanel("Synchronize",br(),br(),tableOutput("syncTest"),br(),br(), textOutput("syncText"),
                textOutput("progressbar"),br(),br(),textOutput("CommitOut")),
       tabPanel("Send",br(),br(), tableOutput("Programs"),br(),br(), textOutput("Sent")),
-      tabPanel("Graft",br(),br(), tableOutput("Branches"),br(),br(), textOutput("Grafted")),
       tabPanel("Configure",br(),br(),uiOutput("Git"),br(),textOutput("Gitlogin"),br(),br(),textOutput("IT2")),
       id="conditionedPanels" 
     )
