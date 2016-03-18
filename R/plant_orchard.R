@@ -31,8 +31,8 @@ plant.orchard <- function(){
 #' @export
 #' 
 first.project <- function(project.path="",publish.path=""){
-project.path <- "/Users/Gelfond/Documents/Projects"
-publish.path <- "/Users/Gelfond/Documents/Projects/Swap"
+#project.path <- "/Users/Gelfond/Documents/Projects"
+#publish.path <- "/Users/Gelfond/Documents/Projects/Swap"
   orchard.site <- file.path(path.expand.2("~"),"ProjectPaths","projectid_2_directory_adapr.csv")	
   
   project.id <- "adaprHome"
