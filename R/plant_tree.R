@@ -11,11 +11,11 @@ plant.tree <- function(project.id,project.path,swap.directory){
   
   empty.orchard <- data.frame(project.id=project.id,project.path=project.path,swap.directory=swap.directory)
   
-  orchard.site <- file.path(path.expand.2("~"),"ProjectPaths","projectid_2_directory.csv")	
+  orchard.site <- file.path(path.expand.2("~"),"ProjectPaths","projectid_2_directory_adapr.csv")	
   
   if(!file.exists(orchard.site)){plant.orchard()}
   
-  all.orchards <- read.csv(file.path(path.expand.2("~"),"ProjectPaths","projectid_2_directory.csv"),as.is=TRUE)
+  all.orchards <- get_orchard()
   
   if(project.id %in% all.orchards$project.id){
     

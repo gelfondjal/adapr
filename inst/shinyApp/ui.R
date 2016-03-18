@@ -1,6 +1,6 @@
 ## ui.R
 
-library(IT2)
+library(adapr)
 library(shinyIncubator)
 
 shinyUI(fluidPage(theme="style.css",pageWithSidebar(
@@ -97,7 +97,7 @@ shinyUI(fluidPage(theme="style.css",pageWithSidebar(
                      br(),
                      actionButton("submitGitLogin","Login"),
                      br(),br(),
-                     helpText(h3("Install the latest version of IT2")),
+                     helpText(h3("Install the latest version of adapr")),
                      actionButton("installit2","Install"),
                      br(),br(),
                      img(src="configure.jpg",height=330, width=300)

@@ -5,7 +5,7 @@
 \title{Renders and Rmarkdown file}
 \usage{
 create_markdown(target.file = paste0(source_info$file$file, "md"),
-  target.dir = source_info$analysis.dir, style = "html_document",
+  target.dir = source_info$markdown.dir, style = "html_document",
   description = "Markdown", si, overwrite = FALSE)
 }
 \arguments{

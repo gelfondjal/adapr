@@ -6,7 +6,7 @@ get_orchard <- function(){
   
   # 
   
-  orchard.site <- file.path(path.expand.2("~"),"ProjectPaths","projectid_2_directory.csv")  
+  orchard.site <- file.path(path.expand.2("~"),"ProjectPaths","projectid_2_directory_adapr.csv")  
   
   if(!file.exists(orchard.site)){
     
@@ -15,7 +15,7 @@ get_orchard <- function(){
     return(NULL)
   }
   
-  orchard <- read.csv(orchard.site,as.is=TRUE)  
+  suppressWarnings(orchard <-read.csv(orchard.site,as.is=TRUE)  )
   
   orchard <- orchard[order(orchard$project.id),]
   

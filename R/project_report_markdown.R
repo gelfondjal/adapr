@@ -91,6 +91,7 @@ for (source.iter in names(summaries.out)) {
   temp$File <- make.hyperlink(temp$Fullname, temp$File)
   outputs[[source.iter]] <- subset(temp, select = c("IO", 
                                                     "File", "Description"))
+  rownames(outputs[[source.iter]])    <- NULL                                                 
 }
 
 
@@ -119,7 +120,9 @@ for (namer in names(outputs)){
 	
 write("\n",file.path(targetdirectory,targetfile),append=TRUE)
 write(paste("#",namer,"\n"),file.path(targetdirectory,targetfile),append=TRUE)
-write(kable(outputs[[namer]]),file.path(targetdirectory,targetfile),append=TRUE)
+out <- subset(outputs[[namer]],Description!="Support file")
+rownames(out) <- NULL
+write(kable(out),file.path(targetdirectory,targetfile),append=TRUE)
 write("\n",file.path(targetdirectory,targetfile),append=TRUE)
 
 }

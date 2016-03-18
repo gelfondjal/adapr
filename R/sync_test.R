@@ -50,7 +50,7 @@ Sync.test <- function(dagger,tree,plotl=TRUE){
   
   vertex.updates <- rownames(updated.logical)[updated.logical]
   
-  V(dagger)$color <- redblue(length(V(dagger)))[rank(V(dagger)$time)]
+  V(dagger)$color <- "blue"
   #	par(mfrow=c(1,2))
   #	plot(dagger,main="Dagger with time as color")
   

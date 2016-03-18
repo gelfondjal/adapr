@@ -30,7 +30,7 @@ shinyServer(function(input, output,session) {
       })
     }
     
-    all.orchards <<- read.csv(file.path(path.expand.2("~"), "ProjectPaths", "projectid_2_directory.csv"), as.is = TRUE)
+    all.orchards <<- adapr::get_orchard() #read.csv(file.path(path.expand.2("~"), "ProjectPaths", "projectid_2_directory.csv"), as.is = TRUE)
     textout  
   })
   
@@ -143,7 +143,7 @@ shinyServer(function(input, output,session) {
         
         app.command <- paste0("shiny::runApp('",app.dir,"',port=",portL,",host='127.0.0.1')")
         
-        run.command <- paste("library(IT2)",app.command,sep="\n")
+        run.command <- paste("library(adapr)",app.command,sep="\n")
         
         tf <- tempfile()
         
@@ -312,7 +312,7 @@ shinyServer(function(input, output,session) {
     pi <- get.project.info.si(source_info)
     temp <- subset(pi$all.files,select=c("file","description"),file.class=="source")
     rownames(temp) <- 1:nrow(temp)
-    temp <- rename(temp,replace=c("file"="File","description"="Description"))
+    temp <- plyr::rename(temp,replace=c("file"="File","description"="Description"))
     temp
   })
   
@@ -363,7 +363,7 @@ shinyServer(function(input, output,session) {
     textout<-"Waiting to install latest adapr"
     if (input$installit2!=0){
       install_github("adapr", "gelfondjal")
-      library(IT2)
+      library(adapr)
       textout<-"adapr has been installed."
     }
     textout

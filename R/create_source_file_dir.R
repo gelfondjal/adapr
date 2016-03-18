@@ -29,20 +29,23 @@ create_source_file_dir <- function(project.id0=project.id,source.file0=source.fi
   library.dir <- file.path(support.dir,project.tree$library.bank)
   source.support.dir <- file.path(support.dir,source.file0)
   apps.dir <- file.path(support.dir,"Apps")
+  markdown.dir <- file.path(analysis.dir,"Markdown")
   
   project.tree <- project.directory.tree
   
   # Create necessary directories
   
-  apply(matrix(c(analysis.dir,data.dir,results.dir,tex.dir,dependency.dir,support.dir,library.dir,apps.dir,source.support.dir   )),1,dir.create,showWarnings=FALSE,recursive=TRUE)
+  apply(matrix(c(analysis.dir,data.dir,results.dir,tex.dir,dependency.dir,support.dir,library.dir,apps.dir,source.support.dir,markdown.dir   )),1,dir.create,showWarnings=FALSE,recursive=TRUE)
   
   source.file.info <- Create.file.info(analysis.dir,source.file0,description=source.description)	
   
   source_info <- list(analysis.dir=analysis.dir,data.dir=data.dir,tex.dir=tex.dir,results.dir=results.dir,support.dir = support.dir,library.dir=library.dir,
-                      dependency.dir=dependency.dir,file=source.file.info,source.support.dir=source.support.dir,support.library.file="common_libs.csv")
+                      dependency.dir=dependency.dir,file=source.file.info,source.support.dir=source.support.dir,markdown.dir=markdown.dir,support.library.file="common_libs.csv")
   
   source_info$project.id <- project.id0
   source_info$project.path <- project.path	
+  
+  source_info$options <- get_adapr_options(TRUE)
   
   try({
     not.this.source <- subset(Harvest.trees(dependency.dir),(source.file0!=source_info$file[["file"]])&(!is.na(dependency)))
@@ -80,7 +83,7 @@ create_source_file_dir <- function(project.id0=project.id,source.file0=source.fi
   # Creat markdown partner
   
   targetfile <- paste0(source_info$file$file,"md")
-  targetdir <- source_info$analysis.dir
+  targetdir <- source_info$markdown.dir
 
   source_info$rmdfile <- create_markdown(target.file= targetfile,target.dir=targetdir,style="html_document",description=source_info$file$description,source_info)
   
