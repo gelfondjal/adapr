@@ -27,7 +27,7 @@ create_source_file_dir <- function(project.id0=project.id,source.file0=source.fi
   dependency.dir <- file.path(project.path,project.tree$dependency.dir)
   support.dir <- file.path(project.path,project.tree$support)
   library.dir <- file.path(support.dir,project.tree$library.bank)
-  source.support.dir <- file.path(support.dir,source.file0)
+  source.support.dir <- file.path(support.dir,gsub("\\.(R|r)$","_R",source.file0))
   apps.dir <- file.path(support.dir,"Apps")
   markdown.dir <- file.path(analysis.dir,"Markdown")
   
