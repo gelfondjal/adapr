@@ -7,7 +7,7 @@
 load.source.directory <- function(source.directory){
 
   
-  source.file.list <- list.files(source.directory,pattern="(\\.R$)|(\\.r$)",full.names=TRUE)
+  source.file.list <- list.files(source.directory,pattern="(\\.R$)|(\\.r$)",full.names=TRUE,include.dirs=FALSE)
   
   print(source.file.list)
   
