@@ -20,7 +20,7 @@ shinyServer(function(input, output,session) {
   })
   
   output$createproject <- renderText({
-    textout <- "Waiting to create project"
+    textout <- ifelse(nrow(get_orchard())==0,"Configure Project Directories.","Waiting to create project.")
     if(input$submitProject!=0){
       isolate({
         no.spaces<-make.names(input$project.id.make)
@@ -31,6 +31,7 @@ shinyServer(function(input, output,session) {
     }
     
     all.orchards <<- adapr::get_orchard() #read.csv(file.path(path.expand.2("~"), "ProjectPaths", "projectid_2_directory.csv"), as.is = TRUE)
+    
     textout  
   })
   
@@ -358,6 +359,23 @@ shinyServer(function(input, output,session) {
     }
     textout
   })
+  
+  
+  output$First.project<-renderText({
+    textout<-ifelse(nrow(get_orchard())==0,"Configure Project Directories.","Project Directory Configured.")
+    if((input$submitFirst.project%%2)!=0){
+      login<-first.project(input$project1.directory,input$publish.directory)
+      if(login){
+        textout<-"Project Directories Identified"
+      }
+      else{
+        textout<-paste("Project Not Started!",input$submitFirst.project)
+      } 
+    }
+    textout
+  })
+  
+  
   
   output$IT2<-renderText({
     textout<-"Waiting to install latest adapr"

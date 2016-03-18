@@ -22,10 +22,10 @@ shinyUI(fluidPage(theme="style.css",pageWithSidebar(
                      helpText(h3("Create a New Project")),
                      textInput('project.id.make', "Project ID:", value = "Example project"),
                      textInput('project.directory', "Project directory:", 
-                               value= gsub("(^.*)(\\/.*$)","\\1",all.orchards$project.path[1])),
+                               value= gsub("(^.*)(\\/.*$)","\\1",get_orchard()$project.path[1])),
                      br(),
                      textInput("swap.directory", label = "Swap directory:",
-                               value=gsub("(^.*)(\\/.*$)","\\1",all.orchards$swap.directory[1])),
+                               value=gsub("(^.*)(\\/.*$)","\\1",get_orchard()$swap.directory[1])),
                      br(),br(),
                      actionButton("submitProject","Create project"),  
                      br(),br(),
@@ -88,6 +88,13 @@ shinyUI(fluidPage(theme="style.css",pageWithSidebar(
   
   
       conditionalPanel(condition="input.conditionedPanels == 'Configure'", 
+                       
+                    helpText(h3("Configure First Project")),
+                    textInput("project1.directory","Project Directory",value="Path to Projects"),
+                    textInput("publish.directory","Publish Directory:",value="Path to Publish"),
+                    actionButton("submitFirst.project","Setup First Project"),
+                    br(),br(),
+                       
                      helpText(h3("See if Git is working")),
                      actionButton("submitGitCheck","Check Git"),
                      br(),br(),
@@ -99,7 +106,8 @@ shinyUI(fluidPage(theme="style.css",pageWithSidebar(
                      br(),br(),
                      helpText(h3("Install the latest version of adapr")),
                      actionButton("installit2","Install"),
-                     br(),br(),
+              
+                    
                      img(src="configure.jpg",height=330, width=300)
                      )
     ),
@@ -116,7 +124,7 @@ shinyUI(fluidPage(theme="style.css",pageWithSidebar(
       tabPanel("Synchronize",br(),br(),tableOutput("syncTest"),br(),br(), textOutput("syncText"),
                textOutput("progressbar"),br(),br(),textOutput("CommitOut")),
       tabPanel("Send",br(),br(), tableOutput("Programs"),br(),br(), textOutput("Sent")),
-      tabPanel("Configure",br(),br(),uiOutput("Git"),br(),textOutput("Gitlogin"),br(),br(),textOutput("IT2")),
+      tabPanel("Configure",br(),br(),uiOutput("First.project"),br(),uiOutput("Git"),br(),textOutput("Gitlogin"),br(),br(),textOutput("IT2")),
       id="conditionedPanels" 
     )
   )

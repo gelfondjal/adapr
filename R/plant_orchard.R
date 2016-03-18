@@ -33,22 +33,22 @@ plant.orchard <- function(){
 first.project <- function(project.path="",publish.path=""){
 #project.path <- "/Users/Gelfond/Documents/Projects"
 #publish.path <- "/Users/Gelfond/Documents/Projects/Swap"
-  orchard.site <- file.path(path.expand.2("~"),"ProjectPaths","projectid_2_directory_adapr.csv")	
+  orchard.site <- get_orchard()	
   
   project.id <- "adaprHome"
   
-  if(!file.exists(orchard.site)){
+  if(is.null(orchard.site)){
   	
   	# Create orchard
   	
   	plant.orchard()
  
- 	plant.tree(project.id,project.path,publish.path) 
-  	
-    return(TRUE)
   }
+ 
   
-  return(FALSE)
+  testout <- plant.tree(project.id,project.path,publish.path)   
+  
+  return(testout)
 }
 
 
