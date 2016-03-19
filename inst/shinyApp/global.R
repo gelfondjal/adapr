@@ -8,6 +8,22 @@ all.orchards <-get_orchard()
 
 
 
+get_filelist <- function(project.id){
+  
+  si <- pull_source_info(project.id)
+  
+  files <- get.project.info.si(si)$all.files
+  
+  paths <- gsub(file.path(si$project.path,""),"",fixed=TRUE,files$fullname)
+  descriptions <- files$description
+  
+  results <- subset(data.frame(path=paths,description=descriptions,stringsAsFactors=FALSE),grepl("^Results",path))
+  
+  results$path <-  gsub(file.path("Results",""),"",fixed=TRUE,results$path)
+  
+  return(results)
+  
+}
 
 
 smart.install.packages <- function(package.name,repository=""){

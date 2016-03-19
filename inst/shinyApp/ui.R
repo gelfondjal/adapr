@@ -78,7 +78,7 @@ shinyUI(fluidPage(theme="style.css",pageWithSidebar(
  
     conditionalPanel(condition="input.conditionedPanels == 'Send'",
                      htmlOutput("projectselected5"),
-                     selectInput('filename.send', "Result File:", c("",get_filelist(project.id)$path),""),
+                     textInput('filename.send', "Result File:", value="Path from main results directory"),
                      br(),br(),
                      actionButton("submitPublish","Add File & Publish"),
                      br(),br(),
