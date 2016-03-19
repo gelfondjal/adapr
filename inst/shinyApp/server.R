@@ -6,6 +6,7 @@ library(plyr)
 library(devtools)
 library(shinyIncubator)
 library(knitr)
+require(igraph)
 source("helpers.R")
 
 
@@ -309,21 +310,60 @@ shinyServer(function(input, output,session) {
   })
   
   output$Programs <- renderTable({
-    source_info <- pull_source_info(input$project.id)
-    pi <- get.project.info.si(source_info)
-    temp <- subset(pi$all.files,select=c("file","description"),file.class=="source")
-    rownames(temp) <- 1:nrow(temp)
-    temp <- plyr::rename(temp,replace=c("file"="File","description"="Description"))
-    temp
+    
+    if(input$submitPublish!=0){ 
+      source_info <- pull_source_info(input$project.id)
+      publication.file <- file.path(source_info$project.path,project.directory.tree$support,"files_to_publish.csv")
+      publication.table <- read.csv(publication.file,as.is=TRUE)
+      
+      if(input$filename.send!=""){
+      
+      possible.paths <- get_filelist(input$project.id)
+      
+      possible.paths$path <- file.path("Results",possible.paths$path)
+      names(possible.paths) <- c("Path","Description")
+      
+      
+      filetosend <- file.path("Results",input$filename.send)
+      
+      if(!(filetosend %in% publication.table$Path)){
+      
+        
+        print(filetosend)
+        print(possible.paths)
+        
+        publication.table <- rbind(publication.table,subset(possible.paths,Path==filetosend))
+        
+        print(publication.table)
+        write.csv(publication.table,publication.file,row.names=FALSE)
+      }#if new file
+        
+      }#if file selected
+      
+      if(nrow(publication.table)>0){
+      publication.table <- publication.table[order(basename(publication.table$Path)),]
+      }else{publication.table <- data.frame(Path="No files to publish",Description="Choose a file")}
+      
+      
+      file.copy(file.path(source_info$project.path,publication.table$Path),get.project.publish.path(input$project.id),overwrite=TRUE)
+      
+      
+      publication.table
+    
+      
+      
+    }# if action button
   })
+  
   
   output$Sent <- renderText({ 
     if(input$submitSend!=0){                                             
       isolate({  
         source_info <- pull_source_info(input$project.id)
-        name<-ifelse(as.logical(input$all.branchesTF),"all",input$filename.send)
-        send.branch.si(source_info,name,all=as.logical(input$all.branchesTF))
-        paste("Sent",input$filename.send,Sys.time()) 
+        target.directory <- get.project.publish.path(input$project.id)
+		project_report_send_rmd(target.directory=target.directory,source_info,send.data=ifelse(input$send.data=="TRUE",TRUE,FALSE),
+									 graph.width = 960, graph.height = 500) 
+        paste("Project",input$project.id,"published on",Sys.time()) 
       })
     } 
   })   

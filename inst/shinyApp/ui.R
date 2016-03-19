@@ -78,10 +78,12 @@ shinyUI(fluidPage(theme="style.css",pageWithSidebar(
  
     conditionalPanel(condition="input.conditionedPanels == 'Send'",
                      htmlOutput("projectselected5"),
-                     textInput('filename.send', "Filename:", value = "MyProgram.R"),
+                     selectInput('filename.send', "Result File:", c("",get_filelist(project.id)$path),""),
                      br(),br(),
-                     selectInput('all.branchesTF',"Send all branches?",c("FALSE","TRUE"),"FALSE"),
-                     actionButton("submitSend","Send"),
+                     actionButton("submitPublish","Add File & Publish"),
+                     br(),br(),
+                     selectInput('send.data',"Send Data?",c("FALSE","TRUE"),"FALSE"),
+                     actionButton("submitSend","Publish Project"),
                      br(),br(),
                      img(src="sendBranch.jpg",height=275,width=450)
                      ),

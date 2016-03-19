@@ -23,6 +23,25 @@ git.configure.test()
 temp <- git.configure.test()
 
 
+
+get_filelist <- function(project.id){
+	
+	si <- pull_source_info(project.id)
+	
+	files <- get.project.info.si(si)$all.files
+	
+    paths <- gsub(file.path(si$project.path,""),"",fixed=TRUE,files$fullname)
+    descriptions <- files$description
+	
+	results <- subset(data.frame(path=paths,description=descriptions,stringsAsFactors=FALSE),grepl("^Results",path))
+	
+  results$path <-  gsub(file.path("Results",""),"",fixed=TRUE,results$path)
+  
+	return(results)
+	
+}
+
+
 runtimes.source.sync.si <- function(source_info) 
 {
   project_info <- get.project.info.si(source_info)

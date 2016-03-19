@@ -80,12 +80,24 @@ create_source_file_dir <- function(project.id0=project.id,source.file0=source.fi
   
   }# if git
   
-  # Creat markdown partner
+  # Create markdown partner
   
   targetfile <- paste0(source_info$file$file,"md")
   targetdir <- source_info$markdown.dir
 
   source_info$rmdfile <- create_markdown(target.file= targetfile,target.dir=targetdir,style="html_document",description=source_info$file$description,source_info)
+  
+  # Create publication file list
+  
+   publication.file <- file.path(source_info$support.dir,"files_to_publish.csv")
+  
+  if(!file.exists(publication.file)){
+    print("No publication list file")
+    publication.stub <- data.frame(Path="",Description="")[-1,]
+    write.csv(publication.stub,publication.file,row.names=FALSE)
+  }
+  
+  
   
   #print(source_info)
   
