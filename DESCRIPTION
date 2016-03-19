@@ -7,3 +7,13 @@ Author: Jon Gelfond
 Maintainer: Who to complain to <yourfault@somewhere.net>
 Description: Used Git and Pander
 License: Don't know
+Depends:
+    methods,
+    igraph,
+    digest,
+    gplots,
+    shiny,
+    R2HTML
+Imports:
+    knitr,
+    rmarkdown
