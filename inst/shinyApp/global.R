@@ -6,6 +6,46 @@ library(adapr)
 
 all.orchards <-get_orchard()
 
+# Create start-up directories
+
+topdirs <- list.files(path.expand.2("~"),full.names=TRUE)
+project.path <- file.path(grep("Documents$",topdirs,value=1)[1],"Projects")
+
+
+publish.path <- file.path(project.path,"Publish")
+publish.path <- gsub("\\\\","/",publish.path)
+project.path <- gsub("\\\\","/",project.path)
+
+#print(publish.path)
+#print(project.path)
+
+dir.create(project.path,recursive=TRUE)
+dir.create(publish.path,recursive=TRUE)
+
+project.path.start <- ifelse(dir.exists(project.path),project.path,"")
+publish.path.start <- ifelse(dir.exists(publish.path),publish.path,"")
+
+
+# Retrieve git login info
+
+gitAuthor <- "Name"
+gitEmail <- "Email"
+
+try({
+gitAuthor <- system2(git_path(NULL), paste("config --global user.name"),stdout=TRUE)
+gitEmail <- system2(git_path(NULL), paste("config --global user.email"),stdout=TRUE)
+})
+
+if(class(gitAuthor)!="character"){
+  
+  gitAuthor <- "Name"
+  gitEmail <- "Email"
+  
+  
+  
+}
+
+
 
 
 get_filelist <- function(project.id){

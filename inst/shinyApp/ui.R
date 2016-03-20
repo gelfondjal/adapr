@@ -80,7 +80,9 @@ shinyUI(fluidPage(theme="style.css",pageWithSidebar(
                      htmlOutput("projectselected5"),
                      textInput('filename.send', "Result File:", value="Path from main results directory"),
                      br(),br(),
-                     actionButton("submitPublish","Add File & Publish"),
+                     actionButton("submitPublish","Add File to Publish"),
+                     br(),br(),
+                     actionButton("publish.button","Publish files"),
                      br(),br(),
                      selectInput('send.data',"Send Data?",c("FALSE","TRUE"),"FALSE"),
                      actionButton("submitSend","Publish Project"),
@@ -92,8 +94,8 @@ shinyUI(fluidPage(theme="style.css",pageWithSidebar(
       conditionalPanel(condition="input.conditionedPanels == 'Configure'", 
                        
                     helpText(h3("Configure First Project")),
-                    textInput("project1.directory","Project Directory",value="Path to Projects"),
-                    textInput("publish.directory","Publish Directory:",value="Path to Publish"),
+                    textInput("project1.directory","Project Directory",value=project.path.start),
+                    textInput("publish.directory","Publish Directory:",value=publish.path.start),
                     actionButton("submitFirst.project","Setup First Project"),
                     br(),br(),
                        
@@ -101,8 +103,8 @@ shinyUI(fluidPage(theme="style.css",pageWithSidebar(
                      actionButton("submitGitCheck","Check Git"),
                      br(),br(),
                      helpText(h3("Log into Git")),
-                     textInput("git.username","Username:",value="Your username"),
-                     textInput("git.email","Email:",value="Your email"),
+                     textInput("git.username","Username:",value=gitAuthor),
+                     textInput("git.email","Email:",value=gitEmail),
                      br(),
                      actionButton("submitGitLogin","Login"),
                      br(),br(),
@@ -125,7 +127,7 @@ shinyUI(fluidPage(theme="style.css",pageWithSidebar(
       tabPanel("Report",br(),br(), tableOutput("projectus"),tableOutput("runApp")),
       tabPanel("Synchronize",br(),br(),tableOutput("syncTest"),br(),br(), textOutput("syncText"),
                textOutput("progressbar"),br(),br(),textOutput("CommitOut")),
-      tabPanel("Send",br(),br(), tableOutput("Programs"),br(),br(), textOutput("Sent")),
+      tabPanel("Send",br(),br(), tableOutput("Programs"),br(),br(),textOutput("PublishedText"), textOutput("Sent")),
       tabPanel("Configure",br(),br(),uiOutput("First.project"),br(),uiOutput("Git"),br(),textOutput("Gitlogin"),br(),br(),textOutput("IT2")),
       id="conditionedPanels" 
     )

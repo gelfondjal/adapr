@@ -288,11 +288,15 @@ shinyServer(function(input, output,session) {
       isolate({  
         source_info <- pull_source_info(input$project.id)
         #test.sync <- source.sync.si(source_info,run=TRUE)
+        
+        test.sync0 <- sync.test.si(source_info)
+        synccheck <- ifelse(test.sync0,"SYNCHRONIZED","NOT SYNCd")
+        
         setwd(source_info$project.path)
         analysis.dir <- file.path(source_info$project.path,project.directory.tree$analysis)
         all.programs <- matrix(list.files(analysis.dir,recursive=TRUE,full.names=TRUE))
         add <-  apply(all.programs,1,function(x){git.add(source_info$project.path,filename=x)})
-        commited <- git.commit(analysis.dir,input$commit.message)
+        commited <- git.commit(analysis.dir,paste(synccheck,input$commit.message))
         #  test.sync <- sync.test.si(source_info)
         #   print(test.sync)
         print(paste("Git","\n",add,"\n",commited))
@@ -328,6 +332,7 @@ shinyServer(function(input, output,session) {
       
       if(!(filetosend %in% publication.table$Path)){
       
+      if(file.exists(file.path(source_info$project.path,filetosend))){}  
         
         print(filetosend)
         print(possible.paths)
@@ -345,16 +350,39 @@ shinyServer(function(input, output,session) {
       }else{publication.table <- data.frame(Path="No files to publish",Description="Choose a file")}
       
       
-      file.copy(file.path(source_info$project.path,publication.table$Path),get.project.publish.path(input$project.id),overwrite=TRUE)
+      #file.copy(file.path(source_info$project.path,publication.table$Path),get.project.publish.path(input$project.id),overwrite=TRUE)
       
       
-      publication.table
+      outtable <- publication.table
     
+      outtable$Path <- gsub(file.path("Results",""),"",outtable$Path)
       
+      outtable
       
     }# if action button
   })
   
+
+  output$PublishedText <- renderText({
+    
+    pubout <- "Waiting to publish."
+    
+    if(input$publish.button!=0){
+    
+      source_info <- pull_source_info(input$project.id)
+      publication.file <- file.path(source_info$project.path,project.directory.tree$support,"files_to_publish.csv")
+      publication.table <- read.csv(publication.file,as.is=TRUE)
+      publication.table <- publication.table[order(basename(publication.table$Path)),]
+      file.copy(file.path(source_info$project.path,publication.table$Path),get.project.publish.path(input$project.id),overwrite=TRUE)
+      
+      pubout <- paste("Published",input$project.id, "files",Sys.time())
+    
+    }#
+    
+    pubout
+    
+  })
+
   
   output$Sent <- renderText({ 
     if(input$submitSend!=0){                                             
