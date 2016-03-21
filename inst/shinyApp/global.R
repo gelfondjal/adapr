@@ -7,7 +7,7 @@ library(adapr)
 all.orchards <-get_orchard()
 
 # Create start-up directories
-
+# Martin
 
 if(.Platform$OS.type == "unix"){
   topdirs <- list.files(path.expand.2("~"),full.names=TRUE)
