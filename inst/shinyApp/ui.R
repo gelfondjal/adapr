@@ -24,7 +24,7 @@ shinyUI(fluidPage(theme="style.css",pageWithSidebar(
                      textInput('project.directory', "Project directory:", 
                                value= gsub("(^.*)(\\/.*$)","\\1",get_orchard()$project.path[1])),
                      br(),
-                     textInput("swap.directory", label = "Swap directory:",
+                     textInput("swap.directory", label = "Publish directory:",
                                value=gsub("(^.*)(\\/.*$)","\\1",get_orchard()$swap.directory[1])),
                      br(),br(),
                      actionButton("submitProject","Create project"),  
