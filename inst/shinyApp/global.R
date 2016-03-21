@@ -8,8 +8,15 @@ all.orchards <-get_orchard()
 
 # Create start-up directories
 
-topdirs <- list.files(path.expand.2("~"),full.names=TRUE)
-project.path <- file.path(grep("Documents$",topdirs,value=1)[1],"Projects")
+
+if(.Platform$OS.type == "unix"){
+  topdirs <- list.files(path.expand.2("~"),full.names=TRUE)
+  project.path <- file.path(grep("Documents$",topdirs,value=1)[1],"Projects")
+}
+
+if(.Platform$OS.type == "windows"){
+  project.path <- file.path(path.expand.2("~"),"Projects")
+}
 
 
 publish.path <- file.path(project.path,"Publish")
