@@ -111,9 +111,9 @@ write("\n",file.path(targetdirectory,targetfile),append=TRUE)
 tabtopander <- data.frame(`Dependency Graph` = make.hyperlink(reduced.project.graph.file,"Project Graph"))
 rownames(tabtopander) <- 1:nrow(tabtopander)
 
-write("\n",file.path(targetdirectory,targetfile),append=TRUE)
+write("\n\n",file.path(targetdirectory,targetfile),append=TRUE)
 write(kable(tabtopander),file.path(targetdirectory,targetfile),append=TRUE)
-write("\n",file.path(targetdirectory,targetfile),append=TRUE)
+write("\n\n",file.path(targetdirectory,targetfile),append=TRUE)
 
 
 for (namer in names(outputs)){

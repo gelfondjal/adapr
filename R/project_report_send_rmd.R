@@ -116,16 +116,16 @@ rownames(tabtopander) <- 1:nrow(tabtopander)
 
 names(tabtopander) <- c("Source","Description","Last run time (sec)")
 
-write("\n",file.path(target.directory2,targetfile),append=TRUE)
+write("\n\n",file.path(target.directory2,targetfile),append=TRUE)
 write(kable(tabtopander),file.path(target.directory2,targetfile),append=TRUE)
-write("\n",file.path(target.directory2,targetfile),append=TRUE)
+write("\n\n",file.path(target.directory2,targetfile),append=TRUE)
 
 tabtopander <- data.frame(`Dependency Graph` = make.relative.hyperlink(target.directory2,reduced.project.graph.file,"Project Graph"))
 rownames(tabtopander) <- 1:nrow(tabtopander)
 
-write("\n",file.path(target.directory2,targetfile),append=TRUE)
+write("\n\n",file.path(target.directory2,targetfile),append=TRUE)
 write(kable(tabtopander),file.path(target.directory2,targetfile),append=TRUE)
-write("\n",file.path(target.directory2,targetfile),append=TRUE)
+write("\n\n",file.path(target.directory2,targetfile),append=TRUE)
 
 
 for (namer in names(outputs)){
