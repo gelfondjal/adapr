@@ -84,7 +84,7 @@ run.times <- ddply(project.info$tree, "source.file", function(x) {
 
 
 tab.out <- merge(programs, run.times, by = "source.file")
-tab.out$source.link <- make.relative.hyperlink(source_info$project.path,tab.out$source.file.fullname, 
+tab.out$source.link <- make.relative.hyperlink(si$project.path,tab.out$source.file.fullname, 
                                       tab.out$source.file)
 sorted.names <- V(project.info$graph)$file[topological.sort(project.info$graph)]
 sorted.names <- sorted.names[sorted.names %in% tab.out$source.file]
@@ -98,7 +98,7 @@ summaries.out <- lapply(program.split, program.io.table)
 outputs <- list()
 for (source.iter in names(summaries.out)) {
   temp <- summaries.out[[source.iter]]
-  temp$File <- make.relative.hyperlink(source_info$project.path,temp$Fullname, temp$File)
+  temp$File <- make.relative.hyperlink(si$project.path,temp$Fullname, temp$File)
   outputs[[source.iter]] <- subset(temp, select = c("IO", 
                                                     "File", "Description"))
   rownames(outputs[[source.iter]])    <- NULL                                                 

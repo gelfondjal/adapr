@@ -315,7 +315,10 @@ shinyServer(function(input, output,session) {
   
   output$Programs <- renderTable({
     
+    outtable <- data.frame(Path="No files to publish",Description="Choose a file")
+    
     if(input$submitPublish!=0){ 
+      isolate({
       source_info <- pull_source_info(input$project.id)
       publication.file <- file.path(source_info$project.path,project.directory.tree$support,"files_to_publish.csv")
       publication.table <- read.csv(publication.file,as.is=TRUE)
@@ -357,9 +360,12 @@ shinyServer(function(input, output,session) {
     
       outtable$Path <- gsub(file.path("Results",""),"",outtable$Path)
       
-      outtable
       
+      }) #isolate
     }# if action button
+    
+    outtable
+    
   })
   
 
@@ -368,7 +374,7 @@ shinyServer(function(input, output,session) {
     pubout <- "Waiting to publish."
     
     if(input$publish.button!=0){
-    
+    isolate({
       source_info <- pull_source_info(input$project.id)
       publication.file <- file.path(source_info$project.path,project.directory.tree$support,"files_to_publish.csv")
       publication.table <- read.csv(publication.file,as.is=TRUE)
@@ -377,6 +383,8 @@ shinyServer(function(input, output,session) {
       
       pubout <- paste("Published",input$project.id, "files",Sys.time())
     
+    })
+      
     }#
     
     pubout
@@ -389,7 +397,7 @@ shinyServer(function(input, output,session) {
       isolate({  
         source_info <- pull_source_info(input$project.id)
         target.directory <- get.project.publish.path(input$project.id)
-		project_report_send_rmd(target.directory=target.directory,source_info,send.data=ifelse(input$send.data=="TRUE",TRUE,FALSE),
+		    project_report_send_rmd(target.directory=target.directory,source_info,send.data=ifelse(input$send.data=="TRUE",TRUE,FALSE),
 									 graph.width = 960, graph.height = 500) 
         paste("Project",input$project.id,"published on",Sys.time()) 
       })
