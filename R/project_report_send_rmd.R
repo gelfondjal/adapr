@@ -41,6 +41,8 @@ targetfile <- paste0("project_summary",".Rmd")
 
 create_markdown(target.file=targetfile,target.dir=target.directory2,style="html_document",description="\n",si,overwrite=TRUE)
 
+mdtoremove <- file.path(target.directory2,targetfile)
+
 project.info <- get.project.info.si(si)
 project.graph <- project.info$graph
 
@@ -180,7 +182,7 @@ setwd(si$project.path)
     
   }#loop over files
   
-  
+file.remove(mdtoremove)
 
 setwd(tempwd)
 
