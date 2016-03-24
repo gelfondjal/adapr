@@ -358,7 +358,7 @@ shinyServer(function(input, output,session) {
       
       outtable <- publication.table
     
-      outtable$Path <- gsub(file.path("Results",""),"",outtable$Path)
+      outtable$Path <- gsub(paste0("Results","/"),"",outtable$Path)
       
       
       }) #isolate

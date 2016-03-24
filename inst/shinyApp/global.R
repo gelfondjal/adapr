@@ -61,12 +61,12 @@ get_filelist <- function(project.id){
   
   files <- get.project.info.si(si)$all.files
   
-  paths <- gsub(file.path(si$project.path,""),"",fixed=TRUE,files$fullname)
+  paths <- gsub(paste0(si$project.path,"/"),"",fixed=TRUE,files$fullname)
   descriptions <- files$description
   
   results <- subset(data.frame(path=paths,description=descriptions,stringsAsFactors=FALSE),grepl("^Results",path))
   
-  results$path <-  gsub(file.path("Results",""),"",fixed=TRUE,results$path)
+  results$path <-  gsub(paste0(si$project.path,"/"),"",fixed=TRUE,results$path)
   
   return(results)
   
