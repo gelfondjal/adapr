@@ -321,7 +321,9 @@ shinyServer(function(input, output,session) {
       isolate({
       source_info <- pull_source_info(input$project.id)
       publication.file <- file.path(source_info$project.path,project.directory.tree$support,"files_to_publish.csv")
-      publication.table <- read.csv(publication.file,as.is=TRUE)
+      if(file.exists(publication.file)){
+        publication.table <- read.csv(publication.file,as.is=TRUE)
+      }else{write.csv(data.frame(Path="",Description="")[-1,],publication.file,row.names=FALSE)}
       
       if(input$filename.send!=""){
       
