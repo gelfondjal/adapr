@@ -23,6 +23,23 @@ git.configure.test()
 temp <- git.configure.test()
 
 
+get_publication_table <- function(project.id){
+
+  # Retrieves or creates publication table from project.id
+  
+  source_info <- pull_source_info(project.id)
+  publication.file <- file.path(source_info$project.path,project.directory.tree$support,"files_to_publish.csv")
+  if(file.exists(publication.file)){
+    publication.table <- read.csv(publication.file,as.is=TRUE)
+  }else{
+    publication.table <- data.frame(Path="",Description="")[-1,]
+    write.csv(publication.table,publication.file,row.names=FALSE)
+  }  
+
+  return(publication.table)
+  
+}
+
 
 
 

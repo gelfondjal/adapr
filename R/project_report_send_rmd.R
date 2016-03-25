@@ -177,7 +177,7 @@ setwd(si$project.path)
     
     dir <- dirname(all.files[file.iter])
     
-    file.copy(fn,file.path(targetdir,dir))
+    file.copy(fn,file.path(targetdir,dir),overwrite=TRUE)
     
     
   }#loop over files

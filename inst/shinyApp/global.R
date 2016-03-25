@@ -57,17 +57,18 @@ if(class(gitAuthor)!="character"){
 
 get_filelist <- function(project.id){
   
+  # Get files and descriptions for project
+  
   si <- pull_source_info(project.id)
   
   files <- get.project.info.si(si)$all.files
   
-  paths <- gsub(paste0(si$project.path,"/"),"",fixed=TRUE,files$fullname)
-  descriptions <- files$description
+  files$Path <- gsub(paste0(si$project.path,"/"),"",fixed=TRUE,files$fullname)
+ 
+  files$Description <- files$description
   
-  results <- subset(data.frame(path=paths,description=descriptions,stringsAsFactors=FALSE),grepl("^Results",path))
-  
-  results$path <-  gsub(paste0(si$project.path,"/"),"",fixed=TRUE,results$path)
-  
+  results <- subset(files,select=c("Path","Description"))
+   
   return(results)
   
 }

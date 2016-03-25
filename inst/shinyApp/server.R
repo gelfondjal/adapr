@@ -212,6 +212,11 @@ shinyServer(function(input, output,session) {
       isolate({
         text<-paste("Waiting to synchronize",input$project.id) 
         source_info <- pull_source_info(input$project.id)
+        test.sync0 <- sync.test.si(source_info)
+        
+        if(test.sync0$synchronize){
+          text <- paste(input$project.id,"Already synchonized")
+        }else{
         
         syncer <- source_sync_si_load(source_info)
         
@@ -277,6 +282,7 @@ shinyServer(function(input, output,session) {
       if(last.prog==""){    
         text<-paste(last.prog,"failed sync for",input$project.id)
           }
+        }#IF NOT SYNCHONIZED
       text
         #})
       })
@@ -314,55 +320,54 @@ shinyServer(function(input, output,session) {
   })
   
   output$Programs <- renderTable({
-    
-    outtable <- data.frame(Path="No files to publish",Description="Choose a file")
+    # Retrieve publication table
+    source_info <- pull_source_info(input$project.id)
+    publication.file <- file.path(source_info$project.path,project.directory.tree$support,"files_to_publish.csv")
+    publication.table <- get_publication_table(input$project.id)    
+    outtable <- publication.table
+    print("Publication table retrieved")
+    if(nrow(publication.table)==0){
+      outtable <- data.frame(Path="No files to publish",Description="Choose a file")
+    }
     
     if(input$submitPublish!=0){ 
       isolate({
-      source_info <- pull_source_info(input$project.id)
-      publication.file <- file.path(source_info$project.path,project.directory.tree$support,"files_to_publish.csv")
-      if(file.exists(publication.file)){
-        publication.table <- read.csv(publication.file,as.is=TRUE)
-      }else{write.csv(data.frame(Path="",Description="")[-1,],publication.file,row.names=FALSE)}
+            
+      if(input$filename.send!=0){
       
-      if(input$filename.send!=""){
+      print("Checking file to send")
+        
+      filetosend <- input$filename.send# filetosend <- "Results/read_data.R/read_data.html"
       
       possible.paths <- get_filelist(input$project.id)
-      
-      possible.paths$path <- file.path("Results",possible.paths$path)
-      names(possible.paths) <- c("Path","Description")
-      
-      
-      filetosend <- file.path("Results",input$filename.send)
-      
+      file.not.exist <- 0
       if(!(filetosend %in% publication.table$Path)){
+      print("File not in publication path, add to list")  
       
-      if(file.exists(file.path(source_info$project.path,filetosend))){}  
-        
-        print(filetosend)
-        print(possible.paths)
-        
-        publication.table <- rbind(publication.table,subset(possible.paths,Path==filetosend))
-        
+      if(file.exists(file.path(source_info$project.path,filetosend))){ 
+        print(paste("Sending file",filetosend))
+        print(filetosend)        
+        publication.table <- rbind(publication.table,subset(possible.paths,Path==filetosend))        
         print(publication.table)
         write.csv(publication.table,publication.file,row.names=FALSE)
+      }else{
+        file.not.exist <- 1
+        }
+      
       }#if new file
         
       }#if file selected
       
       if(nrow(publication.table)>0){
-      publication.table <- publication.table[order(basename(publication.table$Path)),]
+        publication.table <- publication.table[order(basename(publication.table$Path)),]
       }else{publication.table <- data.frame(Path="No files to publish",Description="Choose a file")}
       
+      if(file.not.exist==1){publication.table <- data.frame(Path="Cannot find file to publish",Description="Choose a file")}
       
       #file.copy(file.path(source_info$project.path,publication.table$Path),get.project.publish.path(input$project.id),overwrite=TRUE)
       
-      
       outtable <- publication.table
-    
-      outtable$Path <- gsub(paste0("Results","/"),"",outtable$Path)
-      
-      
+                
       }) #isolate
     }# if action button
     
@@ -378,12 +383,19 @@ shinyServer(function(input, output,session) {
     if(input$publish.button!=0){
     isolate({
       source_info <- pull_source_info(input$project.id)
-      publication.file <- file.path(source_info$project.path,project.directory.tree$support,"files_to_publish.csv")
-      publication.table <- read.csv(publication.file,as.is=TRUE)
-      publication.table <- publication.table[order(basename(publication.table$Path)),]
-      file.copy(file.path(source_info$project.path,publication.table$Path),get.project.publish.path(input$project.id),overwrite=TRUE)
       
-      pubout <- paste("Published",input$project.id, "files",Sys.time())
+      publication.table <- get_publication_table(input$project.id)  
+      
+      
+      if(nrow(publication.table)>0){
+        
+      publication.table <- publication.table[order(basename(publication.table$Path)),]  
+      file.copy(file.path(source_info$project.path,publication.table$Path),get.project.publish.path(input$project.id),overwrite=TRUE)
+      pubout <- paste("Published",input$project.id, "files",Sys.time(),"to",get.project.publish.path(input$project.id))
+      
+      }else{
+        pubout <- "Nothing to publish at this time."
+      }
     
     })
       
@@ -401,7 +413,7 @@ shinyServer(function(input, output,session) {
         target.directory <- get.project.publish.path(input$project.id)
 		    project_report_send_rmd(target.directory=target.directory,source_info,send.data=ifelse(input$send.data=="TRUE",TRUE,FALSE),
 									 graph.width = 960, graph.height = 500) 
-        paste("Project",input$project.id,"published on",Sys.time()) 
+        paste("Project",input$project.id,"published on",Sys.time(),get.project.publish.path(input$project.id)) 
       })
     } 
   })   

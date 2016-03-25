@@ -78,7 +78,7 @@ shinyUI(fluidPage(theme="style.css",pageWithSidebar(
  
     conditionalPanel(condition="input.conditionedPanels == 'Send'",
                      htmlOutput("projectselected5"),
-                     textInput('filename.send', "Result File:", value="read_data.R/read_data.html"),
+                     textInput('filename.send', "Project File:", value="Results/read_data.R/read_data.html"),
                      br(),br(),
                      actionButton("submitPublish","Add File to Publish"),
                      br(),br(),
