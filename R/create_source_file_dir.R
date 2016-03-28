@@ -48,7 +48,7 @@ create_source_file_dir <- function(project.id0=project.id,source.file0=source.fi
   source_info$options <- get_adapr_options(TRUE)
   
   try({
-    not.this.source <- subset(Harvest.trees(dependency.dir),(source.file0!=source_info$file[["file"]])&(!is.na(dependency)))
+    not.this.source <- subset(Harvest.trees(dependency.dir),(source.file!=source_info$file[["file"]])&(!is.na(dependency)))
     if (nrow(not.this.source)){source_info$all.files<- Condense.file.info(not.this.source)}
   },silent=TRUE)
   
