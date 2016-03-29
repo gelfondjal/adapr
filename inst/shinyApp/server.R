@@ -309,6 +309,15 @@ shinyServer(function(input, output,session) {
       })
     }
   })
+
+
+output$"ProgramDAG" <- renderPlot({
+  if(input$makeGraph!=0){
+  temp <- create_program_graph(input$project.id)
+  
+  temp$ggplot
+  }
+})
   
 
   ##########################################################################################

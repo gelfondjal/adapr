@@ -73,6 +73,8 @@ shinyUI(fluidPage(theme="style.css",pageWithSidebar(
                      br(),br(),
                      actionButton("submitCommitRun","Commit Project"),
                      br(),br(),
+                     actionButton("makeGraph","Plot Project"),
+                     br(),br(),
                      img(src="syncTree.jpg",height=320,width=260)
                      ),
  
@@ -126,7 +128,7 @@ shinyUI(fluidPage(theme="style.css",pageWithSidebar(
                tableOutput('libraryTable'),tableOutput('addLibraryTable')),
       tabPanel("Report",br(),br(), tableOutput("projectus"),tableOutput("runApp")),
       tabPanel("Synchronize",br(),br(),tableOutput("syncTest"),br(),br(), textOutput("syncText"),
-               textOutput("progressbar"),br(),br(),textOutput("CommitOut")),
+               textOutput("progressbar"),br(),br(),textOutput("CommitOut"),plotOutput("ProgramDAG")),
       tabPanel("Send",br(),br(), tableOutput("Programs"),br(),br(),textOutput("PublishedText"), textOutput("Sent")),
       tabPanel("Configure",br(),br(),uiOutput("First.project"),br(),uiOutput("Git"),br(),textOutput("Gitlogin"),br(),br(),textOutput("IT2")),
       id="conditionedPanels" 
