@@ -142,7 +142,6 @@ text.size0 <- 5
 if(graph.width>5){text.size0 <-2 + 2*text.size0/graph.width}              
 
 
-
 dfo$synccolor <- as.character(ifelse(dfo$v %in% unsync.vertex,"red","skyblue"))
 
 proj.gg <- ggplot(dfo,aes(x=x,y=y,label=basename(as.character(v))))+geom_text(nudge_y=text.nudge0,size=text.size0,color="red")+geom_point(color=dfo$synccolor,size=dotsize0,alpha=0.5)+

@@ -4,7 +4,7 @@
 #' @param plotl logical for plotting or not
 #' @export
 
-Sync.test.OLD <- function(dagger,tree,plotl=TRUE){
+Sync.test <- function(dagger,tree,plotl=TRUE){
   
   
   if(!is.dag(dagger)){stop("The computing dependencies have cycles.")}
@@ -21,6 +21,13 @@ Sync.test.OLD <- function(dagger,tree,plotl=TRUE){
   # find the out dated nodes
   
   parent <- names(children.list)[1]
+  
+  sources <- unique(tree$source.file)
+  
+  vertexnames <- V(dagger)$name
+  
+  vertexnames <- vertexnames[basename(vertexnames)%in% sources]
+  
   
   for(parent in names(children.list)){
     
@@ -91,22 +98,27 @@ Sync.test.OLD <- function(dagger,tree,plotl=TRUE){
   
   # if target output is out of sync then update the
   # source file that creates it
+
+  # Don't need this anymore
+
+#  if(length(vertex.updates)>0){
+#    
+#    updated.vertex.info <- subset(file.info,fullname.abbr %in% vertex.updates)
+    
+#    updated.vertex.info$target.path <- updated.vertex.info$path
+#    updated.vertex.info$target.file <- updated.vertex.info$file
+    
+#    failed.tree.2 <- merge(updated.vertex.info,tree,by=c("target.file","target.path"))
+    
+#    source.for.targets <- subset(file.info,file==unique(subset(failed.tree.2,dependency=="out")$source.file))$fullname.abbr
+    
+#  }else{return(list(synchronized=TRUE))}
   
-  if(length(vertex.updates)>0){
-    
-    updated.vertex.info <- subset(file.info,fullname.abbr %in% vertex.updates)
-    
-    updated.vertex.info$target.path <- updated.vertex.info$path
-    updated.vertex.info$target.file <- updated.vertex.info$file
-    
-    failed.tree.2 <- merge(updated.vertex.info,tree,by=c("target.file","target.path"))
-    
-    source.for.targets <- subset(file.info,file==unique(subset(failed.tree.2,dependency=="out")$source.file))$fullname.abbr
-    
-  }else{return(list(synchronized=TRUE))}
-  
-  vertex.updates <- unique(c(vertex.updates,source.for.targets))
-  
+#  vertex.updates <- unique(c(vertex.updates,source.for.targets))
+ 
+
+
+
   
   # Propagate dependencies
   

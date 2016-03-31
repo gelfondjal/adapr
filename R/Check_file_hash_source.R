@@ -66,9 +66,8 @@ Check.file.hash.source <- function(dependency.dir=NULL,dependency.object=NULL){
   failed.targets$path <- failed.targets$target.path
   
   all.failures <- rbind(subset(sources.of.failed.targets,select=c("file","path")),subset(failed.sources,select=c("file","path")))
-
   
-  out.list <- list(hash.fail= all.sources.torun,stale.hash=unique(all.failures))
+  out.list <- list(hash.fail= as.logical(nrow(all.failures)),stale.hash=unique(all.failures))
   
   return(out.list)
   

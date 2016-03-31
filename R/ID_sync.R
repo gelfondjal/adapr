@@ -17,8 +17,13 @@ ID.sync <- function(file.info,dag.to.sync){
                                              file=V(dag.to.sync)$file,path=V(dag.to.sync)$path)[run.order,],file.class=="source")
   
   
-  repair.sync.file.info$run.order <- 1:nrow(repair.sync.file.info)
+  if(nrow(repair.sync.file.info)>0){
   
+  	repair.sync.file.info$run.order <- 1:nrow(repair.sync.file.info)
+  }else{
+  	
+  	repair.sync.file.info$run.order <- integer(0)
+  }	
   return(repair.sync.file.info)
   
   
