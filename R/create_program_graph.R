@@ -36,6 +36,10 @@ text.size0 <- 10
 
 dfo$synccolor <- ifelse(dfo$v %in% unsync.vertex,"red","skyblue")
 
+
+dfo <- merge(dfo,subset(projinfo$all.files,select=c("fullname.abbr","fullname")),by.x="v",by.y="fullname.abbr")
+
+
 proj.gg <- ggplot(dfo,aes(x=x,y=y,label=basename(as.character(v))))+geom_text(nudge_y=text.nudge0,size=text.size0,color="red")+geom_point(color=dfo$synccolor,size=10,alpha=0.5)+scale_x_continuous(limits=c(-1,1))+scale_y_continuous(limits=c(-1,1))+theme(axis.line=element_blank(),axis.text.x=element_blank(),
           axis.text.y=element_blank(),axis.ticks=element_blank(),
           axis.title.x=element_blank(),
@@ -44,7 +48,8 @@ proj.gg <- ggplot(dfo,aes(x=x,y=y,label=basename(as.character(v))))+geom_text(nu
           panel.grid.minor=element_blank(),plot.background=element_blank())+ggtitle(paste(project.id,"R Script Graph"))
 
 isg <- induced_subgraph(projgraph,vertexnames)	
-	
+            
+             
 return(list(vertex=dfo ,edges=NA,ggplot=proj.gg,rgrapher=isg))
 } 
  
@@ -144,6 +149,9 @@ if(graph.width>5){text.size0 <-2 + 2*text.size0/graph.width}
 
 dfo$synccolor <- as.character(ifelse(dfo$v %in% unsync.vertex,"red","skyblue"))
 
+
+dfo <- merge(dfo,subset(projinfo$all.files,select=c("fullname.abbr","fullname")),by.x="v",by.y="fullname.abbr")
+
 proj.gg <- ggplot(dfo,aes(x=x,y=y,label=basename(as.character(v))))+geom_text(nudge_y=text.nudge0,size=text.size0,color="red")+geom_point(color=dfo$synccolor,size=dotsize0,alpha=0.5)+
   annotate(geom="segment",x=froms$x,y=froms$y,xend=froms$x2,yend=froms$y2,arrow=arrow(length=unit(0.2,"cm"),type="closed"),alpha=0.5/ifelse(graph.width>5,5,1))+
   scale_x_continuous(limits=horizontal.range)+theme(axis.line=element_blank(),axis.text.x=element_blank(),
@@ -152,6 +160,7 @@ proj.gg <- ggplot(dfo,aes(x=x,y=y,label=basename(as.character(v))))+geom_text(nu
           axis.title.y=element_blank(),legend.position="none",
           panel.background=element_blank(),panel.border=element_blank(),panel.grid.major=element_blank(),
           panel.grid.minor=element_blank(),plot.background=element_blank())+ggtitle(paste(project.id,"R Script Graph"))
+            
 
 return(list(vertex=dfo,edges=froms,ggplot=proj.gg,rgrapher=isg))
 
