@@ -33,6 +33,10 @@ create_source_file_dir <- function(project.id0=project.id,source.file0=source.fi
   
   project.tree <- project.directory.tree
   
+  if(!grepl("\\.R$|\\.r$",source.file0)){stop(paste("Project",project.id0,"Source file",source.file0,"not an R file extension"))}
+  
+  if(!file.exists(file.path(analysis.dir,source.file0))){stop(paste("Project",project.id0,"Source file",source.file0,"does not exist in program directory"))}
+  
   # Create necessary directories
   
   apply(matrix(c(analysis.dir,data.dir,results.dir,tex.dir,dependency.dir,support.dir,library.dir,apps.dir,source.support.dir,markdown.dir   )),1,dir.create,showWarnings=FALSE,recursive=TRUE)

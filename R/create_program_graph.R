@@ -18,6 +18,8 @@ si <- pull_source_info(project.id)
 
 projinfo <- get.project.info.si(si)
 
+unsync.vertex <- sync.test.si(pull_source_info(project.id))$sources.to.sync$fullname.abbr
+
 projgraph <- projinfo$graph
 
 sources <- unique(projinfo$tree$source.file)
@@ -32,7 +34,9 @@ text.nudge0 <- 0.15
 dotsize0 <- 10
 text.size0 <- 10
 
-proj.gg <- ggplot(dfo,aes(x=x,y=y,label=basename(as.character(v))))+geom_text(nudge_y=text.nudge0,size=text.size0,color="red")+geom_point(size=10,color="skyblue",alpha=0.5)+scale_x_continuous(limits=c(-1,1))+scale_y_continuous(limits=c(-1,1))+theme(axis.line=element_blank(),axis.text.x=element_blank(),
+dfo$synccolor <- ifelse(dfo$v %in% unsync.vertex,"red","skyblue")
+
+proj.gg <- ggplot(dfo,aes(x=x,y=y,label=basename(as.character(v))))+geom_text(nudge_y=text.nudge0,size=text.size0,color="red")+geom_point(aes(color=synccolor),size=10,alpha=0.5)+scale_x_continuous(limits=c(-1,1))+scale_y_continuous(limits=c(-1,1))+theme(axis.line=element_blank(),axis.text.x=element_blank(),
           axis.text.y=element_blank(),axis.ticks=element_blank(),
           axis.title.x=element_blank(),
           axis.title.y=element_blank(),legend.position="none",
@@ -137,8 +141,13 @@ text.size0 <- 5
 
 if(graph.width>5){text.size0 <-2 + 2*text.size0/graph.width}              
 
-              
-proj.gg <- ggplot(dfo,aes(x=x,y=y,label=basename(as.character(v))))+geom_text(nudge_y=text.nudge0,size=text.size0,color="red")+geom_point(size=dotsize0,color="skyblue",alpha=0.5)+annotate(geom="segment",x=froms$x,y=froms$y,xend=froms$x2,yend=froms$y2,arrow=arrow(length=unit(0.2,"cm"),type="closed"),alpha=0.5/ifelse(graph.width>5,5,1))+scale_x_continuous(limits=horizontal.range)+theme(axis.line=element_blank(),axis.text.x=element_blank(),
+
+
+dfo$synccolor <- ifelse(dfo$v %in% unsync.vertex,"red","skyblue")
+
+
+
+proj.gg <- ggplot(dfo,aes(x=x,y=y,label=basename(as.character(v))))+geom_text(nudge_y=text.nudge0,size=text.size0,color="red")+geom_point(aes(color=synccolor),size=dotsize0,alpha=0.5)+annotate(geom="segment",x=froms$x,y=froms$y,xend=froms$x2,yend=froms$y2,arrow=arrow(length=unit(0.2,"cm"),type="closed"),alpha=0.5/ifelse(graph.width>5,5,1))+scale_x_continuous(limits=horizontal.range)+theme(axis.line=element_blank(),axis.text.x=element_blank(),
           axis.text.y=element_blank(),axis.ticks=element_blank(),
           axis.title.x=element_blank(),
           axis.title.y=element_blank(),legend.position="none",

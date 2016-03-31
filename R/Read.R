@@ -19,7 +19,7 @@ Read <- function(file.name="data.csv",description="Data file",read.fcn=guess.rea
     
   }else{inpath <- source_info$data.dir}
   
-  
+  if(!file.exists(file.path(inpath,file.name))){stop(paste("Read error: file does not exists:",file.path(inpath,file.name)))}
   
   file.info <- Create.file.info(inpath,basename(file.name),description)
   
