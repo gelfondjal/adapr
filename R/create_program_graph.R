@@ -11,7 +11,8 @@ create_program_graph <- function(project.id){
 # computes transitively connected subpgraph of project DAG
 # given a project id (project.id)
 # 	
-require(ggplot2)	
+require(ggplot2)
+require(plyr)	
 
 si <- pull_source_info(project.id)
 
@@ -22,7 +23,26 @@ projgraph <- projinfo$graph
 sources <- unique(projinfo$tree$source.file)
 
 vertexnames <- subset(projinfo$all.files,file %in%sources)$fullname.abbr
- 
+
+if(length(vertexnames)==1){
+
+dfo <- data.frame(v=vertexnames[1],x=0,y=0)	
+
+text.nudge0 <- 0.15
+dotsize0 <- 10
+text.size0 <- 10
+
+proj.gg <- ggplot(dfo,aes(x=x,y=y,label=basename(as.character(v))))+geom_text(nudge_y=text.nudge0,size=text.size0,color="red")+geom_point(size=10,color="skyblue",alpha=0.5)+scale_x_continuous(limits=c(-1,1))+scale_y_continuous(limits=c(-1,1))+theme(axis.line=element_blank(),axis.text.x=element_blank(),
+          axis.text.y=element_blank(),axis.ticks=element_blank(),
+          axis.title.x=element_blank(),
+          axis.title.y=element_blank(),legend.position="none",
+          panel.background=element_blank(),panel.border=element_blank(),panel.grid.major=element_blank(),
+          panel.grid.minor=element_blank(),plot.background=element_blank())+ggtitle(paste(project.id,"R Script Graph"))
+
+isg <- induced_subgraph(projgraph,vertexnames)	
+	
+return(list(vertex=dfo ,edges=NA,ggplot=proj.gg,rgrapher=isg))
+} 
  
 lo <- layout.sugiyama(projgraph)
  
@@ -35,7 +55,7 @@ tp <- function(x){
   return(x)
 }
   
- 
+
   
     
 vertex <- vertexnames[2]  
