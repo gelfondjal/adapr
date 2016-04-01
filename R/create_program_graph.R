@@ -166,7 +166,7 @@ return(list(vertex=dfo,edges=froms,ggplot=proj.gg,rgrapher=isg))
 
 } #
  
- 
+    
 #' Make plot of project programs only
 #' Summarize all programs.
 #' @param project.id Project id of program
@@ -179,7 +179,7 @@ create_program_graph<- function(project.id){
 	
 # computes transitively connected subpgraph of project DAG
 # given a project id (project.id)
-# 	
+# Uses nicer plot parameters
 require(ggplot2)
 require(plyr)	
 
