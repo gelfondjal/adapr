@@ -4,64 +4,42 @@
 #' @param plotl logical for plotting or not
 #' @export
 
-Sync.test_2nd <- function(dagger,tree,plotl=TRUE){
-  
+Sync.test <- function(dagger,tree,plotl=FALSE){
   
   if(!is.dag(dagger)){stop("The computing dependencies have cycles.")}
-  
   
   # track the run time of source files
   # track the modification time of target files
   V(dagger)$time <- ifelse(V(dagger)$file.class=="source",V(dagger)$run.time,V(dagger)$mod.time)
-  
-  children.list <- get.adjlist(dagger,mode="out")
-  
-  updated.logical <- matrix(FALSE,length(children.list),1,dimnames=list(V(dagger)$name,"time"))
-  
+   
+  file.info <- Condense.file.info(tree)
+ 
   # find the out dated nodes
+  file.check <- Check.file.mtime.source(dependency.object=tree)
+
+  # vertices to update
+  vertex.updates <- c()
   
-  parent <- names(children.list)[1]
+  # get the abbreviated names from the tree to match to the vertex
   
-  sources <- unique(tree$source.file)
-  
-  vertexnames <- V(dagger)$name
-  
-  vertexnames <- vertexnames[basename(vertexnames)%in% sources]
-  
-  
-  for(parent in names(children.list)){
+  if(file.check$mtime.fail){
     
-    if(length(children.list[[parent]])>0){
-      
-      parent.time <- V(dagger)$time[V(dagger)$name==parent]
-      
-      min.child.time <- min(V(dagger)$time[children.list[[parent]]])
-      
-      updated.logical[parent,] <- parent.time > min.child.time
-      
-      if(parent.time > min.child.time){
-        
-        print(paste("Parent younger than child:","Parent =",parent,parent.time))
-        
-        child.times <- subset(data.frame(child=V(dagger)$name[children.list[[parent]]], time=V(dagger)$time[children.list[[parent]]]),time<parent.time)
-        print("Child times")
-        print(child.times)
-        
-      }
-      
-    }
+    all.fail <-file.check$stale.mtime
     
+    failed.tree <- merge(all.fail,file.info,by=c("file","path"))
+    
+    print("Mod times file")
+    print(failed.tree)
+    
+    failed.fullname.abbr <- failed.tree$fullname.abbr
+    
+    vertex.updates <- unique(c(vertex.updates,failed.fullname.abbr))
+ 
   }
-  
-  
-  
-  vertex.updates <- rownames(updated.logical)[updated.logical]
   
   V(dagger)$color <- "blue"
   #	par(mfrow=c(1,2))
   #	plot(dagger,main="Dagger with time as color")
-  
-  
   dagger.updated <- dagger
   V(dagger.updated)$color <- ifelse(V(dagger.updated)$name %in% vertex.updates,"red","white")
   
@@ -69,15 +47,13 @@ Sync.test_2nd <- function(dagger,tree,plotl=TRUE){
   
   # check for file hash inconsistencies
   
-  file.check <- Check.file.hash(dependency.object=tree)
-  
-  file.info <- Condense.file.info(tree)
+  file.check <- Check.file.hash.source(dependency.object=tree)
   
   # get the abbreviated names from the tree to match to the vertex
   
   if(file.check$hash.fail){
     
-    all.fail <- rbind.fill(file.check$stale.hash,file.check$multiple.hash)
+    all.fail <- rbind.fill(file.check$stale.hash)
     
     failed.tree <- merge(all.fail,file.info,by=c("file","path"))
     
@@ -95,30 +71,6 @@ Sync.test_2nd <- function(dagger,tree,plotl=TRUE){
   
   
   
-  
-  # if target output is out of sync then update the
-  # source file that creates it
-
-  # Don't need this anymore
-
-#  if(length(vertex.updates)>0){
-#    
-#    updated.vertex.info <- subset(file.info,fullname.abbr %in% vertex.updates)
-    
-#    updated.vertex.info$target.path <- updated.vertex.info$path
-#    updated.vertex.info$target.file <- updated.vertex.info$file
-    
-#    failed.tree.2 <- merge(updated.vertex.info,tree,by=c("target.file","target.path"))
-    
-#    source.for.targets <- subset(file.info,file==unique(subset(failed.tree.2,dependency=="out")$source.file))$fullname.abbr
-    
-#  }else{return(list(synchronized=TRUE))}
-  
-#  vertex.updates <- unique(c(vertex.updates,source.for.targets))
- 
-
-
-
   
   # Propagate dependencies
   
