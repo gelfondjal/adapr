@@ -10,3 +10,20 @@ shinyTree <- function (){
   
   
 }
+
+
+
+
+#' Launches adapr21 app
+#' @export
+#' 
+#' 
+
+adapr21 <- function (){
+  shiny::runApp(
+    system.file('adapr21',                                                    
+                package='adapr')) 
+  library(shinydashboard)
+  
+}
+

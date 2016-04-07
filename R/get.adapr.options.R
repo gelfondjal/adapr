@@ -31,3 +31,45 @@ get_adapr_options <- function(setoptions=FALSE){
   
   return(adapr_options)
 }
+
+
+#' Returns Modifies the primary adapr option file
+#' @param optionname is name of option to modify
+#' @param optionvalue is new value to give optionname
+#' @return adaproptions
+#' @export
+#' 
+set_adapr_options <- function(optionname="",optionvalue=""){
+  # 
+  
+  options <- get_adapr_options(FALSE)
+  
+  
+  options[[optionname]] <- optionvalue
+  
+  dfout <- NULL
+  
+  for(i in 1:length(options)){
+    
+    dfout <- rbind(dfout,data.frame(option=names(options[i]),value=options[[i]]))
+    
+  }
+  
+  option.file <- "adapr_options.csv"
+  
+  options.site <- file.path(path.expand.2("~"),"ProjectPaths", option.file)  
+  
+  write.csv(dfout,options.site,row.names=FALSE)
+  
+  return(options)
+}
+
+
+
+
+
+
+
+
+
+

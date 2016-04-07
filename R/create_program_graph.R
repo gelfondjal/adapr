@@ -66,10 +66,6 @@ tp <- function(x){
   
 
   
-    
-vertex <- vertexnames[2]  
-vertexTo <- vertexnames[4]
-
 longgraph <- NULL
 
 for(vertex in vertexnames){
