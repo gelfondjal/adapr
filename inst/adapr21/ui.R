@@ -83,52 +83,56 @@ body <- dashboardBody(
     ),
     tabItem("report",
       fluidRow(
-        column(width=3,
+        column(width=2,
           box(title = "Report", status = "info", width = 12, height = NULL, collapsible = FALSE, solidHeader = TRUE,
-            actionButton("submitReport","Create report"),br(),br() ,actionButton("make_report_graph","Examine Program Graph")            
+            actionButton("submitReport","Create report")            
           ),
         #),
         #column(width=3,
           box(title = "App", status = "info", width = 12, height = NULL, collapsible = FALSE, solidHeader = TRUE,
             actionButton("submitRunApp","Run App"),br(),br(),
             htmlOutput("selectAppUI")
+          ),br(),br(),
+          box(title = "Program Graph", status = "info", width = 12, height = NULL, collapsible = FALSE, solidHeader = TRUE,
+            actionButton("make_report_graph","Examine Program Graph")
           )
-        ),
-        column(width=9,
-        h3(strong(htmlOutput("projectselected3"))),
-        box(status = "info", width = 12, height = 260, collapsible = FALSE, solidHeader = FALSE,
-            h4(tableOutput("projectus")),
-            h4(tableOutput("runApp"))
-         ),
-        box(title = NULL, status = "info", width = 12, height = NULL, collapsible = FALSE, solidHeader = FALSE,
-            plotOutput("ProgramDAG_report", height = 500,
-                       # Equivalent to: click = clickOpts(id = "plot_click")
-                       click = "ProgramDAG_click_report",
-                       brush = brushOpts(
-                         id = "ProgramDAG_brush_report",
-                         resetOnNew = TRUE
-                       ))
-            
-        ),
-        box(title = NULL, status = "info", width = 12, height = NULL, collapsible = FALSE, solidHeader = FALSE,
-            
+        ),  
+        column(width=10,
+          h3(strong(htmlOutput("projectselected3"))),
+          box(status = "info", width = 12, height = 260, collapsible = FALSE, solidHeader = FALSE,
+              h4(tableOutput("projectus")),
+              h4(tableOutput("runApp"))
+           ),
+          box(title = NULL, status = "info", width = 6, height = NULL, collapsible = FALSE, solidHeader = FALSE,
+              #plotOutput("ProgramDAG_report", click = "ProgramDAG_click_report"),
+              plotOutput("ProgramDAG_report", height = 500,
+                         # Equivalent to: click = clickOpts(id = "plot_click")
+                         click = "ProgramDAG_click_report",
+                         brush = brushOpts(
+                           id = "ProgramDAG_brush_report",
+                           resetOnNew = TRUE
+                         )),
+              #verbatimTextOutput("ProgramDAG_report_info_1"),
+              verbatimTextOutput("ProgramDAG_report_info")
+              
+          ),
+          box(title = NULL, status = "info", width = 6, height = NULL, collapsible = FALSE, solidHeader = FALSE,
+                       
             plotOutput("ProgramDAG_report_select_graph", height = 500,
-                       # Equivalent to: click = clickOpts(id = "plot_click")
-                       click = "ProgramDAG_click_report_browse",
-                       brush = brushOpts(
-                         id = "ProgramDAG_brush_report_browse",
-                         resetOnNew = TRUE
-                       )),
+                         # Equivalent to: click = clickOpts(id = "plot_click")
+                         click = "ProgramDAG_click_report_browse",
+                         brush = brushOpts(
+                           id = "ProgramDAG_brush_report_browse",
+                           resetOnNew = TRUE
+                         )),
+                         #HTML('<style>.rChart {width: 100%; height: 400px}</style>'),
             verbatimTextOutput("brush_info_select")
-            
-        ),
-        
-        
-        
-        box(title = NULL, status = "info", width = 12, height = NULL, collapsible = FALSE, solidHeader = FALSE,
-            tableOutput("ProgramDAG_report_select")
-            
-        )
+              
+          )#,          
+          #box(title = NULL, status = "info", width = 5, height = NULL, collapsible = FALSE, solidHeader = FALSE,
+            #tableOutput("ProgramDAG_report_select")
+              
+          #)
         )
       )
     ),  

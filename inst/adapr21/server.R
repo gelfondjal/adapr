@@ -144,63 +144,103 @@ shinyServer(function(input, output,session) {
       
       #p <- ggplotly(temp$ggplot)
       #print(p)
-    }
+    }          
   
   })
   
+  output$ProgramDAG_report_info <- renderPrint({
+    nout. <- nearPoints(report_graph$vertex, input$ProgramDAG_click_report, xvar = "x", yvar = "y", threshold = 20)
+    #cat("Running...")
+    if(nrow(nout.) >= 1){
+      clean_source(nout.$fullname)
+      cat("Completed")
+    }else{
+      cat("Click to run, select to get details")
+    }
+    
+  })
+  
+  #output$ProgramDAG_report_info_1 <- renderPrint({
+  #  nout. <- nearPoints(report_graph$vertex, input$ProgramDAG_click_report, xvar = "x", yvar = "y", threshold = 20)
+  #  if(nrow(nout.) >= 1){
+  #    cat("Running...")  
+  #  }
+    #cat("Click on Examine Program Graph")
+  #})  
+  
   output$ProgramDAG_report_select_graph <- renderPlot( {
+        
     if(input$make_report_graph==0){
-     
-      proggraphout <- ggplot(data.frame(x=1,y=1,label="waiting"),aes(x=x,y=x,label=label))+geom_text()
-      
-      proggraphout   
+      return(NULL)
+      #proggraphout <- ggplot(data.frame(x=1,y=1,label="waiting"),aes(x=x,y=x,label=label))+geom_text()+
+      #theme(legend.position="bottom",
+      #                      axis.line=element_blank(),axis.text.x=element_blank(),
+      #                      axis.text.y=element_blank(),axis.ticks=element_blank(),
+      #                      axis.title.x=element_blank(),
+      #                      axis.title.y=element_blank(),
+      #                      panel.background=element_blank(),panel.border=element_blank(),panel.grid.major=element_blank(),
+      #                      panel.grid.minor=element_blank(),plot.background=element_blank())
+      #proggraphout   
         
     }else{
       #nearPoints(temp$vertex, input$ProgramDAG_brush, threshold = 100, maxpoints = 1)     
-      brushedPoints(report_graph$vertex, input$ProgramDAG_brush_report)
+      #brushedPoints(report_graph$vertex, input$ProgramDAG_brush_report)
+            
       out0. <- brushedPoints(report_graph$vertex, input$ProgramDAG_brush_report)
+                                
+      iotable0 <- subset(report_tree,source.file==basename(out0.$fullname))
       
-    }
-    
-    iotable0 <- subset(report_tree,source.file==basename(out0.$fullname))
-    
-    ioprogram <- data.frame(File=iotable0$source.file[1],Description=iotable0$source.file.description[1],Dependency="R Script",Path=iotable0$source.file.path[1])
-    
-    iotable0 <- subset(iotable0,select=c("target.file","target.description","dependency","target.path"))
-    
-    names(iotable0) <- c("File","Description","Dependency","Path")
-    
-    iotable0 <- subset(iotable0,Description!="Support file")
-    
-    iotable0 <- iotable0[order(iotable0$Dependency),]
-    
-    iotable0 <- rbind(ioprogram,iotable0)
-    
-    iotable0$y <- nrow(iotable0) - (cumsum(iotable0$Dependency=="in")*(iotable0$Dependency=="in") + cumsum(iotable0$Dependency=="out")*(iotable0$Dependency=="out"))
-    
-    iotable0$x <- ifelse(iotable0$Dependency=="R Script",0,ifelse(iotable0$Dependency=="in",-1,1))
-
-    proggraphout <- ggplot(iotable0,aes(x=x,y=y,label=File,color="white",fill=Dependency))+geom_label(size=10,nudge_y=0,color="white")+geom_label(aes(x=x,y=y,label=Description,fill=NULL),nudge_y=-0.25)+scale_x_continuous(limits=c(-3,3))
+      ioprogram <- data.frame(File=iotable0$source.file[1],Description=iotable0$source.file.description[1],Dependency="R Script",Path=iotable0$source.file.path[1])
       
-    proggraphout <- proggraphout + annotate("text",x=c(-1,1),y=rep(nrow(iotable0),2)-0.25,label=c("Inputs","Outputs"),size=5)+theme_bw()
-    
-    iotable0$fullname <- file.path(iotable0$Path,iotable0$File)
-    
-    iotable0 <<- iotable0
-    
-    proggraphout
-    
+      iotable0 <- subset(iotable0,select=c("target.file","target.description","dependency","target.path"))
+      
+      names(iotable0) <- c("File","Description","Dependency","Path")
+      
+      iotable0 <- subset(iotable0,Description!="Support file")
+      
+      iotable0 <- iotable0[order(iotable0$Dependency),]
+      
+      iotable0 <- rbind(ioprogram,iotable0)
+      
+      iotable0$y <- nrow(iotable0) - (cumsum(iotable0$Dependency=="in")*(iotable0$Dependency=="in") + cumsum(iotable0$Dependency=="out")*(iotable0$Dependency=="out"))
+      
+      iotable0$x <- ifelse(iotable0$Dependency=="R Script",0,ifelse(iotable0$Dependency=="in",-1,1))
+  
+      proggraphout <- ggplot(iotable0,aes(x=x,y=y,label=File,color="white",fill=Dependency))+
+                      geom_label(size=6.5,nudge_y=0,color="white")+
+                      geom_label(aes(x=x,y=y,label=Description,fill=NULL),nudge_y=-0.25)+
+                      scale_x_continuous(limits=c(-3,3)) 
+                      
+      proggraphout <- proggraphout + annotate("text",x=c(-1,1),y=rep(nrow(iotable0),2)-0.25,label=c("Inputs","Outputs"),size=5)+theme_bw()+
+                      theme(legend.position="bottom",
+                            axis.line=element_blank(),axis.text.x=element_blank(),
+                            axis.text.y=element_blank(),axis.ticks=element_blank(),
+                            axis.title.x=element_blank(),
+                            axis.title.y=element_blank(),
+                            panel.background=element_blank(),panel.border=element_blank(),panel.grid.major=element_blank(),
+                            panel.grid.minor=element_blank(),plot.background=element_blank())
+      
+      iotable0$fullname <- file.path(iotable0$Path,iotable0$File)
+      
+      iotable0 <<- iotable0
+      
+      proggraphout
+      
+      }
     
   })
   
   output$brush_info_select <- renderPrint({
     if(input$make_report_graph==0){
+      #nearPoints(report_graph$vertex, input$ProgramDAG_brush_report, xvar="x", yvar="y")
+      #rownames(report_graph$vertex)
+      #names(report_graph$vertex)
       cat("Click on Examine Project and select program")
     }else{
       #nearPoints(temp$vertex, input$ProgramDAG_brush, threshold = 100, maxpoints = 1)     
       out. <- brushedPoints(iotable0, input$ProgramDAG_brush_report_browse)#nearPoints(temp$vertex, input$ProgramDAG_brush, threshold = 100, maxpoints = 1)
       #out.
-      print(out.)
+      #print(out.)
       if(nrow(out.)>0){
         #print(paste0("Running ",out.$fullname))
       #  clean_source(out.$fullname)

@@ -8,7 +8,7 @@
 #' @details Intializes git for the project, adds program git tracking, and initializes dependency tracking
 #' @export
 #' 
-create_source_file_dir <- function(project.id0=project.id,source.file0=source.file,source.description="",git.path=NULL,git.log = TRUE){
+create_source_file_dir <- function(project.id0=project.id,source.file0=source.file,source.description=""){
   require(devtools)
   require(plyr)
   require(igraph)
@@ -58,15 +58,15 @@ create_source_file_dir <- function(project.id0=project.id,source.file0=source.fi
   
   source_info$dependency.file <- paste(source.file.info[2],".txt",sep="")	
   
-  source_info$git.path <- git.path
+  source_info$git.path <- source_info$options$git.path
   
-  source_info$git.log <- git.log		
+  source_info$git.log <- ifelse(is.null(source_info$options$git),TRUE,source_info$options$git)		
   
   # create depedency ref class instance
   
   source_info$dependency <- dependency(data= data.frame())
   
-  source_info$option$git <- TRUE
+  source_info$options$git <- ifelse(is.null(source_info$options$git),TRUE,source_info$options$git=="TRUE")
   
   
   
@@ -75,7 +75,7 @@ create_source_file_dir <- function(project.id0=project.id,source.file0=source.fi
   #Start html markup tracking
   
     
-  if(source_info$option$git){
+  if(source_info$options$git){
   
   try({
     git_binary_path <- git_path(NULL)

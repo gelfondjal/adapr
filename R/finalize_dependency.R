@@ -37,10 +37,12 @@ finalize_dependency <- function(write=TRUE){
   project.path <- dependency.out$project.path[1]
   
   dependency.out$source.git <- NA
+    if(source_info$options$git){
   try({
     dependency.out$source.git <- paste(git.info(as.character(dependency.out$path[1]),file.path(dependency.out$source.file.path[1],dependency.out$source.file)[1])[1:5],collapse=" ")
     
   })	
+  }
   dependency.out$source.mod.time <- as.character(file.info(file.path(dependency.out$source.file.path[1],dependency.out$source.file[1]))$mtime)
   
   dependency.out$source.hash <-   Digest(file=file.path(dependency.out$source.file.path[1],dependency.out$source.file[1]),serialize=FALSE) 
@@ -80,7 +82,7 @@ finalize_dependency <- function(write=TRUE){
     
     write.dependency(trees,dependency.file)
     
-    if(source_info$option$git){
+    if(source_info$options$git){
     	try({	git.add(project.path,file.path(dependency.file))	})
     }
        

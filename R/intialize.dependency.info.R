@@ -30,7 +30,7 @@ initialize_dependency_info <- function(source_info_arg){
   #  write.dependency(dependency.out,dependency.file)	
   
   
-  if(source_info_arg$option$git){
+  if(source_info_arg$options$git){
   
   try({
     
@@ -81,7 +81,7 @@ initialize_dependency_info <- function(source_info_arg){
   
   for(file.name in support.files){
     
-    if(source_info_arg$option$git){try({ git.add(project.path,file.name) })}
+    if(source_info_arg$options$git){try({ git.add(project.path,file.name) })}
     
     Read.cap(Create.file.info(dirname(file.name),basename(file.name),"Support file"),I,source_info_arg)
     
