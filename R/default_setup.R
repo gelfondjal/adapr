@@ -5,12 +5,53 @@
 
 default.adapr.setup <- function(){
   
+  # check launch in Rstudio
+
+   sysEnvironment <- Sys.getenv()
+
+  rstudio <- ""
+  try({
+  	rstudio <- sysEnvironment[["RSTUDIO"]]
+  })
+  
+  rstudio <- rstudio=="1"
+  
+  if(!rstudio){stop("Please start up first time in RStudio to identify pandoc resources.")}
+  
+  # check pandoc path
+  
+  PATHer <- sysEnvironment[["PATH"]]
+  
+  oldoptions <- get_adapr_options()
+  
+  oldpath <- oldoptions$PATH
+  
+  pandocpath <- sysEnvironment[["RSTUDIO_PANDOC"]]
+  
+  if(!grepl(pandocpath,oldpath,fixed=TRUE)){oldpath <- paste0(oldpath,.Platform$path.sep,pandocpath)}
+  
+  set_adapr_options("PATH",oldpath)
+  
   # Check git
   
   git_binary_path <- git_path(NULL)
   
-  if(grepl("Git does not",git_binary_path)){ stop("Git is not installed Please download and configure (git-scm.com). Try GIT client GUI!!")}
-  
+  if(grepl("Git does not",git_binary_path)){ 
+  	
+  	yesno <- readline("Do you want to use git y/n? (This is optional)")
+  	
+  	wantgit <- substring(yesno,1,1) %in% c("y","Y")
+  	
+  	
+  	if(wantgit){
+  	
+  	stop("Git is not installed Please download and configure (git-scm.com). Try GIT client GUI!!")}
+  	
+  	}else{
+  		
+  		set_adapr_options("git","FALSE")
+  		
+  		}
   # Check git config  
   
   email <- ""
@@ -76,7 +117,7 @@ default.adapr.setup <- function(){
   }
   
   
-  return("adapr setup: try 'shinyTree()'")
+  return("adapr setup: try 'adapr21()'")
   
   
 }# END default set.up

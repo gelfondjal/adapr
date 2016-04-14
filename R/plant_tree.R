@@ -6,6 +6,18 @@
 #' @export
 plant.tree <- function(project.id,project.path,swap.directory){
   
+  
+  if(!dir.exists(project.path)|!dir.exists(swap.directory)){
+  	
+  	print("Project Directories invalid")
+  	
+  	if(!dir.exists(project.path)){print(paste("Project Directory doesn't exist",project.path))}
+  	if(!dir.exists(swap.directory)){print(paste("Project Publish Directory doesn't exist",publish.path))}
+  	
+  	return(FALSE)
+  	
+  }
+  
   project.path <- file.path(project.path,project.id)
   swap.directory <- file.path(swap.directory,project.id)
   
@@ -60,4 +72,62 @@ plant.tree <- function(project.id,project.path,swap.directory){
   
   
 }
+
+
+
+
+
+#' Changes project directory/publish directory or identifies imported project
+#' @param project.id0 Project name
+#' @param project.path Project home directory
+#' @param swap.directory Project publish directory
+#' @return logical for success or not
+#' @export
+redirect.tree <- function(project.id0,project.path,swap.directory){
+  
+  
+  project.path <- file.path(project.path,project.id0)
+  swap.directory <- file.path(swap.directory,project.id0)
+  
+  if(!dir.exists(project.path)|!dir.exists(swap.directory)){
+  	
+  	print("Project Directories invalid")
+  	
+  	if(!dir.exists(project.path)){print(paste("Project Directory doesn't exist",project.path))}
+  	if(!dir.exists(swap.directory)){print(paste("Project Publish Directory doesn't exist",publish.path))}
+  	
+  	return(FALSE)
+  	
+  }
+
+  empty.orchard <- data.frame(project.id=project.id0,project.path=project.path,swap.directory=swap.directory)
+  
+  orchard.site <- file.path(path.expand.2("~"),"ProjectPaths","projectid_2_directory_adapr.csv")	
+  
+  if(!file.exists(orchard.site)){plant.orchard()}
+  
+  all.orchards <- get_orchard()
+  
+  if(project.id0 %in% all.orchards$project.id){
+    
+    print("Project Exists: Redirected to new path")
+    
+    all.orchards <- subset(all.orchards,project.id!=project.id)
+    
+    
+  }else{
+  	    print(paste(project.id0,"Project Identified"))
+
+  	}
+
+  write.csv(rbind(all.orchards,empty.orchard),orchard.site,row.names=FALSE)
+
+  return(TRUE)
+
+}
+
+
+
+
+
 

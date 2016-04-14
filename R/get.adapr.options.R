@@ -43,6 +43,26 @@ set_adapr_options <- function(optionname="",optionvalue=""){
   # 
   
   options <- get_adapr_options(FALSE)
+
+  if(optionname=="project.path"){
+    
+    if(!dir.exists(optionvalue)){
+      
+      stop("Option project.path directory does not exist")
+    }
+    
+  }
+  
+  if(optionname=="publish.path"){
+    
+    if(!dir.exists(optionvalue)){
+      
+      stop("Option publish.path directory does not exist")
+    }
+    
+  }
+  
+  
   
   
   options[[optionname]] <- optionvalue
@@ -54,6 +74,8 @@ set_adapr_options <- function(optionname="",optionvalue=""){
     dfout <- rbind(dfout,data.frame(option=names(options[i]),value=options[[i]]))
     
   }
+  
+  
   
   option.file <- "adapr_options.csv"
   

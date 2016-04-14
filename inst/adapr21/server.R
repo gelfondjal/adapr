@@ -27,7 +27,7 @@ shinyServer(function(input, output,session) {
     if(input$submitProject!=0){
       isolate({
         no.spaces<-make.names(input$project.id.make)
-        no.spaces2<-gsub("\\.","_",no.spaces)
+        no.spaces2<-gsub("\\.","_",no.spaces)        
         textout <- ifelse( plant.tree(no.spaces2, input$project.directory, input$swap.directory),
                            paste("Made project",no.spaces2),"Failed")
       })
@@ -43,6 +43,24 @@ shinyServer(function(input, output,session) {
     selectInput(inputId = "project.id", label="", choices=get_orchard()$project.id, 
                 selected = get_orchard()$project.id[1])
   })
+  
+  
+    output$redirectproject <- renderText({
+    textout <- ifelse(nrow(get_orchard())==0,"Configure Project Directories.","Waiting to create project.")
+    if(input$IDredirectProject!=0){
+      isolate({
+        no.spaces<-make.names(input$project.id.redirect)
+        no.spaces2<-gsub("\\.","_",no.spaces)        
+        textout <- ifelse( redirect.tree(no.spaces2, input$new.project.directory, input$new.swap.directory),
+                           paste("Redirected Tree",no.spaces2),"Failed")
+      })
+    }
+    
+    all.orchards <<- adapr::get_orchard() #read.csv(file.path(path.expand.2("~"), "ProjectPaths", "projectid_2_directory.csv"), as.is = TRUE)
+    
+    textout  
+  })
+  
   
   
   ##########################################################################################
@@ -111,7 +129,6 @@ shinyServer(function(input, output,session) {
   ##########################################################################################
   ### REPORT TAB
 
-  
   output$projectselected3<-renderUI({
     helpText(paste("*",input$project.id,"*"))
   })
@@ -238,13 +255,22 @@ shinyServer(function(input, output,session) {
       cat("Click on Examine Project and select program")
     }else{
       #nearPoints(temp$vertex, input$ProgramDAG_brush, threshold = 100, maxpoints = 1)     
-      out. <- brushedPoints(iotable0, input$ProgramDAG_brush_report_browse)#nearPoints(temp$vertex, input$ProgramDAG_brush, threshold = 100, maxpoints = 1)
+      out. <- brushedPoints(iotable0, input$ProgramDAG_brush_report_browse)#
+      
+      clicked <- nearPoints(iotable0, input$ProgramDAG_click_report_browse, threshold = 10, maxpoints = 1)
+      
+    if(nrow(clicked)){
+      browseURL(clicked$fullname[1])
+    }
       #out.
       #print(out.)
       if(nrow(out.)>0){
         #print(paste0("Running ",out.$fullname))
       #  clean_source(out.$fullname)
-        browseURL(out.$fullname[1])
+        
+        print(basename(out.$fullname[1]))
+        
+        browseURL(dirname(out.$fullname[1]))
       }else{
         cat("nothing selected")
       }
@@ -449,7 +475,11 @@ shinyServer(function(input, output,session) {
   
   output$CommitOut <- renderText({ 
     if(input$submitCommitRun!=0){                                             
+      
       isolate({  
+      	
+      	if(adapr_options$git=="TRUE"){
+      	
         source_info <- pull_source_info(input$project.id)
         #test.sync <- source.sync.si(source_info,run=TRUE)
         
@@ -464,7 +494,16 @@ shinyServer(function(input, output,session) {
         #  test.sync <- sync.test.si(source_info)
         #   print(test.sync)
         print(paste("Git","\n",add,"\n",commited))
+        
+        }else{
+        	
+        	print("ADAPR OPTION git FALSE \n git not active")
+        	
+        	}
+        
       })
+      
+      
     }
   })    
 
@@ -620,6 +659,9 @@ shinyServer(function(input, output,session) {
   
   
   output$Git<-renderUI({ 
+    
+    if(adapr_options$git=="TRUE"){
+    
     textout <- "Waiting to check Git"
     if(input$submitGitCheck!=0){
       temp <- git.configure.test()
@@ -631,9 +673,18 @@ shinyServer(function(input, output,session) {
       }
     }
     textout  
+    
+    }else{
+      
+      textout <- "ADAPR OPTION git FALSE\n git not active"
+      textout
+    }
+    textout
   })
 
   output$Gitlogin<-renderText({
+    if(adapr_options$git=="TRUE"){
+    
     textout<-"Waiting to log into Git"
     if(input$submitGitLogin!=0){
       login<-git.configure(input$git.username,input$git.email)
@@ -643,13 +694,57 @@ shinyServer(function(input, output,session) {
       else{textout<-"Login failed."} 
     }
     textout
+    
+    }else{
+      
+      textout <- "ADAPR OPTION git FALSE\n git not active"
+      textout
+    }
+    textout
   })
   
+
+  output$GitOnOff <- renderText({
+    
+    textonoff <- "Change git On/Off status"
+    
+    if(input$submitGitOFF%%2!=0){
+      
+      if(adapr_options$git=="TRUE"){
+        
+        set_adapr_options("git","FALSE")
+        
+        adapr_options <<- get_adapr_options()
+        
+        textonoff <- "Git turned off"
+        
+      }else{
+        
+        textonoff <- "Git turned on"
+        set_adapr_options("git","TRUE")        
+        adapr_options <<- get_adapr_options()
+        
+        
+      }
+     
+      
+    }
+    
+    textonoff
+    
+  })
   
   output$First.project<-renderText({
     textout<-ifelse(nrow(get_orchard())==0,"Configure Project Directories.","Project Directory Configured.")
     if((input$submitFirst.project%%2)!=0){
-      login<-first.project(input$project1.directory,input$publish.directory)
+      
+      set_adapr_options("project.path",input$project1.directory)
+                           
+      set_adapr_options("publish.path",input$publish.directory)
+      
+      adapr_options <<- get_adapr_options()
+      
+      login <- (dir.exists(adapr_options$project.path))&(dir.exists(adapr_options$publish.path))
       if(login){
         textout<-"Project Directories Identified"
       }

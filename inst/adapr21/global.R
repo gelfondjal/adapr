@@ -6,6 +6,10 @@ library(adapr)
 
 all.orchards <-get_orchard()
 
+
+adapr_options <- get_adapr_options(TRUE)
+
+
 # Create start-up directories
 # Martin
 
@@ -17,6 +21,8 @@ if(.Platform$OS.type == "unix"){
 if(.Platform$OS.type == "windows"){
   project.path <- file.path(path.expand.2("~"),"Projects")
 }
+
+
 
 
 publish.path <- file.path(project.path,"Publish")
@@ -32,17 +38,31 @@ dir.create(publish.path,recursive=TRUE)
 project.path.start <- project.path#ifelse(dir.exists(project.path),project.path,"")
 publish.path.start <- publish.path#ifelse(dir.exists(publish.path),publish.path,"")
 
+if(is.null(adapr_options$project.path)){
+	
+	set_adapr_options("project.path" ,project.path.start)
+	
+}
+
+if(is.null(adapr_options$publish.path)){
+	
+	set_adapr_options("publish.path",publish.path.start)
+	
+}
+
+adapr_options <- get_adapr_options(TRUE)
+
 
 # Retrieve git login info
 
 gitAuthor <- "Name"
 gitEmail <- "Email"
-
+if(adapr_options$git=="TRUE"){
 try({
 gitAuthor <- system2(git_path(NULL), paste("config --global user.name"),stdout=TRUE)
 gitEmail <- system2(git_path(NULL), paste("config --global user.email"),stdout=TRUE)
 })
-
+}
 if(class(gitAuthor)!="character"){
   
   gitAuthor <- "Name"

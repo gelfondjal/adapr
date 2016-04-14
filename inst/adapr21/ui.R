@@ -24,7 +24,7 @@ body <- dashboardBody(
   tabItems(
     tabItem("selectproject",
       fluidRow(
-        column(width=3,
+        column(width=6,
           box(title = "Choose an Existing Project", status = "info", width = 12, collapsible = FALSE, solidHeader = TRUE,
             htmlOutput("selectUI")
           ),
@@ -32,21 +32,47 @@ body <- dashboardBody(
           box(title = "Create a New Project", status = "info", width = 12, collapsible = FALSE, solidHeader = TRUE,
             textInput('project.id.make', "Project ID:", value = "Example project"),
             textInput('project.directory', "Project directory:",
-                      value= gsub("(^.*)(\\/.*$)","\\1",get_orchard()$project.path[1])),                      
+                      value= adapr_options$project.path),                      
             br(),
             textInput("swap.directory", label = "Publish directory:",
-                      value=gsub("(^.*)(\\/.*$)","\\1",get_orchard()$swap.directory[1])),
+                      value=adapr_options$publish.path),
             br(),br(),
             actionButton("submitProject","Create project")
           )
         ),
-        column(width=9,
+        column(width=6,
           h3(strong(uiOutput("projectselected"))),
           box(status = "info", width = 12, height = 525, collapsible = FALSE, solidHeader = FALSE,
             h4(tableOutput("createproject"))
           )
         )    
-      )
+      ),
+      
+     
+     
+     column(width=6,
+          helpText(h1(strong("OR"),align='center')),
+          box(title = "Redirect old or Identify imported project", status = "info", width = 12, collapsible = FALSE, solidHeader = TRUE,
+            textInput('project.id.redirect', "Project ID:", value = "Example project"),
+            
+            
+            textInput('new.project.directory', "New Project directory:",
+                      value= adapr_options$project.path ),
+                          br(),br(),
+                       textInput("new.swap.directory", label = "New Publish directory:",
+                      value=adapr_options$publish.path),
+            
+            actionButton("IDredirectProject","Redirect or Identify")
+                      
+               )
+                
+            ),br(),
+            column(width=6,br(),br(),br(),
+                 box(status = "info", width = 12, height=200L,collapsible = FALSE, solidHeader = FALSE,
+                     h4(tableOutput("redirectProject"))
+                 )
+          
+            )    
     ),
     tabItem("programslib",
       fluidRow(
@@ -206,19 +232,21 @@ body <- dashboardBody(
         column(width=3,
           box(title = "Configure", status = "info", width = 12, height = NULL, collapsible = FALSE, solidHeader = TRUE,
             helpText(h3("Configure First Project")),
-            textInput("project1.directory","Project Directory",value=project.path.start),
-            textInput("publish.directory","Publish Directory:",value=publish.path.start),
-            actionButton("submitFirst.project","Setup First Project")
+            textInput("project1.directory","Project Directory",value=adapr_options$project.path),
+            textInput("publish.directory","Publish Directory:",value=adapr_options$publish.path),
+            actionButton("submitFirst.project","Setup default project path")
           ),
           box(title = "Git", status = "info", width = 12, height = NULL, collapsible = FALSE, solidHeader = TRUE,             
             helpText(h3("See if Git is working")),
             actionButton("submitGitCheck","Check Git"),
-            br(),br(),
+            br(),br(),            
             helpText(h4("Log into Git")),
             textInput("git.username","Username:",value=gitAuthor),
             textInput("git.email","Email:",value=gitEmail),
             br(),
-            actionButton("submitGitLogin","Login")
+            actionButton("submitGitLogin","Login"),
+            br(),br(),
+            actionButton("submitGitOFF","Git On/Off")
           )
         ),
         column(width=9,
@@ -226,6 +254,7 @@ body <- dashboardBody(
               h4(uiOutput("First.project")),
               br(),h4(uiOutput("Git")),
               br(),h4(textOutput("Gitlogin")),
+              br(),h4(textOutput("GitOnOff")),
               br(),h4(textOutput("IT2"))
             ),
           box(title = "Install the latest version of adapr", width = 3, height = NULL, collapsible = FALSE, solidHeader = TRUE, 

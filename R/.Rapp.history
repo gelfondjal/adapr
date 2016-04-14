@@ -1,0 +1,38 @@
+"TRUE"
+"TRUE"==TRUE
+"FALS"==TRUE
+"FALSE"==TRUE
+"FALSE"==FALSE
+adapr_options <- get_adapr_options(TRUE)
+q()
+Sys.getenv()
+environment <- Sys.getenv()
+environment
+class(environment)
+rstudio <- Sys.getenv()[["RSTUDIO"]]
+rstudio <- ""#
+  try({#
+  	rstudio <- Sys.getenv()[["RSTUDIO"]]#
+  })
+sysEnvironment <- Sys.getenv()#
+  rstudio <- ""#
+  try({#
+  	rstudio <- sysEnvironment [["RSTUDIO"]]#
+  })#
+  rstudio <- rstudio=="1"
+rstudio
+sysEnvironment
+PATHer <- sysEnvironment[["PATH"]]
+PATHer
+oldoptions <- get_adapr_options()
+library(adapr)
+oldoptions
+oldoptions <- get_adapr_options()
+oldoptions
+.Platform
+pathsep
+pathsep <- ifelse(.Platform$OS.type=="Windows",";",":")
+set_adapr_options("PATH",oldpath)
+source("/Users/Gelfond/Documents/Projects/adapr/R/default_setup.R")
+load("/Users/Gelfond/Documents/Projects/adaprHome/Results/read_data.R/from_read.Rdata")
+q()

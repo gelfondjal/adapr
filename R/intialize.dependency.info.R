@@ -66,6 +66,10 @@ initialize_dependency_info <- function(source_info_arg){
   load.source.directory(source_info_arg$support.dir)
   load.source.directory(source_info_arg$source.support.dir)
   
+  outlibraries <- id_new_libs(file.path(source_info_arg$support.dir,source_info_arg$support.library.file))
+  
+  print(paste("Libraries not automatically loaded",outlibraries))
+  
   
   support.files <- unlist(lapply(c(source_info_arg$support.dir,source_info_arg$source.support.dir)
   										,list.files,recursive=TRUE,full.names=TRUE,include.dirs=FALSE))
