@@ -7,7 +7,7 @@ default.adapr.setup <- function(){
   
   # check launch in Rstudio
   
-  total <- 5
+  total <- 6
   step <- 1
   
   print(paste("Step",step,"of",total,"Identifying RSTUDIO step"))
@@ -38,18 +38,17 @@ default.adapr.setup <- function(){
   
   pandocpath <- sysEnvironment[["RSTUDIO_PANDOC"]]
   
+  if(length(oldpath)==0){oldpath <- PATHer}
+    
   if(!grepl(pandocpath,oldpath,fixed=TRUE)){oldpath <- paste0(oldpath,.Platform$path.sep,pandocpath)}
   
   set_adapr_options("PATH",oldpath)
-  
- 
   
   # Check git
   
   print(paste("Step",step,"of",total,"Check git version control"))
   step <- step + 1
-  
-  
+
   git_binary_path <- git_path(NULL)
   
   if(grepl("Git does not",git_binary_path)){ 
@@ -125,6 +124,12 @@ default.adapr.setup <- function(){
     project.path.start <- project.path#ifelse(dir.exists(project.path),project.path,"")
     publish.path.start <- publish.path#ifelse(dir.exists(publish.path),publish.path,"")
     
+    print(paste("Step",step,"of",total,"Set default project paths"))
+    step <- step + 1
+    
+    set_adapr_options("project.path",project.path.start)
+    
+    set_adapr_options("publish.path", publish.path.start)
     
     first.project(project.path.start, publish.path.start)
     
