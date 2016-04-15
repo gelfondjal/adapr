@@ -14,7 +14,6 @@ create_source_file_dir <- function(project.id0=project.id,source.file0=source.fi
   require(igraph)
   require(digest)
   require(rCharts)
-  require(pander)
   
   project.path <- get.project.path(project.id0)
   project.tree <- project.directory.tree
