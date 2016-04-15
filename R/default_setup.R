@@ -71,6 +71,8 @@ default.adapr.setup <- function(){
   		}
   # Check git config  
   
+  if(!grepl("Git does not",git_binary_path)){
+  
   email <- ""
   
   try({
@@ -94,6 +96,8 @@ default.adapr.setup <- function(){
     if (!grepl("@",email)) {return("Git is not configured. Run: git.configure(user.name, user.email)")}
     
   }else{print("Git configured")}
+  
+  }# configure git
   
   orchards <- get_orchard()
   
