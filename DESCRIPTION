@@ -13,7 +13,9 @@ Depends:
     digest,
     gplots,
     shiny,
-    R2HTML
+    R2HTML,
+    plotly,
+    shinydashboard
 Imports:
     knitr,
     rmarkdown
