@@ -11,6 +11,8 @@ get_adapr_options <- function(setoptions=FALSE){
   
   if(!file.exists(options.site)){
     
+    dir.create(dirname(options.site),recursive=TRUE)
+    
     options.site0 <- system.file(option.file,package='adapr')
 
     file.copy(options.site0,options.site)    
@@ -74,8 +76,6 @@ set_adapr_options <- function(optionname="",optionvalue=""){
     dfout <- rbind(dfout,data.frame(option=names(options[i]),value=options[[i]]))
     
   }
-  
-  
   
   option.file <- "adapr_options.csv"
   

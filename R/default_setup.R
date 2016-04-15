@@ -6,6 +6,12 @@
 default.adapr.setup <- function(){
   
   # check launch in Rstudio
+  
+  total <- 5
+  step <- 1
+  
+  print(paste("Step",step,"of",total,"Identifying RSTUDIO step"))
+  step <- step + 1
 
    sysEnvironment <- Sys.getenv()
 
@@ -20,6 +26,10 @@ default.adapr.setup <- function(){
   
   # check pandoc path
   
+  print(paste("Step",step,"of",total,"Check pandoc path"))
+  step <- step + 1
+
+  
   PATHer <- sysEnvironment[["PATH"]]
   
   oldoptions <- get_adapr_options()
@@ -32,7 +42,13 @@ default.adapr.setup <- function(){
   
   set_adapr_options("PATH",oldpath)
   
+ 
+  
   # Check git
+  
+  print(paste("Step",step,"of",total,"Check git version control"))
+  step <- step + 1
+  
   
   git_binary_path <- git_path(NULL)
   
@@ -80,6 +96,10 @@ default.adapr.setup <- function(){
   
   orchards <- get_orchard()
   
+  print(paste("Step",step,"of",total,"Creating 1st project adaprHome"))
+  step <- step + 1
+  
+  
   if(!("adaprHome" %in% orchards$project.id)){
     
     
@@ -116,6 +136,8 @@ default.adapr.setup <- function(){
     
   }
   
+  print(paste("Step",step,"of",total,"Completed default seup!"))
+  step <- step + 1
   
   return("adapr setup: try 'adapr21()'")
   
