@@ -22,10 +22,10 @@ create_markdown <- function(target.file=paste0(source_info$file$file,"md"),targe
 	
 	if((!overwrite)&file.exists(target.file)){return(file.information)}
 	
-	
+  if(source_info$options$git){
 	git_binary_path <- git_path(NULL)
 	author <- system2(git_binary_path, paste("config --global user.name"),stdout = TRUE)
-	
+  }else{author <- source_info$options$username}
 	
 	start.lines.generic <- c("---",
 							paste("title:",paste0("\"",si$project.id," ",basename(target.file),": ",description,"\"")),

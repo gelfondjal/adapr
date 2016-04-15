@@ -10,6 +10,11 @@ default.adapr.setup <- function(){
   total <- 6
   step <- 1
   
+
+  
+  
+  
+  
   print(paste("Step",step,"of",total,"Identifying RSTUDIO step"))
   step <- step + 1
 
@@ -23,7 +28,7 @@ default.adapr.setup <- function(){
   rstudio <- rstudio=="1"
   
   if(!rstudio){stop("Please start up first time in RStudio to identify pandoc resources.")}
-  
+    
   # check pandoc path
   
   print(paste("Step",step,"of",total,"Check pandoc path"))
@@ -67,6 +72,8 @@ default.adapr.setup <- function(){
   	}else{
   		
   		set_adapr_options("git","FALSE")
+  		username <- readline("What is your username? (This is optional)")
+  		set_adapr_options("username",ifelse(username=="","Anonymous",username))
   		
   		}
   # Check git config  
