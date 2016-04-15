@@ -49,7 +49,7 @@ default.adapr.setup <- function(){
   print(paste("Step",step,"of",total,"Check git version control"))
   step <- step + 1
 
-  git_binary_path <- ""
+  git_binary_path <- "Git does not"
   
   try(git_binary_path <- git_path(NULL))
   
