@@ -59,15 +59,13 @@ create_source_file_dir <- function(project.id0=project.id,source.file0=source.fi
   
   source_info$git.path <- source_info$options$git.path
   
-  source_info$git.log <- ifelse(is.null(source_info$options$git),TRUE,source_info$options$git)		
+  source_info$git.log <- ifelse(is.null(source_info$options$git),TRUE,source_info$options$git=="TRUE")		
   
   # create depedency ref class instance
   
   source_info$dependency <- dependency(data= data.frame())
   
   source_info$options$git <- ifelse(is.null(source_info$options$git),TRUE,source_info$options$git=="TRUE")
-  
-  
   
   initialize_dependency_info(source_info)
   

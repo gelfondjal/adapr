@@ -4,7 +4,7 @@
 \alias{project_report_markdown}
 \title{Make plot of network within html documents.
 Summarize all programs.
-Uses pander and pandoc unlike project_report}
+Uses pandoc unlike project_report}
 \usage{
 project_report_markdown(source_info, graph.width = 960, graph.height = 500)
 }
@@ -18,7 +18,7 @@ project_report_markdown(source_info, graph.width = 960, graph.height = 500)
 \description{
 Make plot of network within html documents.
 Summarize all programs.
-Uses pander and pandoc unlike project_report
+Uses pandoc unlike project_report
 }
 \details{
 Dose not assume source_info in workspace
