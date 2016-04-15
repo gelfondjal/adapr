@@ -46,6 +46,8 @@ set_adapr_options <- function(optionname="",optionvalue=""){
   
   options <- get_adapr_options(FALSE)
 
+  if((as.numeric(version$major) +as.numeric(version$minor)/10)>=3.2){
+  
   if(optionname=="project.path"){
     
     if(!dir.exists(optionvalue)){
@@ -64,7 +66,7 @@ set_adapr_options <- function(optionname="",optionvalue=""){
     
   }
   
-  
+  }#check dir exists if r version gt or = 3.2
   
   
   options[[optionname]] <- optionvalue
