@@ -89,6 +89,7 @@ finalize_dependency <- function(write=TRUE){
     
   }
   
+  # Write library versions to specific source directory
   
   print(paste("Completed",source_info$file[["file"]]))
   

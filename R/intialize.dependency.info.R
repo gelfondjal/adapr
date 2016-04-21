@@ -70,6 +70,7 @@ initialize_dependency_info <- function(source_info_arg){
   
   print(paste("Libraries not automatically loaded",outlibraries))
   
+  write(session_info()$packages,file.path(source_info_arg$source.support.dir,"package_info.csv"))
   
   support.files <- unlist(lapply(c(source_info_arg$support.dir,source_info_arg$source.support.dir)
   										,list.files,recursive=TRUE,full.names=TRUE,include.dirs=FALSE))
