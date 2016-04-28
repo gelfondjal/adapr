@@ -70,7 +70,7 @@ initialize_dependency_info <- function(source_info_arg){
   
   print(paste("Libraries not automatically loaded",outlibraries))
   
-  #write(as.data.frame(session_info()$packages),file.path(source_info_arg$source.support.dir,"package_info.csv"))
+  write.csv(as.data.frame(session_info()$packages),file.path(source_info_arg$source.support.dir,"package_info.csv"))
   
   support.files <- unlist(lapply(c(source_info_arg$support.dir,source_info_arg$source.support.dir)
   										,list.files,recursive=TRUE,full.names=TRUE,include.dirs=FALSE))
@@ -88,8 +88,10 @@ initialize_dependency_info <- function(source_info_arg){
     
     if(source_info_arg$options$git){try({ git.add(project.path,file.name) })}
     
-    Read.cap(Create.file.info(dirname(file.name),basename(file.name),"Support file"),I,source_info_arg)
+    if(grepl("(\\.r)|(\\.R)$",file.name)){
     
+      Read.cap(Create.file.info(dirname(file.name),basename(file.name),"Support file"),I,source_info_arg)
+    }
   }		  
   
   return(dependency.file)
