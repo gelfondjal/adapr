@@ -347,7 +347,7 @@ dfo <- merge(dfo,subset(projinfo$all.files,select=c("fullname.abbr","fullname"))
 proj.gg <- ggplot(dfo,aes(x=x,y=y,label=basename(as.character(v))))+
  geom_point(aes(colour=dfo$synccolor),size=dotsize0,alpha=0.7)+
 geom_point(shape = 1,size = dotsize0,colour = "grey70", stroke=2)+
- geom_text(nudge_y=text.nudge0,size=text.size0,color="black")+
+ geom_text(vjust=-0.5,size=text.size0,color="black")+
 annotate(geom="segment",x=froms$x,y=froms$y,xend=froms$x2,yend=froms$y2,arrow=arrow(length=unit(0.2,"cm"),type="closed"),alpha=0.5/ifelse(graph.width>5,5,1))+
  scale_x_continuous(limits=horizontal.range)+theme(axis.line=element_blank(),axis.text.x=element_blank(),
 axis.text.y=element_blank(),axis.ticks=element_blank(),

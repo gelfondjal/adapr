@@ -166,6 +166,12 @@ shinyServer(function(input, output,session) {
   })
   
   output$ProgramDAG_report_info <- renderPrint({
+    
+    if(input$make_report_graph==0){
+      
+      cat("Click to run, select to get details")
+    }else{
+    
     nout. <- nearPoints(report_graph$vertex, input$ProgramDAG_click_report, xvar = "x", yvar = "y", threshold = 20)
     #cat("Running...")
     if(nrow(nout.) >= 1){
@@ -173,6 +179,7 @@ shinyServer(function(input, output,session) {
       cat("Completed")
     }else{
       cat("Click to run, select to get details")
+    }
     }
     
   })
