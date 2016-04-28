@@ -32,8 +32,8 @@ project.path <- gsub("\\\\","/",project.path)
 #print(publish.path)
 #print(project.path)
 
-dir.create(project.path,recursive=TRUE)
-dir.create(publish.path,recursive=TRUE)
+#dir.create(project.path,recursive=TRUE)
+#dir.create(publish.path,recursive=TRUE)
 
 project.path.start <- project.path#ifelse(dir.exists(project.path),project.path,"")
 publish.path.start <- publish.path#ifelse(dir.exists(publish.path),publish.path,"")
