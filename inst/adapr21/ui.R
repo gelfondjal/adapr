@@ -118,17 +118,45 @@ body <- dashboardBody(
           box(title = "App", status = "info", width = 12, height = NULL, collapsible = FALSE, solidHeader = TRUE,
             actionButton("submitRunApp","Run App"),br(),br(),
             htmlOutput("selectAppUI")
-          ),br(),br(),
-          box(title = "Program Graph", status = "info", width = 12, height = NULL, collapsible = FALSE, solidHeader = TRUE,
-            actionButton("make_report_graph","Examine Program Graph")
           )
-        ),  
+                  ),  
         column(width=10,
           h3(strong(htmlOutput("projectselected3"))),
           box(status = "info", width = 12, height = 260, collapsible = FALSE, solidHeader = FALSE,
               h4(tableOutput("projectus")),
               h4(tableOutput("runApp"))
-           ),
+           )
+          
+          
+        )
+      )
+    ),  
+    tabItem("synch",
+      fluidRow(
+        column(width=3,
+          box(title = "Synchronize", status = "info", width = 12, height = NULL, collapsible = FALSE, solidHeader = TRUE,
+            actionButton("submitSyncTest","Check Sync"),
+            br(),br(),
+            actionButton("submitSyncRun","Synchronize Now"),
+            br(),br(),
+            textInput('commit.message', "Commit Message", value = "Message"),
+            br(),br(),
+            helpText("Version Control Snapshot:"),
+            actionButton("submitCommitRun","Commit Project")
+          ),
+     	  box(title = "Program Graph", status = "info", width = 12, height = NULL, collapsible = FALSE, solidHeader = TRUE,
+            actionButton("make_report_graph","Examine Program Graph")
+          )
+
+        ),
+        column(width=9,
+        h3(strong(htmlOutput("projectselected4"))),
+        box(status = "info", width = 12, height = 300, collapsible = FALSE, solidHeader = FALSE,
+            tableOutput("syncTest"),
+            br(),h4(textOutput("syncText")),
+            br(),h4(textOutput("progressbar")),
+            br(),h4(textOutput("CommitOut"))
+         ),
           box(title = NULL, status = "info", width = 6, height = NULL, collapsible = FALSE, solidHeader = FALSE,
               #plotOutput("ProgramDAG_report", click = "ProgramDAG_click_report"),
               plotOutput("ProgramDAG_report", height = 500,
@@ -154,50 +182,7 @@ body <- dashboardBody(
                          #HTML('<style>.rChart {width: 100%; height: 400px}</style>'),
             verbatimTextOutput("brush_info_select")
               
-          )#,          
-          #box(title = NULL, status = "info", width = 5, height = NULL, collapsible = FALSE, solidHeader = FALSE,
-            #tableOutput("ProgramDAG_report_select")
-              
-          #)
-        )
-      )
-    ),  
-    tabItem("synch",
-      fluidRow(
-        column(width=3,
-          box(title = "Synchronize", status = "info", width = 12, height = NULL, collapsible = FALSE, solidHeader = TRUE,
-            actionButton("submitSyncTest","Check Sync"),
-            br(),br(),
-            actionButton("submitSyncRun","Synchronize Now"),
-            br(),br(),
-            textInput('commit.message', "Commit Message", value = "Message"),
-            br(),br(),
-            helpText("Version Control Snapshot:"),
-            actionButton("submitCommitRun","Commit Project")
-          ),
-          box(title = "Plot", status = "info", width = 12, height = NULL, collapsible = FALSE, solidHeader = TRUE,
-            actionButton("makeGraph","Update Project Plot")
-          )
-        ),
-        column(width=9,
-        h3(strong(htmlOutput("projectselected4"))),
-        box(status = "info", width = 12, height = 300, collapsible = FALSE, solidHeader = FALSE,
-            tableOutput("syncTest"),
-            br(),h4(textOutput("syncText")),
-            br(),h4(textOutput("progressbar")),
-            br(),h4(textOutput("CommitOut"))
-         ),
-         box(title = "Project Graph", status = "info", width = 12, height = NULL, collapsible = FALSE, solidHeader = TRUE,
-            verbatimTextOutput("brush_info"),
-            plotOutput("ProgramDAG", height = 500,
-                       # Equivalent to: click = clickOpts(id = "plot_click")
-                       click = "ProgramDAG_click",
-                       brush = brushOpts(
-                       id = "ProgramDAG_brush",
-                       resetOnNew = TRUE
-                       ))
-            
-        )
+          )#,
       )
     )),  
     tabItem("send",
