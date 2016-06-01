@@ -226,7 +226,7 @@ shinyServer(function(input, output,session) {
       
       iotable0 <- rbind(ioprogram,iotable0)
       
-      iotable0$y <- nrow(iotable0) - (cumsum(iotable0$Dependency=="in")*(iotable0$Dependency=="in") + cumsum(iotable0$Dependency=="out")*(iotable0$Dependency=="out"))
+      iotable0$y <- nrow(iotable0) - (cumsum(iotable0$Dependency=="in")*(iotable0$Dependency=="in") + cumsum(iotable0$Dependency=="out")*(iotable0$Dependency=="out")) + 0.5*(iotable0$Dependency=="out")
       
       iotable0$x <- ifelse(iotable0$Dependency=="R Script",0,ifelse(iotable0$Dependency=="in",-1,1))
   
