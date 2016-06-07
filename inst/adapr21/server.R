@@ -226,16 +226,21 @@ shinyServer(function(input, output,session) {
       
       iotable0 <- rbind(ioprogram,iotable0)
       
-      iotable0$y <- nrow(iotable0) - (cumsum(iotable0$Dependency=="in")*(iotable0$Dependency=="in") + cumsum(iotable0$Dependency=="out")*(iotable0$Dependency=="out")) + 0.5*(iotable0$Dependency=="out")
-      
-      iotable0$x <- ifelse(iotable0$Dependency=="R Script",0,ifelse(iotable0$Dependency=="in",-1,1))
+  #    iotable0$y <- nrow(iotable0) - (cumsum(iotable0$Dependency=="in")*(iotable0$Dependency=="in") + cumsum(iotable0$Dependency=="out")*(iotable0$Dependency=="out")) + 0.5*(iotable0$Dependency=="out")
+  #    iotable0$x <- ifelse(iotable0$Dependency=="R Script",0,ifelse(iotable0$Dependency=="in",-1,1))
   
+  
+      iotable0 <- iotable0[order(iotable0$Dependency),]
+  
+      iotable0$y <- nrow(iotable0):1
+      iotable0$x <- 0
+
       proggraphout <- ggplot(iotable0,aes(x=x,y=y,label=File,color="white",fill=Dependency))+
                       geom_label(size=6.5,nudge_y=0,color="white")+
                       geom_label(aes(x=x,y=y,label=Description,fill=NULL),nudge_y=-0.25)+
                       scale_x_continuous(limits=c(-3,3)) 
                       
-      proggraphout <- proggraphout + annotate("text",x=c(-1,1),y=rep(nrow(iotable0),2)-0.25,label=c("Inputs","Outputs"),size=5)+theme_bw()+
+      proggraphout <- proggraphout+theme_bw()+
                       theme(legend.position="bottom",
                             axis.line=element_blank(),axis.text.x=element_blank(),
                             axis.text.y=element_blank(),axis.ticks=element_blank(),
