@@ -9,6 +9,7 @@ plant.tree <- function(project.id,project.path,swap.directory){
   
   if(!dir.exists(project.path)|!dir.exists(swap.directory)){
   	
+    
   	print("Project Directories invalid")
   	
   	if(!dir.exists(project.path)){print(paste("Project Directory doesn't exist",project.path))}
@@ -88,6 +89,9 @@ redirect.tree <- function(project.id0,project.path,swap.directory){
   
   project.path <- file.path(project.path,project.id0)
   swap.directory <- file.path(swap.directory,project.id0)
+  
+  dir.create(project.path)
+  dir.create(swap.directory)
   
   if(!dir.exists(project.path)|!dir.exists(swap.directory)){
   	

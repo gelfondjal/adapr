@@ -1,6 +1,7 @@
 Package: adapr
 Type: Package
-Title: Tracks reading and writing within R scripts that are organized into a directed acyclic graph.
+Title: Tracks reading and writing within R scripts that are organized into a
+    directed acyclic graph.
 Version: 1.0
 Date: 2015-12-21
 Author: Jon Gelfond
@@ -19,3 +20,4 @@ Depends:
 Imports:
     knitr,
     rmarkdown
+RoxygenNote: 5.0.1
