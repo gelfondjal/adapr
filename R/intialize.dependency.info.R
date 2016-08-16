@@ -68,7 +68,7 @@ initialize_dependency_info <- function(source_info_arg){
   
   outlibraries <- id_new_libs(file.path(source_info_arg$support.dir,source_info_arg$support.library.file))
   
-  print(paste("Libraries not automatically loaded",outlibraries))
+  if (length(outlibraries)>0) {print(paste("Libraries not automatically loaded",outlibraries))}
   
   write.csv(as.data.frame(session_info()$packages),file.path(source_info_arg$source.support.dir,"package_info.csv"))
   
