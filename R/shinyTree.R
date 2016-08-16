@@ -19,7 +19,7 @@ shinyTree <- function (){
 #' 
 #' 
 
-adapr21 <- function (){
+adapr <- function (){
   shiny::runApp(
     system.file('adapr21',                                                    
                 package='adapr')) 

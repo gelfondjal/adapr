@@ -116,7 +116,7 @@ redirect.tree <- function(project.id0,project.path,swap.directory){
     
     print("Project Exists: Redirected to new path")
     
-    all.orchards <- subset(all.orchards,project.id!=project.id)
+    all.orchards <- subset(all.orchards,project.id!=project.id0)
     
     
   }else{

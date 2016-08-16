@@ -69,7 +69,7 @@ body <- dashboardBody(
             ),br(),
             column(width=6,br(),br(),br(),
                  box(status = "info", width = 12, height=200L,collapsible = FALSE, solidHeader = FALSE,
-                     h4(tableOutput("redirectProject"))
+                     h4(textOutput("redirectproject"))
                  )
           
             )    

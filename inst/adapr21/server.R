@@ -45,20 +45,23 @@ shinyServer(function(input, output,session) {
   })
   
   
-    output$redirectproject <- renderText({
-    textout <- ifelse(nrow(get_orchard())==0,"Configure Project Directories.","Waiting to create project.")
+  output$redirectproject <- renderText({
+    print("Redirecting Project")
+  
+    textoutRD <- ifelse(nrow(get_orchard())==0,"Configure Project Directories.","Waiting to create project.")
     if(input$IDredirectProject!=0){
+      print("Redirecting Project")
       isolate({
         no.spaces<-make.names(input$project.id.redirect)
         no.spaces2<-gsub("\\.","_",no.spaces)        
-        textout <- ifelse( redirect.tree(no.spaces2, input$new.project.directory, input$new.swap.directory),
-                           paste("Redirected Tree",no.spaces2),"Failed")
+        textoutRD <- ifelse( redirect.tree(no.spaces2, input$new.project.directory, input$new.swap.directory),
+                         paste("Redirected Tree",no.spaces2),"Failed")
       })
     }
     
-    all.orchards <<- adapr::get_orchard() #read.csv(file.path(path.expand.2("~"), "ProjectPaths", "projectid_2_directory.csv"), as.is = TRUE)
+    all.orchards <<- adapr::get_orchard() 
     
-    textout  
+     textoutRD 
   })
   
   
