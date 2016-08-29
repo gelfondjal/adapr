@@ -16,8 +16,9 @@ Depends:
     shiny,
     R2HTML,
     plotly,
-    shinydashboard
-Imports:
+    shinydashboard,
     knitr,
+    pander,
     rmarkdown
+Imports:
 RoxygenNote: 5.0.1
