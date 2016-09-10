@@ -37,7 +37,8 @@ create_markdown <- function(target.file=paste0(source_info$file$file,"md"),targe
 							"```{r,echo=FALSE}\n
 							paste(\"Created on\",(Sys.time() ))\n
 							```",
-							"```{r}\n```")
+							paste("```{r}\n #scriptLoader(",si$project.id,",",si$file$file,")```"),
+							"```{r}\n #finalize_dependency()```")
 								
 	start.lines.generic <- paste(start.lines.generic,collapse="\n")
 	
