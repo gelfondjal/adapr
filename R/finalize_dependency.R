@@ -14,14 +14,15 @@ finalize_dependency <- function(write=TRUE){
   # Copy and render Rmd file
   file.copy(source_info$rmdfile$fullname,file.path(source_info$results.dir,source_info$rmdfile$file),overwrite=TRUE)
   if(is.null(options()$Rmdstart)){
+  options(RScriptstart=TRUE)  
   outputfile <- rmarkdown::render(file.path(source_info$results.dir,source_info$rmdfile$file))
   outfile <- Create.file.info(source_info$results.dir, basename(outputfile), paste("rendered Rmarkdown of", source_info$file$file))
   Write.cap(NULL, outfile, I, source_info)
   }else{
     outputfile <- gsub("Rmd","html",file.path(source_info$results.dir,source_info$rmdfile$file))
     outfile <- Create.file.info(source_info$results.dir, basename(outputfile), paste("rendered Rmarkdown of", source_info$file$file))
-    write(0,outfile) # Write a stub for tracking
-    Write.cap(0, outfile, write, source_info)
+    write(0,outfile$fullname) # Write a stub for tracking
+    Write.cap(NULL, outfile, I, source_info)
   }
   Read.cap(source_info$rmdfile, I, source_info)
 

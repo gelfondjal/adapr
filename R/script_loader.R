@@ -18,9 +18,11 @@ scriptLoader <- function(projectID,script){
   if(!file.exists(programPath)){stop("Program file ",programPath," doesn't exist")}
   
   if(!exists("source_info")){
-    source(programPath,echo=FALSE)
+    
     options(Rmdstart=TRUE)
     
+    source(programPath,echo=FALSE)
+   
     }
   
   
