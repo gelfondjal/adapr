@@ -10,7 +10,7 @@ finalize_dependency <- function(RMD=FALSE,write=TRUE){
   # read in dependency object from dependency.file in source_info
   # return dependency object
   require(rmarkdown)
-  
+  current.dir <- getwd()
   # Copy and render Rmd file
   file.copy(source_info$rmdfile$fullname,file.path(source_info$results.dir,source_info$rmdfile$file),overwrite=TRUE)
   if(is.null(options()$Rmdstart)){
@@ -26,7 +26,7 @@ finalize_dependency <- function(RMD=FALSE,write=TRUE){
   }
   Read.cap(source_info$rmdfile, I, source_info)
 
-  current.dir <- getwd()
+
   
   Write(sessionInfo(),paste0("Session_info_",source_info$file$db.name,".RObj"),paste0("sessionInfo for", source_info$file[["file"]]),save)
   
@@ -102,6 +102,8 @@ finalize_dependency <- function(RMD=FALSE,write=TRUE){
   # Write library versions to specific source directory
   
   print(paste("Completed",source_info$file[["file"]]))
+  
+  setwd(current.dir)
   
   return(dependency.out)	
   
