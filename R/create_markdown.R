@@ -40,7 +40,7 @@ create_markdown <- function(target.file=paste0(source_info$file$file,"md"),targe
 							paste("```{r}\n #scriptLoader(",
 							          paste0("\"",si$project.id,"\""),
 							                              ",", 
-                        paste0("\"",si$file$file  ,"\""),"\n",
+                        paste0("\"",si$file$file  ,"\""),")","\n",
 							      
 							      "```"),
 							"```{r} \n #finalize_dependency() \n ```")
