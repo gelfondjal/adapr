@@ -34,7 +34,7 @@ create_markdown <- function(target.file=paste0(source_info$file$file,"md"),targe
 							paste("author:",paste0("\"",author,"\"")),
 							paste("output:",style),
 							"---",
-							"```{r,echo=FALSE}\n require(adapr) \n
+							"```{r,echo=FALSE,message=FALSE}\n require(adapr) \n
 							paste(\"Created on\",(Sys.time() ))\n
 							```",
 							paste("```{r}\n #scriptLoader(",
