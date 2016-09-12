@@ -5,7 +5,7 @@
 #' @return dependency.object 
 #' @export
 
-finalize_dependency <- function(write=TRUE){
+finalize_dependency <- function(RMD=FALSE,write=TRUE){
   
   # read in dependency object from dependency.file in source_info
   # return dependency object
@@ -21,7 +21,7 @@ finalize_dependency <- function(write=TRUE){
   }else{
     outputfile <- gsub("Rmd","html",file.path(source_info$results.dir,source_info$rmdfile$file))
     outfile <- Create.file.info(source_info$results.dir, basename(outputfile), paste("rendered Rmarkdown of", source_info$file$file))
-    write(0,outfile$fullname) # Write a stub for tracking
+    if(!file.exists(outfile$fullname)){write(0,outfile$fullname)} # Write a stub for tracking
     Write.cap(NULL, outfile, I, source_info)
   }
   Read.cap(source_info$rmdfile, I, source_info)

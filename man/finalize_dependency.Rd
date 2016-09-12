@@ -4,7 +4,7 @@
 \alias{finalize_dependency}
 \title{Writes dependency data to file in "Dependency" directory}
 \usage{
-finalize_dependency(write = TRUE)
+finalize_dependency(RMD = FALSE, write = TRUE)
 }
 \arguments{
 \item{write}{Logical indicated to write the dependency object}
