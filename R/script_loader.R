@@ -23,8 +23,9 @@ scriptLoader <- function(projectID,script){
     
     source(programPath,echo=FALSE)
    
-    }
+  }
   
+  setwd(resultsPath)
   
   return(1)
   

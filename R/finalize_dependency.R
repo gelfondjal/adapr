@@ -69,7 +69,9 @@ finalize_dependency <- function(write=TRUE){
   }
 
 
-  dependency.out <- subset(dependency.out,""!=target.hash)	
+  dependency.out <- subset(dependency.out,""!=target.hash)
+  
+  dependency.out <- subset(dependency.out,!duplicated(file.path(as.character(target.path),as.character(target.file))))
 
   setwd(current.dir)
     
