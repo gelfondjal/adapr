@@ -10,7 +10,7 @@ listBranches(si = source_info)
 \item{si}{is source_info object}
 }
 \value{
-dataframe of objects and descriptions
+dataframe of descriptions available branches
 }
 \description{
 Lists the branches available for loading in the adapr project

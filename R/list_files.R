@@ -1,6 +1,6 @@
 #' Lists the branches available for loading in the adapr project
 #' @param si is source_info object
-#' @return dataframe of objects and descriptions
+#' @return dataframe of descriptions available branches
 #' @export
 #' 
 listBranches <- function(si=source_info){
@@ -15,7 +15,7 @@ listBranches <- function(si=source_info){
 
 #' Lists the branches available for loading in the adapr project
 #' @param si is source_info object
-#' @return description of 
+#' @return description of data files
 #' @export
 #' 
 listDatafiles <- function(si=source_info){

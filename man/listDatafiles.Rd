@@ -10,7 +10,7 @@ listDatafiles(si = source_info)
 \item{si}{is source_info object}
 }
 \value{
-description of
+description of data files
 }
 \description{
 Lists the branches available for loading in the adapr project
