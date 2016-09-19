@@ -216,7 +216,7 @@ body <- dashboardBody(
       fluidRow(
         column(width=3,
           box(title = "Configure", status = "info", width = 12, height = NULL, collapsible = FALSE, solidHeader = TRUE,
-            helpText(h3("Configure First Project")),
+            helpText(h3("Configure Default Directory")),
             textInput("project1.directory","Project Directory",value=adapr_options$project.path),
             textInput("publish.directory","Publish Directory:",value=adapr_options$publish.path),
             actionButton("submitFirst.project","Setup default project path")
