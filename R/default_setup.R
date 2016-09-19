@@ -62,22 +62,16 @@ default.adapr.setup <- function(){
   
   set_adapr_options("git",ifelse(wantgit,"TRUE","FALSE"))
   
-  if(grepl("Git does not",git_binary_path)){ 
-  	
+  if(wantgit==FALSE){
+    username <- readline("What is your username? (This is optional)")
+    set_adapr_options("username",ifelse(username=="","Anonymous",username))
+  }
   
-  	if(wantgit){
+  if(wantgit & grepl("Git does not",git_binary_path)){ 
   	
+
   	  stop("Git is not installed Please download and configure (git-scm.com). Try GIT client GUI!!")
   	
-  	}else{
-  	  
-  	  set_adapr_options("git","FALSE")
-  	  username <- readline("What is your username? (This is optional)")
-  	  set_adapr_options("username",ifelse(username=="","Anonymous",username))
-  	  
-  	}
-    
-    
   	}
   # Check git config  
   
