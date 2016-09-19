@@ -9,11 +9,10 @@ default.adapr.setup <- function(){
   
   total <- 6
   step <- 1
+  require(devtools)
   
-
-  
-  
-  
+  devtools::install_github("RStudio/shiny-incubator")
+  devtools::install_github('ramnathv/rCharts')
   
   print(paste("Step",step,"of",total,"Identifying RSTUDIO step"))
   step <- step + 1
@@ -33,7 +32,6 @@ default.adapr.setup <- function(){
   
   print(paste("Step",step,"of",total,"Check pandoc path"))
   step <- step + 1
-
   
   PATHer <- sysEnvironment[["PATH"]]
   
@@ -58,13 +56,15 @@ default.adapr.setup <- function(){
   
   try(git_binary_path <- git_path(NULL))
   
+  yesno <- readline("Do you want to use git y/n? (This is optional)")
+  
+  wantgit <- substring(yesno,1,1) %in% c("y","Y")
+  
+  set_adapr_options("git",ifelse(wantgit,"TRUE","FALSE"))
+  
   if(grepl("Git does not",git_binary_path)){ 
   	
-  	yesno <- readline("Do you want to use git y/n? (This is optional)")
-  	
-  	wantgit <- substring(yesno,1,1) %in% c("y","Y")
-  	
-  	
+  
   	if(wantgit){
   	
   	  stop("Git is not installed Please download and configure (git-scm.com). Try GIT client GUI!!")
@@ -81,7 +81,7 @@ default.adapr.setup <- function(){
   	}
   # Check git config  
   
-  if(!grepl("Git does not",git_binary_path)){
+  if(wantgit & !grepl("Git does not",git_binary_path)){
   
   email <- ""
   
@@ -160,7 +160,7 @@ default.adapr.setup <- function(){
   print(paste("Step",step,"of",total,"Completed default seup!"))
   step <- step + 1
   
-  return("adapr setup: try 'adapr21()'")
+  return("adapr setup: try 'adapr()'")
   
   
 }# END default set.up

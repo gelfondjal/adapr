@@ -2,7 +2,7 @@
 % Please edit documentation in R/list_files.R
 \name{listDatafiles}
 \alias{listDatafiles}
-\title{Lists the branches available for loading in the adapr project}
+\title{Lists the data files available for reading in the adapr project}
 \usage{
 listDatafiles(si = source_info)
 }
@@ -13,6 +13,6 @@ listDatafiles(si = source_info)
 description of data files
 }
 \description{
-Lists the branches available for loading in the adapr project
+Lists the data files available for reading in the adapr project
 }
 
