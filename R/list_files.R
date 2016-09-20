@@ -6,10 +6,9 @@
 listBranches <- function(si=source_info){
   
   file_data <- si$all.files
-
   
-  if(length(file_sub$file)==0){
-    print("No available files")
+  if(length(file_data$file)==0){
+    print("No available branch files")
     return(NULL)
   }
   
@@ -34,6 +33,13 @@ listBranches <- function(si=source_info){
 listDatafiles <- function(si=source_info){
   
   file_data <- si$all.files
+  
+  if(length(file_data)==0){
+    print("No available file I/O") 
+    return(file_data)
+    
+  }
+  
   
   allfiles <- data.frame(file=list.files(si$data.dir,recursive=TRUE,full.names = 1),stringsAsFactors = FALSE)
   
