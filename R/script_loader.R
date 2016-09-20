@@ -34,6 +34,8 @@ scriptLoader <- function(projectID,script){
 #' Checks whether interactive R markdown session is ON
 #' @param changeOption logical to print out to change the Rmdstart option
 #' @return value TRUE if R session in in interactive R markdown mode
+#' @export
+#' 
 checkRmdMode <- function(changeOption=FALSE){
   
   test <- !is.null(options()$Rmdstart)
