@@ -37,13 +37,13 @@ create_markdown <- function(target.file=paste0(source_info$file$file,"md"),targe
 							"```{r,echo=FALSE,message=FALSE,warning=FALSE,include=FALSE}\n require(adapr) \n
 							paste0(\"Created on \",(Sys.time() ))\n
 							```\n\n\n",
-							paste0("```{r}\n scriptLoader(",
+							paste0("```{r,echo=FALSE,message=FALSE,warning=FALSE,include=FALSE}\n scriptLoader(",
 							          paste0("\"",si$project.id,"\""),
 							                              ",", 
                         paste0("\"",si$file$file  ,"\""),")","\n",
 							      
 							      "```\n\n\n\n"),
-							"```{r} \n if(checkRmdMode()){dependency.out <- finalize_dependency() } \n ```")
+							"```{r,echo=FALSE} \n if(checkRmdMode()){dependency.out <- finalize_dependency() } \n ```")
 								
 	start.lines.generic <- paste(start.lines.generic,collapse="\n")
 	
