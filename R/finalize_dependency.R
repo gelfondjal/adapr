@@ -13,8 +13,7 @@ finalize_dependency <- function(RMD=FALSE,write=TRUE){
   current.dir <- getwd()
   # Copy and render Rmd file
   file.copy(source_info$rmdfile$fullname,file.path(source_info$results.dir,source_info$rmdfile$file),overwrite=TRUE)
-  if(is.null(options()$Rmdstart)){
-  options(RScriptstart=TRUE)  
+  if(checkRmdMode()){
   outputfile <- rmarkdown::render(file.path(source_info$results.dir,source_info$rmdfile$file))
   outfile <- Create.file.info(source_info$results.dir, basename(outputfile), paste("rendered Rmarkdown of", source_info$file$file))
   Write.cap(NULL, outfile, I, source_info)
