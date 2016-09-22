@@ -32,24 +32,19 @@ listBranches <- function(si=source_info){
 #' 
 listDatafiles <- function(si=source_info){
   
-  file_data <- si$all.files
-  
-  if(length(file_data)==0){
-    print("No available file I/O") 
-    return(file_data)
-    
-  }
-  
-  
+ 
   allfiles <- data.frame(file=list.files(si$data.dir,recursive=TRUE,full.names = 1),stringsAsFactors = FALSE)
   
   allfiles$path <- dirname(substring(as.character(allfiles$file),nchar(si$project.path)+2,nchar(as.character(allfiles$file))))
   
   allfiles$file <- basename(allfiles$file)
-  
-  
+
+    
+  file_data <- si$all.files
+  file_sub <- data.frame()
+  try({
   file_sub <- subset(file_data,path==si$data.dir,select = c("file","path","description"))
-  
+  })
   if(nrow(file_sub)==0){
     
     return(allfiles)

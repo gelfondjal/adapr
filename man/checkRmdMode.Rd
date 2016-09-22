@@ -7,7 +7,7 @@
 checkRmdMode(changeOption = FALSE)
 }
 \arguments{
-\item{changeOption}{logical to print out to change the Rmdstart option}
+\item{changeOption}{logical to print out and change the Rmdstart option}
 }
 \value{
 value TRUE if R session in in interactive R markdown mode
