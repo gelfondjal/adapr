@@ -17,6 +17,7 @@ Depends:
     DBI,
     assertthat,
     tibble,
+    base64enc,
     plyr,
     dplyr,
     shiny,
