@@ -23,6 +23,7 @@ Imports:
     caTools,
     highr,
     evaluate,
+    stringr,
     Rcpp,
     httpuv,
     munsell,
