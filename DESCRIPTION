@@ -25,7 +25,7 @@ Imports:
     gtools,
     gdata,
     gplots,
-    catools,
+    caTools,
     xtable,
     plotly,
     shinydashboard,
