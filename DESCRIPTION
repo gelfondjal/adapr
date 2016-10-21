@@ -16,6 +16,7 @@ Imports:
     bitops,
     htmltools,
     lazyeval,
+    purrr,
     gplots,
     caTools,
     Rcpp,
