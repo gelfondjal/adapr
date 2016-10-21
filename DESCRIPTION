@@ -17,6 +17,7 @@ Imports:
     htmltools,
     lazyeval,
     purrr,
+    tidyr,
     gplots,
     caTools,
     Rcpp,
