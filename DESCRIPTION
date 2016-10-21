@@ -30,6 +30,7 @@ Imports:
     caTools,
     Rcpp,
     httpuv,
+    ggplot2,
     plotly,
     xtable,
     plotly,
