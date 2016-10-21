@@ -25,6 +25,7 @@ Imports:
     gtools,
     gdata,
     bitops,
+    htmltools,
     gplots,
     caTools,
     xtable,
