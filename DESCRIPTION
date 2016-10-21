@@ -23,6 +23,7 @@ Depends:
 Imports:
     magrittr,
     gtools,
+    gdata,
     xtable,
     plotly,
     shinydashboard,
