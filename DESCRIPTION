@@ -5,7 +5,7 @@ Title: Tracks reading and writing within R scripts that are organized into a
 Version: 1.0
 Date: 2015-12-21
 Author: Jon Gelfond
-Maintainer: Who to complain to <yourfault@somewhere.net>
+Maintainer: Jonathan Gelfond <gelfondjal@uthscsa.edu>
 Description: Used Git and Pander
 License: Don't know
 Depends:
@@ -14,6 +14,7 @@ Depends:
     digest,
     gplots,
     ggplot2,
+    DBI,
     plyr,
     dplyr,
     shiny,
