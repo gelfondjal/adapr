@@ -22,6 +22,7 @@ Depends:
     rmarkdown
 Imports:
     magrittr,
+    gtools,
     xtable,
     plotly,
     shinydashboard,
