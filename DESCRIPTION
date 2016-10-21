@@ -24,6 +24,7 @@ Imports:
     magrittr,
     gtools,
     gdata,
+    bitops,
     gplots,
     caTools,
     xtable,
