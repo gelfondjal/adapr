@@ -25,6 +25,7 @@ Imports:
     evaluate,
     stringr,
     stringi,
+    labelling,
     Rcpp,
     httpuv,
     munsell,
