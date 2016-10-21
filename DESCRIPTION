@@ -15,6 +15,7 @@ Imports:
     gdata,
     bitops,
     htmltools,
+    lazyeval,
     gplots,
     caTools,
     Rcpp,
