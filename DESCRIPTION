@@ -29,6 +29,7 @@ Depends:
     rmarkdown
 Imports:
     magrittr,
+    base64enc,
     gtools,
     gdata,
     bitops,
