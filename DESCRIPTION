@@ -21,6 +21,7 @@ Imports:
     viridisLite,
     gplots,
     caTools,
+    highr,
     Rcpp,
     httpuv,
     munsell,
