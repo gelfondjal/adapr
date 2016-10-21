@@ -24,6 +24,7 @@ Imports:
     highr,
     evaluate,
     stringr,
+    stringi,
     Rcpp,
     httpuv,
     munsell,
