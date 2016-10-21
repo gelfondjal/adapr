@@ -28,6 +28,7 @@ Imports:
     htmltools,
     gplots,
     caTools,
+    Rcpp,
     xtable,
     plotly,
     shinydashboard,
