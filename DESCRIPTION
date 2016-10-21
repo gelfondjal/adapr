@@ -32,6 +32,7 @@ Imports:
     httpuv,
     ggplot2,
     gtable,
+    scales,
     plotly,
     xtable,
     plotly,
