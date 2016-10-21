@@ -15,6 +15,7 @@ Depends:
     gplots,
     ggplot2,
     DBI,
+    assertthat,
     plyr,
     dplyr,
     shiny,
