@@ -28,6 +28,8 @@ Render_Rmd <- function(Rmd.file,description="Rmarkdown",...){
     
   Write.cap(NULL,outfile,I,source_info)#,envir=parent.frame())
   
+  file.remove(shiftmdfile)
+  
   return(outfile)
   
 }

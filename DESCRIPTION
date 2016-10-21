@@ -21,4 +21,11 @@ Depends:
     pander,
     rmarkdown
 Imports:
+    magrittr,
+    xtable,
+    plotly,
+    shinydashboard,
+    knitr,
+    pander,
+    rmarkdown
 RoxygenNote: 5.0.1
