@@ -12,7 +12,7 @@ git_provenance(project.id, filepath = 0)
 \item{filepath}{File that will be hashed and search within Git history, File choose dialogue if not specified}
 }
 \value{
-list of 1) Git commit including commit message, date, author and 2) file info
+list of 1) filename, 2) Git commit including commit message, date, author and 2) file info
 }
 \description{
 Identify git provenance of file within a project

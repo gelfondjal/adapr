@@ -118,13 +118,17 @@ body <- dashboardBody(
           box(title = "App", status = "info", width = 12, height = NULL, collapsible = FALSE, solidHeader = TRUE,
             actionButton("submitRunApp","Run App"),br(),br(),
             htmlOutput("selectAppUI")
-          )
+          ),
+        
+        box(title = "Check File Provenance", status = "info", width = 12, height = NULL, collapsible = FALSE, solidHeader = TRUE,
+            actionButton("IDfile","Identify file"),br(),br()
+        )
                   ),  
         column(width=10,
           h3(strong(htmlOutput("projectselected3"))),
           box(status = "info", width = 12, height = 260, collapsible = FALSE, solidHeader = FALSE,
               h4(tableOutput("projectus")),
-              h4(tableOutput("runApp"))
+              h4(tableOutput("runApp"),verbatimTextOutput("selectIDfile"))
            )
           
           

@@ -118,7 +118,7 @@ noedges <- 0
 if(nrow(isgdf)==0){
   
   noedges <- 1
-  isgdf <- igraph::as_data_frame(graph.data.frame(longgraph))
+  isgdf <- igraph::as_data_frame(graph.data.frame(data.frame(from=vertexnames[1],to=vertexnames[1])))
   
   
 }

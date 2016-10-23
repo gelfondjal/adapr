@@ -155,6 +155,11 @@ shinyServer(function(input, output,session) {
     }
   })  
   
+  
+  ##########################################################################################
+  ### SYNCHRONIZE TAB 
+  
+  
   output$ProgramDAG_report <- renderPlot({ 
     if(input$make_report_graph!=0){
       report_graph <<- create_program_graph(input$project.id)
@@ -360,6 +365,19 @@ shinyServer(function(input, output,session) {
   }) 
 
   
+  output$selectIDfile <- renderPrint({ 
+   # print("Hello")
+    if(input$IDfile!=0){                                             
+      isolate({  
+        provenanceOutput <-  git_provenance(input$project.id)
+        print(((provenanceOutput)))
+      })
+    } 
+  }) 
+  
+  
+  
+  
   ##########################################################################################
   ### SYNCHRONIZE TAB
 
@@ -441,8 +459,11 @@ shinyServer(function(input, output,session) {
         
         
         full.time <- wait0
-        
-        for (source.iter in 1:nrow(ID.sync.out)) {
+        last.prog <- "Go"
+        source.iter <- 0
+        while((last.prog != "") & source.iter < nrow(ID.sync.out)){
+        source.iter <- source.iter + 1
+        #for (source.iter in 1:nrow(ID.sync.out)) {
         
           runmessage <- paste(ID.sync.out$file[source.iter],paste0(source.iter,"/",n.scripts.to.sync),wait0,"seconds remaining")
           
@@ -472,6 +493,8 @@ shinyServer(function(input, output,session) {
           
         }
         
+        failure.script <- ifelse(source.iter <= nrow(ID.sync.out),as.character(ID.sync.out$file[source.iter]),"")
+        
         #withProgress(session,min=1,max=3,expr={
       #    setProgress(message = 'Synchronizing',detail=paste("Approximate Time:", wait, "seconds"),value=2)
         #  test.sync <- source.sync.si(source_info,run=TRUE,TRUE)
@@ -479,7 +502,7 @@ shinyServer(function(input, output,session) {
       
       text<-paste(startmessage,"Sync successful for",input$project.id)
       if(last.prog==""){    
-        text<-paste(last.prog,"failed sync for",input$project.id)
+        text<-paste(last.prog,"failed sync for",input$project.id,"Check",failure.script)
           }
         }#IF NOT SYNCHONIZED
       text
