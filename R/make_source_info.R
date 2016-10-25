@@ -1,7 +1,7 @@
 #' Create source_info from project.id
-#' @param project.id
+#' @param project.id Project ID to use
 #' @return source_info for generic source_info tree operations
-#' @details Creates tree_controller.R directory
+#' @details Creates tree_controller.R directory. This directory is used for operation on the tree.
 #' @export
 pull_source_info <- function(project.id){
   

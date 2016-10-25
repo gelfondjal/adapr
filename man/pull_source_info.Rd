@@ -6,6 +6,9 @@
 \usage{
 pull_source_info(project.id)
 }
+\arguments{
+\item{project.id}{Project ID to use}
+}
 \value{
 source_info for generic source_info tree operations
 }
@@ -13,6 +16,6 @@ source_info for generic source_info tree operations
 Create source_info from project.id
 }
 \details{
-Creates tree_controller.R directory
+Creates tree_controller.R directory. This directory is used for operation on the tree.
 }
 

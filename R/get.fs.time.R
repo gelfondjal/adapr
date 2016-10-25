@@ -4,8 +4,6 @@
 #' @export
 get.fs.time <- function(){
   
-  #'@description 
-    
     # Get the filesystem write time
     tf <- tempfile()
     write(0,tf)

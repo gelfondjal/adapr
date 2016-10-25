@@ -13,7 +13,7 @@
 #' 
 project_report_send_rmd <- function (target.directory=source_info$project.path,si,send.data=FALSE, graph.width = 960, graph.height = 500) 
 {
-  library(pander)
+  #library(pander)
   library(devtools)
   if(!require("rCharts")){install_github('rCharts','ramnathv')}
   library(rCharts)

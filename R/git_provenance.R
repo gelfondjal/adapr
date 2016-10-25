@@ -15,7 +15,7 @@ git_provenance <- function(project.id,filepath=0){
   
   provenance <- git.history.search(gitpath,filehash)  
   
-  si <- pull_source_info("Finasteride_adapr")
+  si <- pull_source_info(project.id)
   
   files <- Condense.file.info(Harvest.trees(si$dependency.dir))
                               
