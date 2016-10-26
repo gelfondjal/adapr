@@ -10,6 +10,6 @@ default.adapr.setup()
 Set up adapr 1st time
 }
 \details{
-experimental
+Use on ADAPR start up. Will make project directories in computer Document directory and create adaprHome project.
 }
 

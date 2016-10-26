@@ -446,14 +446,16 @@ shinyServer(function(input, output,session) {
         wait0<-ceiling(as.numeric(sum( run.times$last.run.time.sec))*1.5)
         
         
-        progress <- shiny::Progress$new()
-        on.exit(progress$close())
+        #progress <- shiny::Progress$new()
+        #on.exit(progress$close())
       
         n.scripts.to.sync <- nrow(ID.sync.out)
         
-        startmessage <- paste("Approximate Time:", wait0, "seconds",n.scripts.to.sync,"scripts")
+        startmessage <- paste("Start sync approximate Time:", wait0, "seconds",n.scripts.to.sync,"scripts")
         
-        progress$set(message=paste("Start sync",startmessage),value=0)
+        withProgress(message=startmessage, expr={
+        
+#        progress$set(message=paste("Start sync",startmessage),value=0)
         
         Sys.sleep(3)
         
@@ -467,7 +469,8 @@ shinyServer(function(input, output,session) {
         
           runmessage <- paste(ID.sync.out$file[source.iter],paste0(source.iter,"/",n.scripts.to.sync),wait0,"seconds remaining")
           
-          progress$inc(1/2,detail=runmessage)
+          incProgress(source.iter/nrow(ID.sync.out),message=runmessage)
+          
          # progress$set(message=paste("Start sync",startmessage),value=0)
         
           last.prog <- ""
@@ -492,6 +495,8 @@ shinyServer(function(input, output,session) {
           
           
         }
+        
+        })#END progress bar
         
         failure.script <- ifelse(source.iter <= nrow(ID.sync.out),as.character(ID.sync.out$file[source.iter]),"")
         

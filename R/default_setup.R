@@ -1,5 +1,5 @@
 #' Set up adapr 1st time
-#' @details experimental
+#' @details Use on ADAPR start up. Will make project directories in computer Document directory and create adaprHome project.
 #' @export
 #' 
 
@@ -11,8 +11,11 @@ default.adapr.setup <- function(){
   step <- 1
   require(devtools)
   
-  devtools::install_github("RStudio/shiny-incubator")
-  devtools::install_github('ramnathv/rCharts')
+#  devtools::install_github("RStudio/shiny-incubator")
+#  devtools::install_github('ramnathv/rCharts')
+  
+  print("Will make project directories in computer Document directory and create adaprHome project.")
+  
   
   print(paste("Step",step,"of",total,"Identifying RSTUDIO step"))
   step <- step + 1

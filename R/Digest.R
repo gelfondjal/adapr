@@ -1,5 +1,6 @@
 #' Digest files from (digest package)
-#' @description Compute file hash without checking file.access
+#' @description Compute file hash without checking file.access. 
+#' @details Uses digest from package "digest". Authors Dirk Eddelbuettel edd@debian.org for the R interface; Antoine Lucas for the integration of crc32; Jarek Tuszynski for the file-based operations; Henrik Bengtsson and Simon Urbanek for improved serialization patches; Christophe Devine for the hash function implementations for sha-1, sha-256 and md5; Jean-loup Gailly and Mark Adler for crc32; Hannes Muehleisen for the integration of sha-512; Jim Hester for the integration of xxhash32, xxhash64 and murmur32.
 #' @return The filehash
 #' @export
 Digest <- function (object, algo = c("md5", "sha1", "crc32", "sha256", 

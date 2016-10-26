@@ -15,8 +15,8 @@ project_report_send_rmd <- function (target.directory=source_info$project.path,s
 {
   #library(pander)
   library(devtools)
-  if(!require("rCharts")){install_github('rCharts','ramnathv')}
-  library(rCharts)
+#  if(!require("rCharts")){install_github('rCharts','ramnathv')}
+#  library(rCharts)
   library(plyr)
   
   make.relative.hyperlink <- function(directory.to.clip,files,links){
@@ -49,29 +49,38 @@ project.graph <- project.info$graph
 
 # START Make Sankey Plot
 
-E(project.graph)$weight = 0.1
-edgelist <- get.data.frame(project.graph)
-colnames(edgelist) <- c("source", "target", "value")
-edgelist$source <- as.character(edgelist$source)
-edgelist$target <- as.character(edgelist$target)
+#E(project.graph)$weight = 0.1
+#edgelist <- get.data.frame(project.graph)
+#colnames(edgelist) <- c("source", "target", "value")
+#edgelist$source <- as.character(edgelist$source)
+#edgelist$target <- as.character(edgelist$target)
 
-support.names <- subset(project.info$all.files, description == 
-                          "Support file")$fullname.abbr
-edgelist <- subset(edgelist, !(source %in% support.names) & 
-                     !grepl("Session_info", edgelist$source, fixed = TRUE) & 
-                     !grepl("Session_info", edgelist$target, fixed = TRUE))
-sankeyPlot <- rCharts$new()
-sankeyPlot$setLib("http://timelyportfolio.github.io/rCharts_d3_sankey/libraries/widgets/d3_sankey")
-sankeyPlot$set(data = edgelist, nodeWidth = 15, nodePadding = 10, 
-               layout = 32, width = graph.width, height = graph.height)
+#support.names <- subset(project.info$all.files, description == 
+#                          "Support file")$fullname.abbr
+#edgelist <- subset(edgelist, !(source %in% support.names) & 
+#                     !grepl("Session_info", edgelist$source, fixed = TRUE) & 
+#                     !grepl("Session_info", edgelist$target, fixed = TRUE))
+#sankeyPlot <- rCharts$new()
+#sankeyPlot$setLib("http://timelyportfolio.github.io/rCharts_d3_sankey/libraries/widgets/d3_sankey")
+#sankeyPlot$set(data = edgelist, nodeWidth = 15, nodePadding = 10, 
+#               layout = 32, width = graph.width, height = graph.height)
 
 
 # END: Make Sankey Plot
 
 
 reduced.project.graph.file <- file.path(target.directory2, 
-                                        "reduced_networks.html")
-sankeyPlot$save(reduced.project.graph.file, cdn = TRUE)
+                                       "reduced_networks.png")
+
+
+#sankeyPlot$save(reduced.project.graph.file, cdn = TRUE)
+
+png(reduced.project.graph.file,graph.width,graph.height)
+programGraph <- create_program_graph(si$project.id)
+print(programGraph$ggplot)
+graphics.off()
+
+
 programs <- subset(project.info$tree, !duplicated(source.file), 
                    select = c("source.file", "source.file.path", "source.file.description"))
 programs$source.file.fullname <- file.path(programs$source.file.path, 
@@ -157,7 +166,6 @@ tempwd <- getwd()
 
 setwd(si$project.path)
 
-#target.directory <- "/Volumes/WORKING/Gelfond_Swap"
 
 # Copy filesover
   

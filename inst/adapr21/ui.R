@@ -21,6 +21,20 @@ sidebar <- dashboardSidebar(
 
 
 body <- dashboardBody(
+  
+  tags$style(HTML("#shiny-notification-panel {
+                    width: 300px;
+                  position: absolute;
+                  margin: auto;
+                  top: 0;
+                  right: 0;
+                  bottom: 0;
+                  left: 0;
+                  height: 200px;
+                  }
+                  .shiny-notification { opacity: 0.95; }
+                  h2 { padding-left: 15px; }")),
+  
   tabItems(
     tabItem("selectproject",
       fluidRow(
@@ -196,7 +210,7 @@ body <- dashboardBody(
             #helpText(h4("Your choices:")),
             #textOutput('variables'),
             #br(),br(),
-            textInput('filename.send', "Result File:", value="Path from main results directory"),
+            textInput('filename.send', "Result File:", value="Results/..."),
             actionButton("submitPublish","Add File to Publish"),
             actionButton("publish.button","Publish files"),
             br(),br(),br(),br(),
