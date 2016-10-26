@@ -1,6 +1,6 @@
 
-if(!require(shinyIncubator)){devtools::install_github("shiny-incubator", "rstudio")}
-require(shinyIncubator)
+#if(!require(shinyIncubator)){devtools::install_github("shiny-incubator", "rstudio")}
+#require(shinyIncubator)
 library(devtools)
 library(adapr)
 
