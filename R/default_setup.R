@@ -10,9 +10,7 @@ default.adapr.setup <- function(){
   total <- 6
   step <- 1
   require(devtools)
-  
-#  devtools::install_github("RStudio/shiny-incubator")
-#  devtools::install_github('ramnathv/rCharts')
+
   
   print("Will make project directories in computer Document directory and create adaprHome project.")
   

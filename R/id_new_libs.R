@@ -12,8 +12,8 @@ id_new_libs <- function(library.data.file){
  
   packages.info.all <- read.csv(library.data.file,as.is=TRUE)
   
-  adapr_packs <- c("adapr","knitr","plyr","rCharts","shinydashboard","devtools","R2HTML","shiny","gplots","digest","igraph","stats",
-  					"stats","graphics","grDevices","utils","datasets","methods","base","plotly","shinyIncubator")
+  adapr_packs <- c("adapr","knitr","plyr","shinydashboard","devtools","R2HTML","shiny","gplots","digest","igraph","stats",
+  					"stats","graphics","grDevices","utils","datasets","methods","base","plotly")
 
    notadapr <- setdiff(loaded_packages()$package,adapr_packs)
    
