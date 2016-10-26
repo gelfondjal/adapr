@@ -13,8 +13,6 @@ function (source_info, graph.width = 960, graph.height = 500)
 {
 
   library(devtools)
-  if(!require("rCharts")){install_github('rCharts','ramnathv')}
-  library(rCharts)
   library(plyr)
   
   

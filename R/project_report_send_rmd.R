@@ -15,8 +15,6 @@ project_report_send_rmd <- function (target.directory=source_info$project.path,s
 {
   #library(pander)
   library(devtools)
-#  if(!require("rCharts")){install_github('rCharts','ramnathv')}
-#  library(rCharts)
   library(plyr)
   
   make.relative.hyperlink <- function(directory.to.clip,files,links){
