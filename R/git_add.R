@@ -5,6 +5,7 @@
 #' @param git_args string argument for git
 #' @param git_binary location of git executable
 #' @return git output from git add
+#' @author Uses git_path adapted form devtools author Hadley Wickham
 #' @export
 #' 
 git.add <- function(gitdir,filename,branch = NULL, git_args = character(), git_binary = NULL){

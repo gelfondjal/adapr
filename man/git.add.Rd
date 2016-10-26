@@ -24,4 +24,7 @@ git output from git add
 \description{
 git add to stage the file
 }
+\author{
+Uses git_path adapted form devtools author Hadley Wickham
+}
 

@@ -5,6 +5,7 @@
 #' @param git_args arguments to git
 #' @param git_binary location of git executable
 #' @return git log output
+#' @author Uses git_path adapted form devtools author Hadley Wickham
 #' @export
 #' 
 

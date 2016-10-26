@@ -2,6 +2,7 @@
 #' @param git_binary_name git binary name 
 #' @return git executable
 #' @export
+#' @author Adapted form devtools author Hadley Wickham
 #' 
 git_path <- function(git_binary_name = NULL) {
   # Use user supplied path

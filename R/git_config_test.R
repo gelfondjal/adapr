@@ -1,6 +1,7 @@
 #' Checks git configuration
 #' @return integer 0 if configured otherwise 99 if not
 #' @export
+#' @author Uses git_path adapted form devtools author Hadley Wickham
 #' 
 #' 
 

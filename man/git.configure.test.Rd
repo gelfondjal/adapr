@@ -12,4 +12,7 @@ integer 0 if configured otherwise 99 if not
 \description{
 Checks git configuration
 }
+\author{
+Uses git_path adapted form devtools author Hadley Wickham
+}
 
