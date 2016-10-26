@@ -1,6 +1,6 @@
 ## server.R
 library(shiny)
-require(rCharts)
+#require(rCharts)
 library(adapr)
 library(plyr) 
 library(devtools)
