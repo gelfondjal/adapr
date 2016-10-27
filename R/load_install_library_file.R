@@ -9,6 +9,8 @@
 #' 
 load.install.library.file <- function(library.data.file=NA,subgroup=NULL,verbose=FALSE){
  
+  require(devtools)
+  
   if(is.na(library.data.file)){library.data.file <- file.path(source_info$support.dir,source_info$support.library.file)}
   
   if(!file.exists(library.data.file)){

@@ -8,6 +8,8 @@ Digest <- function (object, algo = c("md5", "sha1", "crc32", "sha256",
                     skip = "auto", ascii = FALSE, raw = FALSE) 
 {
 	
+  require(digest)
+  
   val <- ""
   
   
