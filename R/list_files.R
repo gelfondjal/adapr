@@ -60,4 +60,23 @@ listDatafiles <- function(si=source_info){
 }
 
 
+#' Opens results directory
+#' @param si is source_info object
+#' @details Use BrowseURL to open results directory
+#' @export
+#' 
+showResults <- function(si=source_info){
+  browseURL(si$results.dir)
+}
+
+#' Opens project directory
+#' @param si is source_info object
+#' @details Use BrowseURL to open project directory
+#' @export
+#' 
+showProject <- function(si=source_info){
+  browseURL(si$project.path)
+}
+
+
 
