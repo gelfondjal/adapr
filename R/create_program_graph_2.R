@@ -12,7 +12,6 @@ create_program_graph<- function(project.id){
 # given a project id (project.id)
 # Uses nicer plot parameters
 require(ggplot2)
-requireNamespace(ggplot2)
 require(plyr)	
 require(igraph)
 
@@ -36,7 +35,7 @@ vertexnames <- subset(projinfo$all.files,file %in%sources)$fullname.abbr
 inedges <- igraph::adjacent_vertices(projgraph, vertexnames,"out")
 
 inedges <- lapply(inedges,function(x){return(attr(x,"name"))})
-inedges <- ldply(inedges,as.data.frame)
+inedges <- plyr::ldply(inedges,as.data.frame)
 
 names(inedges) <- c("to","from")
 
@@ -120,7 +119,7 @@ noedges <- 0
 if(nrow(isgdf)==0){
   
   noedges <- 1
-  isgdf <- igraph::as_data_frame(graph.data.frame(data.frame(from=vertexnames[1],to=vertexnames[1])))
+  isgdf <- igraph::as_data_frame(igraph::graph.data.frame(data.frame(from=vertexnames[1],to=vertexnames[1])))
   
   
 }
@@ -202,38 +201,38 @@ dfo$synccolor <- as.character(ifelse(dfo$v %in% unsync.vertex,"Not Synchronized"
 
 dfo$synccolor <- factor(dfo$synccolor,levels=c("Synchronized","Not Synchronized"))
 
-proj.gg <- ggplot2::ggplot(dfo,aes(x=x,y=y,label=basename(as.character(v))))+
- geom_point(aes(colour=dfo$synccolor),size=dotsize0,alpha=0.7)+
-geom_point(shape = 1,size = dotsize0,colour = "grey70", stroke=2)+
- geom_text(vjust=-0.5,size=text.size0,color="black")
+proj.gg <- ggplot2::ggplot(dfo,ggplot2::aes(x=x,y=y,label=basename(as.character(v))))+
+  ggplot2::geom_point(ggplot2::aes(colour=dfo$synccolor),size=dotsize0,alpha=0.7)+
+  ggplot2::geom_point(shape = 1,size = dotsize0,colour = "grey70", stroke=2)+
+  ggplot2::geom_text(vjust=-0.5,size=text.size0,color="black")
 
-proj.gg <- proj.gg + annotate(geom="label",x=dfo$x,y=dfo$y-ifelse(length(vertexnames)>1,0.125,0.1),label=dfo$description)
+proj.gg <- proj.gg + ggplot2::annotate(geom="label",x=dfo$x,y=dfo$y-ifelse(length(vertexnames)>1,0.125,0.1),label=dfo$description)
 
 if(length(vertexnames)==1){
   
-  proj.gg <- proj.gg + scale_y_continuous(limits=rangery)
+  proj.gg <- proj.gg + ggplot2::scale_y_continuous(limits=rangery)
   
 }
 
 
 if(noedges==0){
 
-proj.gg <- proj.gg+annotate(geom="segment",x=froms$x,y=froms$y,xend=froms$x2,yend=froms$y2,
-        arrow=arrow(length=unit(0.2,"cm"),type="closed"),alpha=0.5/ifelse(graph.width>5,5,1))
+proj.gg <- proj.gg+ggplot2::annotate(geom="segment",x=froms$x,y=froms$y,xend=froms$x2,yend=froms$y2,
+        arrow=ggplot2::arrow(length=ggplot2::unit(0.2,"cm"),type="closed"),alpha=0.5/ifelse(graph.width>5,5,1))
  
 }  
-proj.gg <- proj.gg +scale_x_continuous(limits=horizontal.range)+theme(axis.line=element_blank(),axis.text.x=element_blank(),
-axis.text.y=element_blank(),axis.ticks=element_blank(),
-axis.title.x=element_blank(),
-axis.title.y=element_blank(),legend.position="bottom",
-panel.background=element_blank(),panel.border=element_blank(),panel.grid.major=element_blank(),
-panel.grid.minor=element_blank(),plot.background=element_blank())+ggtitle(paste(project.id,"- R Script Graph"))+theme(text=element_text(size=20))
+proj.gg <- proj.gg +ggplot2::scale_x_continuous(limits=horizontal.range)+ggplot2::theme(axis.line=ggplot2::element_blank(),axis.text.x=ggplot2::element_blank(),
+axis.text.y=ggplot2::element_blank(),axis.ticks=ggplot2::element_blank(),
+axis.title.x=ggplot2::element_blank(),
+axis.title.y=ggplot2::element_blank(),legend.position="bottom",
+panel.background=ggplot2::element_blank(),panel.border=ggplot2::element_blank(),panel.grid.major=ggplot2::element_blank(),
+panel.grid.minor=ggplot2::element_blank(),plot.background=ggplot2::element_blank())+ggplot2::ggtitle(paste(project.id,"- R Script Graph"))+ggplot2::theme(text=ggplot2::element_text(size=20))
 
-proj.gg <- proj.gg+ scale_color_manual(name = element_blank(), # or name = element_blank()
+proj.gg <- proj.gg+ ggplot2::scale_color_manual(name = ggplot2::element_blank(), # or name = element_blank()
 #labels = c("Synchronized", "Not Synchronized"),
 values =synccolors)
 isg <- igraph::induced_subgraph(projgraph,vertexnames)
-runorder <- data.frame(v=topological.sort(isg)$name,run.order=1:length(vertexnames))
+runorder <- data.frame(v=igraph::topological.sort(isg)$name,run.order=1:length(vertexnames))
 dfo <- merge(dfo,runorder,by='v')
             
 
