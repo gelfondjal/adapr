@@ -2,6 +2,7 @@
 #' @param file.info file information list 
 #' @param read.fcn function for reading the file
 #' @param source_info source information list
+#' @param ... arguments passed to read.fcn
 #' @return object read from files
 #' @export
 #' 

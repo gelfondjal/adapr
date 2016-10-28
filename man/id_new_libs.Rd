@@ -8,8 +8,6 @@ id_new_libs(library.data.file)
 }
 \arguments{
 \item{library.data.file}{CSV File with a set of library names and repository locations}
-
-\item{verbose}{Print which libraries are installed and loaded}
 }
 \value{
 Libraries loaded that were not automatically loaded

@@ -4,7 +4,7 @@
 #' copy to target.directory
 #' Uses pander and pandoc unlike project_report
 #' @param target.directory Location to send project report
-#' @param source_info Source information list
+#' @param si Source information list
 #' @param send.data Logical to send data directory or not
 #' @param graph.width Sankey Plot dimensions
 #' @param graph.height Sankey Plot dimensions

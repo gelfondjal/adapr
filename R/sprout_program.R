@@ -4,6 +4,7 @@
 #' @param description What program does
 #' @param seed Set seed at program initialization
 #' @param capture.load.command Command for loading inference tree library
+#' @param controller logical to insert lines that operate on analysis tree
 #' @return Logical indicating success or not
 #' @details Will not overwrite existing program
 #' @export

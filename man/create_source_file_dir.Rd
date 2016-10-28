@@ -8,15 +8,11 @@ create_source_file_dir(project.id0 = project.id, source.file0 = source.file,
   source.description = "")
 }
 \arguments{
-\item{project.id0}{is the project id name string}
+\item{project.id0}{project id name string}
 
-\item{source.file0}{is the filename of the source}
+\item{source.file0}{filename of the source}
 
-\item{description}{is the string description of what the source file does}
-
-\item{project.path}{is the home directory of the project}
-
-\item{git.path}{path to git version control command}
+\item{source.description}{character description of what the source file does}
 }
 \value{
 source_info list describing the project

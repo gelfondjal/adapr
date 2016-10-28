@@ -6,6 +6,7 @@
 #' @export
 Make.summary.graph <- function(dependency.dir=NULL,dependency.object=NULL,plot.graph=FALSE){
   
+  require(igraph)
   
   if(is.null(dependency.object)){
     
@@ -16,7 +17,7 @@ Make.summary.graph <- function(dependency.dir=NULL,dependency.object=NULL,plot.g
   
   g.all <- Make.dependency.graph.obj(trees)
   
-  suffixes <- gsub(".*\\.","",V(g.all)$name)  	
+  suffixes <- gsub(".*\\.","",igraph::V(g.all)$name)  	
   
   outputs <- c("tex","Robj","pdf")
   data.types <- c("csv","txt")
@@ -40,60 +41,60 @@ Make.summary.graph <- function(dependency.dir=NULL,dependency.object=NULL,plot.g
   
   all.file.info$rank <- rank(all.file.info$tim)
   
-  #V(g.all)$color <- file.type.df$color[match(suffixes,file.type.df$suffix)]
+  #igraph::V(g.all)$color <- file.type.df$color[match(suffixes,file.type.df$suffix)]
   
-  V(g.all)$shape <- file.type.df$shape[match(suffixes,as.character(file.type.df$suffix))]
+  igraph::V(g.all)$shape <- file.type.df$shape[match(suffixes,as.character(file.type.df$suffix))]
   
-  V(g.all)$color <- "blue"
+  igraph::V(g.all)$color <- "blue"
   
-  V(g.all)$mod.time <-  all.file.info$time[match(V(g.all)$name,all.file.info$fullname.abbr)]
+  igraph::V(g.all)$mod.time <-  all.file.info$time[match(igraph::V(g.all)$name,all.file.info$fullname.abbr)]
   
-  V(g.all)$run.time <-  as.POSIXct(all.file.info$source.run.time[match(V(g.all)$name,all.file.info$fullname.abbr)])
+  igraph::V(g.all)$run.time <-  as.POSIXct(all.file.info$source.run.time[match(igraph::V(g.all)$name,all.file.info$fullname.abbr)])
   
-  V(g.all)$file.class <-  all.file.info$file.class[match(V(g.all)$name,all.file.info$fullname.abbr)]
+  igraph::V(g.all)$file.class <-  all.file.info$file.class[match(igraph::V(g.all)$name,all.file.info$fullname.abbr)]
   
-  V(g.all)$file.hash <-  all.file.info$file.hash[match(V(g.all)$name,all.file.info$fullname.abbr)]
+  igraph::V(g.all)$file.hash <-  all.file.info$file.hash[match(igraph::V(g.all)$name,all.file.info$fullname.abbr)]
   
-  V(g.all)$file <-  all.file.info$file[match(V(g.all)$name,all.file.info$fullname.abbr)]
+  igraph::V(g.all)$file <-  all.file.info$file[match(igraph::V(g.all)$name,all.file.info$fullname.abbr)]
   
-  V(g.all)$path <-  all.file.info$path[match(V(g.all)$name,all.file.info$fullname.abbr)]
+  igraph::V(g.all)$path <-  all.file.info$path[match(igraph::V(g.all)$name,all.file.info$fullname.abbr)]
   
   
-  V(g.all)$description <-  all.file.info$description[match(V(g.all)$name,all.file.info$fullname.abbr)]
+  igraph::V(g.all)$description <-  all.file.info$description[match(igraph::V(g.all)$name,all.file.info$fullname.abbr)]
   
-  V(g.all)$shape <- ifelse(is.na(V(g.all)$shape),"circle",V(g.all)$shape)
+  igraph::V(g.all)$shape <- ifelse(is.na(igraph::V(g.all)$shape),"circle",igraph::V(g.all)$shape)
   
   #plot(g.all,main="Dependencies",vertex.label=get.vertex.attribute(g.all,"name"))
   
-  tree.layout <- layout.sugiyama(g.all,attributes="all")
+  tree.layout <- igraph::layout.sugiyama(g.all,attributes="all")
   
   
   
   g2 <- tree.layout$extd_graph
-  suffixes <-  gsub(".*\\.","",V(g2)$name)
+  suffixes <-  gsub(".*\\.","",igraph::V(g2)$name)
   file.type.df <- rbind(file.type.df,data.frame(file.type="dummy",suffix="",shape="circle"))
   
-  V(g2)$shape <- file.type.df$shape[match(suffixes,as.character(file.type.df$suffix))]
+  igraph::V(g2)$shape <- file.type.df$shape[match(suffixes,as.character(file.type.df$suffix))]
   
-  V(g2)$shape <- ifelse(is.na(V(g2)$shape),"circle",V(g2)$shape)
+  igraph::V(g2)$shape <- ifelse(is.na(igraph::V(g2)$shape),"circle",igraph::V(g2)$shape)
   
-  V(g2)$color <-  "blue"
+  igraph::V(g2)$color <-  "blue"
   
-  V(g2)$color <- ifelse(is.na(V(g2)$color),"black",V(g2)$color)
+  igraph::V(g2)$color <- ifelse(is.na(igraph::V(g2)$color),"black",igraph::V(g2)$color)
   
-  g2$layout[,2] <- g2$layout[,2]+ifelse(!is.na(V(g2)$name),runif(length(g2$layout[,2]),min=-0.25,max=0.25),0)
+  g2$layout[,2] <- g2$layout[,2]+ifelse(!is.na(igraph::V(g2)$name),stats::runif(length(g2$layout[,2]),min=-0.25,max=0.25),0)
   
   if(plot.graph){
     
-    plot(g2,vertex.size=ifelse(!is.na(V(g2)$name),10,1),main="Analytical Dependencies",vertex.label.dist=0.25,vertex.label.color="black")
+    graphics::plot(g2,vertex.size=ifelse(!is.na(igraph::V(g2)$name),10,1),main="Analytical Dependencies",vertex.label.dist=0.25,vertex.label.color="black")
     
-    par(mar=c(14,5,5,10))
+    graphics::par(mar=c(14,5,5,10))
     
-    plot(all.file.info$rank,all.file.info$time,col="blue",pch=19,main="File Modification Time",ylab="Modification Time",xlab="Rank")
+    graphics::plot(all.file.info$rank,all.file.info$time,col="blue",pch=19,main="File Modification Time",ylab="Modification Time",xlab="Rank")
     
-    points(all.file.info$rank,all.file.info$time,pch=1)
+    graphics::points(all.file.info$rank,all.file.info$time,pch=1)
     
-    image.plot( zlim=c(1,max(all.file.info$rank)) ,add=TRUE,col=rainbow(256),legend.only=TRUE,axes=FALSE,ylab="")
+    #image.plot( zlim=c(1,max(all.file.info$rank)) ,add=TRUE,col=rainbow(256),legend.only=TRUE,axes=FALSE,ylab="")
     
   }
   

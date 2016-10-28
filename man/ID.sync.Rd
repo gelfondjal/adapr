@@ -2,12 +2,13 @@
 % Please edit documentation in R/ID_sync.R
 \name{ID.sync}
 \alias{ID.sync}
-\title{Returns the source files needed to repair synchrony
- @param file.info Project file information}
+\title{Returns the source files needed to repair synchrony}
 \usage{
 ID.sync(file.info, dag.to.sync)
 }
 \arguments{
+\item{file.info}{Project file information}
+
 \item{dag.to.sync}{Directed Acyclic graph in need of synchronization}
 }
 \value{
@@ -15,6 +16,5 @@ data.frame with sources that need to be run, rows in run order
 }
 \description{
 Returns the source files needed to repair synchrony
- @param file.info Project file information
 }
 

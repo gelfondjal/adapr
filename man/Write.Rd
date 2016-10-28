@@ -8,6 +8,8 @@ Write(obj = NULL, file.name = "data.csv", description = "Result file",
   write.fcn = guess.write.fcn(file.name), date = FALSE, ...)
 }
 \arguments{
+\item{obj}{object to write}
+
 \item{file.name}{file to write to the source "Result" directory}
 
 \item{description}{describes object to write}
@@ -15,6 +17,8 @@ Write(obj = NULL, file.name = "data.csv", description = "Result file",
 \item{write.fcn}{function for writing file of object type}
 
 \item{date}{logical for adding date to filename}
+
+\item{...}{arguments passed to write.fcn}
 }
 \value{
 File information list

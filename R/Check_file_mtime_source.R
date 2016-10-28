@@ -8,6 +8,8 @@
 #' 
 Check.file.mtime.source <- function(dependency.dir=NULL,dependency.object=NULL){
   
+  require(plyr)
+  
   if(is.null(dependency.object)){
     
     trees <- Harvest.trees(dependency.dir)
@@ -16,7 +18,7 @@ Check.file.mtime.source <- function(dependency.dir=NULL,dependency.object=NULL){
  
   source.df <- subset(trees,!duplicated(source.hash))
   
-  source.mtime.check <- ddply(source.df,c("source.file","source.file.path"),function(x){
+  source.mtime.check <- plyr::ddply(source.df,c("source.file","source.file.path"),function(x){
     
     current.mtime <- ""
     try({
@@ -34,7 +36,7 @@ Check.file.mtime.source <- function(dependency.dir=NULL,dependency.object=NULL){
   failed.sources$path <- failed.sources$source.file.path
   #Check target hashes are current
   
-  target.mtime.check <- ddply(trees,c("source.file","source.file.path","target.path","target.file"),function(x){
+  target.mtime.check <- plyr::ddply(trees,c("source.file","source.file.path","target.path","target.file"),function(x){
     
     	currrent.mtime <- ""
     	try({

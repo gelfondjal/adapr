@@ -38,11 +38,11 @@ Make.dependency.graph.obj <- function(dependency.out){
   
   edge.mat2 <- cbind(ifelse(dependencies$dependency=="in",edge.mat[,2],edge.mat[,1]),ifelse(dependencies$dependency=="in",edge.mat[,1],edge.mat[,2]))
   
-  graph.out <- graph(t(edge.mat2),n=max(edge.mat2))
+  graph.out <- igraph::graph(t(edge.mat2),n=max(edge.mat2))
   
   df <- data.frame(from=ifelse(dependencies$dependency=="in",dependencies$"target.fullname.abbr",dependencies$"source.fullname.abbr"),to=ifelse(dependencies$dependency=="in",dependencies$"source.fullname.abbr",dependencies$"target.fullname.abbr"))
   
-  g <- graph.data.frame(df,directed=TRUE)
+  g <- igraph::graph.data.frame(df,directed=TRUE)
   
   return(g)
   

@@ -155,7 +155,7 @@ default.adapr.setup <- function(){
   print(paste("Step",step,"of",total,"Completed default seup!"))
   step <- step + 1
   
-  return("adapr setup: try 'adapr()'")
+  return("adapr setup: try 'adaprApp()'")
   
   
 }# END default set.up

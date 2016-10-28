@@ -7,11 +7,11 @@
 Sync.test.OLD(dagger, tree, plotl = TRUE)
 }
 \arguments{
+\item{dagger}{a directed acyclic igraph representing dependencies}
+
 \item{tree}{dependency tree corresponding to dagger}
 
 \item{plotl}{logical for plotting or not}
-
-\item{g.all}{dependency object or set of dependency objects making a directed acyclic graph}
 }
 \description{
 check the synchrony of source files and their created objects

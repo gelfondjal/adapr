@@ -7,6 +7,8 @@
 #' 
 Check.file.hash <- function(dependency.dir=NULL,dependency.object=NULL){
   
+  require(plyr)
+  
   if(is.null(dependency.object)){
     
     trees <- Harvest.trees(dependency.dir)
@@ -15,7 +17,7 @@ Check.file.hash <- function(dependency.dir=NULL,dependency.object=NULL){
   
   source.df <- subset(trees,!duplicated(source.hash))
   
-  source.hash.count <- ddply(source.df,"source.file",function(x){
+  source.hash.count <- plyr::ddply(source.df,"source.file",function(x){
     
     all.hash <- unique(x$source.hash)
     
@@ -26,7 +28,7 @@ Check.file.hash <- function(dependency.dir=NULL,dependency.object=NULL){
     return(out.counts)
   })
   
-  target.hash.count <- ddply(trees,c("target.path","target.file"),function(x){
+  target.hash.count <- plyr::ddply(trees,c("target.path","target.file"),function(x){
     
     all.hash <- unique(x$target.hash)
     
@@ -37,12 +39,12 @@ Check.file.hash <- function(dependency.dir=NULL,dependency.object=NULL){
     return(out.counts)
   })
   
-  all.hash.counts <- rbind.fill(source.hash.count,target.hash.count)
+  all.hash.counts <- plyr::rbind.fill(source.hash.count,target.hash.count)
   
   multiple.hash <- subset(all.hash.counts,n.unique.hash!=1,select=c("path","file","file.hash","n.unique.hash"))
   
   
-  hash.compute <- ddply(all.hash.counts,c("path","file","file.hash","n.unique.hash"),function(x){
+  hash.compute <- plyr::ddply(all.hash.counts,c("path","file","file.hash","n.unique.hash"),function(x){
     
     current.hash <- ""
     try({

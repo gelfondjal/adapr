@@ -1,11 +1,12 @@
 #' Writes dependency data to file in "Dependency" directory
+#' @param RMD Logical denoting whether the finalizing occurs in markdown vs R script
 #' @param write Logical indicated to write the dependency object
 #' @details Operates git tracking of program and dependency file. 
 #' @details Strips project directory out of dependency file
 #' @return dependency.object 
 #' @export
 
-finalize_dependency <- function(RMD=FALSE,write=TRUE){
+finalize_dependency <- function(RMD=TRUE,write=TRUE){
   
   # read in dependency object from dependency.file in source_info
   # return dependency object

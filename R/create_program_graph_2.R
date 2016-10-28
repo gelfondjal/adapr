@@ -12,7 +12,9 @@ create_program_graph<- function(project.id){
 # given a project id (project.id)
 # Uses nicer plot parameters
 require(ggplot2)
+requireNamespace(ggplot2)
 require(plyr)	
+require(igraph)
 
 si <- pull_source_info(project.id)
 
@@ -31,7 +33,7 @@ sources <- unique(projinfo$tree$source.file)
 
 vertexnames <- subset(projinfo$all.files,file %in%sources)$fullname.abbr
 
-inedges <- adjacent_vertices(projgraph, vertexnames,"out")
+inedges <- igraph::adjacent_vertices(projgraph, vertexnames,"out")
 
 inedges <- lapply(inedges,function(x){return(attr(x,"name"))})
 inedges <- ldply(inedges,as.data.frame)
@@ -40,27 +42,27 @@ names(inedges) <- c("to","from")
 
 dfgraph <- igraph::as_data_frame(projgraph,what="edges")
 
-dfgraph$to <- mapvalues(dfgraph$to,as.character(inedges$from),as.character(inedges$to),warn_missing = FALSE)
-dfgraph$from <- mapvalues(dfgraph$from,as.character(inedges$from),as.character(inedges$to),warn_missing = FALSE)
+dfgraph$to <- plyr::mapvalues(dfgraph$to,as.character(inedges$from),as.character(inedges$to),warn_missing = FALSE)
+dfgraph$from <- plyr::mapvalues(dfgraph$from,as.character(inedges$from),as.character(inedges$to),warn_missing = FALSE)
 
-dfoo <- graph_from_data_frame(dfgraph)
+dfoo <- igraph::graph_from_data_frame(dfgraph)
 
 #plot(simplify(dfoo))
 #dfgraph <- merge(dfgraph,inedges,all.x=TRUE)
-#matches <- as.character(inedges[,1])[match(V(projgraph)$name,as.character(inedges[,2]))]
-#matches2 <- ifelse(is.na(matches),V(projgraph)$name,matches)
+#matches <- as.character(inedges[,1])[match(igraph::V(projgraph)$name,as.character(inedges[,2]))]
+#matches2 <- ifelse(is.na(matches),igraph::V(projgraph)$name,matches)
 #projgraph2 <- projgraph
-#V(projgraph2)$name <- ifelse(is.na(matches),V(projgraph)$name,"")
-#graphcontract <- contract(projgraph2,match(matches2,V(projgraph2)$name),vertex.attr.comb = first)
+#igraph::V(projgraph2)$name <- ifelse(is.na(matches),igraph::V(projgraph)$name,"")
+#graphcontract <- contract(projgraph2,match(matches2,igraph::V(projgraph2)$name),vertex.attr.comb = first)
 
-graph2 <- simplify(delete_vertices(dfoo,setdiff(V(dfoo)$name,vertexnames)))
+graph2 <- igraph::simplify(igraph::delete_vertices(dfoo,setdiff(igraph::V(dfoo)$name,vertexnames)))
 
 
 synccolors <- c("aquamarine3","darkorange2")
 names(synccolors) <- c("Synchronized", "Not Synchronized")
 
  
-lo <- layout.sugiyama(projgraph)
+lo <- igraph::layout.sugiyama(projgraph)
  
 tp <- function(x){
  
@@ -148,10 +150,10 @@ if(length(vertexnames)==1){
    
 }else{
 
-dfo <- tp(layout.sugiyama(isg)$layout)
+dfo <- tp(igraph::layout.sugiyama(isg)$layout)
 colnames(dfo) <- c("x","y")
  
-dfo <- data.frame(dfo,v=V(isg)$name)
+dfo <- data.frame(dfo,v=igraph::V(isg)$name)
  
 todfo <- dfo
 names(todfo)[1:2] <- c("x2","y2")
@@ -200,7 +202,7 @@ dfo$synccolor <- as.character(ifelse(dfo$v %in% unsync.vertex,"Not Synchronized"
 
 dfo$synccolor <- factor(dfo$synccolor,levels=c("Synchronized","Not Synchronized"))
 
-proj.gg <- ggplot(dfo,aes(x=x,y=y,label=basename(as.character(v))))+
+proj.gg <- ggplot2::ggplot(dfo,aes(x=x,y=y,label=basename(as.character(v))))+
  geom_point(aes(colour=dfo$synccolor),size=dotsize0,alpha=0.7)+
 geom_point(shape = 1,size = dotsize0,colour = "grey70", stroke=2)+
  geom_text(vjust=-0.5,size=text.size0,color="black")
@@ -230,7 +232,7 @@ panel.grid.minor=element_blank(),plot.background=element_blank())+ggtitle(paste(
 proj.gg <- proj.gg+ scale_color_manual(name = element_blank(), # or name = element_blank()
 #labels = c("Synchronized", "Not Synchronized"),
 values =synccolors)
-isg <- induced_subgraph(projgraph,vertexnames)
+isg <- igraph::induced_subgraph(projgraph,vertexnames)
 runorder <- data.frame(v=topological.sort(isg)$name,run.order=1:length(vertexnames))
 dfo <- merge(dfo,runorder,by='v')
             

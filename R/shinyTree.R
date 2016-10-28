@@ -1,29 +1,15 @@
-#' Launches shiny app
+#' Launches Main app
 #' @export
 #' 
 #' 
 
-shinyTree <- function (){
-  shiny::runApp(
-    system.file('shinyApp',                                                    
-                package='adapr')) 
-  
-  
-}
-
-
-
-
-#' Launches adapr21 app
-#' @export
-#' 
-#' 
-
-adapr <- function (){
+adaprApp <- function (){
+  library(shiny)
+  library(shinydashboard)
   shiny::runApp(
     system.file('adapr21',                                                    
                 package='adapr')) 
-  library(shinydashboard)
+
   
 }
 

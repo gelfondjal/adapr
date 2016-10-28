@@ -120,7 +120,7 @@ load.install.library.file <- function(library.data.file=NA,subgroup=NULL,verbose
         print(.Library)
         print(.libPaths())
         print(Sys.getenv("R_LIBS_USER"))
-        library(packages.info$Package[library.iter],character=TRUE)		
+        library(packages.info$Package[library.iter],character.only=TRUE)		
         
         if(verbose){ print(paste("Loaded",packages.info$Package[library.iter]))}
         

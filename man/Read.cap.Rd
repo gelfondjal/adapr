@@ -12,6 +12,8 @@ Read.cap(file.info, read.fcn, source_info, ...)
 \item{read.fcn}{function for reading the file}
 
 \item{source_info}{source information list}
+
+\item{...}{arguments passed to read.fcn}
 }
 \value{
 object read from files

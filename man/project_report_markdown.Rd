@@ -9,11 +9,11 @@ Uses pandoc unlike project_report}
 project_report_markdown(source_info, graph.width = 960, graph.height = 500)
 }
 \arguments{
+\item{source_info}{Source information list}
+
 \item{graph.width}{Sankey Plot dimensions}
 
 \item{graph.height}{Sankey Plot dimensions}
-
-\item{si}{Source information list}
 }
 \description{
 Make plot of network within html documents.

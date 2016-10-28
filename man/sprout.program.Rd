@@ -18,6 +18,8 @@ sprout.program(project.id = NA, source.file.name = NA, description = "",
 \item{seed}{Set seed at program initialization}
 
 \item{capture.load.command}{Command for loading inference tree library}
+
+\item{controller}{logical to insert lines that operate on analysis tree}
 }
 \value{
 Logical indicating success or not

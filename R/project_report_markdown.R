@@ -1,7 +1,7 @@
 #' Make plot of network within html documents.
 #' Summarize all programs.
 #' Uses pandoc unlike project_report
-#' @param si Source information list
+#' @param source_info Source information list
 #' @param graph.width Sankey Plot dimensions
 #' @param graph.height Sankey Plot dimensions
 #' @details Dose not assume source_info in workspace

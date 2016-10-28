@@ -1,16 +1,19 @@
 #' check the synchrony of source files and their created objects
-#' @param g.all dependency object or set of dependency objects making a directed acyclic graph
+#' @param dagger a directed acyclic igraph representing dependencies
 #' @param tree  dependency tree corresponding to dagger
 #' @param plotl logical for plotting or not
 #' @export
+#' @return list with synchronizing information
 
 Sync.test <- function(dagger,tree,plotl=FALSE){
   
-  if(!is.dag(dagger)){stop("The computing dependencies have cycles.")}
+  require(igraph)
+
+  if(!igraph::is.dag(dagger)){stop("The computing dependencies have cycles.")}
   
   # track the run time of source files
   # track the modification time of target files
-  V(dagger)$time <- ifelse(V(dagger)$file.class=="source",V(dagger)$run.time,V(dagger)$mod.time)
+  igraph::V(dagger)$time <- ifelse(igraph::V(dagger)$file.class=="source",igraph::V(dagger)$run.time,igraph::V(dagger)$mod.time)
    
   file.info <- Condense.file.info(tree)
  
@@ -37,13 +40,13 @@ Sync.test <- function(dagger,tree,plotl=FALSE){
  
   }
   
-  V(dagger)$color <- "blue"
+  igraph::V(dagger)$color <- "blue"
   #	par(mfrow=c(1,2))
   #	plot(dagger,main="Dagger with time as color")
   dagger.updated <- dagger
-  V(dagger.updated)$color <- ifelse(V(dagger.updated)$name %in% vertex.updates,"red","white")
+  igraph::V(dagger.updated)$color <- ifelse(igraph::V(dagger.updated)$name %in% vertex.updates,"red","white")
   
-  if(plotl){plot(dagger.updated,main="Dagger with out of sync detection")}
+  if(plotl){graphics::plot(dagger.updated,main="Dagger with out of sync detection")}
   
   # check for file hash inconsistencies
   
@@ -53,7 +56,7 @@ Sync.test <- function(dagger,tree,plotl=FALSE){
   
   if(file.check$hash.fail){
     
-    all.fail <- rbind.fill(file.check$stale.hash)
+    all.fail <- plyr::rbind.fill(file.check$stale.hash)
     
     failed.tree <- merge(all.fail,file.info,by=c("file","path"))
     
@@ -82,7 +85,7 @@ Sync.test <- function(dagger,tree,plotl=FALSE){
     
     if(!(vertex.updates.iter  %in% updated.vertex.dependency)){
       
-      children <- V(dagger.updated)$name[na.exclude(graph.bfs(dagger,vertex.updates.iter,unreachable=FALSE)$order)]
+      children <- igraph::V(dagger.updated)$name[na.exclude(igraph::graph.bfs(dagger,vertex.updates.iter,unreachable=FALSE)$order)]
       
       updated.vertex.dependency <- union(children,updated.vertex.dependency)
       
@@ -94,9 +97,9 @@ Sync.test <- function(dagger,tree,plotl=FALSE){
   
   dagger.propagated <- dagger
   
-  V(dagger.propagated)$color <- ifelse(V(dagger.propagated)$name %in% updated.vertex.dependency,"red","white")
+  igraph::V(dagger.propagated)$color <- ifelse(igraph::V(dagger.propagated)$name %in% updated.vertex.dependency,"red","white")
   
-  V(dagger.propagated)$synced <- ifelse(V(dagger.propagated)$name %in% updated.vertex.dependency,"No","Yes")
+  igraph::V(dagger.propagated)$synced <- ifelse(igraph::V(dagger.propagated)$name %in% updated.vertex.dependency,"No","Yes")
   
   
   
@@ -105,7 +108,7 @@ Sync.test <- function(dagger,tree,plotl=FALSE){
   
   #	par(mfrow=c(1,1))
   
-  stale.graph <- induced.subgraph(dagger.propagated,V(dagger.updated)[V(dagger.updated)$name %in% updated.vertex.dependency],impl="create_from_scratch")
+  stale.graph <- igraph::induced.subgraph(dagger.propagated,igraph::V(dagger.updated)[igraph::V(dagger.updated)$name %in% updated.vertex.dependency],impl="create_from_scratch")
   
   sources.to.sync <- ID.sync(file.info,stale.graph)
   

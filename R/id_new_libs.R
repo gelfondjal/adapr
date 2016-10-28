@@ -1,6 +1,5 @@
 #' Captures libraries that are not loaded automatically
 #' @param library.data.file CSV File with a set of library names and repository locations
-#' @param verbose Print which libraries are installed and loaded
 #' @return Libraries loaded that were not automatically loaded
 #' @details Captures unaccounted for library within library information file
 #' @export

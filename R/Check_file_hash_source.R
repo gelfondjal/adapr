@@ -8,6 +8,8 @@
 #' 
 Check.file.hash.source <- function(dependency.dir=NULL,dependency.object=NULL){
   
+  require(plyr)
+  
   if(is.null(dependency.object)){
     
     trees <- Harvest.trees(dependency.dir)
@@ -18,7 +20,7 @@ Check.file.hash.source <- function(dependency.dir=NULL,dependency.object=NULL){
   
   #Check source hashes are current
   
-  source.hash.check <- ddply(source.df,c("source.file","source.file.path"),function(x){
+  source.hash.check <- plyr::ddply(source.df,c("source.file","source.file.path"),function(x){
     
     	current.hash <- ""
     	try({
@@ -37,7 +39,7 @@ Check.file.hash.source <- function(dependency.dir=NULL,dependency.object=NULL){
 
   #Check target hashes are current
   
-  target.hash.check <- ddply(trees,c("source.file","source.file.path","target.path","target.file"),function(x){
+  target.hash.check <- plyr::ddply(trees,c("source.file","source.file.path","target.path","target.file"),function(x){
     
     	current.hash <- ""
     	try({

@@ -9,6 +9,8 @@ Render_Rmd(Rmd.file, description = "Rmarkdown", ...)
 \arguments{
 \item{Rmd.file}{Filename of .Rmd file within the R Markdown directory (source_info$markdown.dir)}
 
+\item{description}{of rendered file}
+
 \item{...}{extra arguments for rmarkdown::render}
 }
 \value{

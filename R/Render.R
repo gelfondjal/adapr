@@ -1,5 +1,6 @@
 #' Renders and Rmarkdown file
 #' @param Rmd.file Filename of .Rmd file within the R Markdown directory (source_info$markdown.dir)
+#' @param description of rendered file
 #' @param ... extra arguments for rmarkdown::render
 #' @return Rendered output file information
 #' @details Uses rmarkdown library to access objects in the R script. Will track dependencies for objects used within Rmd file.

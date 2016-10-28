@@ -1,7 +1,7 @@
 #' Renders and Rmarkdown file
 #' @param target.file Markdown file to create
 #' @param target.dir Directory to send target file
-#' @param tyle Markdown target style
+#' @param style Markdown target style
 #' @param description Markdown description
 #' @param si source_info object for tracking
 #' @param overwrite overwrite existing R markdown?

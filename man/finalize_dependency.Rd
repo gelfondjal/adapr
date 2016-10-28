@@ -4,9 +4,11 @@
 \alias{finalize_dependency}
 \title{Writes dependency data to file in "Dependency" directory}
 \usage{
-finalize_dependency(RMD = FALSE, write = TRUE)
+finalize_dependency(RMD = TRUE, write = TRUE)
 }
 \arguments{
+\item{RMD}{Logical denoting whether the finalizing occurs in markdown vs R script}
+
 \item{write}{Logical indicated to write the dependency object}
 }
 \value{

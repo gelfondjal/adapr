@@ -1,8 +1,9 @@
 #' Write object and capture file information
 #' @param file.name file to write to the source "Result" directory
 #' @param description describes object to write
-#' @param write.fcn function for writing file of object type
+#' @param write.fcn function for writing file of object type. Will open graphics device.
 #' @param date logical for adding date to filename
+#' @param ... arguments passed to write.fcn
 #' @return File information list 
 #' @export
 

@@ -11,7 +11,11 @@ Write.cap(obj = NULL, file.info, write.fcn, source_info, ...)
 
 \item{file.info}{file information list}
 
+\item{write.fcn}{function to write file}
+
 \item{source_info}{source information list}
+
+\item{...}{arguments passed to write.fcn}
 }
 \value{
 file.info file information returned

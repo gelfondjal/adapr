@@ -13,13 +13,13 @@ create_markdown(target.file = paste0(source_info$file$file, "md"),
 
 \item{target.dir}{Directory to send target file}
 
+\item{style}{Markdown target style}
+
 \item{description}{Markdown description}
 
 \item{si}{source_info object for tracking}
 
 \item{overwrite}{overwrite existing R markdown?}
-
-\item{tyle}{Markdown target style}
 }
 \value{
 File information

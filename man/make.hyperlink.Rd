@@ -8,6 +8,8 @@ make.hyperlink(files, links)
 }
 \arguments{
 \item{files}{character vector of filenames}
+
+\item{links}{description of links}
 }
 \value{
 link command vector

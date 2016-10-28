@@ -14,13 +14,13 @@ project_report_send_rmd(target.directory = source_info$project.path, si,
 \arguments{
 \item{target.directory}{Location to send project report}
 
+\item{si}{Source information list}
+
 \item{send.data}{Logical to send data directory or not}
 
 \item{graph.width}{Sankey Plot dimensions}
 
 \item{graph.height}{Sankey Plot dimensions}
-
-\item{source_info}{Source information list}
 }
 \description{
 Make plot of network within html documents.

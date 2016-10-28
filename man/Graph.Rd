@@ -12,9 +12,11 @@ Graph(file.name = "data.csv", description = "Result file",
 
 \item{description}{describes object to write}
 
-\item{write.fcn}{function for writing file of object type}
+\item{write.fcn}{function for writing file of object type. Will open graphics device.}
 
 \item{date}{logical for adding date to filename}
+
+\item{...}{arguments passed to write.fcn}
 }
 \value{
 File information list

@@ -16,7 +16,7 @@ Harvest.trees <- function(dependency.dir){
     
   list.deps <- lapply(dep.files,read.dependency)
   
-  trees <- rbind.fill(list.deps)
+  trees <- plyr::rbind.fill(list.deps)
     
   project.id <-  list.deps[[1]]$project.id[1] 
   
