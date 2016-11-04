@@ -19,7 +19,7 @@ Digest <- function (object=NULL, algo = c("md5", "sha1", "crc32", "sha256",
   require(digest)
   
   object0 <- object 
-  algo0 <- algo
+  algo0 <- algo[1]
   serialize0 <- serialize
   file0 <- file
   length0 <- length
