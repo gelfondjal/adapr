@@ -177,7 +177,7 @@ body <- dashboardBody(
          ),
           box(title = NULL, status = "info", width = 6, height = NULL, collapsible = FALSE, solidHeader = FALSE,
               #plotOutput("ProgramDAG_report", click = "ProgramDAG_click_report"),
-              plotOutput("ProgramDAG_report", height = 500,
+              plotOutput("ProgramDAG_report", height = 500,width="100%",
                          # Equivalent to: click = clickOpts(id = "plot_click")
                          click = "ProgramDAG_click_report",
                          brush = brushOpts(

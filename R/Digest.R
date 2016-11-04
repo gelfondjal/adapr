@@ -27,7 +27,7 @@ Digest <- function (object=NULL, algo = c("md5", "sha1", "crc32", "sha256",
   ascii0 <- ascii
   raw0 <- raw
   
-  val <- digest::digest(object, algo=algo0 , serialize = serialize0 , file = file0, length = length0, 
+  val <- digest::digest(algo=algo0 , serialize = serialize0 , file = file0, length = length0, 
                  skip = skip0, ascii = ascii0 , raw = raw0 ,errormode="warn")
   
   
