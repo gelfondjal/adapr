@@ -85,7 +85,7 @@ Sync.test <- function(dagger,tree,plotl=FALSE){
     
     if(!(vertex.updates.iter  %in% updated.vertex.dependency)){
       
-      children <- igraph::V(dagger.updated)$name[na.exclude(igraph::graph.bfs(dagger,vertex.updates.iter,unreachable=FALSE)$order)]
+      children <- igraph::V(dagger.updated)$name[stats::na.exclude(igraph::graph.bfs(dagger,vertex.updates.iter,unreachable=FALSE)$order)]
       
       updated.vertex.dependency <- union(children,updated.vertex.dependency)
       

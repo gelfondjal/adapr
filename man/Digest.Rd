@@ -4,7 +4,7 @@
 \alias{Digest}
 \title{Digest files from (digest package)}
 \usage{
-Digest(object, algo = c("md5", "sha1", "crc32", "sha256", "sha512"),
+Digest(object = NULL, algo = c("md5", "sha1", "crc32", "sha256", "sha512"),
   serialize = TRUE, file = TRUE, length = Inf, skip = "auto",
   ascii = FALSE, raw = FALSE)
 }
