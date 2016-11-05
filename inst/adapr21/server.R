@@ -702,11 +702,11 @@ shinyServer(function(input, output,session) {
   
   
   output$Git<-renderUI({ 
-    
+    if(input$submitGitCheck!=0){
     if(adapr_options$git=="TRUE"){
     
     textout <- "Waiting to check Git"
-    if(input$submitGitCheck!=0){
+
       temp <- git.configure.test()
       if(temp==0){
         textout<-"Git is configured."
@@ -715,7 +715,7 @@ shinyServer(function(input, output,session) {
         textout<-a("Git is not configured. Click here to get Git",href="http://git-scm.com/downloads")
       }
     }
-    textout  
+    textout <-  ifelse(adapr_options$git=="TRUE","git active","ADAPR OPTION git FALSE\n git not active")
     
     }else{
       
@@ -726,10 +726,15 @@ shinyServer(function(input, output,session) {
   })
 
   output$Gitlogin<-renderText({
+    textout <- "Check git status"
+    
+    if(input$submitGitLogin!=0){
+      
     if(adapr_options$git=="TRUE"){
+
     
     textout<-"Waiting to log into Git"
-    if(input$submitGitLogin!=0){
+
       login<-git.configure(input$git.username,input$git.email)
       if(login[[1]]==0&login[[2]]==0){
         textout<-"Login successful"
@@ -740,7 +745,7 @@ shinyServer(function(input, output,session) {
     
     }else{
       
-      textout <- "ADAPR OPTION git FALSE\n git not active"
+      textout <- ifelse(adapr_options$git=="TRUE","git active","ADAPR OPTION git FALSE\n git not active")
       textout
     }
     textout
