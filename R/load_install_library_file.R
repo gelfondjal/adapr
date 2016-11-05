@@ -8,18 +8,16 @@
 #' 
 #' 
 load.install.library.file <- function(library.data.file=NA,subgroup=NULL,verbose=FALSE){
- 
-  require(devtools)
   
   if(is.na(library.data.file)){library.data.file <- file.path(source_info$support.dir,source_info$support.library.file)}
   
   if(!file.exists(library.data.file)){
     print("No library information file")
     library.stub <- data.frame(Package="devtools",repos="",specific=FALSE)
-    write.csv(library.stub,library.data.file,row.names=FALSE)
+    utils::write.csv(library.stub,library.data.file,row.names=FALSE)
   }
   
-  packages.info.all <- read.csv(library.data.file,as.is=TRUE)
+  packages.info.all <- utils::read.csv(library.data.file,as.is=TRUE)
   
   if(is.null(packages.info.all$specific)){packages.info.all$specific <- FALSE}
   
@@ -62,7 +60,6 @@ load.install.library.file <- function(library.data.file=NA,subgroup=NULL,verbose
       bioc.list <- subset(packages.info,(repos=="bioC")&(install.check==FALSE))$Package
       
       print(paste("Installing",bioc.list))
-      
       
       source("http://bioconductor.org/biocLite.R")
       
@@ -116,7 +113,7 @@ load.install.library.file <- function(library.data.file=NA,subgroup=NULL,verbose
         
         repository <- ifelse(is.na(repository)|(repository==""),getOption("repos"),repository)
         
-        install.packages(packages.info$Package[library.iter],lib=.libPaths()[1],repos=repository)
+        utils::install.packages(packages.info$Package[library.iter],lib=.libPaths()[1],repos=repository)
         print(.Library)
         print(.libPaths())
         print(Sys.getenv("R_LIBS_USER"))
@@ -141,7 +138,7 @@ load.install.library.file <- function(library.data.file=NA,subgroup=NULL,verbose
       
       packages.info.out <- subset(packages.info.out,!(Package %in% not.installed))
       
-      write.csv(packages.info.out[order(packages.info.out$Package),],library.data.file,row.names=FALSE)
+      utils::write.csv(packages.info.out[order(packages.info.out$Package),],library.data.file,row.names=FALSE)
     
 }
   

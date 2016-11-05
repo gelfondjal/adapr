@@ -11,8 +11,8 @@ create_program_graph_v2<- function(project.id){
 # computes transitively connected subpgraph of project DAG
 # given a project id (project.id)
 # Uses nicer plot parameters
-# require(ggplot2)
-# require(plyr)	
+# #equire(ggplot2)
+# #equire(plyr)	
 # 
 # si <- pull_source_info(project.id)
 # 

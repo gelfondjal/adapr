@@ -10,11 +10,11 @@ send.branch <- function(branch_cut,all=FALSE){
   
   if(!all){
     
-    v.name <- V(project_info$graph)$name[V(project_info$graph)$file==branch_cut]
+    v.name <- igraph::V(project_info$graph)$name[igraph::V(project_info$graph)$file==branch_cut]
     
-    branch <- na.exclude(graph.bfs(project_info$graph,v.name,unreachable=FALSE)$order)
+    branch <- stats::na.exclude(igraph::graph.bfs(project_info$graph,v.name,unreachable=FALSE)$order)
     
-    branch.names <- V(project_info$graph)$file[branch]  # These are in order
+    branch.names <- igraph::V(project_info$graph)$file[branch]  # These are in order
     
     
     programs <- subset(subset(project_info$tree,source.file %in% c(branch_cut,branch.names)),!duplicated(source.file))
@@ -23,9 +23,9 @@ send.branch <- function(branch_cut,all=FALSE){
     
   }else{
     
-    branch <- na.exclude(topological.sort(project_info$graph))
+    branch <- stats::na.exclude(igraph::topological.sort(project_info$graph))
     
-    branch.names <- V(project_info$graph)$file[branch]  # These are in order
+    branch.names <- igraph::V(project_info$graph)$file[branch]  # These are in order
     
     programs <- subset(subset(project_info$tree,source.file %in% c(branch.names)),!duplicated(source.file))
     
@@ -57,7 +57,7 @@ send.branch <- function(branch_cut,all=FALSE){
   
   branch.info.out <- data.frame(branch.names,dependency=paste0(branch.names,".txt"))
   
-  write.table(branch.info.out,file.path(branch.dir,paste0(branch_cut,".txt")))
+  utils::write.table(branch.info.out,file.path(branch.dir,paste0(branch_cut,".txt")))
   
   for(prog.iter in program.paths){file.copy(prog.iter,file.path(prog.dir,basename(prog.iter)),overwrite=TRUE)}		
   

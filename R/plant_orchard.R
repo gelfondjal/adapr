@@ -14,7 +14,7 @@ plant.orchard <- function(){
     
     empty.orchard <- data.frame(project.id="",project.path="",swap.directory="")[-1,]	
     
-    write.csv(empty.orchard,orchard.site,row.names=FALSE)
+    utils::write.csv(empty.orchard,orchard.site,row.names=FALSE)
     
     
     return(TRUE)

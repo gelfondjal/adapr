@@ -7,13 +7,9 @@
 #' @export
 #' 
 create_source_file_dir <- function(project.id0=project.id,source.file0=source.file,source.description=""){
-  require(devtools)
-  require(plyr)
-  require(igraph)
-  require(digest)
-  require(rCharts)
-  
-  project.path <- get.project.path(project.id0)
+  #equire(devtools)
+
+    project.path <- get.project.path(project.id0)
   project.tree <- project.directory.tree
   
   
@@ -93,7 +89,7 @@ create_source_file_dir <- function(project.id0=project.id,source.file0=source.fi
   if(!file.exists(publication.file)){
     print("No publication list file")
     publication.stub <- data.frame(Path="",Description="")[-1,]
-    write.csv(publication.stub,publication.file,row.names=FALSE)
+    utils::write.csv(publication.stub,publication.file,row.names=FALSE)
   }
   
   

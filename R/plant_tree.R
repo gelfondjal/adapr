@@ -38,9 +38,9 @@ plant.tree <- function(project.id,project.path,swap.directory){
   }else{
     
 
-    orchards.old <- read.csv(orchard.site,as.is=TRUE)
+    orchards.old <- utils::read.csv(orchard.site,as.is=TRUE)
     
-    write.csv(rbind(orchards.old,empty.orchard),orchard.site,row.names=FALSE)
+    utils::write.csv(rbind(orchards.old,empty.orchard),orchard.site,row.names=FALSE)
     
     dir.create(swap.directory)
     
@@ -55,13 +55,13 @@ plant.tree <- function(project.id,project.path,swap.directory){
     
     test <- sprout.program(project.id,source.file.name="read_data.R",description="reads data",seed=2011,capture.load.command="library(adapr)",controller=FALSE)
     try({
-    clean_source(file.path(project.path,project.directory.tree$analysis,"read_data.R"),quiet=TRUE) 
+    devtools::clean_source(file.path(project.path,project.directory.tree$analysis,"read_data.R"),quiet=TRUE) 
     })
      if(!test){
      
      # revert to old orchard if failure
      	
-     	write.csv(orchards.old,orchard.site,row.names=FALSE)
+     	utils::write.csv(orchards.old,orchard.site,row.names=FALSE)
      	
      	
      }
@@ -124,7 +124,7 @@ redirect.tree <- function(project.id0,project.path,swap.directory){
 
   	}
 
-  write.csv(rbind(all.orchards,empty.orchard),orchard.site,row.names=FALSE)
+  utils::write.csv(rbind(all.orchards,empty.orchard),orchard.site,row.names=FALSE)
 
   return(TRUE)
 

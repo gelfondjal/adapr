@@ -6,7 +6,7 @@
 get.project.swap.directory <-function(project_name=NULL){
   
   
-  all.projects <- read.csv(file.path(path.expand.2("~"),"ProjectPaths","projectid_2_directory.csv"),as.is=TRUE)
+  all.projects <- utils::read.csv(file.path(path.expand.2("~"),"ProjectPaths","projectid_2_directory.csv"),as.is=TRUE)
   
   if(is.null(project_name)){return(all.projects)}
   

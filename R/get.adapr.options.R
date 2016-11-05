@@ -19,7 +19,7 @@ get_adapr_options <- function(setoptions=FALSE){
  
   }
   
-  suppressWarnings(option.data <- read.csv(options.site,as.is=TRUE))
+  suppressWarnings(option.data <- utils::read.csv(options.site,as.is=TRUE))
   
   adapr_options <- list()
   
@@ -83,7 +83,7 @@ set_adapr_options <- function(optionname="",optionvalue=""){
   
   options.site <- file.path(path.expand.2("~"),"ProjectPaths", option.file)  
   
-  write.csv(dfout,options.site,row.names=FALSE)
+  utils::write.csv(dfout,options.site,row.names=FALSE)
   
   return(options)
 }

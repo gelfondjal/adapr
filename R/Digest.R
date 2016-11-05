@@ -16,7 +16,7 @@ Digest <- function (object=NULL, algo = c("md5", "sha1", "crc32", "sha256",
                     skip = "auto", ascii = FALSE, raw = FALSE) 
 {
 	
-  require(digest)
+  #equire(digest)
   
   object0 <- object 
   algo0 <- algo[1]

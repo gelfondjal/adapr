@@ -6,7 +6,7 @@
 
 Sync.test.OLD <- function(dagger,tree,plotl=TRUE){
   
-  require(igraph)
+  #equire(igraph)
   
   if(!igraph::is.dag(dagger)){stop("The computing dependencies have cycles.")}
   

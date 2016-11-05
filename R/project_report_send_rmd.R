@@ -13,10 +13,8 @@
 #' 
 project_report_send_rmd <- function (target.directory=source_info$project.path,si,send.data=FALSE, graph.width = 960, graph.height = 500) 
 {
-  #library(pander)
-  library(devtools)
-  library(plyr)
-  
+  ##ibrary(pander)
+
   make.relative.hyperlink <- function(directory.to.clip,files,links){
     
     files <- gsub("^/","",gsub(directory.to.clip,"",files,fixed=TRUE))
@@ -73,10 +71,10 @@ reduced.project.graph.file <- file.path(target.directory2,
 
 #sankeyPlot$save(reduced.project.graph.file, cdn = TRUE)
 
-png(reduced.project.graph.file,graph.width,graph.height)
+grDevices::png(reduced.project.graph.file,graph.width,graph.height)
 programGraph <- create_program_graph(si$project.id)
 print(programGraph$ggplot)
-graphics.off()
+grDevices::graphics.off()
 
 
 programs <- subset(project.info$tree, !duplicated(source.file), 
@@ -85,7 +83,7 @@ programs$source.file.fullname <- file.path(programs$source.file.path,
                                            programs$source.file)
 
 
-run.times <- ddply(project.info$tree, "source.file", function(x) {
+run.times <- plyr::ddply(project.info$tree, "source.file", function(x) {
   last.run.time <- max(as.POSIXct(x$target.mod.time) - 
                          as.POSIXct(x$source.run.time), na.rm = TRUE)
   return(data.frame(last.run.time.sec = last.run.time))
@@ -95,7 +93,7 @@ run.times <- ddply(project.info$tree, "source.file", function(x) {
 tab.out <- merge(programs, run.times, by = "source.file")
 tab.out$source.link <- make.relative.hyperlink(si$project.path,tab.out$source.file.fullname, 
                                       tab.out$source.file)
-sorted.names <- V(project.info$graph)$file[topological.sort(project.info$graph)]
+sorted.names <- igraph::V(project.info$graph)$file[igraph::topological.sort(project.info$graph)]
 sorted.names <- sorted.names[sorted.names %in% tab.out$source.file]
 tab.out <- tab.out[match(sorted.names, tab.out$source.file), ]
 
@@ -124,14 +122,14 @@ rownames(tabtopander) <- 1:nrow(tabtopander)
 names(tabtopander) <- c("Source","Description","Last run time (sec)")
 
 write("\n\n",file.path(target.directory2,targetfile),append=TRUE)
-write(kable(tabtopander),file.path(target.directory2,targetfile),append=TRUE)
+write(knitr::kable(tabtopander),file.path(target.directory2,targetfile),append=TRUE)
 write("\n\n",file.path(target.directory2,targetfile),append=TRUE)
 
 tabtopander <- data.frame(`Dependency Graph` = make.relative.hyperlink(target.directory2,reduced.project.graph.file,"Project Graph"))
 rownames(tabtopander) <- 1:nrow(tabtopander)
 
 write("\n\n",file.path(target.directory2,targetfile),append=TRUE)
-write(kable(tabtopander),file.path(target.directory2,targetfile),append=TRUE)
+write(knitr::kable(tabtopander),file.path(target.directory2,targetfile),append=TRUE)
 write("\n\n",file.path(target.directory2,targetfile),append=TRUE)
 
 
@@ -141,7 +139,7 @@ write("\n",file.path(target.directory2,targetfile),append=TRUE)
 write(paste("#",namer,"\n"),file.path(target.directory2,targetfile),append=TRUE)
 out <- subset(outputs[[namer]],Description!="Support file")
 rownames(out) <- NULL
-write(kable(out),file.path(target.directory2,targetfile),append=TRUE)
+write(knitr::kable(out),file.path(target.directory2,targetfile),append=TRUE)
 write("\n",file.path(target.directory2,targetfile),append=TRUE)
 
 }

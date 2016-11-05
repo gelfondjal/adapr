@@ -2,7 +2,7 @@
 hashcopy <- function(originals,targetdir){
   
   
-out <- rep(NA,lenth(orginals))
+out <- rep(NA,length(orginals))
 step <- 1
   
 for(original in orginals){  

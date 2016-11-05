@@ -11,7 +11,7 @@
 
 Render_Rmd <- function(Rmd.file,description="Rmarkdown",...){
   
-  require(rmarkdown)
+  #equire(rmarkdown)
   
   mdfile <- Create.file.info(source_info$markdown.dir,Rmd.file,description)
   

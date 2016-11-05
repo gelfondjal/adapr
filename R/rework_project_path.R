@@ -18,7 +18,7 @@ rework.project.path <- function(dependency.dir=source_info$depedency.dir,new.pat
   
   for(dep.file.iter in dep.files){
     
-    write.table(fixed.deps[[dep.file.iter]],dep.file.iter,sep="\t",row.names=FALSE)
+    utils::write.table(fixed.deps[[dep.file.iter]],dep.file.iter,sep="\t",row.names=FALSE)
   }
   
 }# END: rework.project.path 

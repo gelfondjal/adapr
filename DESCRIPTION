@@ -21,4 +21,6 @@ Imports:
      plyr,
     dplyr,
     methods
+Suggests:
+  pkgKitten
 RoxygenNote: 5.0.1

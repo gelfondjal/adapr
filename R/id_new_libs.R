@@ -9,12 +9,12 @@ id_new_libs <- function(library.data.file){
  
  #library.data.file= "/Users/Gelfond/Documents/Projects/Aflatoxin/Programs/support_functions/common_libs.csv"
  
-  packages.info.all <- read.csv(library.data.file,as.is=TRUE)
+  packages.info.all <- utils::read.csv(library.data.file,as.is=TRUE)
   
   adapr_packs <- c("adapr","knitr","plyr","shinydashboard","devtools","R2HTML","shiny","gplots","digest","igraph","stats",
   					"stats","graphics","grDevices","utils","datasets","methods","base","plotly")
 
-   notadapr <- setdiff(loaded_packages()$package,adapr_packs)
+   notadapr <- setdiff(devtools::loaded_packages()$package,adapr_packs)
    
    missing <- setdiff(notadapr,packages.info.all$Package)   					   					
   
@@ -22,7 +22,7 @@ id_new_libs <- function(library.data.file){
   
   if(length(missing)){
     packages.info <- rbind(packages.info.all,data.frame(Package=missing,repos=NA,specific=TRUE))
-    write.csv(packages.info,library.data.file,row.names=FALSE)
+    utils::write.csv(packages.info,library.data.file,row.names=FALSE)
     
   }    
   

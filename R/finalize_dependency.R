@@ -10,7 +10,7 @@ finalize_dependency <- function(RMD=TRUE,write=TRUE){
   
   # read in dependency object from dependency.file in source_info
   # return dependency object
-  require(rmarkdown)
+ 
   current.dir <- getwd()
   # Copy and render Rmd file
   file.copy(source_info$rmdfile$fullname,file.path(source_info$results.dir,source_info$rmdfile$file),overwrite=TRUE)
@@ -28,7 +28,7 @@ finalize_dependency <- function(RMD=TRUE,write=TRUE){
 
 
   
-  Write(sessionInfo(),paste0("Session_info_",source_info$file$db.name,".RObj"),paste0("sessionInfo for", source_info$file[["file"]]),save)
+  Write(utils::sessionInfo(),paste0("Session_info_",source_info$file$db.name,".RObj"),paste0("sessionInfo for", source_info$file[["file"]]),save)
   
   # Render the markdown
     

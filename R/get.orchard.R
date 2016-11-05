@@ -16,7 +16,7 @@ get_orchard <- function(){
     return(NULL)
   }
   
-  suppressWarnings(orchard <-read.csv(orchard.site,as.is=TRUE)  )
+  suppressWarnings(orchard <- utils::read.csv(orchard.site,as.is=TRUE)  )
   
   orchard <- orchard[order(orchard$project.id),]
   

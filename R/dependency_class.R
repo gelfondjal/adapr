@@ -2,7 +2,7 @@
 #' 
 #' @export
 # Make dependency class
-dependency <- setRefClass("dependency",
+dependency <- methods::setRefClass("dependency",
                           fields = list( data = "data.frame"),
                           methods = list(
                             update = function(df.update) {
@@ -14,11 +14,11 @@ dependency <- setRefClass("dependency",
                                 invisible(data)
                               }
                               
-                              new.row <- data[1,] # Retrieves part of dependency information that does not change
+                              new_row <- data[1,] # Retrieves part of dependency information that does not change
                               
-                              for(col.iter in names(df.update)){new.row[[col.iter]] <- df.update[[col.iter]]}
+                              for(col.iter in names(df.update)){new_row[[col.iter]] <- df.update[[col.iter]]}
                               
-                              data <<- rbind.fill(data,new.row)
+                              data <<- rbind.fill(data,new_row)
                               
                               invisible(data)
                             })

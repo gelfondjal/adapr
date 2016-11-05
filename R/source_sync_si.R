@@ -32,20 +32,22 @@ source.sync.si <- function(source_info,run=TRUE,plot.to.file=FALSE){
   
   sync.out <- sync.test.si(source_info)
   
-  propagated.names <- V(sync.out$propagated.graph)$name[V(sync.out$propagated.graph)$synced=="No"]
+  propagated.names <- igraph::V(sync.out$propagated.graph)$name[igraph::V(sync.out$propagated.graph)$synced=="No"]
   
   
   syncPlotFile <- file.path(source_info$project.path,project.directory.tree$results,"tree_controller.R","sync_updater.png")
   
   dir.create(dirname(syncPlotFile),showWarnings=FALSE)
   
-  if(plot.to.file){png(syncPlotFile)}
+  if(plot.to.file){grDevices::png(syncPlotFile)}
   
-  Plot.biggraph.horizontal(project_info$graph,title="Files to syncrhonise",black.vertex.list=propagated.names)			
+  #Plot.biggraph.horizontal(project_info$graph,title="Files to syncrhonise",black.vertex.list=propagated.names)			
   
-  if(plot.to.file){graphics.off()}
+  create_program_graph(source_info$project.id)
   
-  run.times <- ddply(tree.to.run,"source.file",function(x){
+  if(plot.to.file){grDevices::graphics.off()}
+  
+  run.times <- plyr::ddply(tree.to.run,"source.file",function(x){
     
     last.run.time <- max(as.POSIXct(x$target.mod.time)-as.POSIXct(x$source.run.time),na.rm=TRUE)
     
@@ -69,7 +71,7 @@ source.sync.si <- function(source_info,run=TRUE,plot.to.file=FALSE){
       if(sync.out$synchronized){
         propagated.names <- ""
       }else{
-        propagated.names <- V(sync.out$propagated.graph)$name[V(sync.out$propagated.graph)$synced=="No"]}
+        propagated.names <- igraph::V(sync.out$propagated.graph)$name[igraph::V(sync.out$propagated.graph)$synced=="No"]}
       
       remaining.time <- paste0(sum(subset(run.times,source.file %in% sync.out$sources.to.sync$file)$last.run.time.sec,na.rm=TRUE)," secs")
       
@@ -78,15 +80,14 @@ source.sync.si <- function(source_info,run=TRUE,plot.to.file=FALSE){
                               
                       
       
-      if(plot.to.file){png(syncPlotFile)}
+      if(plot.to.file){grDevices::png(syncPlotFile)}
       
       
-      Plot.biggraph.horizontal(project_info$graph,title=title.of.graph,black.vertex.list=propagated.names)			
+      create_program_graph(source_info$project.id)
       
+      if(plot.to.file){grDevices::graphics.off()}
       
-      if(plot.to.file){graphics.off()}
-      
-      if(source.iter<=nrow(ID.sync.out)){clean_source(file.path(ID.sync.out$path[source.iter],ID.sync.out$file[source.iter]))}
+      if(source.iter<=nrow(ID.sync.out)){devtools::clean_source(file.path(ID.sync.out$path[source.iter],ID.sync.out$file[source.iter]))}
       
       
     }

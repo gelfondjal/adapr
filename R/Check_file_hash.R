@@ -7,7 +7,7 @@
 #' 
 Check.file.hash <- function(dependency.dir=NULL,dependency.object=NULL){
   
-  require(plyr)
+  #equire(plyr)
   
   if(is.null(dependency.object)){
     

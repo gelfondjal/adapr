@@ -17,9 +17,9 @@ source_sync_si_load <- function (source_info)
   tree.to.run <- subset(project_info$tree, source.file %in% 
                           ID.sync.out$file)
   sync.out <- sync.test.si(source_info)
-  propagated.names <- V(sync.out$propagated.graph)$name[V(sync.out$propagated.graph)$synced == "No"]
+  propagated.names <- igraph::V(sync.out$propagated.graph)$name[igraph::V(sync.out$propagated.graph)$synced == "No"]
  
-  run.times <- ddply(tree.to.run, "source.file", function(x) {
+  run.times <- plyr::ddply(tree.to.run, "source.file", function(x) {
     last.run.time <- max(as.POSIXct(x$target.mod.time) - 
                            as.POSIXct(x$source.run.time), na.rm = TRUE)
     return(data.frame(last.run.time.sec = last.run.time))

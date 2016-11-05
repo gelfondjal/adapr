@@ -12,10 +12,6 @@ project_report_markdown<-
 function (source_info, graph.width = 960, graph.height = 500) 
 {
 
-  library(devtools)
-  library(plyr)
-  
-  
 si <- source_info
 
 targetfile <- paste0("project_summary",".Rmd")
@@ -59,10 +55,10 @@ reduced.project.graph.file <- file.path(source_info$results.dir,
                                         "reduced_networks.png")
 #sankeyPlot$save(reduced.project.graph.file, cdn = TRUE)
 
-png(reduced.project.graph.file,graph.width,graph.height)
+grDevices::png(reduced.project.graph.file,graph.width,graph.height)
 programGraph <- create_program_graph(source_info$project.id)
 print(programGraph$ggplot)
-graphics.off()
+grDevices::graphics.off()
 
 
 
@@ -72,7 +68,7 @@ programs$source.file.fullname <- file.path(programs$source.file.path,
                                            programs$source.file)
 
 
-run.times <- ddply(project.info$tree, "source.file", function(x) {
+run.times <- plyr::ddply(project.info$tree, "source.file", function(x) {
   last.run.time <- max(as.POSIXct(x$target.mod.time) - 
                          as.POSIXct(x$source.run.time), na.rm = TRUE)
   return(data.frame(last.run.time.sec = last.run.time))
@@ -82,7 +78,7 @@ run.times <- ddply(project.info$tree, "source.file", function(x) {
 tab.out <- merge(programs, run.times, by = "source.file")
 tab.out$source.link <- make.hyperlink(tab.out$source.file.fullname, 
                                       tab.out$source.file)
-sorted.names <- V(project.info$graph)$file[topological.sort(project.info$graph)]
+sorted.names <- igraph::V(project.info$graph)$file[igraph::topological.sort(project.info$graph)]
 sorted.names <- sorted.names[sorted.names %in% tab.out$source.file]
 tab.out <- tab.out[match(sorted.names, tab.out$source.file), ]
 
@@ -111,14 +107,14 @@ rownames(tabtopander) <- 1:nrow(tabtopander)
 names(tabtopander) <- c("Source","Description","Last run time (sec)")
 
 write("\n",file.path(targetdirectory,targetfile),append=TRUE)
-write(kable(tabtopander),file.path(targetdirectory,targetfile),append=TRUE)
+write(knitr::kable(tabtopander),file.path(targetdirectory,targetfile),append=TRUE)
 write("\n",file.path(targetdirectory,targetfile),append=TRUE)
 
 tabtopander <- data.frame(`Dependency Graph` = make.hyperlink(reduced.project.graph.file,"Project Graph"))
 rownames(tabtopander) <- 1:nrow(tabtopander)
 
 write("\n\n",file.path(targetdirectory,targetfile),append=TRUE)
-write(kable(tabtopander),file.path(targetdirectory,targetfile),append=TRUE)
+write(knitr::kable(tabtopander),file.path(targetdirectory,targetfile),append=TRUE)
 write("\n\n",file.path(targetdirectory,targetfile),append=TRUE)
 
 
@@ -128,7 +124,7 @@ write("\n",file.path(targetdirectory,targetfile),append=TRUE)
 write(paste("#",namer,"\n"),file.path(targetdirectory,targetfile),append=TRUE)
 out <- subset(outputs[[namer]],Description!="Support file")
 rownames(out) <- NULL
-write(kable(out),file.path(targetdirectory,targetfile),append=TRUE)
+write(knitr::kable(out),file.path(targetdirectory,targetfile),append=TRUE)
 write("\n",file.path(targetdirectory,targetfile),append=TRUE)
 
 }

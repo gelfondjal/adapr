@@ -9,7 +9,7 @@ default.adapr.setup <- function(){
   
   total <- 6
   step <- 1
-  require(devtools)
+  #equire(devtools)
 
   
   print("Will make project directories in computer Document directory and create adaprHome project.")
@@ -147,7 +147,7 @@ default.adapr.setup <- function(){
     
   }else{
     
-    print("ADAPRHOME project implies adpar already congifured")
+    print("adaprHome project implies adpar already congifured")
     return("Already configured")
     
   }

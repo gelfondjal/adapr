@@ -6,7 +6,7 @@
 #' @export
 Make.summary.graph <- function(dependency.dir=NULL,dependency.object=NULL,plot.graph=FALSE){
   
-  require(igraph)
+  #equire(igraph)
   
   if(is.null(dependency.object)){
     

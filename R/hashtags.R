@@ -21,7 +21,7 @@ gethashtag <- function(x){
 
 #guidedf <- unique(data.frame(Symbol=avs,Tag=toupper(gethashtag(tester))))
 
-#library(ggplot2)
+#ibrary(ggplot2)
 
 #ggplot(cars,aes(x=speed,y=dist))+geom_point()+annotate("text",x=cars[,1],y=cars[,2],label=avs,family="serif")
 

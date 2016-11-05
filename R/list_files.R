@@ -66,7 +66,7 @@ listDatafiles <- function(si=source_info){
 #' @export
 #' 
 showResults <- function(si=source_info){
-  browseURL(si$results.dir)
+  utils::browseURL(si$results.dir)
 }
 
 #' Opens project directory
@@ -75,7 +75,7 @@ showResults <- function(si=source_info){
 #' @export
 #' 
 showProject <- function(si=source_info){
-  browseURL(si$project.path)
+  utils::browseURL(si$project.path)
 }
 
 

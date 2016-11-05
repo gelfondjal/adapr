@@ -9,7 +9,7 @@ git_provenance <- function(project.id,filepath=0){
 
   if(filepath==0){filepath <- file.choose()}
   
-  filehash <- Digest(file=filepath,file=TRUE)
+  filehash <- Digest(file=filepath)
   
   gitpath <- get.project.path(project.id)
   

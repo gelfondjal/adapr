@@ -4,8 +4,8 @@
 #' 
 
 adaprApp <- function (){
-  library(shiny)
-  library(shinydashboard)
+  #ibrary(shiny)
+  #ibrary(shinydashboard)
   shiny::runApp(
     system.file('adapr21',                                                    
                 package='adapr')) 
