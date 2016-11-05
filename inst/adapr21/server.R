@@ -803,7 +803,7 @@ shinyServer(function(input, output,session) {
   output$IT2<-renderText({
     textout<-"Waiting to install latest adapr"
     if (input$installit2!=0){
-      install_github("adapr", "gelfondjal")
+      install_github("gelfondjal/adapr")
       library(adapr)
       textout<-"adapr has been installed."
     }
