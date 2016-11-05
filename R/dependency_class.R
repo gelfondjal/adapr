@@ -18,7 +18,7 @@ dependency <- methods::setRefClass("dependency",
                               
                               for(col.iter in names(df.update)){new_row[[col.iter]] <- df.update[[col.iter]]}
                               
-                              data <<- rbind.fill(data,new_row)
+                              data <<- plyr::rbind.fill(data,new_row)
                               
                               invisible(data)
                             })
