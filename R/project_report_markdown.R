@@ -62,7 +62,7 @@ grDevices::graphics.off()
 
 
 
-programs <- subset(project.info$tree, !duplicated(source.file), 
+programs <- subset(project.info$tree, !duplicated(project.info$tree$source.file), 
                    select = c("source.file", "source.file.path", "source.file.description"))
 programs$source.file.fullname <- file.path(programs$source.file.path, 
                                            programs$source.file)
@@ -122,7 +122,7 @@ for (namer in names(outputs)){
 	
 write("\n",file.path(targetdirectory,targetfile),append=TRUE)
 write(paste("#",namer,"\n"),file.path(targetdirectory,targetfile),append=TRUE)
-out <- subset(outputs[[namer]],Description!="Support file")
+out <- subset(outputs[[namer]],outputs[[namer]]$Description!="Support file")
 rownames(out) <- NULL
 write(knitr::kable(out),file.path(targetdirectory,targetfile),append=TRUE)
 write("\n",file.path(targetdirectory,targetfile),append=TRUE)

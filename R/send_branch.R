@@ -6,6 +6,9 @@
 
 send.branch <- function(branch_cut,all=FALSE){
   
+  
+  source_info <- get("source_info")
+  
   project_info <- get.project.info.si(source_info)
   
   if(!all){
@@ -17,7 +20,9 @@ send.branch <- function(branch_cut,all=FALSE){
     branch.names <- igraph::V(project_info$graph)$file[branch]  # These are in order
     
     
-    programs <- subset(subset(project_info$tree,source.file %in% c(branch_cut,branch.names)),!duplicated(source.file))
+    programs <- subset(project_info$tree,project_info$tree$source.file %in% c(branch_cut,branch.names))
+    
+    programs <- subset(programs,!duplicated(programs$source.file))
     
     
     
@@ -27,7 +32,9 @@ send.branch <- function(branch_cut,all=FALSE){
     
     branch.names <- igraph::V(project_info$graph)$file[branch]  # These are in order
     
-    programs <- subset(subset(project_info$tree,source.file %in% c(branch.names)),!duplicated(source.file))
+    programs <- subset(project_info$tree,project_info$tree$source.file %in% c(branch.names))
+
+    programs <- subset(programs,!duplicated(programs$source.file))
     
   }	
   

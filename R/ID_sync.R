@@ -13,8 +13,11 @@ ID.sync <- function(file.info,dag.to.sync){
   
   run.order <- igraph::topological.sort(dag.to.sync)
   
-  repair.sync.file.info <- subset(data.frame(fullname.abbr=igraph::V(dag.to.sync)$name,file.class=igraph::V(dag.to.sync)$file.class,
-                                             file=igraph::V(dag.to.sync)$file,path=igraph::V(dag.to.sync)$path)[run.order,],file.class=="source")
+  tempdf <- data.frame(fullname.abbr=igraph::V(dag.to.sync)$name,file.class=igraph::V(dag.to.sync)$file.class,
+                       file=igraph::V(dag.to.sync)$file,path=igraph::V(dag.to.sync)$path)[run.order,]
+  
+  
+  repair.sync.file.info <- subset(tempdf,tempdf$file.class=="source")
   
   
   if(nrow(repair.sync.file.info)>0){

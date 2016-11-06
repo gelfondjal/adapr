@@ -14,6 +14,17 @@ Write <- function(obj=NULL,file.name="data.csv",description="Result file",write.
   # lightweight Write.cap take small number of args
   # used file.name and description create file.information
   
+  
+  
+  if(!exists("source_info")){
+    
+    source_info <- list()
+    
+    stop("Write (adapr) error: source_info not found")
+    
+  }
+  
+  
   if(date){
     
     prefix <- gsub("\\..*","",file.name)

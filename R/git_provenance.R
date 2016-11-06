@@ -19,7 +19,7 @@ git_provenance <- function(project.id,filepath=0){
   
   files <- Condense.file.info(Harvest.trees(si$dependency.dir))
                               
-  file.data <- subset(files,file.hash==filehash)   
+  file.data <- subset(files,files$file.hash==filehash)   
   
   if(length(provenance)==0){provenance <- "Git history not found"}
   if(nrow(file.data)==0){file.data <- "Current file not found"}

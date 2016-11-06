@@ -8,8 +8,8 @@ Make a readme file at top project directory
 copy to target.directory
 Uses pander and pandoc unlike project_report}
 \usage{
-project_report_send_rmd(target.directory = source_info$project.path, si,
-  send.data = FALSE, graph.width = 960, graph.height = 500)
+project_report_send_rmd(target.directory = get("source_info")$project.path,
+  si, send.data = FALSE, graph.width = 960, graph.height = 500)
 }
 \arguments{
 \item{target.directory}{Location to send project report}

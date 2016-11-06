@@ -20,7 +20,7 @@ si <- pull_source_info(project.id)
 projinfo <- get.project.info.si(si)
 
 
-outputs <- subset(projinfo$tree,dependency=="out",select=c("source.file","target.path","target.file"))
+outputs <- subset(projinfo$tree,projinfo$tree$dependency=="out",select=c("source.file","target.path","target.file"))
 outputs$fullname <- file.path(outputs$target.path,outputs$target.file)
 outputs <- merge(outputs,projinfo$all.files,by="fullname")
 
@@ -201,7 +201,7 @@ dfo$synccolor <- as.character(ifelse(dfo$v %in% unsync.vertex,"Not Synchronized"
 
 dfo$synccolor <- factor(dfo$synccolor,levels=c("Synchronized","Not Synchronized"))
 
-proj.gg <- ggplot2::ggplot(dfo,ggplot2::aes(x=x,y=y,label=basename(as.character(v))))+
+proj.gg <- ggplot2::ggplot(dfo,ggplot2::aes(x=dfo$x,y=dfo$y,label=basename(as.character(dfo$v))))+
   ggplot2::geom_point(ggplot2::aes(colour=dfo$synccolor),size=dotsize0,alpha=0.7)+
   ggplot2::geom_point(shape = 1,size = dotsize0,colour = "grey70", stroke=2)+
   ggplot2::geom_text(vjust=-0.5,size=text.size0,color="black")

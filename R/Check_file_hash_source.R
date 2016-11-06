@@ -16,7 +16,7 @@ Check.file.hash.source <- function(dependency.dir=NULL,dependency.object=NULL){
     trees <- subset(trees,!is.na(dependency))
   }else{trees <- dependency.object}
   
-  source.df <- subset(trees,!duplicated(source.hash))
+  source.df <- subset(trees,!duplicated(trees$source.hash))
   
   #Check source hashes are current
   
@@ -32,7 +32,7 @@ Check.file.hash.source <- function(dependency.dir=NULL,dependency.object=NULL){
     return(data.frame(hash.fail))
   })
   
-  failed.sources <- subset(source.hash.check,hash.fail)
+  failed.sources <- subset(source.hash.check,source.hash.check$hash.fail)
 
   failed.sources$file <- failed.sources$source.file
   failed.sources$path <- failed.sources$source.file.path
@@ -52,7 +52,7 @@ Check.file.hash.source <- function(dependency.dir=NULL,dependency.object=NULL){
     
      })
   
-  failed.targets <- subset(target.hash.check,hash.fail)
+  failed.targets <- subset(target.hash.check,target.hash.check$hash.fail)
   
   sources.of.failed.targets <- subset(failed.targets,select=c("source.file","source.file.path"))
   

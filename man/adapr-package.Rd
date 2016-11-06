@@ -24,9 +24,8 @@ Maintainer: \packageMaintainer{adapr}
 None.
 }
 
-\keyword{ package }
-\seealso{
-}
+\keyword{ package, reproducibility, accountability }
+
 \examples{
 #Digest()
 }

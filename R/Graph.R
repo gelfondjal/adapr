@@ -15,13 +15,21 @@ Graph <- function(file.name="data.csv",description="Result file",write.fcn=guess
   
   obj <- NULL
   
+  if(!exists("source_info")){
+    
+    source_info <- list()
+    
+    stop("Graph (adapr) error: source_info not found")
+    
+  }
+  
+  
   if(date){
     
     prefix <- gsub("\\..*","",file.name)
     suffix <- gsub(".*\\.","\\.",file.name)
     
     datestring <- gsub("\\-","_",Sys.Date())
-    
     
     file.name <- paste0(prefix,"_",datestring,suffix)
     

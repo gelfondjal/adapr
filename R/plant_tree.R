@@ -13,7 +13,7 @@ plant.tree <- function(project.id,project.path,swap.directory){
   	print("Project Directories invalid")
   	
   	if(!dir.exists(project.path)){print(paste("Project Directory doesn't exist",project.path))}
-  	if(!dir.exists(swap.directory)){print(paste("Project Publish Directory doesn't exist",publish.path))}
+  	if(!dir.exists(swap.directory)){print(paste("Project Publish Directory doesn't exist",swap.directory))}
   	
   	return(FALSE)
   	
@@ -98,7 +98,7 @@ redirect.tree <- function(project.id0,project.path,swap.directory){
   	print("Project Directories invalid")
   	
   	if(!dir.exists(project.path)){print(paste("Project Directory doesn't exist",project.path))}
-  	if(!dir.exists(swap.directory)){print(paste("Project Publish Directory doesn't exist",publish.path))}
+  	if(!dir.exists(swap.directory)){print(paste("Project Publish Directory doesn't exist",swap.directory))}
   	
   	return(FALSE)
   	
@@ -116,7 +116,7 @@ redirect.tree <- function(project.id0,project.path,swap.directory){
     
     print("Project Exists: Redirected to new path")
     
-    all.orchards <- subset(all.orchards,project.id!=project.id0)
+    all.orchards <- subset(all.orchards,all.orchards$project.id!=project.id0)
     
     
   }else{

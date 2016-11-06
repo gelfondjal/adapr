@@ -13,10 +13,10 @@ Check.file.mtime.source <- function(dependency.dir=NULL,dependency.object=NULL){
   if(is.null(dependency.object)){
     
     trees <- Harvest.trees(dependency.dir)
-    trees <- subset(trees,!is.na(dependency))
+    trees <- subset(trees,!is.na(trees$dependency))
   }else{trees <- dependency.object}
  
-  source.df <- subset(trees,!duplicated(source.hash))
+  source.df <- subset(trees,!duplicated(trees$source.hash))
   
   source.mtime.check <- plyr::ddply(source.df,c("source.file","source.file.path"),function(x){
     
@@ -30,7 +30,7 @@ Check.file.mtime.source <- function(dependency.dir=NULL,dependency.object=NULL){
     return(data.frame( mtime.fail))
   })
   
-  failed.sources <- subset(source.mtime.check,mtime.fail)
+  failed.sources <- subset(source.mtime.check,source.mtime.check$mtime.fail)
   
   failed.sources$file <- failed.sources$source.file
   failed.sources$path <- failed.sources$source.file.path
@@ -48,7 +48,7 @@ Check.file.mtime.source <- function(dependency.dir=NULL,dependency.object=NULL){
     
      })
   
-  failed.targets <- subset(target.mtime.check,mtime.fail)
+  failed.targets <- subset(target.mtime.check,target.mtime.check$mtime.fail)
   
   sources.of.failed.targets <- subset(failed.targets,select=c("source.file","source.file.path"))
   

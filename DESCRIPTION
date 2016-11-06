@@ -1,11 +1,11 @@
 Package: adapr
 Type: Package
-Title: ADAPR  Accountable data analysis process in R 
+Title: An Implementation of an Accountable Data Analysis Process 
 Version: 1.0
-Date: 2015-12-21
+Date: 2016-11-05
 Author: Jon Gelfond
 Maintainer: Jonathan Gelfond <gelfondjal@uthscsa.edu>
-Description: Tracks reading and writing within R scripts that are organized into a directed acyclic graph. Contains an interactive shiny application adapr(). Uses Git and file hashes to track version histories of input and output.
+Description: Tracks reading and writing within R scripts that are organized into a directed acyclic graph. Contains an interactive shiny application adaprApp(). Uses Git and file hashes to track version histories of input and output.
 License: LGPL-2
 Imports:
    gdata,

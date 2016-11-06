@@ -4,10 +4,14 @@
 \alias{showResults}
 \title{Opens results directory}
 \usage{
-showResults(si = source_info)
+showResults(si = get("source_info"), project.id = "", rscript = "")
 }
 \arguments{
 \item{si}{is source_info object}
+
+\item{project.id}{character string specifies project}
+
+\item{rscript}{character string specifies the R script result directory to open}
 }
 \description{
 Opens results directory

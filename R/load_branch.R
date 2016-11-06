@@ -8,6 +8,13 @@ Load.branch <- function(file){
   # Loads obj from source_info
   # updates dependency.file
   
+  if(!exists("source_info")){
+    
+    source_info <- list()
+    
+    stop("Load.branch (adapr) error: source_info not found")
+    
+  }
   
   file.info <- Get.file.info(source_info,data="",file0="",path.grep=file)
   

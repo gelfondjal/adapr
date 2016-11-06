@@ -13,6 +13,15 @@ Render_Rmd <- function(Rmd.file,description="Rmarkdown",...){
   
   #equire(rmarkdown)
   
+  if(!exists("source_info")){
+    
+    source_info <- list()
+    
+    stop("Render (adapr) error: source_info not found")
+    
+  }
+  
+  
   mdfile <- Create.file.info(source_info$markdown.dir,Rmd.file,description)
   
   Read.cap(mdfile,I,source_info)#,envir=parent.frame())

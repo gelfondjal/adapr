@@ -10,9 +10,9 @@ guess.write.fcn <- function(filename){
   
   suffix <- tolower(gsub(".*\\.","",filename))
   
-  if(suffix=="png"){return(png)}
-  if(suffix=="pdf"){return(pdf)}
-  if(suffix=="csv"){return(write.csv)}
+  if(suffix=="png"){return(grDevices::png)}
+  if(suffix=="pdf"){return(grDevices::pdf)}
+  if(suffix=="csv"){return(utils::write.csv)}
   if(suffix=="rdata"){return(save)}
   
   

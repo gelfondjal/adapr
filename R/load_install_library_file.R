@@ -9,7 +9,7 @@
 #' 
 load.install.library.file <- function(library.data.file=NA,subgroup=NULL,verbose=FALSE){
   
-  if(is.na(library.data.file)){library.data.file <- file.path(source_info$support.dir,source_info$support.library.file)}
+  if(is.na(library.data.file)){library.data.file <- file.path(get("source_info")$support.dir,get("source_info")$support.library.file)}
   
   if(!file.exists(library.data.file)){
     print("No library information file")
@@ -24,13 +24,13 @@ load.install.library.file <- function(library.data.file=NA,subgroup=NULL,verbose
   #Only load nonspecific packages if subgroup is null
   
   if(is.null(subgroup)){
-    packages.info <- subset(packages.info.all,!specific)
+    packages.info <- subset(packages.info.all,!packages.info.all$specific)
     
   }else{
     
-    packages.info <- subset(packages.info.all, (!specific) | (Package %in% subgroup$Package))    
+    packages.info <- subset(packages.info.all, (!packages.info.all$specific) | (packages.info.all$Package %in% subgroup$Package))    
     
-    new.packs <- subset(subgroup,!(Package %in% packages.info$Package))
+    new.packs <- subset(subgroup,!(subgroup$Package %in% packages.info$Package))
     
     packages.info <- unique(rbind(subgroup,packages.info))
     
@@ -57,13 +57,16 @@ load.install.library.file <- function(library.data.file=NA,subgroup=NULL,verbose
     try({
       
       
-      bioc.list <- subset(packages.info,(repos=="bioC")&(install.check==FALSE))$Package
+      bioc.list <- subset(packages.info,(packages.info$repos=="bioC")&(packages.info$install.check==FALSE))$Package
       
       print(paste("Installing",bioc.list))
       
+      
+      
       source("http://bioconductor.org/biocLite.R")
       
-      biocLite(bioc.list,ask=TRUE)
+      tempfcn <- get("biocLite")
+      tempfcn(bioc.list,ask=TRUE)
       lapply(bioc.list, require, character.only=TRUE)
       
       print(paste("Loaded",bioc.list))
@@ -82,14 +85,14 @@ load.install.library.file <- function(library.data.file=NA,subgroup=NULL,verbose
     try({
       
       
-      install.command.list <- subset(packages.info,(repos!="bioC")&(install.check==FALSE))$repos
+      install.command.list <- subset(packages.info,(packages.info$repos!="bioC")&(packages.info$install.check==FALSE))$repos
       
       install.command.list <- grep("^install",install.command.list,value=TRUE)
       
       if(length(install.command.list)>0){
         sapply(install.command.list,function(x){source(textConnection(x))})
   
-        lapply(subset(packages.info,repos %in% install.command.list)$Package, require, character.only=TRUE)      
+        lapply(subset(packages.info,packages.info$repos %in% install.command.list)$Package, require, character.only=TRUE)      
              
         packages.info$install.check[packages.info$repos %in% install.command.list] <- TRUE
       }
@@ -131,12 +134,12 @@ load.install.library.file <- function(library.data.file=NA,subgroup=NULL,verbose
   
   if(!is.null(subgroup)){
   
-
-      packages.info.out <- subset(rbind(subgroup,packages.info.all),!duplicated(Package))
+      tempckgdf <- rbind(subgroup,packages.info.all)
+      packages.info.out <- subset(tempckgdf,!duplicated(tempckgdf$Package))
             
-      not.installed <- subset(packages.info,!install.check)$Package
+      not.installed <- subset(packages.info,!packages.info$install.check)$Package
       
-      packages.info.out <- subset(packages.info.out,!(Package %in% not.installed))
+      packages.info.out <- subset(packages.info.out,!(packages.info.out$Package %in% not.installed))
       
       utils::write.csv(packages.info.out[order(packages.info.out$Package),],library.data.file,row.names=FALSE)
     

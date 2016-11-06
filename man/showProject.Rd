@@ -4,10 +4,12 @@
 \alias{showProject}
 \title{Opens project directory}
 \usage{
-showProject(si = source_info)
+showProject(si = get("source_info"), project.id = "")
 }
 \arguments{
 \item{si}{is source_info object}
+
+\item{project.id}{character string specifies project to open}
 }
 \description{
 Opens project directory

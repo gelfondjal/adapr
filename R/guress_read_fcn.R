@@ -10,9 +10,9 @@ guess.read.fcn <- function(filename){
   
   suffix <- tolower(gsub(".*\\.","",filename))
   
-  if(suffix=="csv"){return(read.csv)}
-  if(suffix=="txt"){return(read.delim)}
-  if(suffix %in% c("xls","xlsx")){return(read.xls)}
+  if(suffix=="csv"){return(utils::read.csv)}
+  if(suffix=="txt"){return(utils::read.delim)}
+  if(suffix %in% c("xls","xlsx")){return(gdata::read.xls)}
   
   return(FALSE)
   

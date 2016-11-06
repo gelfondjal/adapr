@@ -10,13 +10,13 @@ Get.file.info <- function(source_info,data="",file0="",path.grep=""){
   
   
   if(data!=""){
-    file.row <- subset(source_info$all.files,(path==file.path(source_info$data.dir,data))&(file==file0))
+    file.row <- subset(source_info$all.files,(source_info$all.files$path==file.path(source_info$data.dir,data))&(source_info$all.files$file==file0))
   }else{
-    file.row <- subset(source_info$all.files,(file==file0))  	  	
+    file.row <- subset(source_info$all.files,(source_info$all.files$file==file0))  	  	
   }
   
   if(path.grep!=""){
-    file.row <- subset(source_info$all.files,grepl(path.grep,fullname,fixed=TRUE))  	  	
+    file.row <- subset(source_info$all.files,grepl(path.grep,source_info$all.files$fullname,fixed=TRUE))  	  	
   }
   
   if(nrow(file.row)<1){stop("Attempt to retreive non-extant file information")}

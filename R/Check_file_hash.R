@@ -15,7 +15,7 @@ Check.file.hash <- function(dependency.dir=NULL,dependency.object=NULL){
     trees <- subset(trees,!is.na(dependency))
   }else{trees <- dependency.object}
   
-  source.df <- subset(trees,!duplicated(source.hash))
+  source.df <- subset(trees,!duplicated(trees$source.hash))
   
   source.hash.count <- plyr::ddply(source.df,"source.file",function(x){
     
@@ -41,7 +41,7 @@ Check.file.hash <- function(dependency.dir=NULL,dependency.object=NULL){
   
   all.hash.counts <- plyr::rbind.fill(source.hash.count,target.hash.count)
   
-  multiple.hash <- subset(all.hash.counts,n.unique.hash!=1,select=c("path","file","file.hash","n.unique.hash"))
+  multiple.hash <- subset(all.hash.counts,all.hash.counts$n.unique.hash!=1,select=c("path","file","file.hash","n.unique.hash"))
   
   
   hash.compute <- plyr::ddply(all.hash.counts,c("path","file","file.hash","n.unique.hash"),function(x){
@@ -58,7 +58,7 @@ Check.file.hash <- function(dependency.dir=NULL,dependency.object=NULL){
     
   })
   
-  stale.hash <- subset(hash.compute,current.hash!=file.hash)
+  stale.hash <- subset(hash.compute,hash.compute$current.hash!=hash.compute$file.hash)
   
   hash.fail <- as.logical(nrow(multiple.hash)+nrow(stale.hash))
   

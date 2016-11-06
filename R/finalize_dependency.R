@@ -10,6 +10,15 @@ finalize_dependency <- function(RMD=TRUE,write=TRUE){
   
   # read in dependency object from dependency.file in source_info
   # return dependency object
+  
+  if(!exists("source_info")){
+    
+    source_info <- list()
+    
+    stop("finalize_dependency (adapr) error: source_info not found")
+    
+  }
+  
  
   current.dir <- getwd()
   # Copy and render Rmd file
@@ -69,9 +78,9 @@ finalize_dependency <- function(RMD=TRUE,write=TRUE){
   }
 
 
-  dependency.out <- subset(dependency.out,""!=target.hash)
+  dependency.out <- subset(dependency.out,""!=dependency.out$target.hash)
   
-  dependency.out <- subset(dependency.out,!duplicated(file.path(as.character(target.path),as.character(target.file))))
+  dependency.out <- subset(dependency.out,!duplicated(file.path(as.character(dependency.out$target.path),as.character(dependency.out$target.file))))
 
   setwd(current.dir)
     

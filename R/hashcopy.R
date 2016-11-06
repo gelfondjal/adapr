@@ -1,16 +1,22 @@
-
+#' Given Project name, Return project publish directory
+#' @param originals character vector of file paths to copy
+#' @param targetdir directory to copy to
+#' @details Only copies if there is a discrepancy in the file hash
+#' @return vector of logicals indicating copy status
+#' 
+#' 
 hashcopy <- function(originals,targetdir){
   
   
-out <- rep(NA,length(orginals))
+out <- rep(NA,length(originals))
 step <- 1
   
-for(original in orginals){  
+for(original in originals){  
   
 rewriteTF <- TRUE
 out <- FALSE
 
-target <- file.path(targetdir,basename(orginal))
+target <- file.path(targetdir,basename(original))
 
 if(file.exists(target)){
   

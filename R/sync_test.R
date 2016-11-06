@@ -37,7 +37,11 @@ Sync.test.OLD <- function(dagger,tree,plotl=TRUE){
         
         print(paste("Parent younger than child:","Parent =",parent,parent.time))
         
-        child.times <- subset(data.frame(child=igraph::V(dagger)$name[children.list[[parent]]], time=igraph::V(dagger)$time[children.list[[parent]]]),time<parent.time)
+        tempdf <- data.frame(child=igraph::V(dagger)$name[children.list[[parent]]], 
+                   time=igraph::V(dagger)$time[children.list[[parent]]])
+        
+        
+        child.times <- subset(tempdf,tempdf$time<parent.time)
         print("Child times")
         print(child.times)
         
@@ -95,7 +99,7 @@ Sync.test.OLD <- function(dagger,tree,plotl=TRUE){
   
   if(length(vertex.updates)>0){
     
-    updated.vertex.info <- subset(file.info,fullname.abbr %in% vertex.updates)
+    updated.vertex.info <- subset(file.info,file.info$fullname.abbr %in% vertex.updates)
     
     updated.vertex.info$target.path <- updated.vertex.info$path
     updated.vertex.info$target.file <- updated.vertex.info$file

@@ -5,7 +5,7 @@
 #' 
 Condense.file.info <- function(trees){
   
-  source.files <- subset(trees,!duplicated(source.file))
+  source.files <- subset(trees,!duplicated(trees$source.file))
   
   source.files$time <- as.POSIXct(source.files$source.mod.time)
   

@@ -45,7 +45,10 @@ Sync.test_2nd <- function(dagger,tree,plotl=TRUE){
         
         print(paste("Parent younger than child:","Parent =",parent,parent.time))
         
-        child.times <- subset(data.frame(child=igraph::V(dagger)$name[children.list[[parent]]], time=igraph::V(dagger)$time[children.list[[parent]]]),time<parent.time)
+        tempdf <- data.frame(child=igraph::V(dagger)$name[children.list[[parent]]], 
+                   time=igraph::V(dagger)$time[children.list[[parent]]])  
+        
+        child.times <- subset(tempdf,tempdf$time<parent.time)
         print("Child times")
         print(child.times)
         

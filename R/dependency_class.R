@@ -1,5 +1,5 @@
 #' Dependency class
-#' 
+#' @importFrom methods new
 #' @export
 # Make dependency class
 dependency <- methods::setRefClass("dependency",

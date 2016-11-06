@@ -4,8 +4,8 @@
 \alias{rework.project.path}
 \title{Collects all trees in dependency.dir and changes the project path}
 \usage{
-rework.project.path(dependency.dir = source_info$depedency.dir,
-  new.path = get.project.path(source_info$project.id))
+rework.project.path(dependency.dir = get("source_info")$depedency.dir,
+  new.path = get.project.path(get("source_info")$project.id))
 }
 \arguments{
 \item{dependency.dir}{location of dependency files to rework}

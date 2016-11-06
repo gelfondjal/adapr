@@ -27,7 +27,7 @@ source.sync.si <- function(source_info,run=TRUE,plot.to.file=FALSE){
     warning("There is nothing to run")
   }
   
-  tree.to.run <- subset(project_info$tree,source.file %in% ID.sync.out$file)	
+  tree.to.run <- subset(project_info$tree,project_info$tree$source.file %in% ID.sync.out$file)	
   
   
   sync.out <- sync.test.si(source_info)
@@ -73,7 +73,7 @@ source.sync.si <- function(source_info,run=TRUE,plot.to.file=FALSE){
       }else{
         propagated.names <- igraph::V(sync.out$propagated.graph)$name[igraph::V(sync.out$propagated.graph)$synced=="No"]}
       
-      remaining.time <- paste0(sum(subset(run.times,source.file %in% sync.out$sources.to.sync$file)$last.run.time.sec,na.rm=TRUE)," secs")
+      remaining.time <- paste0(sum(subset(run.times,run.times$source.file %in% sync.out$sources.to.sync$file)$last.run.time.sec,na.rm=TRUE)," secs")
       
       title.of.graph <- paste(ifelse(sync.out$synchronized,"Sychronized Remaining","Files to synchronize"),"Run time = ",remaining.time,
                       "\n",ID.sync.out$file[source.iter])        

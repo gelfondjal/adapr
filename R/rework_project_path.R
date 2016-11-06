@@ -4,7 +4,7 @@
 #' @details Used with swapping branches
 #' @export
 #' 
-rework.project.path <- function(dependency.dir=source_info$depedency.dir,new.path=get.project.path(source_info$project.id)){
+rework.project.path <- function(dependency.dir=get("source_info")$depedency.dir,new.path=get.project.path(get("source_info")$project.id)){
   
   
   

@@ -10,7 +10,7 @@ get.project.swap.directory <-function(project_name=NULL){
   
   if(is.null(project_name)){return(all.projects)}
   
-  project.out <- subset(all.projects,project.id==project_name)
+  project.out <- subset(all.projects,all.projects$project.id==project_name)
   
   if(nrow(project.out)!=1){stop("Project.id cannot be used to resolve project path")}
   

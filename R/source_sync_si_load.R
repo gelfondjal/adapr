@@ -14,7 +14,7 @@ source_sync_si_load <- function (source_info)
   if (nrow(ID.sync.out) == 0) {
     warning("There is nothing to run")
   }
-  tree.to.run <- subset(project_info$tree, source.file %in% 
+  tree.to.run <- subset(project_info$tree, project_info$tree$source.file %in% 
                           ID.sync.out$file)
   sync.out <- sync.test.si(source_info)
   propagated.names <- igraph::V(sync.out$propagated.graph)$name[igraph::V(sync.out$propagated.graph)$synced == "No"]

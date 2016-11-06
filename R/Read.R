@@ -14,6 +14,15 @@ Read <- function(file.name="data.csv",description="Data file",read.fcn=guess.rea
   # reads from data directory
   
   
+  if(!exists("source_info")){
+    
+    source_info <- list()
+    
+    stop("Read (adapr) error: source_info not found")
+    
+  }
+  
+  
   if(dirname(file.name)!="."){
     inpath <- file.path(source_info$data.dir,dirname(file.name))
     file.name <- basename(file.name)
