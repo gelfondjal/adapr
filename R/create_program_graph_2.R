@@ -195,13 +195,26 @@ text.nudge0 <- dotsize0/20
 
 text.size0 <- 5
 
+# check dfo namespace
+
+if(sum(!(c("x","y","v")  %in% names(dfo)))){
+  
+  x <- NULL
+  y <- NULL
+  v <- NULL
+  
+  stop("create_program_graph (adapr) error: cannot find vertex")
+  
+}
+
+
 if(graph.width>5){text.size0 <-2 + 2*text.size0/graph.width}              
 
 dfo$synccolor <- as.character(ifelse(dfo$v %in% unsync.vertex,"Not Synchronized","Synchronized"))
 
 dfo$synccolor <- factor(dfo$synccolor,levels=c("Synchronized","Not Synchronized"))
 
-proj.gg <- ggplot2::ggplot(dfo,ggplot2::aes(x=dfo$x,y=dfo$y,label=basename(as.character(dfo$v))))+
+proj.gg <- ggplot2::ggplot(dfo,ggplot2::aes(x=x,y=y,label=basename(as.character(v))))+
   ggplot2::geom_point(ggplot2::aes(colour=dfo$synccolor),size=dotsize0,alpha=0.7)+
   ggplot2::geom_point(shape = 1,size = dotsize0,colour = "grey70", stroke=2)+
   ggplot2::geom_text(vjust=-0.5,size=text.size0,color="black")
