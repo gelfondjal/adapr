@@ -162,11 +162,12 @@ shinyServer(function(input, output,session) {
   
   output$ProgramDAG_report <- renderPlot({ 
     if(input$make_report_graph!=0){
+      
       report_graph <<- create_program_graph(input$project.id)
      
       report_tree <<- Harvest.trees(pull_source_info(input$project.id)$dependency.dir)
       report_graph$ggplot
-      
+     
       #p <- ggplotly(temp$ggplot)
       #print(p)
     }          
@@ -719,14 +720,14 @@ shinyServer(function(input, output,session) {
     
     }else{
       
-      textout <- "ADAPR OPTION git FALSE\n git not active"
+      textout <- ifelse(adapr_options$git=="TRUE","git active","ADAPR OPTION git FALSE\n git not active")
       textout
     }
     textout
   })
 
   output$Gitlogin<-renderText({
-    textout <- "Check git status"
+    textout <- "Check git user/email"
     
     if(input$submitGitLogin!=0){
       
@@ -806,7 +807,7 @@ shinyServer(function(input, output,session) {
   
   
   output$IT2<-renderText({
-    textout<-"Waiting to install latest adapr"
+    textout<-"Waiting to update to latest version of adapr"
     if (input$installit2!=0){
       install_github("gelfondjal/adapr")
       library(adapr)

@@ -45,6 +45,12 @@ listDatafiles <- function(si=get("source_info")){
   try({
   file_sub <- subset(file_data,file_data$path==si$data.dir,select = c("file","path","description"))
   })
+  
+  if(is.null(file_sub)){
+    return(allfiles)
+    }
+  
+  
   if(nrow(file_sub)==0){
     
     return(allfiles)
