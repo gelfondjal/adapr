@@ -40,8 +40,11 @@ get_publication_table <- function(project.id){
   
 }
 
-
-
+fixWindowsDashes <- function(dirname){
+  
+  return(gsub("\\\\","/",dirname))
+  
+}
 
 runtimes.source.sync.si <- function(source_info) 
 {

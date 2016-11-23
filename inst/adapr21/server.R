@@ -28,7 +28,7 @@ shinyServer(function(input, output,session) {
       isolate({
         no.spaces<-make.names(input$project.id.make)
         no.spaces2<-gsub("\\.","_",no.spaces)        
-        textout <- ifelse( plant.tree(no.spaces2, input$project.directory, input$swap.directory),
+        textout <- ifelse( plant.tree(no.spaces2, fixWindowsDashes(input$project.directory), fixWindowsDashes(input$swap.directory)),
                            paste("Made project",no.spaces2),"Failed")
       })
     }
@@ -54,7 +54,7 @@ shinyServer(function(input, output,session) {
       isolate({
         no.spaces<-make.names(input$project.id.redirect)
         no.spaces2<-gsub("\\.","_",no.spaces)        
-        textoutRD <- ifelse( redirect.tree(no.spaces2, input$new.project.directory, input$new.swap.directory),
+        textoutRD <- ifelse( redirect.tree(no.spaces2, fixWindowsDashes(input$new.project.directory), fixWindowsDashes(input$new.swap.directory)),
                          paste("Redirected Tree",no.spaces2),"Failed")
       })
     }
@@ -787,9 +787,9 @@ shinyServer(function(input, output,session) {
     textout<-ifelse(nrow(get_orchard())==0,"Configure Project Directories.","Project Directory Configured.")
     if((input$submitFirst.project%%2)!=0){
       
-      set_adapr_options("project.path",input$project1.directory)
+      set_adapr_options("project.path",fixWindowsDashes(input$project1.directory))
                            
-      set_adapr_options("publish.path",input$publish.directory)
+      set_adapr_options("publish.path",fixWindowsDashes(input$publish.directory))
       
       adapr_options <<- get_adapr_options()
       
