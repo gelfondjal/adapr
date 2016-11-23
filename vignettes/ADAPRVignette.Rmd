@@ -1,0 +1,162 @@
+---
+title: "adapr Package Instructions"
+author: "Jonathan Gelfond"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Using the adapr package.}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+##Introduction
+
+Reproducibility and accountability are increasingly demanded in statistical computing. This implies a need for new computing systems and environments that can transparently, easily, and robustly satisfy reproducibility and accountability standards. To this end, we have developed a system and R package called adapr (Accountable Data Analysis Process in R) that is built on the idea of accountable units. An accountable unit is a data file (statistic, table or graphic) that can be associated with a provenance, meaning how it was created, when it was created and who created it. A key concept is that an accountable unit is sharable and can be incorporated into a collaborative project wherein multiple investigators may use different systems to produce a composite publication. Reproducing such composite publications may be highly complex requiring repeating computations on multiple systems from multiple authors; however, determining the provenance of each unit should be much simpler, requiring only a search in a result database. adapr organizes analytic computations within a project as a directed acyclic graph (DAG) in which data, computer programs, and outputs are nodes.  adapr works by integrating a version control system (Git), cryptographic hashes, and a dependency tracking database. The implementation uses an R Shiny interface (adaprApp) creating an efficient user experience concealing the complexity and reducing overhead of tracking relative to standard data analytic coding.
+
+We present the Accountable Data Analysis Process in R (ADAPR) system in R to facilitate reproducible calculations. The objective is to use a structured, transparent, and self-contained system that would allow users to quickly and easily generate reports and manage the complexity of analyses without minimal additional overhead. The byproduct this structured system of this is system is that multiple data analysts can interpret and collaborate on the same project.
+
+##Defining a Project
+
+An adapr project is a set of related analyses from a given dataset. The project is a self-contained folder with all data, resources (with the exception of R libraries, which are version tracked), and results. 
+
+In order to initially set up adapr, there is a helper 
+function `adapr::default.adapr.setup()` that will ask a short sequence of questions (preferred username, version control preference, etc.) and 
+will create the first adapr project adaprHome within the document directory of the computer. The setup function requires RStudio to work as
+this application locates resources such as `pandoc` automatically and sets environment variables accordingly. The setup function creates a directory at the top level of the user directories
+called `ProjectPaths` with two files `projectid_2_directory_adapr.csv` and `adapr_options.csv` that are required to locate projects and configure adapr, respectively.
+
+
+
+When a new project is created by the adapr app (launched by `adaprApp()`), the project is created as a single folder within a file system (OS X or Windows) with the following structure:
+
+1.	Data Directory (Where data files are stored)
+
+2.	Program Directory
+
+2.1.	Set of R script files operating on the Data 
+
+2.2.	Support Directory
+
+2.2.1.	Library File (list of R packages used by project)
+
+2.2.2.	List of R functions automatically loaded by R scripts within 2.1
+
+2.2.3.	Folder containing R Shiny Apps
+
+2.3.	Markdown Directory (list of R markdown files corresponding to each R script in 2.1.)
+
+2.4.	Dependency Directory (list of dependency files corresponding to each R script in 2.1.)
+
+3.	Results Directory
+
+3.1.	List of Results folders named corresponding to each R script in 2.1.
+
+The fundamental unit of the project is an R script that has two corresponding elements. The first is a Results folder with the same name as the R Script. This results folder (3.1) resides within the Results directory (3).  The second is an R markdown file with the same name (with file extension .Rmd) within the Markdown directory (See 2.3 above). A `read_data.R` program is created automatically upon creation of the project. This creates a results directory (`Results/read_data.R/`) and an R markdown file (2.3 `Markdown/read_data.Rmd`).
+
+In addition to the main project directory, each project is associated with a “Publish” directory that can be used to share results with collaborators. The Publish directory could be a Dropbox, file server or web server directory. See figure 1 for the Create Project tab. 
+
+![Figure 1.The project select tab. 1. Pulldown to select project. 2. Create New Project. Project ID is text input for project name (Project ID has R variable name syntax). Project directory is the file path to the project. The publish directory is where published files will be copied to. 3. Redirect project panel allows the identification or discovery of an existing project that is imported. Publication and project paths for existing projects could be changed here.](project_tab.png)
+
+##Writing ADAP R scripts
+
+Creating an adapr R script is done within the adapr app from the “Make Programs” tab. Each program has a text string description. See Figure 2. When a program is created through the app, the program is executed creating a Results directory, R markdown file, and a dependency file that contains the read/write history of the file. 
+
+![Figure 2. Make program tab. 1. Specify the R script name within the specified project. See upper left corner. Here `Finasteride_adapr` project is specified. 2. Manage libraries. Add an R package to a project as a resource for that project. Pressing the button updates the packages associated with the projects.](program_tab.png)
+
+
+The adapr R scripts have a header that creates a list object source_info that contains the read/write and project information, and a footer that writes the read/write dependencies into a file corresponding to the R script within the Program/Dependency directory. The read/write information is collected within the body of the R script by wrapping the read/write commands within three R commands. The first is the read command:
+```
+Read(file.name = "data.csv", description = "Data file",
+  read.fcn = guess.read.fcn(file.name), ...)
+```
+This command returns the file object read by the function read.fcn and tracks the description and the file hash with “…” passed as additional arguments to the read function. Note that in the usage example below, it is transparent and parsimonious, especially given that the Read function defaults to reading from the project’s data directory:
+```
+Dataset <- Read(“datafile.csv”,”my first dataset”)
+```
+The second command is the Write function:
+```
+Write(obj = NULL, file.name = "data.csv", description = "Result file",
+  write.fcn = guess.write.fcn(file.name), date = FALSE, ...)
+```
+This command writes the R object obj using the function write.fcn and tracks the description and the file hash with “…” passed as additional arguments to write.fcn. If the file.name argument has a .Rdata extension then the R object is written to the results directory as an R data object. The last function:
+```
+Graph(file.name = "ouput.png", description = "Result file",
+  write.fcn = guess.write.fcn(file.name), date = FALSE, ...)
+```
+This command writes the opens a graphics device for plotting using the function write.fcn and tracks the description and the file hash with “…” passed as additional arguments to write.fcn. The date variable is a logical that determines whether a date is added to the filename. This function is followed by a graphics command and closed by a dev.off() or graphics.off() statement. Below is an example.
+
+```
+Graph("histogram.png","hist of random normals")
+
+hist(rnorm(100))
+
+graphics.off()
+```
+
+This code snippet creates a file in the results directory of the project called histogram.png with a histogram of 100 standard normal variables. Another useful function is the following
+
+```
+LoadedObject <- Load.branch("read_data.R/mydata.Rdata"")
+```
+
+This function reads in an R data object with the `.Rdata` file extension written by another program. This function searches through all results from the project to identify file, and returns the corresponding R object (assigned to in LoadedObject example). The function follows Write within another R script (read_data.R) to avoid reading the same file twice and to pass preprocessed data from one R script to another. Each R script ends with a footer
+```
+dependency.out <- finalize_dependency()
+```
+that collects the file hashes of reads and writes and writes the dependency information to the Programs/Dependency directory. If `finalize_dependency()` function does not execute, then the R markdown file will not be rendered and the dependencies will not be available for use by other R scripts.
+
+
+## Literate programing using R Markdown
+
+An R markdown file is created automatically when an R script is created within the Programs/Markdown directory. This .Rmd file is executed when the R script is executed and rendered as a side-effect of the `finalize_dependency()` function. The rendered markdown resides within the Results directory corresponding to the R script. Additional R markdown files can be created using the `create_markdown` function and rendered within the Results directory with the Render_Rmd function. Executing the R script will render these markdown files.
+
+## Managing R packages
+
+R packages needed for each R script can be added in the usual manner. However, the ADAPR app facilitates loading libraries and tracking which library are used by creating a common library file that contains a list of libraries used by project. Each library is specified therein is as specific to a particular R script or not. If the library is not labeled as specific to an R script is will be automatically loaded for each R script in the project. These libraries are managed with the Programs tab of the app. Figure 2. Library management is needed for reproducibility. The libraries need not be specified by the app, but can be included in the R scripts header prior to the creation of `source_info`. The function ` create_source_file_dir` will detect and record libraries that are already loaded.
+
+If the project is imported by another user, the data regarding the packages needed will be used by 
+`create_source_file_dir` and packages needed for the project will be automatically installed.
+
+#Summarizing and visualizing projects
+
+All programs and results are summarized within a single HTML document with descriptions, dependency information, and links to programs and results. This information can be obtained within the Report tab of the app. After clicking the “Report” button, the HTML project summary is written to the `Results/Tree_controller.R/` directory. The Report tab also is capable of launching project R Shiny apps that access project data or Results. The Report tab can also check the file provenance within projects. See Figure 3.
+
+![Figure 3. Run report tab. 1. The Create Report button will create an html report listing all R script input/outputs. 2. RunApp selects and launches App within the project App directory. 3. The Identify file button initiates a file select dialogue and the version control history based upon the file hash is given.](project_report_tab.png)
+
+#Synchronizing and version control
+
+Two critical parts of accountability and reproducibility are addressed within the Synchronize tab of the app. First, the app can check the synchronicity of the project. That is, if the project DAG has parent nodes with later file modification times than the children nodes, then the project is not synchronized. Also, if the file hash (data fingerprint) of the file hash changed from the corresponding hash within the dependency file, then the project is out of not synchronized. The app detects lack of synchrony and can execute the corresponding R scripts that are needed to achieve synchrony. See Figure 4. Next, adapr uses the git version control system, which can be operated within the Synchonize tab. Git must be installed for this feature to work.  There are platform independent and free Git clients available for download (https://git-scm.com/downloads/guis). The commit button within the app takes a project snapshot of all R scripts and adds the synchronization status (synchronized or not) to the commit message. Because the file names and file hashes are stored within the version control system any data or result file can be matched within the version control history to determine its provenance.
+
+It is important to note that adapr automatically creates a project specific repository and adds all R script files into the project's Git repository, but it does not automatically use formal version control for data or results files because these files may be too large for the version control system to efficiently track the changes. However, the file hash is computed and stored within the `Dependency` directory for all files that are read or written within the project so that all relevant files and their provenances can be identified, if a commit was made when the file was read/written. File histories can be identified within the Run Report tab that executes a file hash search and returns
+the Git commit associated with the file including the date, author, and file description. The Git history of a file is also obtained with the `git_provenance(project.id, filepath)` function.
+
+There is an interactive project map feature within the synchronize tab. The "Examine Program Graph" button displays the DAG of all the project's R scripts colored by there synchronization status. These scripts can be 
+executed by clicking on the colored point, and their file I/O can be examined by selecting or "brushing" over the colored point. This reveals the file I/O graphic in an adjacent panel. These files are labeled by
+their descriptions and can be opened by clicking on the file or their file directories may be browsed by selecting or "brushing" over the colored file labels. A limitation is that very large DAGs or very large input/output 
+lists for an R script can overwhelm the visual space of these graphics. Future versions will address this issue.
+
+![Figure 4. Synchronize Tab. 1. Check the synchronization status and synchronize project by running necessary R scripts. A pop-up progress bar will open. 2. Commit Message associated with Git version control snapshot of project. Commit Project button operates Git. 3. Examine program graph creates or updates two interactive plots. 4. R Script Graph shows dependencies of R scripts. Clicking on button runs the R scripts. Selecting or brushing button opens panel 5. 5. Displays the inputs and output of the selected R script. Clicking on the file label opens the file or selecting opens the file folder.](synchronize_tab.png)
+
+#Sharing Results
+
+The specific results from the project or the entire project can be sent within the Send tab of the app. This tab creates a file within the Programs/Support_functions directory that contains a list of files that are selected for publication (i.e., copied to the project’s publication directory, which may be a shared server folder, a web server, or cloud server such as Dropbox). A button automatically sends these files to the publication directory. Also, the full project can be copied to the publication directory. The data directory is not sent by default to protect potentially sensitive data elements. There is a selector option for sending the data (or not) and a button for sending the full project. See Figure 5.
+
+![Figure 5. Send Tab. 1. Select files to publish by copying to the publication directory. 2. Send a copy of the full project to the publication directory.](send_tab.png)
+
+#Configuration Tab
+
+The adapr package can be updated and configured within the configure tab shown in Figure 6. adapr options can be set with `set_adapr_options()`. For example, `set_adapr_options("git","TRUE") will modify the file
+"adapr_options.csv" and initiate Git.
+
+![Figure 6. Configure Tab. 1. Setup default project path where projects will be created. 2. Check Git. Check Git configuration. Add user name and email as Git user. Turn Git option on/off. 3. Install and update adapr package from github.](configure_tab.png)
+
+
+## Miscellaneous
+
+There are some convenience functions that can be used within the R console if there is a `source_info` object in the R environment.
+
+`showProject()` and `showResults()` will open the project or results directory with the file browser.
+`listBranches()` will list branches, orgins, and description that are available for loading.
+`listDatafiles()` will list the files and descriptions in the `Data` directory.
+
+
