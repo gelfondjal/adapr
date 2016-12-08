@@ -1,8 +1,13 @@
-#' Configure user.name and email for git
+#' Configure user.name and email for git. Requires git installation.
 #' @param user.name Chris Someone
 #' @param user.email someone[at]somewhere.com
 #' @return output from git
 #' @export
+#' @examples 
+#'\dontrun{
+#' # Requires Git installation
+#'  git.configure("jonG","gelfond@somewhere.com")
+#'} 
 #' 
 git.configure <- function(user.name,user.email){
   

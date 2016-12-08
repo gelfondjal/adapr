@@ -2,7 +2,7 @@
 % Please edit documentation in R/git.commit.R
 \name{git.commit}
 \alias{git.commit}
-\title{git commit}
+\title{git commit. Requires git installation.}
 \usage{
 git.commit(gitdir, message, branch = NULL, git_args = character(),
   git_binary = NULL)
@@ -22,6 +22,13 @@ git.commit(gitdir, message, branch = NULL, git_args = character(),
 git commit output
 }
 \description{
-git commit
+git commit. Requires git installation.
+}
+\examples{
+\dontrun{
+ si <- pull_source_info("adaprHome")
+git.commit(si$project.path,"test commit")
+} 
+
 }
 

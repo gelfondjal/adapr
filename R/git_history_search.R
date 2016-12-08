@@ -7,6 +7,11 @@
 #' @return git log output
 #' @author Uses git_path adapted form devtools author Hadley Wickham
 #' @export
+#' @examples 
+#'\dontrun{
+#'  si <- pull_source_info("adaprHome")
+#'  git.history.search(si$project.path,"read_data.R")
+#'} 
 #' 
 
 git.history.search <- function(gitdir,pattern,branch = NULL, git_args = character(), git_binary = NULL){
@@ -20,7 +25,6 @@ git.history.search <- function(gitdir,pattern,branch = NULL, git_args = characte
   setwd(gitdir)
   
   git.out <- system2(git_binary_path, args, stdout = TRUE, stderr = TRUE)
-  
   
   return(git.out)
   

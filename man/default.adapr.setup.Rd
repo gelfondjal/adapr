@@ -10,6 +10,14 @@ default.adapr.setup()
 Set up adapr 1st time
 }
 \details{
-Use on ADAPR start up. Will make project directories in computer Document directory and create adaprHome project.
+Use on ADAPR start up. Requires RStudio to work. Will make project directories in computer Document directory and create adaprHome project.
+}
+\examples{
+\dontrun{
+# Requires RStudio
+default.adapr.setup()
+
+} 
+
 }
 

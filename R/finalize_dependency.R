@@ -5,6 +5,12 @@
 #' @details Strips project directory out of dependency file
 #' @return dependency.object 
 #' @export
+#' @examples 
+#'\dontrun{
+#' #Executed only at the end of adapr R script
+#' #finalize_dependency() 
+#'} 
+#' 
 
 finalize_dependency <- function(RMD=TRUE,write=TRUE){
   

@@ -2,7 +2,7 @@
 % Please edit documentation in R/git_config_test.R
 \name{git.configure.test}
 \alias{git.configure.test}
-\title{Checks git configuration}
+\title{Checks git configuration. Requires git installation}
 \usage{
 git.configure.test()
 }
@@ -10,7 +10,15 @@ git.configure.test()
 integer 0 if configured otherwise 99 if not
 }
 \description{
-Checks git configuration
+Checks git configuration. Requires git installation
+}
+\examples{
+\dontrun{
+#Requires git installation
+git.configure.test()
+} 
+
+
 }
 \author{
 Uses git_path adapted form devtools author Hadley Wickham

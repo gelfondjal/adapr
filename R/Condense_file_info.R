@@ -2,6 +2,11 @@
 #' @param trees dependency object
 #' @return data frame with information about each file in project
 #' @export
+#' @examples 
+#'\dontrun{
+#'  trees <- Harvest.trees(pull_source_info("adaprHome")$dependency.dir)
+#' Condense.file.info(trees)
+#' } 
 #' 
 Condense.file.info <- function(trees){
   

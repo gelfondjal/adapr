@@ -1,7 +1,13 @@
 #' Set up adapr 1st time
-#' @details Use on ADAPR start up. Will make project directories in computer Document directory and create adaprHome project.
+#' @details Use on ADAPR start up. Requires RStudio to work. Will make project directories in computer Document directory and create adaprHome project.
 #' @export
-#' 
+#' @examples 
+#'\dontrun{
+#' # Requires RStudio
+#'default.adapr.setup()
+#'
+#'} 
+#'
 
 default.adapr.setup <- function(){
   

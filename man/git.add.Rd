@@ -24,6 +24,14 @@ git output from git add
 \description{
 git add to stage the file
 }
+\examples{
+\dontrun{
+si <- pull_source_info("adaprHome")
+file0 <- file.path(si$project.path,project.directory.tree$analysis,"read_data.R")
+git.add(si$project.path,file0) 
+} 
+
+}
 \author{
 Uses git_path adapted form devtools author Hadley Wickham
 }

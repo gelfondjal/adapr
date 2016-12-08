@@ -69,8 +69,8 @@ programs$source.file.fullname <- file.path(programs$source.file.path,
 
 
 run.times <- plyr::ddply(project.info$tree, "source.file", function(x) {
-  last.run.time <- max(as.POSIXct(x$target.mod.time) - 
-                         as.POSIXct(x$source.run.time), na.rm = TRUE)
+  last.run.time <- max(difftime(as.POSIXct(x$target.mod.time) ,
+                         as.POSIXct(x$source.run.time),units="secs"), na.rm = TRUE)
   return(data.frame(last.run.time.sec = last.run.time))
 })
 

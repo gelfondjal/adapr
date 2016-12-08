@@ -4,6 +4,11 @@
 #' @details Only needs one or the other argument
 #' @return list of information about file hase mismatches
 #' @export
+#' @examples 
+#' \dontrun{
+#' Check.file.hash(pull_source_info("adaprHome")$dependency.dir)
+#' } 
+#' 
 #' 
 Check.file.hash <- function(dependency.dir=NULL,dependency.object=NULL){
   

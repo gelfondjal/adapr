@@ -1,5 +1,5 @@
 ---
-title: "adapr Package Instructions"
+title: "Getting Started with adapr"
 author: "Jonathan Gelfond"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -11,9 +11,9 @@ vignette: >
 
 ##Introduction
 
-Reproducibility and accountability are increasingly demanded in statistical computing. This implies a need for new computing systems and environments that can transparently, easily, and robustly satisfy reproducibility and accountability standards. To this end, we have developed a system and R package called adapr (Accountable Data Analysis Process in R) that is built on the idea of accountable units. An accountable unit is a data file (statistic, table or graphic) that can be associated with a provenance, meaning how it was created, when it was created and who created it. A key concept is that an accountable unit is sharable and can be incorporated into a collaborative project wherein multiple investigators may use different systems to produce a composite publication. Reproducing such composite publications may be highly complex requiring repeating computations on multiple systems from multiple authors; however, determining the provenance of each unit should be much simpler, requiring only a search in a result database. adapr organizes analytic computations within a project as a directed acyclic graph (DAG) in which data, computer programs, and outputs are nodes.  adapr works by integrating a version control system (Git), cryptographic hashes, and a dependency tracking database. The implementation uses an R Shiny interface (adaprApp) creating an efficient user experience concealing the complexity and reducing overhead of tracking relative to standard data analytic coding.
+Reproducibility and accountability are increasingly demanded in statistical computing. This implies a need for new computing systems and environments that can transparently, easily, and robustly satisfy reproducibility and accountability standards. To this end, we have developed a system and R package called adapr (Accountable Data Analysis Process in R) that is built on the idea of accountable units. An accountable unit is a data file (statistic, table or graphic) that can be associated with a provenance, meaning how it was created, when it was created and who created it. A key concept is that an accountable unit is sharable and can be incorporated into a collaborative project wherein multiple investigators may use different systems to produce a composite publication. Reproducing such composite publications may be highly complex requiring repeating computations on multiple systems from multiple authors; however, determining the provenance of each unit should be much simpler, requiring only a search in a result database. adapr organizes analytic computations within a project as a directed acyclic graph (DAG) in which data, computer programs, and outputs are nodes.  adapr works by integrating a version control system (Git), cryptographic hashes, and a dependency tracking database. The adapr package enables treatment of the analysis as a single unit that evovles over time as stored within the version control system. The implementation uses an R Shiny interface (adaprApp) creating an efficient user experience concealing the complexity and reducing overhead of tracking relative to standard data analytic coding.
 
-We present the Accountable Data Analysis Process in R (ADAPR) system in R to facilitate reproducible calculations. The objective is to use a structured, transparent, and self-contained system that would allow users to quickly and easily generate reports and manage the complexity of analyses without minimal additional overhead. The byproduct this structured system of this is system is that multiple data analysts can interpret and collaborate on the same project.
+We present the Accountable Data Analysis Process in R (ADAPR) system in R to facilitate reproducible calculations. The objective is to use a structured, transparent, and self-contained system that would allow users to quickly and easily generate reports and manage the complexity of analyses with minimal additional overhead. The byproduct this structured system of this is system is that multiple data analysts can interpret and collaborate on the same project.
 
 ##Defining a Project
 
@@ -53,13 +53,23 @@ When a new project is created by the adapr app (launched by `adaprApp()`), the p
 
 The fundamental unit of the project is an R script that has two corresponding elements. The first is a Results folder with the same name as the R Script. This results folder (3.1) resides within the Results directory (3).  The second is an R markdown file with the same name (with file extension .Rmd) within the Markdown directory (See 2.3 above). A `read_data.R` program is created automatically upon creation of the project. This creates a results directory (`Results/read_data.R/`) and an R markdown file (2.3 `Markdown/read_data.Rmd`).
 
-In addition to the main project directory, each project is associated with a “Publish” directory that can be used to share results with collaborators. The Publish directory could be a Dropbox, file server or web server directory. See figure 1 for the Create Project tab. 
+In addition to the main project directory, each project is associated with a “Publish” directory that can be used to share results with collaborators. The Publish directory could be a Dropbox, file server or web server directory. See figure 1 for the Create Project tab. Projects can be created within the R console using the ```plant.tree``` function ```plant.tree("MyProject","Path to project","Path to publish directory")```. A list of all projects can be obtained using the ```get_orchard()``` command.
 
 ![Figure 1.The project select tab. 1. Pulldown to select project. 2. Create New Project. Project ID is text input for project name (Project ID has R variable name syntax). Project directory is the file path to the project. The publish directory is where published files will be copied to. 3. Redirect project panel allows the identification or discovery of an existing project that is imported. Publication and project paths for existing projects could be changed here.](project_tab.png)
 
 ##Writing ADAP R scripts
 
 Creating an adapr R script is done within the adapr app from the “Make Programs” tab. Each program has a text string description. See Figure 2. When a program is created through the app, the program is executed creating a Results directory, R markdown file, and a dependency file that contains the read/write history of the file. 
+
+Programs can be created by using ```sprout.program``` that takes three main arguments 1) project ID, 2) program name,
+3) program description. Programs can be created, executed, and removed using the following 3 commands:
+
+```sprout.program("adaprHome","MyProgram.R","Produces little") # Creates program```
+
+```run.program("adaprHome","MyProgram.R") # Executes Program```
+
+```prune.program("adaprHome","MyProgram.R") # Removes Program and Results```.
+
 
 ![Figure 2. Make program tab. 1. Specify the R script name within the specified project. See upper left corner. Here `Finasteride_adapr` project is specified. 2. Manage libraries. Add an R package to a project as a resource for that project. Pressing the button updates the packages associated with the projects.](program_tab.png)
 
@@ -78,7 +88,9 @@ The second command is the Write function:
 Write(obj = NULL, file.name = "data.csv", description = "Result file",
   write.fcn = guess.write.fcn(file.name), date = FALSE, ...)
 ```
-This command writes the R object obj using the function write.fcn and tracks the description and the file hash with “…” passed as additional arguments to write.fcn. If the file.name argument has a .Rdata extension then the R object is written to the results directory as an R data object. The last function:
+A usage case is given below, which writes the ```cars``` dataset to the program's Result directory.
+```Write(cars,"cars.csv","dataset about cars from R")```
+This command writes the R object obj using the function write.fcn and tracks the description and the file hash with “…” passed as additional arguments to ```write.fcn```. If the file.name argument has a .Rdata extension then the R object is written to the results directory as an R data object. The last function:
 ```
 Graph(file.name = "ouput.png", description = "Result file",
   write.fcn = guess.write.fcn(file.name), date = FALSE, ...)
@@ -93,13 +105,13 @@ hist(rnorm(100))
 graphics.off()
 ```
 
-This code snippet creates a file in the results directory of the project called histogram.png with a histogram of 100 standard normal variables. Another useful function is the following
+This code snippet creates a file in the results directory of the project called histogram.png with a histogram of 100 standard normal variables. If the ```Read/Write``` functions are not used for reading/writing then the input/output can be stil be tracked using the funtions ```ReadTrack/WriteTrack```. Another useful function is the following
 
 ```
 LoadedObject <- Load.branch("read_data.R/mydata.Rdata"")
 ```
 
-This function reads in an R data object with the `.Rdata` file extension written by another program. This function searches through all results from the project to identify file, and returns the corresponding R object (assigned to in LoadedObject example). The function follows Write within another R script (read_data.R) to avoid reading the same file twice and to pass preprocessed data from one R script to another. Each R script ends with a footer
+This function reads in an R data object with the `.Rdata` file extension written by another program. This function searches through all results from the project to identify file, and returns the corresponding R object (assigned to in LoadedObject example). The function follows ```Write(mydata,"mydata.Rdata","some data")``` within another R script (read_data.R) to avoid reading the same file twice and to pass preprocessed data from one R script to another. Each R script ends with a footer
 ```
 dependency.out <- finalize_dependency()
 ```
@@ -108,11 +120,11 @@ that collects the file hashes of reads and writes and writes the dependency info
 
 ## Literate programing using R Markdown
 
-An R markdown file is created automatically when an R script is created within the Programs/Markdown directory. This .Rmd file is executed when the R script is executed and rendered as a side-effect of the `finalize_dependency()` function. The rendered markdown resides within the Results directory corresponding to the R script. Additional R markdown files can be created using the `create_markdown` function and rendered within the Results directory with the Render_Rmd function. Executing the R script will render these markdown files.
+An R markdown file is created automatically when an R script is created within the Programs/Markdown directory. This .Rmd file is executed when the R script is executed and rendered as a side-effect of the `finalize_dependency()` function. The rendered markdown resides within the Results directory corresponding to the R script. Additional R markdown files can be created using the `create_markdown` function and rendered within the Results directory with the ```Render_Rmd``` function. Executing the R script will render these markdown files.
 
 ## Managing R packages
 
-R packages needed for each R script can be added in the usual manner. However, the ADAPR app facilitates loading libraries and tracking which library are used by creating a common library file that contains a list of libraries used by project. Each library is specified therein is as specific to a particular R script or not. If the library is not labeled as specific to an R script is will be automatically loaded for each R script in the project. These libraries are managed with the Programs tab of the app. Figure 2. Library management is needed for reproducibility. The libraries need not be specified by the app, but can be included in the R scripts header prior to the creation of `source_info`. The function ` create_source_file_dir` will detect and record libraries that are already loaded.
+R packages needed for each R script can be added in the usual manner. However, the ADAPR app facilitates loading packages and tracking which packages are used by creating a common library file with package names that contains a list of packages used by project. Each package is specified therein is as specific to a particular R script or not. If the package is not labeled as specific to an R script is will be automatically loaded for each R script in the project. These packages are managed with the Programs tab of the app. Figure 2. Package management is needed for reproducibility. The packages need not be specified by the app, but can be included in the R scripts header prior to the creation of `source_info`. The function ` create_source_file_dir` will detect and record libraries that are already loaded.
 
 If the project is imported by another user, the data regarding the packages needed will be used by 
 `create_source_file_dir` and packages needed for the project will be automatically installed.
@@ -156,7 +168,12 @@ The adapr package can be updated and configured within the configure tab shown i
 There are some convenience functions that can be used within the R console if there is a `source_info` object in the R environment.
 
 `showProject()` and `showResults()` will open the project or results directory with the file browser.
+
 `listBranches()` will list branches, orgins, and description that are available for loading.
+
 `listDatafiles()` will list the files and descriptions in the `Data` directory.
+
+`listScripts()` will list the R scripts in the project.
+
 
 

@@ -2,7 +2,13 @@
 #' @param setoptions Logical specifying Execute Options
 #' @return adaproptions
 #' @export
+#' @examples 
+#'\dontrun{
+#' opt <- get_adapr_options()
+#' print(opt)
+#'} 
 #' 
+
 get_adapr_options <- function(setoptions=FALSE){
     # 
   option.file <- "adapr_options.csv"
@@ -40,6 +46,13 @@ get_adapr_options <- function(setoptions=FALSE){
 #' @param optionvalue is new value to give optionname
 #' @return adaproptions
 #' @export
+#' @examples 
+#'\dontrun{
+#' opt <- get_adapr_options()
+#' set_adapr_options("project.path",opt$project.path)
+#' opt2 <- get_adapr_options()
+#' identical(opt,opt2)
+#'} 
 #' 
 set_adapr_options <- function(optionname="",optionvalue=""){
   # 

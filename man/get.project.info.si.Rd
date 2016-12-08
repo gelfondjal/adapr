@@ -15,4 +15,11 @@ list with stacked dependency files, graph of dependencies, and condensed file in
 \description{
 Given source_info object, retrieves project information
 }
+\examples{
+\dontrun{
+source_info <- create_source_file_dir("adaprHome","tree_controller.R")
+get.project.info.si(source_info)
+} 
+
+}
 

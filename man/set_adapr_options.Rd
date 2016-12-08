@@ -17,4 +17,13 @@ adaproptions
 \description{
 Returns Modifies the primary adapr option file
 }
+\examples{
+\dontrun{
+opt <- get_adapr_options()
+set_adapr_options("project.path",opt$project.path)
+opt2 <- get_adapr_options()
+identical(opt,opt2)
+} 
+
+}
 

@@ -30,4 +30,13 @@ Renders and Rmarkdown file
 \details{
 Uses rmarkdown library to access objects in the R script. Will track dependencies for objects used within Rmd file.
 }
+\examples{
+\dontrun{
+source_info <- create_source_file_dir("adaprHome","tree_controller.R")
+#Create markdown file in markdown directory for tree_controller.R
+create_markdown()
+} 
+
+
+}
 

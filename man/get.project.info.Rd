@@ -19,4 +19,11 @@ Acquire all dependencies related to a project,
 Generate graph of project dependencies,
 Get all file information related to project
 }
+\examples{
+\dontrun{
+projInfo <- get.project.info(pull_source_info("adaprHome")$dependency.dir)
+plot(projInfo$graph) 
+} 
+
+}
 

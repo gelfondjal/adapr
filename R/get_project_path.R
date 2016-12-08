@@ -3,6 +3,11 @@
 #' @details Reads "~/ProjectPaths/projectid_2_diretory.csv" into dataframe
 #' @return string containing project directory
 #' @export
+#' @examples 
+#'\dontrun{
+#' get.project.path("adaprHome")
+#'} 
+#' 
 
 get.project.path <- function(project_name=NULL){
   
@@ -25,6 +30,12 @@ get.project.path <- function(project_name=NULL){
 #' @details Reads "~/ProjectPaths/projectid_2_diretory.csv" into dataframe
 #' @return string containing project directory
 #' @export
+#' @examples 
+#'\dontrun{
+#' get.project.publish.path("adaprHome")
+#'} 
+#' 
+
 get.project.publish.path <- function(project_name=NULL){
   
   all.projects <- get_orchard()

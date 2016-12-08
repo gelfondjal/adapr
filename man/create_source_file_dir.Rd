@@ -23,4 +23,10 @@ Create source file directories
 \details{
 Intializes git for the project, adds program git tracking, and initializes dependency tracking
 }
+\examples{
+\dontrun{
+source_info <- create_source_file_dir("adaprHome","tree_controller.R")
+} 
+
+}
 

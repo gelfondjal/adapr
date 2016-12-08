@@ -5,6 +5,11 @@
 #' @param dependency.dir is the string location of dependency files
 #' @return list with stacked dependency files, graph of dependencies, and condensed file information
 #' @export
+#' @examples 
+#'\dontrun{
+#' projInfo <- get.project.info(pull_source_info("adaprHome")$dependency.dir)
+#' plot(projInfo$graph) 
+#'} 
 #' 
 get.project.info <- function(dependency.dir){
   

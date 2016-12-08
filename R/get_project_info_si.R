@@ -2,6 +2,11 @@
 #' @param source_info is list with source information
 #' @return list with stacked dependency files, graph of dependencies, and condensed file information
 #' @export
+#'@examples 
+#'\dontrun{
+#' source_info <- create_source_file_dir("adaprHome","tree_controller.R")
+#' get.project.info.si(source_info)
+#'} 
 #' 
 get.project.info.si <- function(source_info){
   

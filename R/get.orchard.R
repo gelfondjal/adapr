@@ -1,7 +1,14 @@
 #' Returns the primary hub file with project location and id information
 #' @return orchard
 #' @export
+#' @examples 
+#'\dontrun{
+#' orchard <- get_orchard()
+#' print(subset(orchard,project.id=="adaprHome"))
+#'} 
 #' 
+#' 
+
 get_orchard <- function(){
   
   # 

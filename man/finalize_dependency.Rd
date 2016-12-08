@@ -22,4 +22,11 @@ Operates git tracking of program and dependency file.
 
 Strips project directory out of dependency file
 }
+\examples{
+\dontrun{
+#Executed only at the end of adapr R script
+#finalize_dependency() 
+} 
+
+}
 

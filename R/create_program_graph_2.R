@@ -1,9 +1,13 @@
 #' Make plot of project programs only
-#' Summarize all programs.
+#' Summarize all programs. Sync status is assessed and indicated.
 #' @param project.id Project id of program
 #' @return List of data.frame of programs vertices, data.frame of edges, ggplot ,rgrapher=igraph
 #' @details Uses ggplot2
 #' @export
+#' @examples 
+#'\dontrun{
+#' create_program_graph("adaprHome")
+#'} 
 #'  
  
 create_program_graph<- function(project.id){
@@ -141,7 +145,7 @@ if(length(vertexnames)==1){
   
    froms <- NA
    
-   horizontal.range <- c(-1,1)
+   horizontal.range <- c(-1.25,1.25)
    rangery <- c(-1,1)*0.5
    graph.height <- 1*0.5
    graph.width <- 1*0.5
@@ -163,7 +167,7 @@ froms <- merge(tos,dfo,by.x="from",by.y="v")
 
 ranger <- range(c(froms$x,froms$x2))
 
-span <- 0.1*abs(diff(ranger))
+span <- 0.25*abs(diff(ranger))
 
 horizontal.range <- c(ranger[1]-span,ranger[2]+span)
 
@@ -193,7 +197,7 @@ text.nudge0 <- dotsize0/20
 
 #if(graph.height>5){text.nudge0 <- 0.05 +text.nudge0/graph.height}              
 
-text.size0 <- 5
+text.size0 <- 4
 
 # check dfo namespace
 
@@ -219,7 +223,7 @@ proj.gg <- ggplot2::ggplot(dfo,ggplot2::aes(x=x,y=y,label=basename(as.character(
   ggplot2::geom_point(shape = 1,size = dotsize0,colour = "grey70", stroke=2)+
   ggplot2::geom_text(vjust=-0.5,size=text.size0,color="black")
 
-proj.gg <- proj.gg + ggplot2::annotate(geom="label",x=dfo$x,y=dfo$y-ifelse(length(vertexnames)>1,0.125,0.1),label=dfo$description)
+proj.gg <- proj.gg + ggplot2::annotate(geom="label",x=dfo$x,y=dfo$y-ifelse(length(vertexnames)>1,0.125,0.1),label=dfo$description,size=text.size0)
 
 if(length(vertexnames)==1){
   
@@ -244,10 +248,11 @@ panel.grid.minor=ggplot2::element_blank(),plot.background=ggplot2::element_blank
 proj.gg <- proj.gg+ ggplot2::scale_color_manual(name = ggplot2::element_blank(), # or name = element_blank()
 #labels = c("Synchronized", "Not Synchronized"),
 values =synccolors)
+
+
 isg <- igraph::induced_subgraph(projgraph,vertexnames)
 runorder <- data.frame(v=igraph::topological.sort(isg)$name,run.order=1:length(vertexnames))
 dfo <- merge(dfo,runorder,by='v')
-            
 
 return(list(vertex=dfo,edges=froms,ggplot=proj.gg,rgrapher=isg))
 

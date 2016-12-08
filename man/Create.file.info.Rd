@@ -23,4 +23,12 @@ file info list with path filename fullname description and db.name
 \description{
 Creates a list containing information about a file
 }
+\examples{
+\dontrun{
+file0 <- file.path(pull_source_info("adaprHome")$project.path,
+project.directory.tree$analysis,"read_data.R")
+Create.file.info(dirname(file0),basename(file0),"a program that reads")
+} 
+
+}
 

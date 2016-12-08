@@ -175,7 +175,7 @@ body <- dashboardBody(
             br(),h4(textOutput("progressbar")),
             br(),h4(textOutput("CommitOut"))
          ),
-          box(title = NULL, status = "info", width = 6, height = 500, collapsible = FALSE, solidHeader = FALSE,
+          box(title = NULL, status = "info", width = 12, height = 500, collapsible = FALSE, solidHeader = FALSE,
               #plotOutput("ProgramDAG_report", click = "ProgramDAG_click_report"),
               plotOutput("ProgramDAG_report",width="100%",
                          # Equivalent to: click = clickOpts(id = "plot_click")
@@ -188,7 +188,7 @@ body <- dashboardBody(
               verbatimTextOutput("ProgramDAG_report_info")
               
           ),
-          box(title = NULL, status = "info", width = 6, height = 500, collapsible = FALSE, solidHeader = FALSE,
+          box(title = NULL, status = "info", width = 12, height = 500, collapsible = FALSE, solidHeader = FALSE,
                        
             plotOutput("ProgramDAG_report_select_graph", width="100%",
                          # Equivalent to: click = clickOpts(id = "plot_click")

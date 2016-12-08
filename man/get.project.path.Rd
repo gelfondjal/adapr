@@ -18,4 +18,10 @@ Given Project name, Return project directory
 \details{
 Reads "~/ProjectPaths/projectid_2_diretory.csv" into dataframe
 }
+\examples{
+\dontrun{
+get.project.path("adaprHome")
+} 
+
+}
 

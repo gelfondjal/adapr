@@ -25,6 +25,35 @@ listBranches <- function(si=get("source_info")){
 }
 
 
+
+
+
+#' Lists the R scripts in the adapr project
+#' @param  project.id project.id
+#' @return dataframe of R scripts and descriptions
+#' @export
+#' 
+listScripts<- function(project.id=get("source_info")$project.id){
+  
+  trees <- Harvest.trees(file.path(get.project.path(project.id),project.directory.tree$dependency.dir))
+  
+  programs <- subset(trees,!duplicated(file.path(trees$source.file.path,trees$source.file)),
+                    select=c("source.file","source.file.description"))
+  
+  
+  return(programs)
+  
+}
+
+
+
+
+
+
+
+
+
+
 #' Lists the data files available for reading in the adapr project
 #' @param si is source_info object
 #' @return description of data files

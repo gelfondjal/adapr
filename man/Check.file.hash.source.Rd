@@ -22,4 +22,11 @@ Reports the source scripts that need to be updated!
 \details{
 Only needs one or the other argument.
 }
+\examples{
+\dontrun{
+
+Check.file.hash.source(pull_source_info("adaprHome")$dependency.dir)
+} 
+
+}
 

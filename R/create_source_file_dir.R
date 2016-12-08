@@ -5,6 +5,10 @@
 #' @return source_info list describing the project
 #' @details Intializes git for the project, adds program git tracking, and initializes dependency tracking
 #' @export
+#' @examples 
+#'\dontrun{
+#' source_info <- create_source_file_dir("adaprHome","tree_controller.R")
+#'} 
 #' 
 create_source_file_dir <- function(project.id0=get("project.id"),source.file0=get("source.file"),source.description=""){
   #equire(devtools)

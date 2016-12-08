@@ -20,4 +20,11 @@ Checks the consistency of the dependency directory with the files within the fil
 \details{
 Only needs one or the other argument
 }
+\examples{
+\dontrun{
+Check.file.hash(pull_source_info("adaprHome")$dependency.dir)
+} 
+
+
+}
 

@@ -3,7 +3,7 @@
 \name{create_program_graph}
 \alias{create_program_graph}
 \title{Make plot of project programs only
-Summarize all programs.}
+Summarize all programs. Sync status is assessed and indicated.}
 \usage{
 create_program_graph(project.id)
 }
@@ -15,9 +15,15 @@ List of data.frame of programs vertices, data.frame of edges, ggplot ,rgrapher=i
 }
 \description{
 Make plot of project programs only
-Summarize all programs.
+Summarize all programs. Sync status is assessed and indicated.
 }
 \details{
 Uses ggplot2
+}
+\examples{
+\dontrun{
+create_program_graph("adaprHome")
+} 
+ 
 }
 

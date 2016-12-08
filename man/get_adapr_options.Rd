@@ -15,4 +15,11 @@ adaproptions
 \description{
 Returns the primary hub file with project location and id information
 }
+\examples{
+\dontrun{
+opt <- get_adapr_options()
+print(opt)
+} 
+
+}
 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/git_configure.R
 \name{git.configure}
 \alias{git.configure}
-\title{Configure user.name and email for git}
+\title{Configure user.name and email for git. Requires git installation.}
 \usage{
 git.configure(user.name, user.email)
 }
@@ -15,6 +15,13 @@ git.configure(user.name, user.email)
 output from git
 }
 \description{
-Configure user.name and email for git
+Configure user.name and email for git. Requires git installation.
+}
+\examples{
+\dontrun{
+# Requires Git installation
+ git.configure("jonG","gelfond@somewhere.com")
+} 
+
 }
 

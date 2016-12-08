@@ -24,6 +24,13 @@ git log output
 \description{
 Performes git history search
 }
+\examples{
+\dontrun{
+ si <- pull_source_info("adaprHome")
+ git.history.search(si$project.path,"read_data.R")
+} 
+
+}
 \author{
 Uses git_path adapted form devtools author Hadley Wickham
 }

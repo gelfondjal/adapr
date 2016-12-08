@@ -12,4 +12,10 @@ The file system write time
 \description{
 Writes to temporary file and extracts mod time with file.info
 }
+\examples{
+\dontrun{
+get.fs.time() 
+} 
+
+}
 

@@ -18,4 +18,10 @@ Checks or changes the specified adapr hash algorithm (adaprHashAlgo option)
 \details{
 Current default is sha1. If algorithm not recognized then will not change option.
 }
+\examples{
+\dontrun{
+ checkAdaprHashAlgo()
+} 
+
+}
 

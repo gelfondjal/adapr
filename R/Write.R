@@ -7,6 +7,17 @@
 #' @param ... arguments passed to write.fcn
 #' @return File information list 
 #' @export
+#' @examples 
+#'\dontrun{
+#' # Within an R script:
+#' source_info <- create_source_file_dir("adaprHome","tree_controller.R")
+#' # Inside R script body:
+#' write.csv(cars,file.path(source_info$results.dir,"test.csv"))
+#' Write(cars,"cars.csv","cars dataframe")
+#' # To examine effect:
+#' showResults()  
+#'} 
+#' 
 
 
 Write <- function(obj=NULL,file.name="data.csv",description="Result file",write.fcn=guess.write.fcn(file.name),date=FALSE,...){
@@ -55,3 +66,30 @@ Write <- function(obj=NULL,file.name="data.csv",description="Result file",write.
   return(file.info)
   
 }
+
+
+
+#' Tracks files written by functions not in adapr and captures the file information within dependency object
+#' @param file.name name of file
+#' @param description description of data file
+#' @details Allows tracking of files written by other functions than Write. Assumes file is in Results directory
+#' @return Filepath of file that was written
+#' @export
+#' @examples 
+#'\dontrun{
+#' source_info <- create_source_file_dir("adaprHome","tree_controller.R")
+#' write.csv(cars,file.path(source_info$results.dir,"test.csv"))
+#' WriteTrack("cars.csv","cars dataframe")
+#' showResults()  
+#'} 
+#'  
+
+WriteTrack <- function(file.name="data.csv",description="Result file"){
+  
+  out <- Graph(file.name,description,I)
+ 
+  return(out$fullname)
+}
+
+
+

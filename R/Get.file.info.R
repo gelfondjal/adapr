@@ -5,6 +5,12 @@
 #' @param path.grep Path to search for file in
 #' @return File information list outcome of search
 #' @export
+#' @examples 
+#'\dontrun{
+#' source_info <- create_source_file_dir("adaprHome","tree_controller.R")
+#' Get.file.info(source_info,file0="read_data.R")
+#'} 
+#' 
 Get.file.info <- function(source_info,data="",file0="",path.grep=""){
   
   

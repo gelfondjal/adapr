@@ -15,4 +15,11 @@ data frame with information about each file in project
 \description{
 Generate condensed information about files from dependency object
 }
+\examples{
+\dontrun{
+ trees <- Harvest.trees(pull_source_info("adaprHome")$dependency.dir)
+Condense.file.info(trees)
+} 
+
+}
 

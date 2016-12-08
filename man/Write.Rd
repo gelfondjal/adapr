@@ -26,4 +26,16 @@ File information list
 \description{
 Write object and capture file information
 }
+\examples{
+\dontrun{
+# Within an R script:
+source_info <- create_source_file_dir("adaprHome","tree_controller.R")
+# Inside R script body:
+write.csv(cars,file.path(source_info$results.dir,"test.csv"))
+Write(cars,"cars.csv","cars dataframe")
+# To examine effect:
+showResults()  
+} 
+
+}
 
