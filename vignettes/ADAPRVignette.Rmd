@@ -53,7 +53,8 @@ When a new project is created by the adapr app (launched by `adaprApp()`), the p
 
 The fundamental unit of the project is an R script that has two corresponding elements. The first is a Results folder with the same name as the R Script. This results folder (3.1) resides within the Results directory (3).  The second is an R markdown file with the same name (with file extension .Rmd) within the Markdown directory (See 2.3 above). A `read_data.R` program is created automatically upon creation of the project. This creates a results directory (`Results/read_data.R/`) and an R markdown file (2.3 `Markdown/read_data.Rmd`).
 
-In addition to the main project directory, each project is associated with a “Publish” directory that can be used to share results with collaborators. The Publish directory could be a Dropbox, file server or web server directory. See figure 1 for the Create Project tab. Projects can be created within the R console using the ```plant.tree``` function ```plant.tree("MyProject","Path to project","Path to publish directory")```. A list of all projects can be obtained using the ```get_orchard()``` command.
+In addition to the main project directory, each project is associated with a “Publish” directory that can be used to share results with collaborators. The Publish directory could be a Dropbox, file server or web server directory. See figure 1 for the Create Project tab. Projects can be created within the R console using the ```plant.tree``` function ```plant.tree("MyProject","Path to project","Path to publish directory")```. A list of all projects can be obtained using the ```get_orchard()``` command. The function ```uproot_tree(project.id)``` will remove the project from the orchard file, which dissociates the project from adapr, but
+does not remove the project from the file system. The function ```redirect.tree()``` tree will edit the project's location in the file system.
 
 ![Figure 1.The project select tab. 1. Pulldown to select project. 2. Create New Project. Project ID is text input for project name (Project ID has R variable name syntax). Project directory is the file path to the project. The publish directory is where published files will be copied to. 3. Redirect project panel allows the identification or discovery of an existing project that is imported. Publication and project paths for existing projects could be changed here.](project_tab.png)
 
@@ -66,7 +67,7 @@ Programs can be created by using ```sprout.program``` that takes three main argu
 
 ```sprout.program("adaprHome","MyProgram.R","Produces little") # Creates program```
 
-```run.program("adaprHome","MyProgram.R") # Executes Program```
+```run.program("adaprHome","MyProgram.R") # Executes Program and creates and optionally creates an R markdown log```
 
 ```prune.program("adaprHome","MyProgram.R") # Removes Program and Results```.
 
@@ -127,7 +128,8 @@ An R markdown file is created automatically when an R script is created within t
 R packages needed for each R script can be added in the usual manner. However, the ADAPR app facilitates loading packages and tracking which packages are used by creating a common library file with package names that contains a list of packages used by project. Each package is specified therein is as specific to a particular R script or not. If the package is not labeled as specific to an R script is will be automatically loaded for each R script in the project. These packages are managed with the Programs tab of the app. Figure 2. Package management is needed for reproducibility. The packages need not be specified by the app, but can be included in the R scripts header prior to the creation of `source_info`. The function ` create_source_file_dir` will detect and record libraries that are already loaded.
 
 If the project is imported by another user, the data regarding the packages needed will be used by 
-`create_source_file_dir` and packages needed for the project will be automatically installed.
+`create_source_file_dir` and packages needed for the project will be automatically installed. The functions ```add_package(project.id,package,install.command,specific)``` and ```remove_package(project.id,package.name)``` will add or remove an R package from a project. To install all packages for a project, use the function
+`install_project_packages(project.id)`.
 
 #Summarizing and visualizing projects
 

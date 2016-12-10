@@ -4,12 +4,12 @@
 \alias{plant.tree}
 \title{initialize project}
 \usage{
-plant.tree(project.id, project.path, swap.directory)
+plant.tree(project.id, project.path = NA, swap.directory = NA)
 }
 \arguments{
-\item{project.id}{Project name}
+\item{project.id}{Project name, if missing then default}
 
-\item{project.path}{Project home directory}
+\item{project.path}{Project home directory, if missing then default}
 
 \item{swap.directory}{Project branch exchange directory}
 }

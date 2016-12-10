@@ -480,6 +480,8 @@ shinyServer(function(input, output,session) {
           try({
           clean_source(file.path(ID.sync.out$path[source.iter],ID.sync.out$file[source.iter]))
             
+          #run.program(input$project.id,ID.sync.out$file[source.iter],TRUE)  
+            
           #Sys.sleep(3)
           
           last.prog <- ID.sync.out$file[source.iter]

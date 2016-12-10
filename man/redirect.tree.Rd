@@ -4,7 +4,7 @@
 \alias{redirect.tree}
 \title{Changes project directory/publish directory or identifies imported project}
 \usage{
-redirect.tree(project.id0, project.path, swap.directory)
+redirect.tree(project.id0, project.path = NA, swap.directory = NA)
 }
 \arguments{
 \item{project.id0}{Project name}

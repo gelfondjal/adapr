@@ -5,12 +5,14 @@
 \title{Run an R script within a project using devtools::clean_source}
 \usage{
 run.program(project.id = get("source_info")$project.id,
-  source.file = get("source_info")$file$file)
+  source.file = get("source_info")$file$file, logRmd = FALSE)
 }
 \arguments{
 \item{project.id}{project id}
 
 \item{source.file}{R script within that project}
+
+\item{logRmd}{logical indicating whether to create R markdown log}
 }
 \value{
 value from clean_source from devtools package

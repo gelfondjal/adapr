@@ -1,11 +1,17 @@
 #' initialize project
-#' @param project.id Project name
-#' @param project.path Project home directory
+#' @param project.id Project name, if missing then default
+#' @param project.path Project home directory, if missing then default
 #' @param swap.directory Project branch exchange directory
 #' @return logical for success or not
 #' @export
-plant.tree <- function(project.id,project.path,swap.directory){
+plant.tree <- function(project.id,project.path=NA,swap.directory=NA){
   
+  opts <- get_adapr_options()
+  
+  if(is.na(project.path)){
+    project.path <- opts$project.path
+    swap.directory <- opts$publish.path
+    }
   
   if(!dir.exists(project.path)|!dir.exists(swap.directory)){
   	
@@ -84,7 +90,14 @@ plant.tree <- function(project.id,project.path,swap.directory){
 #' @param swap.directory Project publish directory
 #' @return logical for success or not
 #' @export
-redirect.tree <- function(project.id0,project.path,swap.directory){
+redirect.tree <- function(project.id0,project.path=NA,swap.directory=NA){
+  
+  opts <- get_adapr_options()
+  
+  if(is.na(project.path)){
+    project.path <- opts$project.path
+    swap.directory <- opts$publish.path
+  }
   
   
   project.path <- file.path(project.path,project.id0)

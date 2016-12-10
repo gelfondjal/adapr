@@ -1,6 +1,7 @@
 #' Run an R script within a project using devtools::clean_source
 #' @param project.id project id
 #' @param source.file R script within that project
+#' @param logRmd logical indicating whether to create R markdown log
 #' @return value from clean_source from devtools package
 #' @export
 #'@examples 
@@ -8,14 +9,72 @@
 #' run.program("adaprHome","read_data.R")
 #'} 
 #' 
-run.program <- function(project.id=get("source_info")$project.id,source.file=get("source_info")$file$file){
+run.program <- function(project.id=get("source_info")$project.id,source.file=get("source_info")$file$file,logRmd=FALSE){
+  
+  scriptfile <- file.path(get.project.path(project.id),project.directory.tree$analysis,source.file)
   
   # get project object
+  if(!logRmd){
+    out <- devtools::clean_source(scriptfile)
+  }else{
+    
+    results <- file.path(get.project.path(project.id),project.directory.tree$results,source.file)
+    
+    dir.create(results,showWarnings=FALSE)
+    
+    program <- scan(scriptfile,what=character(),sep="\n")
+    
+    program <- c("```{r}\n\n",paste("\n\n #adapr Run: \n Sys.time() \n\n"),program,"\n\n #adapr Stop: \n Sys.time() \n\n```")
+    
+    dbname <- gsub("\\.","_",make.names(source.file))
+    
+    tempmkdown <- file.path(results,paste0(dbname,"_adapr_results_log.Rmd"))
+    executor <- file.path(results,"adapr_render.R")
   
-  out <- devtools::clean_source(file.path(get.project.path(project.id),project.directory.tree$analysis,source.file))
+    temphtml <- file.path(results,paste0(dbname,"_adapr_results_log.html"))
+    
+    dependency.file <- file.path(get.project.path(project.id),project.directory.tree$dependency.dir,
+                                 paste0(source.file,".txt"))
+    
+    write(program,tempmkdown)
+    
+    olddir <- getwd()
+    
+    setwd(results)
+    
+    filetest <- paste0("\ntest <- file.exists(\"",temphtml,"\")\n")
+    
+    renderstatement <- paste0("library(markdown)\n setwd(\"",results,"\")","\nrmarkdown::render(\"",tempmkdown,"\")",filetest,"\n if(!test){stop()}")
+    
+    write(renderstatement,executor)
+    
+    out <- devtools::clean_source(executor)
+    
+    depout <- read.dependency(dependency.file)
+    
+    outline <- depout[nrow(depout),]
+    outline$target.path <- file.path(project.directory.tree$results,source.file)
+    outline$target.file <- basename(temphtml)
+    outline$dependency <- "out"
+    outline$target.description <- "R script log in rmarkdown"
+    outline$target.hash <- Digest(file=temphtml)
+    outline$target.mod.time <- as.character(file.info(temphtml)$mtime)
+    
+    depout <- rbind(depout,outline)
+    
+    file.remove(c(tempmkdown,executor))
+    
+    write.dependency(depout,dependency.file)
+    
+    setwd(olddir)
+    
+  }
+  
   
   return(out)
 }
+
+
 
 
 
