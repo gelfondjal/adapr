@@ -42,14 +42,20 @@ initialize_dependency_info <- function(source_info_arg){
     #if(source_info_arg$git.log){temp <- system2(git_binary_path,"log",stdout="")}else{
     #temp <- system2(git_binary_path,"log",stdout=NULL)}
     
-    if(is.null(git2r::discover_repository(project.path))){
+    no.repository <- TRUE
+    try({
+      no.repository <- (0==length(git2r::commits(git2r::repository(project.path))))
+    },silent = TRUE)
+    
+    if(no.repository){
       
       #git.add(project.path,file.path(source.file.info[["path"]],source.file.info[["file"]]))	
       #git.commit(project.path,"Intitialize git")
       
       git2r::init(project.path)
-      
-      commit.project(project.id ,"Initialize git")
+      repo <- git2r::repository(project.path)
+      git.add(project.path,file.path(source.file.info[["path"]],source.file.info[["file"]]))
+      git2r::commit(repo,message ="Initialize git")
       
       print("Initialized git repo")
       
@@ -59,6 +65,9 @@ initialize_dependency_info <- function(source_info_arg){
     
   })#try get
   }
+  
+  
+  
   
   #  git.add(project.path,file.path(dependency.file))	
   

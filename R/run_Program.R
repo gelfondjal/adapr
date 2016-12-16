@@ -1,6 +1,6 @@
 #' Run an R script within a project using devtools::clean_source
 #' @param project.id project id
-#' @param source.file R script within that project
+#' @param r R script within that project (r is short R script for convenience)
 #' @param logRmd logical indicating whether to create R markdown log
 #' @return value from clean_source from devtools package
 #' @export
@@ -9,7 +9,9 @@
 #' run.program("adaprHome","read_data.R")
 #'} 
 #' 
-run.program <- function(project.id=get.project(),source.file=get("source_info")$file$file,logRmd=FALSE){
+run.program <- function(project.id=get.project(),r=get("source_info")$file$file,logRmd=FALSE){
+  
+  source.file <- r
   
   scriptfile <- file.path(get.project.path(project.id),project.directory.tree$analysis,source.file)
   
