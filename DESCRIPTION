@@ -20,6 +20,7 @@ Imports:
     digest,
     devtools,
      plyr,
+     git2r,
     methods
 Suggests:
   pkgKitten

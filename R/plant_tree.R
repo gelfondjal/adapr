@@ -1,6 +1,23 @@
 #' initialize project
 #' @param project.id Project name, if missing then default
 #' @param project.path Project home directory, if missing then default
+#' @param publish.directory Project branch exchange directory
+#' @return logical for success or not
+#' @examples 
+#'\dontrun{
+#' init.project("adaprTest")
+#'} 
+#' @details Wrapper for plant.tree
+#' @export
+init.project <- function(project.id,project.path=NA,publish.directory=NA){
+  
+  out <- plant.tree(project.id,project.path,publish.directory )
+  
+}
+
+#' initialize project
+#' @param project.id Project name, if missing then default
+#' @param project.path Project home directory, if missing then default
 #' @param swap.directory Project branch exchange directory
 #' @return logical for success or not
 #' @export
@@ -80,7 +97,24 @@ plant.tree <- function(project.id,project.path=NA,swap.directory=NA){
   
 }
 
-
+#' Changes project directory/publish directory or identifies imported project
+#' @param project.id0 Project name
+#' @param project.path Project home directory
+#' @param swap.directory Project publish directory
+#' @return logical for success or not
+#' @details Is wrapper for redirect.tree
+#' @examples 
+#'\dontrun{
+#' reidentify.project.project("adaprTest","mydirectory1","mydirectory2publish")
+#'} 
+#' @export
+reidentify.project <- function(project.id0,project.path=NA,swap.directory=NA){
+  
+  out <- redirect.tree(project.id0,project.path,swap.directory)
+  
+  return(out)
+  
+}
 
 
 

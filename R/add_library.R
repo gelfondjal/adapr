@@ -9,7 +9,7 @@
 #' read_library("adaprHome")
 #'} 
 #' 
-read_library <- function(project.id){
+read_library <- function(project.id=get.project()){
   source_info <- pull_source_info(project.id)    
   library.file <- file.path(source_info$project.path,project.directory.tree$support,"common_libs.csv")
 
@@ -36,7 +36,7 @@ read_library <- function(project.id){
 #' add_package("adaprHome","ggplot2")
 #'} 
 #' 
-add_package <- function(project.id=get(source_info)$project.id,library.name,library.install=NA,library.specific=FALSE){
+add_package <- function(project.id=get.project(),library.name,library.install=NA,library.specific=FALSE){
 
   source_info <- pull_source_info(project.id)    
   library.file <- file.path(source_info$project.path,project.directory.tree$support,"common_libs.csv")
@@ -60,7 +60,7 @@ add_package <- function(project.id=get(source_info)$project.id,library.name,libr
 #' remove_package("adaprHome","ggplot2")
 #'} 
 #' 
-remove_package <- function(project.id=get(source_info)$project.id,library.name){
+remove_package <- function(project.id=get.project(),library.name){
   libout <- read_library(project.id)
   
   libout <- subset(libout,libout$Package!=library.name)
@@ -83,7 +83,7 @@ remove_package <- function(project.id=get(source_info)$project.id,library.name){
 #' \dontrun{
 #' install_project_packages("adaprHome")
 #'} 
-install_project_packages <- function(project.id){
+install_project_packages <- function(project.id=get.project()){
   source_info <- pull_source_info(project.id)    
   library.file <- file.path(source_info$project.path,project.directory.tree$support,"common_libs.csv")
   load.install.library.file(library.data.file= library.file,verbose=TRUE)

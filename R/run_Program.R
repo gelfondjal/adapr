@@ -9,7 +9,7 @@
 #' run.program("adaprHome","read_data.R")
 #'} 
 #' 
-run.program <- function(project.id=get("source_info")$project.id,source.file=get("source_info")$file$file,logRmd=FALSE){
+run.program <- function(project.id=get.project(),source.file=get("source_info")$file$file,logRmd=FALSE){
   
   scriptfile <- file.path(get.project.path(project.id),project.directory.tree$analysis,source.file)
   
@@ -89,10 +89,10 @@ run.program <- function(project.id=get("source_info")$project.id,source.file=get
 #' 
 #'@examples 
 #'\dontrun{
-#' prune.program("adaprHome","read_data.R")
+#' remove.program("adaprHome","read_data.R")
 #'} 
 #' 
-prune.program <- function(project.id=get("source_info")$project.id,source.file=get("source_info")$file$file,ask=TRUE){
+remove.program <- function(project.id=get.project(),source.file=get("source_info")$file$file,ask=TRUE){
   # get project object
   
   if(ask){

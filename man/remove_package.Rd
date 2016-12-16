@@ -4,7 +4,7 @@
 \alias{remove_package}
 \title{Remove R package to a project}
 \usage{
-remove_package(project.id = get(source_info)$project.id, library.name)
+remove_package(project.id = get.project(), library.name)
 }
 \arguments{
 \item{project.id}{project.id to add R package to}

@@ -37,12 +37,13 @@ get_orchard <- function(){
 #' @export
 #' @examples 
 #'\dontrun{
-#' uproot_tree("adaprHome")
+#' remove.project("adaprHome")
+#' reidentify.project("adaprHome")
 #'} 
 #' 
 #' 
 
-uproot_tree <- function(project.id0){
+remove.project <- function(project.id0){
   
   # 
   orchard.site <- file.path(path.expand.2("~"),"ProjectPaths","projectid_2_directory_adapr.csv")	
@@ -54,4 +55,25 @@ uproot_tree <- function(project.id0){
   utils::write.csv(orchard,orchard.site,row.names=FALSE)
   
   return(orchard)
+}
+
+
+#' Browses orchard in file system
+#' @return orchard
+#' @export
+#' @examples 
+#'\dontrun{
+#' open_orchard
+#'} 
+#' 
+#' 
+
+open_orchard <- function(){
+  
+  # 
+  orchard.site <- file.path(path.expand.2("~"),"ProjectPaths","projectid_2_directory_adapr.csv")	
+  
+  out <- utils::browseURL(orchard.site)
+  
+  return()
 }

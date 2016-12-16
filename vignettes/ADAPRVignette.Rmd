@@ -27,7 +27,7 @@ called `ProjectPaths` with two files `projectid_2_directory_adapr.csv` and `adap
 
 
 
-When a new project is created by the adapr app (launched by `adaprApp()`), the project is created as a single folder within a file system (OS X or Windows) with the following structure:
+Projects can be created within the R console using the ```init.project``` function ```init.project("MyProject","Path to project","Path to publish directory")``` or with the adapr App (launched by `adaprApp()`). When a new project is created, the project is created as a single folder within a file system (OS X or Windows) with the following structure:
 
 1.	Data Directory (Where data files are stored)
 
@@ -53,8 +53,8 @@ When a new project is created by the adapr app (launched by `adaprApp()`), the p
 
 The fundamental unit of the project is an R script that has two corresponding elements. The first is a Results folder with the same name as the R Script. This results folder (3.1) resides within the Results directory (3).  The second is an R markdown file with the same name (with file extension .Rmd) within the Markdown directory (See 2.3 above). A `read_data.R` program is created automatically upon creation of the project. This creates a results directory (`Results/read_data.R/`) and an R markdown file (2.3 `Markdown/read_data.Rmd`).
 
-In addition to the main project directory, each project is associated with a “Publish” directory that can be used to share results with collaborators. The Publish directory could be a Dropbox, file server or web server directory. See figure 1 for the Create Project tab. Projects can be created within the R console using the ```plant.tree``` function ```plant.tree("MyProject","Path to project","Path to publish directory")```. A list of all projects can be obtained using the ```get_orchard()``` command. The function ```uproot_tree(project.id)``` will remove the project from the orchard file, which dissociates the project from adapr, but
-does not remove the project from the file system. The function ```redirect.tree()``` tree will edit the project's location in the file system.
+In addition to the main project directory, each project is associated with a “Publish” directory that can be used to share results with collaborators. The Publish directory could be a Dropbox, file server or web server directory. See figure 1 for the Create Project tab. A list of all projects can be obtained using the ```get_orchard()``` command. The function ```remove.project(project.id)``` will remove the project from the orchard file, which dissociates the project from adapr, but
+does not remove the project from the file system. The function ```reidentify.project()``` tree will edit the location for which adapr will associate with the project.
 
 ![Figure 1.The project select tab. 1. Pulldown to select project. 2. Create New Project. Project ID is text input for project name (Project ID has R variable name syntax). Project directory is the file path to the project. The publish directory is where published files will be copied to. 3. Redirect project panel allows the identification or discovery of an existing project that is imported. Publication and project paths for existing projects could be changed here.](project_tab.png)
 
@@ -63,13 +63,18 @@ does not remove the project from the file system. The function ```redirect.tree(
 Creating an adapr R script is done within the adapr app from the “Make Programs” tab. Each program has a text string description. See Figure 2. When a program is created through the app, the program is executed creating a Results directory, R markdown file, and a dependency file that contains the read/write history of the file. 
 
 Programs can be created by using ```sprout.program``` that takes three main arguments 1) project ID, 2) program name,
-3) program description. Programs can be created, executed, and removed using the following 3 commands:
+3) program description. Programs can be created, executed, listed, and removed using the following 4 commands:
 
 ```sprout.program("adaprHome","MyProgram.R","Produces little") # Creates program```
 
 ```run.program("adaprHome","MyProgram.R") # Executes Program and creates and optionally creates an R markdown log```
 
-```prune.program("adaprHome","MyProgram.R") # Removes Program and Results```.
+
+```remove.program("adaprHome","MyProgram.R") # Removes Program and Results```
+
+```list.programs("adaprHome") # lists the programs in the adaprHome project with descriptions```
+
+```plot.project("adaprHome")  # shows the DAG of the project with synchronization status```.
 
 
 ![Figure 2. Make program tab. 1. Specify the R script name within the specified project. See upper left corner. Here `Finasteride_adapr` project is specified. 2. Manage libraries. Add an R package to a project as a resource for that project. Pressing the button updates the packages associated with the projects.](program_tab.png)
@@ -116,7 +121,7 @@ This function reads in an R data object with the `.Rdata` file extension written
 ```
 dependency.out <- finalize_dependency()
 ```
-that collects the file hashes of reads and writes and writes the dependency information to the Programs/Dependency directory. If `finalize_dependency()` function does not execute, then the R markdown file will not be rendered and the dependencies will not be available for use by other R scripts.
+that collects the file hashes of reads and writes and writes the dependency information to the Programs/Dependency directory. IMPORTANT: If `finalize_dependency()` function does not execute, then the R markdown file will not be rendered and the dependencies will not be available for use by other R scripts.
 
 
 ## Literate programing using R Markdown
@@ -128,12 +133,13 @@ An R markdown file is created automatically when an R script is created within t
 R packages needed for each R script can be added in the usual manner. However, the ADAPR app facilitates loading packages and tracking which packages are used by creating a common library file with package names that contains a list of packages used by project. Each package is specified therein is as specific to a particular R script or not. If the package is not labeled as specific to an R script is will be automatically loaded for each R script in the project. These packages are managed with the Programs tab of the app. Figure 2. Package management is needed for reproducibility. The packages need not be specified by the app, but can be included in the R scripts header prior to the creation of `source_info`. The function ` create_source_file_dir` will detect and record libraries that are already loaded.
 
 If the project is imported by another user, the data regarding the packages needed will be used by 
-`create_source_file_dir` and packages needed for the project will be automatically installed. The functions ```add_package(project.id,package,install.command,specific)``` and ```remove_package(project.id,package.name)``` will add or remove an R package from a project. To install all packages for a project, use the function
-`install_project_packages(project.id)`.
+`create_source_file_dir` in the program header and packages needed for the project will be automatically installed. The functions ```add_package(project.id,package,install.command,specific)``` and ```remove_package(project.id,package.name)``` will add or remove an R package from a project. To install all packages for a project, use the function
+`install_project_packages(project.id)`. The package versions are recorded within the program support directories.
 
 #Summarizing and visualizing projects
 
-All programs and results are summarized within a single HTML document with descriptions, dependency information, and links to programs and results. This information can be obtained within the Report tab of the app. After clicking the “Report” button, the HTML project summary is written to the `Results/Tree_controller.R/` directory. The Report tab also is capable of launching project R Shiny apps that access project data or Results. The Report tab can also check the file provenance within projects. See Figure 3.
+All programs and results are summarized within a single HTML document with descriptions, dependency information, and links to programs and results. This information can be obtained within the Report tab of the app. After clicking the “Report” button, the HTML project summary is written to the `Results/Tree_controller.R/` directory. The Report tab also is capable of launching project R Shiny apps that access project data or Results. The Report tab can also check the file provenance within projects. See Figure 3. The function ```create_program_graph(project.id)``` will generate
+a graph of the project with R scripts and their dependencies.
 
 ![Figure 3. Run report tab. 1. The Create Report button will create an html report listing all R script input/outputs. 2. RunApp selects and launches App within the project App directory. 3. The Identify file button initiates a file select dialogue and the version control history based upon the file hash is given.](project_report_tab.png)
 
@@ -147,35 +153,47 @@ the Git commit associated with the file including the date, author, and file des
 There is an interactive project map feature within the synchronize tab. The "Examine Program Graph" button displays the DAG of all the project's R scripts colored by there synchronization status. These scripts can be 
 executed by clicking on the colored point, and their file I/O can be examined by selecting or "brushing" over the colored point. This reveals the file I/O graphic in an adjacent panel. These files are labeled by
 their descriptions and can be opened by clicking on the file or their file directories may be browsed by selecting or "brushing" over the colored file labels. A limitation is that very large DAGs or very large input/output 
-lists for an R script can overwhelm the visual space of these graphics. Future versions will address this issue.
+lists for an R script can overwhelm the visual space of these graphics.
 
 ![Figure 4. Synchronize Tab. 1. Check the synchronization status and synchronize project by running necessary R scripts. A pop-up progress bar will open. 2. Commit Message associated with Git version control snapshot of project. Commit Project button operates Git. 3. Examine program graph creates or updates two interactive plots. 4. R Script Graph shows dependencies of R scripts. Clicking on button runs the R scripts. Selecting or brushing button opens panel 5. 5. Displays the inputs and output of the selected R script. Clicking on the file label opens the file or selecting opens the file folder.](synchronize_tab.png)
 
 #Sharing Results
 
-The specific results from the project or the entire project can be sent within the Send tab of the app. This tab creates a file within the Programs/Support_functions directory that contains a list of files that are selected for publication (i.e., copied to the project’s publication directory, which may be a shared server folder, a web server, or cloud server such as Dropbox). A button automatically sends these files to the publication directory. Also, the full project can be copied to the publication directory. The data directory is not sent by default to protect potentially sensitive data elements. There is a selector option for sending the data (or not) and a button for sending the full project. See Figure 5.
+The specific results from the project or the entire project can be sent within the Send tab of the app. This tab creates a file within the Programs/Support_functions directory that contains a list of files that are selected for publication (i.e., copied to the project’s publication directory, which may be a shared server folder, a web server, or cloud server such as Dropbox). A button automatically sends these files to the publication directory. Also, the full project can be copied to the publication directory. The data directory is not sent by default to protect potentially sensitive data elements. There is a selector option for sending the data (or not) and a button for sending the full project. See Figure 5. There are 4 functions related to publishing:
+
+```get.pubresults(project.id) # Get data frame of files for publication```
+
+```send.pubresults(project.id) # Copy selected files to publication directory```
+
+```open.pubresults(project.id) # Browses publication table for editing```
 
 ![Figure 5. Send Tab. 1. Select files to publish by copying to the publication directory. 2. Send a copy of the full project to the publication directory.](send_tab.png)
 
 #Configuration Tab
 
-The adapr package can be updated and configured within the configure tab shown in Figure 6. adapr options can be set with `set_adapr_options()`. For example, `set_adapr_options("git","TRUE") will modify the file
-"adapr_options.csv" and initiate Git.
+The adapr package can be updated and configured within the configure tab shown in Figure 6. adapr options can be set with `set_adapr_options()`.  
+The ```set_adapr_options(option,value)``` function the first argument is the option and the second argument is the option value as a character string. The "git" option takes ```TRUE`` or ```FALSE``` depending on whether 
+git is used. For example, `set_adapr_options("git","TRUE") will modify the file
+"adapr_options.csv" and initiate Git. The "path" option indicates the paths for finding resources such as pandoc. There are also "project.path" and "publish.path" options that indicate default publication directories.
+
+Selecting the git user can be done with the ```git.configure(user.name,user.email)``` function.
 
 ![Figure 6. Configure Tab. 1. Setup default project path where projects will be created. 2. Check Git. Check Git configuration. Add user name and email as Git user. Turn Git option on/off. 3. Install and update adapr package from github.](configure_tab.png)
 
 
-## Miscellaneous
 
-There are some convenience functions that can be used within the R console if there is a `source_info` object in the R environment.
 
-`showProject()` and `showResults()` will open the project or results directory with the file browser.
+## Also helpful
 
-`listBranches()` will list branches, orgins, and description that are available for loading.
+There are some convenience functions that can be used within the R console if there is a `source_info` object in the R environment. These can be initiated without specifying the project, if ```set.project(project.id)``` is used to indicate the working project using the "adaprProject" R option withing ```options```. 
 
-`listDatafiles()` will list the files and descriptions in the `Data` directory.
+`show.project()` and `show.results()` will open the project or results directory with the file browser.
 
-`listScripts()` will list the R scripts in the project.
+`list.branches()` will list branches, orgins, and description that are available for loading.
+
+`list.datafiles()` will list the files and descriptions in the `Data` directory.
+
+`list.programs()` will list the R scripts in the project.
 
 
 

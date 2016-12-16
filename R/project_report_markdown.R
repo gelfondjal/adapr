@@ -1,9 +1,9 @@
 #' Make plot of network within html documents.
 #' Summarize all programs.
-#' Uses pandoc unlike project_report
 #' @param source_info Source information list
 #' @param graph.width Sankey Plot dimensions
 #' @param graph.height Sankey Plot dimensions
+#' @return output file
 #' @details Dose not assume source_info in workspace
 #' @export
 #' 
@@ -129,8 +129,36 @@ write("\n",file.path(targetdirectory,targetfile),append=TRUE)
 
 }
 
-rmarkdown::render(file.path(targetdirectory,targetfile))
+fileout <- file.path(targetdirectory,targetfile)
 
-return(paste("Made",si$project.id,"project summary."))
+rmarkdown::render(fileout)
+
+paste("Made",si$project.id,"project summary.")
+
+return(fileout)
 
 }
+
+
+#' Make plot of network within html documents.
+#' Summarize all programs.
+#' @param project.id Source information list
+#' @param graph.width Sankey Plot dimensions
+#' @param graph.height Sankey Plot dimensions
+#' @details Dose not assume source_info in workspace
+#' @return File path to report html file
+#' @export
+#' 
+report.project <- function (project.id=get.project(), graph.width = 960, graph.height = 500){
+  
+  source_info <- pull_source_info(project.id)
+  
+  out <- project_report_markdown(source_info,graph.width, graph.height)
+  
+  out <- gsub("Rmd$","html",out)
+  
+  return(out)
+  
+}
+
+

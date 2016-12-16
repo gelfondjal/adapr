@@ -259,3 +259,24 @@ return(list(vertex=dfo,edges=froms,ggplot=proj.gg,rgrapher=isg))
 } #
  
  
+
+
+#' Make plot of project programs only
+#' Summarize all programs. Sync status is assessed and indicated.
+#' @param project Project id of program
+#' @return List of data.frame of programs vertices, data.frame of edges, ggplot ,rgrapher=igraph
+#' @details Uses ggplot2. Is a wrapper for create_program_graph.
+#' @export
+#' @examples 
+#'\dontrun{
+#' create_program_graph("adaprHome")
+#'} 
+#'  
+graph.project <- function(project=get.project()){
+  
+  out <- create_program_graph(project)
+  
+  return(out)
+}
+
+
