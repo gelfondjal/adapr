@@ -76,8 +76,10 @@ create_source_file_dir <- function(project.id0=get("project.id"),source.file0=ge
   if(source_info$options$git){
   
   try({
-    git_binary_path <- git_path(NULL)
-    author  <- system2(git_binary_path, paste("config --global user.name"),stdout=TRUE)
+    #git_binary_path <- git_path(NULL)
+    #author  <- system2(git_binary_path, paste("config --global user.name"),stdout=TRUE)
+    
+    author <- git2r::config()$global$user.name
   })
   
   }# if git

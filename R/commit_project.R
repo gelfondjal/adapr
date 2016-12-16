@@ -6,7 +6,7 @@
 #' @export
 #' @examples 
 #' \dontrun{
-#' commit.project("adaprHome","did I change something?")
+#' commit.project("adaprHome","Did I change something?")
 #'} 
 #'
 commit.project <- function(project.id=get.project(),commit.message=""){
@@ -28,9 +28,24 @@ commit.project <- function(project.id=get.project(),commit.message=""){
   
   committed <- git2r::commit(repo,message =paste(synccheck,commit.message))
 
-  out <- (paste("Git",paste(committed@sha,utils::capture.output(show(committed@author@when)),
-                             committed@author@name,committed@message)))
+  out <- paste("Git",commit2char(committed))
 
+  return(out)
+  
+}
+
+
+#' git2r commit class to character converter
+#' @param commitclass Commit object
+#' @return commit message
+#' @details Uses git2r package.
+#'
+#'
+commit2char <- function(commitclass){
+  
+  out <- paste(commitclass@sha,utils::capture.output(show(commitclass@author@when)),
+               commitclass@author@name,commitclass@message)
+  
   return(out)
   
 }

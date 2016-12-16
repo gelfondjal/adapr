@@ -62,7 +62,8 @@ finalize_dependency <- function(RMD=TRUE,write=TRUE){
   dependency.out$source.git <- NA
     if(source_info$options$git){
   try({
-    dependency.out$source.git <- paste(git.info(as.character(dependency.out$path[1]),file.path(dependency.out$source.file.path[1],dependency.out$source.file)[1])[1:5],collapse=" ")
+   # dependency.out$source.git <- paste(git.info(as.character(dependency.out$path[1]),file.path(dependency.out$source.file.path[1],dependency.out$source.file)[1])[1:5],collapse=" ")
+    dependency.out$source.git <- commit2char(git2r::commits(git2r::repository(source_info$project.path))[[1]])
     
   })	
   }

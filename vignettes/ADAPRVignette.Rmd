@@ -74,7 +74,7 @@ Programs can be created by using ```sprout.program``` that takes three main argu
 
 ```list.programs("adaprHome") # lists the programs in the adaprHome project with descriptions```
 
-```plot.project("adaprHome")  # shows the DAG of the project with synchronization status```.
+```graph.project("adaprHome")  # shows the DAG of the project with synchronization status```.
 
 
 ![Figure 2. Make program tab. 1. Specify the R script name within the specified project. See upper left corner. Here `Finasteride_adapr` project is specified. 2. Manage libraries. Add an R package to a project as a resource for that project. Pressing the button updates the packages associated with the projects.](program_tab.png)
@@ -165,7 +165,7 @@ The specific results from the project or the entire project can be sent within t
 
 ```send.pubresults(project.id) # Copy selected files to publication directory```
 
-```open.pubresults(project.id) # Browses publication table for editing```
+```show.pubresults(project.id) # Browses publication table for editing```
 
 ![Figure 5. Send Tab. 1. Select files to publish by copying to the publication directory. 2. Send a copy of the full project to the publication directory.](send_tab.png)
 

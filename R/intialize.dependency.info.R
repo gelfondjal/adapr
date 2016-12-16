@@ -34,19 +34,22 @@ initialize_dependency_info <- function(source_info_arg){
   
   try({
     
-    gitout <- git.init(project.path)
+    #gitout <- git.init(project.path)
     
-    setwd(source_info_arg$analysis.dir)
+    #setwd(source_info_arg$analysis.dir)
     
-    git_binary_path <- git_path(NULL)
-    if(source_info_arg$git.log){temp <- system2(git_binary_path,"log",stdout="")}else{
-    temp <- system2(git_binary_path,"log",stdout=NULL)}
+    #git_binary_path <- git_path(NULL)
+    #if(source_info_arg$git.log){temp <- system2(git_binary_path,"log",stdout="")}else{
+    #temp <- system2(git_binary_path,"log",stdout=NULL)}
     
-    if(temp==128){
+    if(is.null(git2r::discover_repository(project.path))){
       
-      git.add(project.path,file.path(source.file.info[["path"]],source.file.info[["file"]]))	
+      #git.add(project.path,file.path(source.file.info[["path"]],source.file.info[["file"]]))	
+      #git.commit(project.path,"Intitialize git")
       
-      git.commit(project.path,"Intitialize git")
+      git2r::init(project.path)
+      
+      commit.project(project.id ,"Initialize git")
       
       print("Initialized git repo")
       

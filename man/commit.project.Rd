@@ -22,7 +22,7 @@ Need git option active. Uses git2r package.
 }
 \examples{
 \dontrun{
-commit.project("adaprHome","did I change something?")
+commit.project("adaprHome","Did I change something?")
 } 
 
 }
