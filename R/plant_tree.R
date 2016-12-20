@@ -105,10 +105,10 @@ plant.tree <- function(project.id,project.path=NA,swap.directory=NA){
 #' @details Is wrapper for redirect.tree
 #' @examples 
 #'\dontrun{
-#' reidentify.project.project("adaprTest","mydirectory1","mydirectory2publish")
+#' relocate.project("adaprTest","mydirectory1","mydirectory2publish")
 #'} 
 #' @export
-reidentify.project <- function(project.id0,project.path=NA,swap.directory=NA){
+relocate.project <- function(project.id0,project.path=NA,swap.directory=NA){
   
   out <- redirect.tree(project.id0,project.path,swap.directory)
   
@@ -128,10 +128,16 @@ redirect.tree <- function(project.id0,project.path=NA,swap.directory=NA){
   
   opts <- get_adapr_options()
   
+  # Set missing to default
+  
   if(is.na(project.path)){
     project.path <- opts$project.path
+  }
+  
+  if(is.na(swap.directory)){
     swap.directory <- opts$publish.path
   }
+  
   
   
   project.path <- file.path(project.path,project.id0)
