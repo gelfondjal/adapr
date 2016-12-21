@@ -61,3 +61,33 @@ sprout.program <- function(project.id=NA,source.file.name=NA,description="",seed
   return(FALSE)
   
 }
+
+
+
+#' Generates the shell of a code that is project specific
+#' @param project.id Name of project
+#' @param r is source file name or Filename to create
+#' @param description What program does
+#' @param seed Random start seed
+#' @param run Execute r script?
+#' @return Logical indicating failure or not
+#' @details Will not overwrite existing program. Executes program stub. Mostly wrapper for sprout.program.
+#' @export
+#' 
+make.program <- function(project.id=get.project(),r="",description="",seed=2011,run=TRUE){
+  
+  if(!(toupper(gsub(".*\\.","",r))=="R")){
+    
+    print("Error make.program: Scripname doesn't end in .R")
+    
+    return(FALSE)
+    
+  }
+  
+  out <- sprout.program(project.id,source.file.name=r,description=,seed)
+  
+  if(run){run.program(project.id,r)}
+
+  return(out)
+}
+
