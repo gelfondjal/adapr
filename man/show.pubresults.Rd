@@ -20,7 +20,7 @@ File is in support directory/files_to_publish.csv
 }
 \examples{
 \dontrun{
-open.pubresults("adaprHome")
+show.pubresults("adaprHome")
 } 
 
 

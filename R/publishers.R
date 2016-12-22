@@ -64,7 +64,7 @@ send.pubresults <- function(project.id=get.project()){
 #' @export
 #' @examples 
 #' \dontrun{
-#' open.pubresults("adaprHome")
+#' show.pubresults("adaprHome")
 #'} 
 #' 
 #' 

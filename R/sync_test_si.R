@@ -22,7 +22,7 @@ sync.test.si <- function(source_info,plotl0=FALSE){
 #'} 
 #' 
 #' 
-synctest.project <- function(project.id=get("source_info")$project.id){
+synctest.project <- function(project.id=get.project()){
   
   source_info <- pull_source_info(project.id)
   
@@ -43,7 +43,7 @@ synctest.project <- function(project.id=get("source_info")$project.id){
 #' 
 #' 
 
-sync.project <- function(project.id){
+sync.project <- function(project.id=get.project()){
 source_info <- pull_source_info(project.id)
 test.sync0 <- sync.test.si(source_info)
 
