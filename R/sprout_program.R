@@ -31,12 +31,9 @@ sprout.program <- function(project.id=NA,source.file.name=NA,description="",seed
   
 
   
-  controller.lines <- c( "#sync.test.si(source_info)     #Tests project synchronization ",
-                     "#source.sync.si(source_info,run=TRUE) # This runs all programs needed to synchronize",
-                       "#project.report()               #This summarizes project in html",
-                         "#sprout.program(source_info$project.id,source.file.name=\"myprog.R\",\"Describe myprog\") #makes new program",
-                         "#send.branch(branch_cut,all=FALSE) #this packages a analytical branch ans sends to swap directory",
-                       "#graft.branch(branch_name,run=TRUE,start.up=FALSE,project.id=NULL,overwriteTF=FALSE) #This loads and runs branch")
+  controller.lines <- c( "#synctest.project()     #Tests project synchronization ",
+                     "#sync.project()  # This runs all programs needed to synchronize",
+                       "#report.project()              #This summarizes project in html")
   
   if(controller){final.line <- controller.lines}
   
