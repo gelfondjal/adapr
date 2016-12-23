@@ -33,6 +33,7 @@ synctest.project <- function(project.id=get.project()){
 
 #' Checks the synchronization project and runs scripts needed for synchronization
 #' @param project.id is project to synchronize
+#' @param ask logical whether to report estimated run time prior to execution
 #' @return Character string with message about success for synchronization
 #' @export
 #' @examples 
@@ -43,7 +44,7 @@ synctest.project <- function(project.id=get.project()){
 #' 
 #' 
 
-sync.project <- function(project.id=get.project()){
+sync.project <- function(project.id=get.project(),ask=FALSE){
 source_info <- pull_source_info(project.id)
 test.sync0 <- sync.test.si(source_info)
 
@@ -62,7 +63,21 @@ if(test.sync0$synchronize){
   
   wait0<-ceiling(as.numeric(sum( run.times$last.run.time.sec))*1.5)
   
+  if(ask){
   
+    print(ID.sync.out)
+    
+    execute <- readline(paste("Synchronizing project",project.id,"will take about",ceiling(wait0/60),"minutes. Proceed? y/n"))
+    
+    if(substring(tolower(execute),1,1)!="y"){
+      print(paste("Not executed:",project.id,"will take about",ceiling(wait0/60),"minutes. Proceed? y/n"))
+      out <- merge(subset(ID.sync.out,select=c("file","run.order")),run.times,by.x="file",by.y="source.file")
+      out <- out[order(out$run.order),]
+      return(out)
+      
+    }
+  
+  }
   #progress <- shiny::Progress$new()
   #on.exit(progress$close())
   
@@ -73,6 +88,7 @@ if(test.sync0$synchronize){
   #shiny::withProgress(message=startmessage, expr={
     
     #        progress$set(message=paste("Start sync",startmessage),value=0)
+    
     
     
     full.time <- wait0

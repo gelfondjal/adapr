@@ -4,10 +4,12 @@
 \alias{sync.project}
 \title{Checks the synchronization project and runs scripts needed for synchronization}
 \usage{
-sync.project(project.id = get.project())
+sync.project(project.id = get.project(), ask = FALSE)
 }
 \arguments{
 \item{project.id}{is project to synchronize}
+
+\item{ask}{logical whether to report estimated run time prior to execution}
 }
 \value{
 Character string with message about success for synchronization
