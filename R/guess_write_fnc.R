@@ -3,7 +3,10 @@
 #' @return function for writing file
 #' @details Uses the file suffix to return write.csv, png, pdf, save
 #' @export 
-#' 
+#' @examples 
+#'\dontrun{
+#'  identical(utils::write.csv,guess.write.fcn("data.csv"))
+#'} 
 guess.write.fcn <- function(filename){
   
   # returns the function for reading a file with the suffix in x

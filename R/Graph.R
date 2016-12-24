@@ -6,6 +6,13 @@
 #' @param ... arguments passed to write.fcn
 #' @return File information list 
 #' @export
+#' @examples 
+#'\dontrun{
+#'  # Within adapr R Script body:
+#'  Graph("hist.pdf","Gaussian RV")
+#'  hist(rnorm(100))
+#'  dev.off()
+#'} 
 
 
 Graph <- function(file.name="data.csv",description="Result file",write.fcn=guess.write.fcn(file.name),date=FALSE,...){

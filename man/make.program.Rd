@@ -27,4 +27,9 @@ Generates the shell of a code that is project specific
 \details{
 Will not overwrite existing program. Executes program stub. Mostly wrapper for sprout.program.
 }
+\examples{
+\dontrun{
+ make.program("adaprHome","read_data.R")
+} 
+}
 

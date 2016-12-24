@@ -20,4 +20,11 @@ Identify git provenance of file within a project
 \details{
 Requires a Git commit snapshot within the project
 }
+\examples{
+\dontrun{
+ projpath <- file.path(get.project.path("adaprHome"),"Programs")
+ git_provenance("adaprHome",file.path(projpath,"read_data.R"))
+} 
+
+}
 

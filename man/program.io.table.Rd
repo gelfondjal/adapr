@@ -17,5 +17,7 @@ Create program io table
 }
 \details{
 groups inputs and outputs
+
+Not for direct use.
 }
 

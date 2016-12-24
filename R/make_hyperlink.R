@@ -4,7 +4,10 @@
 #' @return link command vector
 #' @details Used in making HTML files
 #' @export
-#' 
+#' @examples 
+#'\dontrun{
+#'  make.hyperlink("myPath","click here to my path")
+#'}
 make.hyperlink <- function(files,links){
   
   link.command <- rep("",length(files))

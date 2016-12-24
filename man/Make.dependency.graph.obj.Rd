@@ -15,4 +15,10 @@ graph object of project/program dependencies
 \description{
 Creates an graph object from a dependency object
 }
+\examples{
+\dontrun{
+trees <- Harvest.trees(pull_source_info("adaprHome")$dependency.dir)
+dag<-Make.dependency.graph.obj(trees)
+} 
+}
 

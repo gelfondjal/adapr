@@ -18,4 +18,9 @@ Swap / for \\ in path expand
 \details{
 See path.expand() in base R
 }
+\examples{
+\dontrun{
+ path.expand.2("~")
+} 
+}
 

@@ -3,6 +3,11 @@
 #' @return data frame of stacked dependency files
 #' @details adapts to relative or absolute directories
 #' @export
+#' @examples 
+#'\dontrun{
+#' Harvest.trees(pull_source_info("adaprHome")$dependency.dir) 
+#'} 
+#' 
 #' 
 Harvest.trees <- function(dependency.dir){
   

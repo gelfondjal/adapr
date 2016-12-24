@@ -16,6 +16,6 @@ Libraries loaded that were not automatically loaded
 Captures libraries that are not loaded automatically
 }
 \details{
-Captures unaccounted for library within library information file
+Captures unaccounted for library within library information file. Not for direct use.
 }
 

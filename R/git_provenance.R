@@ -4,7 +4,12 @@
 #' @return list of 1) filename, 2) Git commit including commit message, date, author and 2) file info
 #' @details Requires a Git commit snapshot within the project
 #' @export
-#'  
+#'@examples 
+#'\dontrun{
+#'  projpath <- file.path(get.project.path("adaprHome"),"Programs")
+#'  git_provenance("adaprHome",file.path(projpath,"read_data.R"))
+#'} 
+#' 
 git_provenance <- function(project.id,filepath=0){
 
   if(filepath==0){filepath <- file.choose()}

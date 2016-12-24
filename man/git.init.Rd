@@ -19,4 +19,12 @@ git init lockaout
 \description{
 Initiate git
 }
+\details{
+. Deprecated.
+}
+\examples{
+\dontrun{
+ git.init(get.project.path("adaprHome"))
+} 
+}
 

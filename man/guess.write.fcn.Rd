@@ -18,4 +18,9 @@ Return function for writing common file types
 \details{
 Uses the file suffix to return write.csv, png, pdf, save
 }
+\examples{
+\dontrun{
+ identical(utils::write.csv,guess.write.fcn("data.csv"))
+} 
+}
 

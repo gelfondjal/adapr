@@ -1,7 +1,11 @@
 #' Create project hub files in root directory
 #' @return logical for succesful creation or not
 #' @export
-#' 
+#' @examples 
+#'\dontrun{
+#'  plant.orchard()
+#'} 
+#'
 plant.orchard <- function(){
   
   # 
@@ -29,6 +33,11 @@ plant.orchard <- function(){
 #' @param publish.path Path to share project results
 #' @return logical for succesful creation or not
 #' @export
+#' @examples 
+#'\dontrun{
+#'  opt <- get_adapr_options()
+#'  first.project(opt$project.path,opt$publish.path)
+#'} 
 #' 
 first.project <- function(project.path="",publish.path=""){
 #project.path <- "/Users/Gelfond/Documents/Projects"

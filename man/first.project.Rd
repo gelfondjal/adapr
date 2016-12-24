@@ -17,4 +17,11 @@ logical for succesful creation or not
 \description{
 Create first project
 }
+\examples{
+\dontrun{
+ opt <- get_adapr_options()
+ first.project(opt$project.path,opt$publish.path)
+} 
+
+}
 

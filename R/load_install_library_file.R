@@ -3,7 +3,7 @@
 #' @param subgroup data frame with Package, repos, and specific columns
 #' @param verbose Print which libraries are installed and loaded
 #' @return Library information data
-#' @details Installs and loads all packages
+#' @details Installs and loads all packages.Not for direct use. See install_project_packages().
 #' @export
 #' 
 #' 

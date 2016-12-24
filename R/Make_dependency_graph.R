@@ -2,7 +2,13 @@
 #' @param dependency.out Dependency object(s) to make graph out of
 #' @return graph object of project/program dependencies
 #' @export
-#' 
+#' @examples 
+#'\dontrun{
+#' trees <- Harvest.trees(pull_source_info("adaprHome")$dependency.dir)
+#' dag<-Make.dependency.graph.obj(trees)
+#'} 
+
+
 Make.dependency.graph.obj <- function(dependency.out){
   
   # make dependency graph using dependency.out object

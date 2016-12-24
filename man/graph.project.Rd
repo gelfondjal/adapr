@@ -22,7 +22,7 @@ Uses ggplot2. Is a wrapper for create_program_graph.
 }
 \examples{
 \dontrun{
-create_program_graph("adaprHome")
+graph.project("adaprHome")
 } 
  
 }

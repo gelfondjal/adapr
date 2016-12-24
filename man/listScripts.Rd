@@ -15,4 +15,7 @@ dataframe of R scripts and descriptions
 \description{
 Lists the R scripts in the adapr project
 }
+\details{
+Deprecated see list.programs
+}
 

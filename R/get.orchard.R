@@ -63,7 +63,7 @@ remove.project <- function(project.id0){
 #' @export
 #' @examples 
 #'\dontrun{
-#' open_orchard
+#' open_orchard()
 #'} 
 #' 
 #' 

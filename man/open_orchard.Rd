@@ -14,7 +14,7 @@ Browses orchard in file system
 }
 \examples{
 \dontrun{
-open_orchard
+open_orchard()
 } 
 
 

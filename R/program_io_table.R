@@ -2,6 +2,7 @@
 #' @param dependency.out Tree of dependencies
 #' @details groups inputs and outputs
 #' @return Matrix summarizing inputs and outputs
+#' @details Not for direct use.
 #' @export
 #' 
 program.io.table <- function(dependency.out){

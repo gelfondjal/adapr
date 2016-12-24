@@ -20,4 +20,11 @@ Make.summary graph of projects based on files in dependency directory
 \details{
 Only take dependency directory XOR dependency.data
 }
+\examples{
+\dontrun{
+trees <- Harvest.trees(pull_source_info("adaprHome")$dependency.dir)
+dag<-Make.summary.graph(dependency.obj=trees)
+plot(dag)
+} 
+}
 

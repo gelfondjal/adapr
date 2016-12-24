@@ -20,6 +20,7 @@ init.project <- function(project.id,project.path=NA,publish.directory=NA){
 #' @param project.path Project home directory, if missing then default
 #' @param swap.directory Project branch exchange directory
 #' @return logical for success or not
+#' @details Not for direct use. See init.project().
 #' @export
 plant.tree <- function(project.id,project.path=NA,swap.directory=NA){
   

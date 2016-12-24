@@ -3,6 +3,10 @@
 #' @return Full filepath to x
 #' @details See path.expand() in base R
 #' @export
+#' @examples 
+#'\dontrun{
+#'  path.expand.2("~")
+#'} 
 path.expand.2 <- function(x){
   
   # Swap / for \\ in path expand

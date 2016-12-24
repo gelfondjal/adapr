@@ -20,4 +20,9 @@ Makes HTML hyper link
 \details{
 Used in making HTML files
 }
+\examples{
+\dontrun{
+ make.hyperlink("myPath","click here to my path")
+}
+}
 

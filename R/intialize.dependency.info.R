@@ -1,6 +1,7 @@
 #' Initializes dependency object source_info
 #' @param source_info_arg is a source_info list with describing R script and project
 #' @return Depedency file location
+#' @details Not for direct use.
 #' @export
 #' 
 initialize_dependency_info <- function(source_info_arg){

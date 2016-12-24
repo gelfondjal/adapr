@@ -15,4 +15,9 @@ object for file that was read
 \description{
 Loads a single R object from file
 }
+\examples{
+\dontrun{
+processed <- Load.branch("read_data.R/process_data.Rdata")
+} 
+}
 

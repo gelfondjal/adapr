@@ -2,9 +2,10 @@
 #' @param project_name Project ID
 #' @return file path for swap directory
 #' @export
-#' 
+#' @details Do not use. Deprecated.
 get.project.swap.directory <-function(project_name=NULL){
   
+  warning("get.projct.swap.directory is deprecated.")
   
   all.projects <- utils::read.csv(file.path(path.expand.2("~"),"ProjectPaths","projectid_2_directory.csv"),as.is=TRUE)
   

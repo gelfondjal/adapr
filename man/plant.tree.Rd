@@ -19,4 +19,7 @@ logical for success or not
 \description{
 initialize project
 }
+\details{
+Not for direct use. See init.project().
+}
 

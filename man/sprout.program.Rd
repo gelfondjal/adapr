@@ -28,6 +28,6 @@ Logical indicating success or not
 Generates the shell of a code that is project specific
 }
 \details{
-Will not overwrite existing program
+Will not overwrite existing program. Not for direct use. See make.program().
 }
 

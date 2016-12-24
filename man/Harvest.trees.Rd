@@ -18,4 +18,11 @@ Collect trees from dependency directory
 \details{
 adapts to relative or absolute directories
 }
+\examples{
+\dontrun{
+Harvest.trees(pull_source_info("adaprHome")$dependency.dir) 
+} 
+
+
+}
 

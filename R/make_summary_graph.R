@@ -4,6 +4,12 @@
 #' @param plot.graph Logical to plot graph or not
 #' @details Only take dependency directory XOR dependency.data
 #' @export
+#' @examples 
+#'\dontrun{
+#' trees <- Harvest.trees(pull_source_info("adaprHome")$dependency.dir)
+#' dag<-Make.summary.graph(dependency.obj=trees)
+#' plot(dag)
+#'} 
 Make.summary.graph <- function(dependency.dir=NULL,dependency.object=NULL,plot.graph=FALSE){
   
   #equire(igraph)

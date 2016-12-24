@@ -2,8 +2,11 @@
 #' Summarize all programs.
 #' @param project.id Project id of program
 #' @return List of data.frame of programs vertices, data.frame of edges, ggplot ,rgrapher=igraph
-#' @details Uses ggplot2
-#'
+#' @details Deprecated. See graph.project()
+#'@examples 
+#'\dontrun{
+#'  create_program_graph_v2("adaprHome")
+#'} 
 #'  
  
 create_program_graph_v2<- function(project.id){

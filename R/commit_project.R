@@ -39,7 +39,11 @@ commit.project <- function(project.id=get.project(),commit.message=""){
 #' @param commitclass Commit object
 #' @return commit message
 #' @details Uses git2r package.
-#'
+#' @examples 
+#' \dontrun{
+#' committed <- git2r::commit(repo,message =commit.message)
+#' out <- paste("Git",commit2char(committed))
+#'} 
 #'
 commit2char <- function(commitclass){
   

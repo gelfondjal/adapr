@@ -15,4 +15,7 @@ file path for swap directory
 \description{
 Retrieve project swap directory
 }
+\details{
+Do not use. Deprecated.
+}
 

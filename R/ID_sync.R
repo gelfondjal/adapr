@@ -3,7 +3,13 @@
 #' @param dag.to.sync Directed Acyclic graph in need of synchronization
 #' @return data.frame with sources that need to be run, rows in run order
 #' @export
-#' 
+#' @examples 
+#'\dontrun{
+#' projInfo <- get.project.info(pull_source_info("adaprHome")$dependency.dir)
+#' trees <- Harvest.trees(pull_source_info("adaprHome")$dependency.dir)
+#' file.info <-Condense.file.info(trees)
+#' ID.sync(file.info,projInfo$graph) 
+#'} 
 ID.sync <- function(file.info,dag.to.sync){
   
   #

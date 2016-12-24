@@ -18,6 +18,12 @@ Make plot of project programs only
 Summarize all programs.
 }
 \details{
-Uses ggplot2
+Deprecated. See graph.project()
+}
+\examples{
+\dontrun{
+ create_program_graph_v2("adaprHome")
+} 
+ 
 }
 

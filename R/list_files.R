@@ -2,7 +2,11 @@
 #' @param si is source_info object
 #' @return dataframe of descriptions available branches
 #' @export
-#' 
+#' @examples 
+#'\dontrun{
+#' source_info <- create_source_file_dir("adaprHome","tree_controller.R")
+#` listBranches()
+#'} 
 listBranches <- function(si=get("source_info")){
   
   file_data <- si$all.files
@@ -73,6 +77,7 @@ list.branches <- function(project.id=get.project()){
 #' Lists the R scripts in the adapr project
 #' @param  project.id project.id
 #' @return dataframe of R scripts and descriptions
+#' @details Deprecated see list.programs
 #' @export
 #' 
 listScripts<- function(project.id=get("source_info")$project.id){
@@ -121,6 +126,7 @@ list.programs <- function(project.id=get.project()){
 #' Lists the data files available for reading in the adapr project
 #' @param si is source_info object
 #' @return description of data files
+#' @details Deprecated. See list.datafiles()
 #' @export
 #' 
 listDatafiles <- function(si=get("source_info")){

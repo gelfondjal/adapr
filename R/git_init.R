@@ -3,7 +3,12 @@
 #' @param branch git branch
 #' @param git_binary location of git executable
 #' @return git init lockaout
+#' @details. Deprecated.
 #' @export
+#' @examples 
+#'\dontrun{
+#'  git.init(get.project.path("adaprHome"))
+#'} 
 
 git.init <- function(gitdir,branch = NULL, git_binary = NULL){
   

@@ -24,4 +24,12 @@ File information list
 \description{
 Write object and capture file information
 }
+\examples{
+\dontrun{
+ # Within adapr R Script body:
+ Graph("hist.pdf","Gaussian RV")
+ hist(rnorm(100))
+ dev.off()
+} 
+}
 

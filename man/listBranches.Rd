@@ -15,4 +15,9 @@ dataframe of descriptions available branches
 \description{
 Lists the branches available for loading in the adapr project
 }
+\examples{
+\dontrun{
+source_info <- create_source_file_dir("adaprHome","tree_controller.R")
+} 
+}
 

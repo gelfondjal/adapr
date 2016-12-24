@@ -15,4 +15,10 @@ value TRUE if R session in in interactive R markdown mode
 \description{
 Checks whether interactive R markdown session is ON
 }
+\examples{
+\dontrun{
+ checkRmdMode()
+} 
+
+}
 

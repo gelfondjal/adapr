@@ -6,7 +6,7 @@
 #' @param capture.load.command Command for loading inference tree library
 #' @param controller logical to insert lines that operate on analysis tree
 #' @return Logical indicating success or not
-#' @details Will not overwrite existing program
+#' @details Will not overwrite existing program. Not for direct use. See make.program().
 #' @export
 #' 
 sprout.program <- function(project.id=NA,source.file.name=NA,description="",seed=2011,capture.load.command="library(adapr)",controller=FALSE){
@@ -70,7 +70,10 @@ sprout.program <- function(project.id=NA,source.file.name=NA,description="",seed
 #' @return Logical indicating failure or not
 #' @details Will not overwrite existing program. Executes program stub. Mostly wrapper for sprout.program.
 #' @export
-#' 
+#' @examples 
+#'\dontrun{
+#'  make.program("adaprHome","read_data.R")
+#'} 
 make.program <- function(project.id=get.project(),r="",description="",seed=2011,run=TRUE){
   
   if(!(toupper(gsub(".*\\.","",r))=="R")){

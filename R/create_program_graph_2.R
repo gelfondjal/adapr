@@ -269,7 +269,7 @@ return(list(vertex=dfo,edges=froms,ggplot=proj.gg,rgrapher=isg))
 #' @export
 #' @examples 
 #'\dontrun{
-#' create_program_graph("adaprHome")
+#' graph.project("adaprHome")
 #'} 
 #'  
 graph.project <- function(project=get.project()){

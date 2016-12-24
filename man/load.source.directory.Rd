@@ -18,4 +18,11 @@ Runs all source files within the directory source.directory
 \details{
 Looks for files with .R or .r suffixes.
 }
+\examples{
+\dontrun{
+ path <- get.project.path("adaprHome")
+ path <- file.path(path,"Programs",project.directory.tree$support)
+ load.source.directory(path)
+} 
+}
 

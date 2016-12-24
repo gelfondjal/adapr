@@ -12,4 +12,10 @@ logical for succesful creation or not
 \description{
 Create project hub files in root directory
 }
+\examples{
+\dontrun{
+ plant.orchard()
+} 
+
+}
 

@@ -18,4 +18,11 @@ git2r commit class to character converter
 \details{
 Uses git2r package.
 }
+\examples{
+\dontrun{
+committed <- git2r::commit(repo,message =commit.message)
+out <- paste("Git",commit2char(committed))
+} 
+
+}
 

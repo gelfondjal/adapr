@@ -2,7 +2,10 @@
 #' @param file contains R object
 #' @return object for file that was read
 #' @export
-#' 
+#' @examples 
+#'\dontrun{
+#' processed <- Load.branch("read_data.R/process_data.Rdata")
+#'} 
 Load.branch <- function(file){
   
   # Loads obj from source_info
