@@ -30,6 +30,13 @@ copy to target.directory
 Uses pander and pandoc unlike project_report
 }
 \details{
-Dose not assume source_info in workspace
+Not for direct use. Does not assume source_info in workspace
+}
+\examples{
+\dontrun{
+ source_info <- create_source_file_dir("adaprHome","tree_controller.R")
+project_report_send_rmd(si=source_info)
+} 
+
 }
 

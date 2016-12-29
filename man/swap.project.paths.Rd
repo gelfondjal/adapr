@@ -19,6 +19,6 @@ Updated list of dependency data
 Take list of dependency file data and changes the project path
 }
 \details{
-Used with swapping branches by rework.project.path()
+Not for direct use. Used with swapping branches by rework.project.path()
 }
 

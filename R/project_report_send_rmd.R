@@ -8,9 +8,14 @@
 #' @param send.data Logical to send data directory or not
 #' @param graph.width Sankey Plot dimensions
 #' @param graph.height Sankey Plot dimensions
-#' @details Dose not assume source_info in workspace
+#' @details Not for direct use. Does not assume source_info in workspace
 #' @export
-#' 
+#' @examples 
+#'\dontrun{
+#'  source_info <- create_source_file_dir("adaprHome","tree_controller.R")
+#' project_report_send_rmd(si=source_info)
+#'} 
+#'
 project_report_send_rmd <- function (target.directory=get("source_info")$project.path,si,send.data=FALSE, graph.width = 960, graph.height = 500) 
 {
   ##ibrary(pander)

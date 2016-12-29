@@ -103,7 +103,7 @@ plant.tree <- function(project.id,project.path=NA,swap.directory=NA){
 #' @param project.path Project home directory
 #' @param swap.directory Project publish directory
 #' @return logical for success or not
-#' @details Is wrapper for redirect.tree
+#' @details Is wrapper for redirect.tree. Does not move the project only indicates new location.
 #' @examples 
 #'\dontrun{
 #' relocate.project("adaprTest","mydirectory1","mydirectory2publish")
@@ -125,6 +125,7 @@ relocate.project <- function(project.id0,project.path=NA,swap.directory=NA){
 #' @param swap.directory Project publish directory
 #' @return logical for success or not
 #' @export
+#' @details Not for direct use. See relocate.project
 redirect.tree <- function(project.id0,project.path=NA,swap.directory=NA){
   
   opts <- get_adapr_options()

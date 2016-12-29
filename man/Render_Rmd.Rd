@@ -20,6 +20,12 @@ Rendered output file information
 Renders and Rmarkdown file
 }
 \details{
-Uses rmarkdown library to access objects in the R script. Will track dependencies for objects used within Rmd file.
+Not for direct use. Uses rmarkdown library to access objects in the R script. Will track dependencies for objects used within Rmd file.
+}
+\examples{
+\dontrun{
+source_info <- create_source_file_dir("adaprHome","read_data.R")
+Render_Rmd("read_data.Rmd")
+} 
 }
 

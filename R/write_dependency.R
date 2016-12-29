@@ -3,6 +3,7 @@
 #' @param dependency.pointer filename to write
 #' @return TRUE
 #' @export
+#' @details Not for direct use. See finalize_dependency().
 #' 
 write.dependency <- function(dependency.object,dependency.pointer){
   

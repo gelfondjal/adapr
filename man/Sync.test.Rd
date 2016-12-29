@@ -19,4 +19,14 @@ list with synchronizing information
 \description{
 check the synchrony of source files and their created objects
 }
+\details{
+Not for direct use. See sync.project() and synctest.project().
+}
+\examples{
+\dontrun{
+ si <- pull_source_info("adaprHome")
+projInfo <- get.project.info(si$dependency.dir)
+Sync.test(projInfo$graph,projInfo$tree)
+} 
+}
 

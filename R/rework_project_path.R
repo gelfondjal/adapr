@@ -1,7 +1,7 @@
 #' Collects all trees in dependency.dir and changes the project path
 #' @param dependency.dir location of dependency files to rework
 #' @param new.path file path for the new project path
-#' @details Used with swapping branches
+#' @details Not for direct use. Used with swapping branches
 #' @export
 #' 
 rework.project.path <- function(dependency.dir=get("source_info")$depedency.dir,new.path=get.project.path(get("source_info")$project.id)){

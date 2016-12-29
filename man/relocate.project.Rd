@@ -20,7 +20,7 @@ logical for success or not
 Changes project directory/publish directory or identifies imported project
 }
 \details{
-Is wrapper for redirect.tree
+Is wrapper for redirect.tree. Does not move the project only indicates new location.
 }
 \examples{
 \dontrun{

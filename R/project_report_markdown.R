@@ -6,7 +6,12 @@
 #' @return output file
 #' @details Dose not assume source_info in workspace
 #' @export
-#' 
+#' @examples 
+#'\dontrun{
+#'  source_info <- create_source_file_dir("adaprHome","tree_controller.R")
+#'  project_report_markdown(source_info)
+#'} 
+#'
 project_report_markdown<-
 
 function (source_info, graph.width = 960, graph.height = 500) 
@@ -148,7 +153,10 @@ return(fileout)
 #' @details Dose not assume source_info in workspace
 #' @return File path to report html file
 #' @export
-#' 
+#'@examples 
+#'\dontrun{
+#' report.project("adaprHome")
+#'}  
 report.project <- function (project.id=get.project(), graph.width = 960, graph.height = 500){
   
   source_info <- pull_source_info(project.id)

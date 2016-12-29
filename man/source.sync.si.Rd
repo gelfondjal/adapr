@@ -19,4 +19,13 @@ Data.frame with sources needed to synchronize with run times
 \description{
 Synchronize project by running necessary R scripts
 }
+\details{
+Not usually direct use. See sync.project() and synctest.project().
+}
+\examples{
+\dontrun{
+source_info <- create_source_file_dir("adaprHome","tree_controller.R")
+source.sync.si(source_info)
+} 
+}
 

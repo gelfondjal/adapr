@@ -21,4 +21,15 @@ object read from files
 \description{
 Read data and capture the file information within dependency object
 }
+\examples{
+\dontrun{
+source_info <- create_source_file_dir("adaprHome","tree_controller.R")
+testfile <- file.path(source_info$data.dir,"test.csv")
+write.csv(cars,testfile)
+fileinfo <- Create.file.info(dirname(testfile),basename(testfile),"cars dataset")
+Read.cap(fileinfo,read.csv,source_info)
+file.remove(file.path(source_info$data.dir,"test.csv"))
+
+} 
+}
 

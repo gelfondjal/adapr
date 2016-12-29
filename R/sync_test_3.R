@@ -4,6 +4,13 @@
 #' @param plotl logical for plotting or not
 #' @export
 #' @return list with synchronizing information
+#' @details Not for direct use. See sync.project() and synctest.project().
+#' @examples 
+#'\dontrun{
+#'  si <- pull_source_info("adaprHome")
+#' projInfo <- get.project.info(si$dependency.dir)
+#' Sync.test(projInfo$graph,projInfo$tree)
+#'} 
 
 Sync.test <- function(dagger,tree,plotl=FALSE){
   

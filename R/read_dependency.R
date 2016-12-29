@@ -2,7 +2,7 @@
 #' @param dependency.pointer filename with dependency data
 #' @return dependency data.frame
 #' @export
-#' 
+#' @details Not for direct use. See Harvest.trees().
 
 
 read.dependency <- function(dependency.pointer){

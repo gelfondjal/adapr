@@ -25,4 +25,9 @@ Summarize all programs.
 \details{
 Dose not assume source_info in workspace
 }
+\examples{
+\dontrun{
+report.project("adaprHome")
+}  
+}
 

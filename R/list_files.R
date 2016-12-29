@@ -232,7 +232,7 @@ list.datafiles <- function(project.id=get.project()){
 #' @param si is source_info object
 #' @param project.id character string specifies project 
 #' @param rscript character string specifies the R script result directory to open
-#' @details Use BrowseURL to open results directory
+#' @details Deprecated: use show.results(). Uses BrowseURL to open results directory
 #' @export
 #' 
 showResults <- function(si=get("source_info"),project.id="",rscript=""){
@@ -262,7 +262,7 @@ show.results <- function(project.id=get.project(),rscript=""){
   si <- pull_source_info(project.id)
   
   if(rscript==""){
-    utils::browseURL(si$results.dir)
+    utils::browseURL(file.path(get.project.path(project.id),project.directory.tree$results))
   }else{
     resultdir <- file.path(get.project.path(project.id),project.directory.tree$results,rscript)
     utils::browseURL(resultdir)

@@ -6,7 +6,13 @@
 #' @details Simpler command than Read.cap, automatically generates file info. Assumes file is in project "Data" directory
 #' @return object read from file
 #' @export
-#' 
+#'@examples 
+#'\dontrun{
+#' source_info <- create_source_file_dir("adaprHome","tree_controller.R")
+#' write.csv(cars,file.path(source_info$data.dir,"test.csv"))
+#' Read("test.csv","cars dataframe")
+#' file.remove(file.path(source_info$data.dir,"test.csv"))
+#'}  
 Read <- function(file.name="data.csv",description="Data file",read.fcn=guess.read.fcn(file.name),...){
   
   # lightweight read.cap take small number of args
@@ -47,7 +53,16 @@ Read <- function(file.name="data.csv",description="Data file",read.fcn=guess.rea
 #' @details Allows tracking of files read by other functions than Read. Assumes file is in project "Data" directory
 #' @return Filepath of file to read
 #' @export
-#' 
+#' @examples 
+#'\dontrun{
+#'  source_info <- create_source_file_dir("adaprHome","tree_controller.R")
+#' write.csv(cars,file.path(source_info$data.dir,"test.csv"))
+#' # Read with any function
+#' temp <- utils::read.csv(file.path(source_info$data.dir,"test.csv"))
+#' ReadTrack("test.csv","cars dataframe")
+#' # Will track the file as though read with Read().
+#' file.remove(file.path(source_info$data.dir,"test.csv"))
+#'} 
 ReadTrack <- function(file.name="data.csv",description="Data file"){
   
   # lightweight read.cap take small number of args

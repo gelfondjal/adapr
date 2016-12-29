@@ -19,4 +19,7 @@ logical for success or not
 \description{
 Changes project directory/publish directory or identifies imported project
 }
+\details{
+Not for direct use. See relocate.project
+}
 

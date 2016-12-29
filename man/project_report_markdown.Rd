@@ -24,4 +24,11 @@ Summarize all programs.
 \details{
 Dose not assume source_info in workspace
 }
+\examples{
+\dontrun{
+ source_info <- create_source_file_dir("adaprHome","tree_controller.R")
+ project_report_markdown(source_info)
+} 
+
+}
 

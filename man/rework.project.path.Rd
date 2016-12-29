@@ -16,6 +16,6 @@ rework.project.path(dependency.dir = get("source_info")$depedency.dir,
 Collects all trees in dependency.dir and changes the project path
 }
 \details{
-Used with swapping branches
+Not for direct use. Used with swapping branches
 }
 

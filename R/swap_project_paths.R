@@ -1,7 +1,7 @@
 #' Take list of dependency file data and changes the project path
 #' @param list.deps list of dependency file data
 #' @param new.path file path for the new project path
-#' @details Used with swapping branches by rework.project.path()
+#' @details Not for direct use. Used with swapping branches by rework.project.path()
 #' @return Updated list of dependency data
 #' @export
 #' 

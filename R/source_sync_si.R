@@ -4,6 +4,12 @@
 #' @param plot.to.file logical for writing file in tree_controller.R directory
 #' @return Data.frame with sources needed to synchronize with run times
 #' @export
+#' @details Not usually direct use. See sync.project() and synctest.project().
+#' @examples 
+#'\dontrun{
+#' source_info <- create_source_file_dir("adaprHome","tree_controller.R")
+#' source.sync.si(source_info)
+#'} 
 source.sync.si <- function(source_info,run=TRUE,plot.to.file=FALSE){
   
   # Run in order 

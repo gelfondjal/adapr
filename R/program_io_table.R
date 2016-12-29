@@ -4,7 +4,11 @@
 #' @return Matrix summarizing inputs and outputs
 #' @details Not for direct use.
 #' @export
-#' 
+#' @examples 
+#'\dontrun{
+#' trees <- Harvest.trees(pull_source_info("adaprHome")$dependency.dir)
+#' program.io.table(trees)
+#'} 
 program.io.table <- function(dependency.out){
   
   meta.summary <-  dependency.out[order(dependency.out$dependency),]

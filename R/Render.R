@@ -3,10 +3,13 @@
 #' @param description of rendered file
 #' @param ... extra arguments for rmarkdown::render
 #' @return Rendered output file information
-#' @details Uses rmarkdown library to access objects in the R script. Will track dependencies for objects used within Rmd file.
+#' @details Not for direct use. Uses rmarkdown library to access objects in the R script. Will track dependencies for objects used within Rmd file.
 #' @export
-#' 
-#' 
+#' @examples 
+#'\dontrun{
+#' source_info <- create_source_file_dir("adaprHome","read_data.R")
+#' Render_Rmd("read_data.Rmd")
+#'} 
 
 
 Render_Rmd <- function(Rmd.file,description="Rmarkdown",...){

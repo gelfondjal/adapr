@@ -15,4 +15,7 @@ dependency data.frame
 \description{
 Read the dependcy data from file
 }
+\details{
+Not for direct use. See Harvest.trees().
+}
 

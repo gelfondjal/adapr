@@ -17,4 +17,16 @@ list or logical indicated whether project is synchronized or not
 \description{
 Tests the synchrony of files in dependency tree
 }
+\details{
+Not for direct use. See sync.project() and synctest.project().
+}
+\examples{
+\dontrun{
+si <- pull_source_info("adaprHome")
+projInfo  <- get.project.info(si$dependency.dir)
+Sync.test.pi(projInfo)
+} 
+
+
+}
 

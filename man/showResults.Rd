@@ -17,6 +17,6 @@ showResults(si = get("source_info"), project.id = "", rscript = "")
 Opens results directory
 }
 \details{
-Use BrowseURL to open results directory
+Deprecated: use show.results(). Uses BrowseURL to open results directory
 }
 

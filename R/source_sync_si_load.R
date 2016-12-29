@@ -2,6 +2,12 @@
 #' @param source_info Project information within source_info list
 #' @return Data.frame with sources needed to synchronize with run times
 #' @export
+#' @details Not usually direct use. See sync.project() and synctest.project().
+#' @examples 
+#'\dontrun{
+#' source_info <- create_source_file_dir("adaprHome","tree_controller.R")
+#' source_sync_si_load(source_info)
+#'} 
 source_sync_si_load <- function (source_info) 
 { 
   project_info <- get.project.info.si(source_info) 
