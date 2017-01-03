@@ -84,7 +84,7 @@ make.program <- function(project.id=get.project(),r="",description="",seed=2011,
     
   }
   
-  out <- sprout.program(project.id,source.file.name=r,description=,seed)
+  out <- sprout.program(project.id,source.file.name=r,description=description,seed)
   
   if(run){run.program(project.id,r)}
 
