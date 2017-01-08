@@ -3,7 +3,7 @@
 #' @param n.cores Number of cores to use. Should be >1, but less than number of logical CPUs.
 #' @return data.frame with success/failure status.
 #' @export
-#' @details Experimental. See also sync.project() and synctest.project(). Uses Results/Tree_controller.R directory to pass work/completion data between nodes.
+#' @details Experimental. See also sync.project() and synctest.project(). Uses Results/tree_controller.R directory to pass work/completion data between nodes.
 #' @examples 
 #'\dontrun{
 #' parallelsync.project("adaprHome")
@@ -57,7 +57,6 @@ completedfile <- file.path(checkdir,"completed.csv")
 workfile <- file.path(checkdir,"working.csv")
 todofile <- file.path(checkdir,"todo.csv")
 graphfile <- file.path(checkdir,"graph.Rdata")
-
 
 
 workdat <- data.frame(rscript="",compute.node=NA)[-1,]
