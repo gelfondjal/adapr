@@ -79,36 +79,7 @@ tp <- function(x){
 
 longgraph <- NULL
 
-# for(vertex in vertexnames){
-# 	
-# 	shortgraph <- data.frame(from=vertex,to=vertex)
-# 	
-# 	tos <- c()
-# 	
-# 	for(vertexTo in vertexnames){
-# 		
-# 		shortguy <- shortest_paths(projgraph,vertex,vertexTo)
-# 		
-# 		if(length(shortguy$vpath[[1]])==3){
-# 			
-# 			tos <- c(vertexTo,tos)
-# 			
-# 		}# if one step path
-# 
-# 		}# loop over targets	
-# 			
-# 	   if(length(tos)>0){
-# 	   	
-# 	   	 shortgraph <- rbind(shortgraph,data.frame(from=vertex,to=tos))
-# 	   }# if any targets connected
-# 		
-# 	
-# 	longgraph <- rbind(longgraph,shortgraph)
-# 	
-# } 
-# 
-#   
-# isg <- simplify(graph.data.frame(longgraph))
+
 
 isg <- graph2
  
@@ -250,7 +221,7 @@ proj.gg <- proj.gg+ ggplot2::scale_color_manual(name = ggplot2::element_blank(),
 values =synccolors)
 
 
-isg <- igraph::induced_subgraph(projgraph,vertexnames)
+#isg <- igraph::induced_subgraph(projgraph,vertexnames)
 runorder <- data.frame(v=igraph::topological.sort(isg)$name,run.order=1:length(vertexnames))
 dfo <- merge(dfo,runorder,by='v')
 

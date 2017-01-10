@@ -21,7 +21,7 @@ project.plot <- graphdat$ggplot
 
 findNodependency <- function(graphdat,completed=""){
   
-  isg <- igraph::graph_from_data_frame(graphdat$edges) #  data.frame()graphdat$edges
+  isg <- graphdat$rgrapher #  data.frame()graphdat$edges
   
   sfiles <- setdiff(as.character(graphdat$vertex$v),completed)
   
@@ -48,6 +48,8 @@ findNodependency <- function(graphdat,completed=""){
 }
 
 nodeps <- findNodependency(graphdat)
+
+
 # Initialize broadcast files
 
 checkdir <- pull_source_info(project.id)$results.dir
@@ -341,7 +343,11 @@ monitorParallelSync.project <- function(project.id = get.project(),check.interva
         
       }
       
-      if(nrow(graphdat$edges)>0){
+      
+      testEdges <- !is.null(graphdat$edges)
+      if(testEdges){testEdges <- nrow(graphdat$edges)>0 }
+      
+      if(testEdges){
         
         proj.gg <- proj.gg+ggplot2::annotate(geom="segment",x=froms$x,y=froms$y,xend=froms$x2,yend=froms$y2,
                                              arrow=ggplot2::arrow(length=ggplot2::unit(0.2,"cm"),type="closed"),alpha=0.5/ifelse(graph.width>5,5,1))
