@@ -2,7 +2,7 @@
 % Please edit documentation in R/parallelsync_project.R
 \name{parallelSync.project}
 \alias{parallelSync.project}
-\title{Uses DOSNOW package for parallel syncrhonization of project.}
+\title{Uses DOSNOW package for parallel syncrhonization of project. Takes advantage of directed acyclic graph structure to run R script processes in parallel.}
 \usage{
 parallelSync.project(project.id = get.project(), n.cores = 2)
 }
@@ -15,10 +15,10 @@ parallelSync.project(project.id = get.project(), n.cores = 2)
 data.frame with success/failure status.
 }
 \description{
-Uses DOSNOW package for parallel syncrhonization of project.
+Uses DOSNOW package for parallel syncrhonization of project. Takes advantage of directed acyclic graph structure to run R script processes in parallel.
 }
 \details{
-Experimental. See also sync.project() and synctest.project(). Uses Results/Tree_controller.R directory to pass work/completion data between nodes.
+Experimental. See also monitorParallelSync.project(), sync.project() and synctest.project(). Uses Results/tree_controller.R directory to pass work/completion data between nodes.
 }
 \examples{
 \dontrun{
