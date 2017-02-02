@@ -85,10 +85,11 @@ nodes <- data.frame(compute.node=1:n.cores,completedfile,workfile,todofile,
                     stringsAsFactors = FALSE)
 
 
-clust <- snow::makeCluster(n.cores,type="SOCK")
-            
-doSNOW::registerDoSNOW(clust)
+#clust <- snow::makeCluster(n.cores,type="SOCK")
+#parallel::registerDoSNOW(clust)
 
+clust <- parallel::makeCluster(n.cores,type="SOCK")
+doParallel::registerDoParallel(clust)
 
 presult <- plyr::ddply(nodes,"compute.node",function(x){
   
@@ -191,7 +192,7 @@ presult <- plyr::ddply(nodes,"compute.node",function(x){
 },.parallel = TRUE)
 
 	
-snow::stopCluster(clust)
+parallel::stopCluster(clust)
 
 return(presult)
 

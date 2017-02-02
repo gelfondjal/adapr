@@ -48,8 +48,8 @@ Read <- function(file.name="data.csv",description="Data file",read.fcn=guess.rea
 
 
 #' Tracks files that read by functions not in adapr and captures the file information within dependency object
-#' @param file.name name of file
-#' @param description description of data file
+#' @param file.name name of file (vectorized)
+#' @param description description of data file (vectorized)
 #' @details Allows tracking of files read by other functions than Read. Assumes file is in project "Data" directory
 #' @return Filepath of file to read
 #' @export

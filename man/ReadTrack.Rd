@@ -7,9 +7,9 @@
 ReadTrack(file.name = "data.csv", description = "Data file")
 }
 \arguments{
-\item{file.name}{name of file}
+\item{file.name}{name of file (vectorized)}
 
-\item{description}{description of data file}
+\item{description}{description of data file (vectorized)}
 }
 \value{
 Filepath of file to read

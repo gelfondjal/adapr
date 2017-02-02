@@ -5,7 +5,7 @@ Version: 1.0.2
 Date: 2017-01-30
 Author: Jon Gelfond, Martin Goros
 Maintainer: Jonathan Gelfond <gelfondjal@uthscsa.edu>
-Description: Tracks reading and writing within R scripts that are organized into a directed acyclic graph. Contains an interactive shiny application adaprApp(). Uses git2r package, Git and file hashes to track version histories of input and output. See package vignette for how to get started. V1.02 adds parallel execution of project scrips.
+Description: Tracks reading and writing within R scripts that are organized into a directed acyclic graph. Contains an interactive shiny application adaprApp(). Uses git2r package, Git and file hashes to track version histories of input and output. See package vignette for how to get started. V1.02 adds parallel execution of project scripts and function map in vignette. Makes project specification argument last in order.
 License: LGPL-2
 Depends: R (>= 3.1)
 Imports:
@@ -22,8 +22,8 @@ Imports:
      plyr,
      git2r,
     methods,
-    snow,
-    doSNOW
+    parallel,
+    doParallel
 Suggests:
   pkgKitten
 RoxygenNote: 5.0.1
