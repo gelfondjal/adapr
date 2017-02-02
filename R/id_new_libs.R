@@ -21,7 +21,7 @@ id_new_libs <- function(library.data.file){
   
   if(length(missing)){
     
-    packageInfo <- devtools::session_info()$packages
+    packageInfo <- devtools::session_info(include_base = TRUE)$packages
     
     packageInfo <- subset(packageInfo,packageInfo$package %in% missing)
     
