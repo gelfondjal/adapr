@@ -2,12 +2,13 @@
 #' @param library.data.file CSV File with a set of library names and repository locations
 #' @param subgroup data frame with Package, repos, and specific columns
 #' @param verbose Print which libraries are installed and loaded
+#' @param install.all logicial indicated whether to install all project packages
 #' @return Library information data
 #' @details Installs and loads all packages.Not for direct use. See install_project_packages().
 #' @export
 #' 
 #' 
-load.install.library.file <- function(library.data.file=NA,subgroup=NULL,verbose=FALSE){
+load.install.library.file <- function(library.data.file=NA,subgroup=NULL,verbose=FALSE,install.all=FALSE){
   
   if(is.na(library.data.file)){library.data.file <- file.path(get("source_info")$support.dir,get("source_info")$support.library.file)}
   
@@ -18,6 +19,8 @@ load.install.library.file <- function(library.data.file=NA,subgroup=NULL,verbose
   }
   
   packages.info.all <- utils::read.csv(library.data.file,as.is=TRUE)
+  
+  if(!(install.all)){
   
   if(is.null(packages.info.all$specific)){packages.info.all$specific <- FALSE}
   
@@ -36,7 +39,7 @@ load.install.library.file <- function(library.data.file=NA,subgroup=NULL,verbose
     
   }
   
-  
+  }#if not install.all, take subset of packages
   
   for(library.iter in 1:nrow(packages.info)){
     

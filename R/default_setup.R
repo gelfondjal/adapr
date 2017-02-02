@@ -77,17 +77,18 @@ default.adapr.setup <- function(){
   if(wantgit & grepl("Git does not",git_binary_path)){ 
   	
 
-  	  stop("Git is not installed Please download and configure (git-scm.com). Try GIT client GUI!!")
+  	  warning("Git is not installed. Some version control features limited.
+  	          Please download and configure (git-scm.com). Try GIT client GUI!!")
   	
   	}
   # Check git config  
   
-  if(wantgit & !grepl("Git does not",git_binary_path)){
+  if(wantgit){
   
   email <- ""
   
   try({
-    email <- system2(git_binary_path, paste("config --global user.email"),stdout = TRUE)
+    email <- git2r::config()[["global"]]$user.email
   })
   
   if(!grepl("@",email)){
@@ -100,7 +101,7 @@ default.adapr.setup <- function(){
     git.configure(gituser,gitemail)
     
     try({
-      email <- system2(git_binary_path, paste("config --global user.email"),stdout = TRUE)
+      email <-  git2r::config()[["global"]]$user.email
     })
     
     

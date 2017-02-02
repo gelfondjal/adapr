@@ -4,13 +4,13 @@
 \alias{run.program}
 \title{Run an R script within a project using devtools::clean_source}
 \usage{
-run.program(project.id = get.project(), r = get("source_info")$file$file,
+run.program(r = get("source_info")$file$file, project.id = get.project(),
   logRmd = FALSE)
 }
 \arguments{
-\item{project.id}{project id}
-
 \item{r}{R script within that project (r is short R script for convenience)}
+
+\item{project.id}{project id}
 
 \item{logRmd}{logical indicating whether to create R markdown log}
 }
@@ -22,7 +22,7 @@ Run an R script within a project using devtools::clean_source
 }
 \examples{
 \dontrun{
-run.program("adaprHome","read_data.R")
+run.program("read_data.R","adaprHome")
 } 
 
 }

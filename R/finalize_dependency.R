@@ -40,7 +40,7 @@ finalize_dependency <- function(RMD=TRUE,write=TRUE){
     Write.cap(NULL, outfile, I, source_info)
   }
   Read.cap(source_info$rmdfile, I, source_info)
-
+  file.remove(file.path(source_info$results.dir,source_info$rmdfile$file))
 
   
   Write(utils::sessionInfo(),paste0("Session_info_",source_info$file$db.name,".RObj"),paste0("sessionInfo for", source_info$file[["file"]]),save)

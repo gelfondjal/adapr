@@ -11,8 +11,7 @@ id_new_libs <- function(library.data.file){
  
   packages.info.all <- utils::read.csv(library.data.file,as.is=TRUE)
   
-  adapr_packs <- c("adapr","knitr","plyr","shinydashboard","devtools","R2HTML","shiny","gplots","digest","igraph","stats",
-  					"stats","graphics","grDevices","utils","datasets","methods","base","plotly")
+  adapr_packs <- c("adapr","stats","graphics","grDevices","utils","base")
 
    notadapr <- setdiff(devtools::loaded_packages()$package,adapr_packs)
    
@@ -21,7 +20,14 @@ id_new_libs <- function(library.data.file){
    #Only load nonspecific packages if subgroup is null
   
   if(length(missing)){
-    packages.info <- rbind(packages.info.all,data.frame(Package=missing,repos=NA,specific=TRUE))
+    
+    packageInfo <- devtools::session_info()$packages
+    
+    packageInfo <- subset(packageInfo,packageInfo$package %in% missing)
+    
+    packageInfo$repos <- ifelse(packageInfo$source=="Bioconductor","bioC",NA)
+    
+    packages.info <- rbind(packages.info.all,data.frame(Package=packageInfo$package,repos=packageInfo$repos,specific=TRUE))
     utils::write.csv(packages.info,library.data.file,row.names=FALSE)
     
   }    

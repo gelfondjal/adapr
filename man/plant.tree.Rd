@@ -4,7 +4,8 @@
 \alias{plant.tree}
 \title{initialize project}
 \usage{
-plant.tree(project.id, project.path = NA, swap.directory = NA)
+plant.tree(project.id, project.path = NA, swap.directory = NA,
+  first.program = "read_data.R")
 }
 \arguments{
 \item{project.id}{Project name, if missing then default}
@@ -12,6 +13,8 @@ plant.tree(project.id, project.path = NA, swap.directory = NA)
 \item{project.path}{Project home directory, if missing then default}
 
 \item{swap.directory}{Project branch exchange directory}
+
+\item{first.program}{Name of first program in project (read_data.R default)}
 }
 \value{
 logical for success or not

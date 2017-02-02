@@ -5,7 +5,7 @@
 \title{Loads librarys within the file library.list.file}
 \usage{
 load.install.library.file(library.data.file = NA, subgroup = NULL,
-  verbose = FALSE)
+  verbose = FALSE, install.all = FALSE)
 }
 \arguments{
 \item{library.data.file}{CSV File with a set of library names and repository locations}
@@ -13,6 +13,8 @@ load.install.library.file(library.data.file = NA, subgroup = NULL,
 \item{subgroup}{data frame with Package, repos, and specific columns}
 
 \item{verbose}{Print which libraries are installed and loaded}
+
+\item{install.all}{logicial indicated whether to install all project packages}
 }
 \value{
 Library information data

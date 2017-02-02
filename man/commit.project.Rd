@@ -4,12 +4,12 @@
 \alias{commit.project}
 \title{Git commit of project.}
 \usage{
-commit.project(project.id = get.project(), commit.message = "")
+commit.project(commit.message = "", project.id = get.project())
 }
 \arguments{
-\item{project.id}{project to graph}
-
 \item{commit.message}{message describing edits}
+
+\item{project.id}{project to commit}
 }
 \value{
 commit message

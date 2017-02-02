@@ -4,15 +4,15 @@
 \alias{make.program}
 \title{Generates the shell of a code that is project specific}
 \usage{
-make.program(project.id = get.project(), r = "", description = "",
+make.program(r = "", description = "", project.id = get.project(),
   seed = 2011, run = TRUE)
 }
 \arguments{
-\item{project.id}{Name of project}
-
 \item{r}{is source file name or Filename to create}
 
 \item{description}{What program does}
+
+\item{project.id}{Name of project}
 
 \item{seed}{Random start seed}
 
@@ -29,7 +29,7 @@ Will not overwrite existing program. Executes program stub. Mostly wrapper for s
 }
 \examples{
 \dontrun{
- make.program("adaprHome","read_data.R")
+ make.program("read_data.R",description="reads data","adaprHome")
 } 
 }
 

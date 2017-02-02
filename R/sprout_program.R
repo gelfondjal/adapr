@@ -62,9 +62,9 @@ sprout.program <- function(project.id=NA,source.file.name=NA,description="",seed
 
 
 #' Generates the shell of a code that is project specific
-#' @param project.id Name of project
 #' @param r is source file name or Filename to create
 #' @param description What program does
+#' @param project.id Name of project
 #' @param seed Random start seed
 #' @param run Execute r script?
 #' @return Logical indicating failure or not
@@ -72,9 +72,9 @@ sprout.program <- function(project.id=NA,source.file.name=NA,description="",seed
 #' @export
 #' @examples 
 #'\dontrun{
-#'  make.program("adaprHome","read_data.R")
+#'  make.program("read_data.R",description="reads data","adaprHome")
 #'} 
-make.program <- function(project.id=get.project(),r="",description="",seed=2011,run=TRUE){
+make.program <- function(r="",description="",project.id=get.project(),seed=2011,run=TRUE){
   
   if(!(toupper(gsub(".*\\.","",r))=="R")){
     
@@ -86,7 +86,7 @@ make.program <- function(project.id=get.project(),r="",description="",seed=2011,
   
   out <- sprout.program(project.id,source.file.name=r,description=description,seed)
   
-  if(run){run.program(project.id,r)}
+  if(run){run.program(r,project.id)}
 
   return(out)
 }

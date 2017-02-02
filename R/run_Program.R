@@ -1,15 +1,15 @@
 #' Run an R script within a project using devtools::clean_source
-#' @param project.id project id
 #' @param r R script within that project (r is short R script for convenience)
+#' @param project.id project id
 #' @param logRmd logical indicating whether to create R markdown log
 #' @return value from clean_source from devtools package
 #' @export
 #'@examples 
 #'\dontrun{
-#' run.program("adaprHome","read_data.R")
+#' run.program("read_data.R","adaprHome")
 #'} 
 #' 
-run.program <- function(project.id=get.project(),r=get("source_info")$file$file,logRmd=FALSE){
+run.program <- function(r=get("source_info")$file$file,project.id=get.project(),logRmd=FALSE){
   
   source.file <- r
   
@@ -82,8 +82,8 @@ run.program <- function(project.id=get.project(),r=get("source_info")$file$file,
 
 
 #' Remove an R script from a project. Removes program, dependency, and results.
-#' @param project.id project id
 #' @param source.file R script within that project
+#' @param project.id project id
 #' @param ask is a logical whether to ask user
 #' @return value from file.remove
 #' @details Cannot be undone through adapr! Will not remove markdown or other program side-effects.
@@ -114,6 +114,9 @@ remove.program <- function(project.id=get.project(),source.file=get("source_info
                 paste0(source.file,".txt"))
   results <- file.path(get.project.path(project.id),project.directory.tree$results,source.file)
   
+  markdownfile <- gsub("\\.r$|\\.R","\\.Rmd",source.file)
+  markdownfile <- file.path(get.project.path(project.id),project.directory.tree$analysis,
+                            "Markdown",markdownfile)
   inside.results <- list.files(results,full.names=TRUE,recursive = TRUE)
   
   while(length(inside.results)>0){
@@ -126,7 +129,7 @@ remove.program <- function(project.id=get.project(),source.file=get("source_info
   
   results.out <- file.remove(results,recursive=TRUE,include.dirs = TRUE)
   
-  results <- file.remove(c(program,dependencyDir))
+  results <- file.remove(c(program,dependencyDir,markdownfile))
     
   return(c(results,inside.out,results))
 }

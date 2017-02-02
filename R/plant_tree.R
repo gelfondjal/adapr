@@ -2,16 +2,20 @@
 #' @param project.id Project name, if missing then default
 #' @param project.path Project home directory, if missing then default
 #' @param publish.directory Project branch exchange directory
+#' @param first.program Name of first program in project (read_data.R default)
 #' @return logical for success or not
+#' @details Sets project
 #' @examples 
 #'\dontrun{
 #' init.project("adaprTest")
 #'} 
 #' @details Wrapper for plant.tree
 #' @export
-init.project <- function(project.id,project.path=NA,publish.directory=NA){
+init.project <- function(project.id,project.path=NA,publish.directory=NA,first.program="read_data.R"){
   
-  out <- plant.tree(project.id,project.path,publish.directory )
+  out <- plant.tree(project.id,project.path,publish.directory,first.program )
+  
+  set.project(project.id)
   
 }
 
@@ -19,10 +23,11 @@ init.project <- function(project.id,project.path=NA,publish.directory=NA){
 #' @param project.id Project name, if missing then default
 #' @param project.path Project home directory, if missing then default
 #' @param swap.directory Project branch exchange directory
+#' @param first.program Name of first program in project (read_data.R default)
 #' @return logical for success or not
 #' @details Not for direct use. See init.project().
 #' @export
-plant.tree <- function(project.id,project.path=NA,swap.directory=NA){
+plant.tree <- function(project.id,project.path=NA,swap.directory=NA,first.program="read_data.R"){
   
   opts <- get_adapr_options()
   
@@ -77,9 +82,9 @@ plant.tree <- function(project.id,project.path=NA,swap.directory=NA){
        
     sprout.program(project.id,source.file.name=NA,description="",seed=2011,capture.load.command="library(adapr)",controller=TRUE)
     
-    test <- sprout.program(project.id,source.file.name="read_data.R",description="reads data",seed=2011,capture.load.command="library(adapr)",controller=FALSE)
+    test <- sprout.program(project.id,source.file.name=first.program,description="reads data",seed=2011,capture.load.command="library(adapr)",controller=FALSE)
     try({
-    devtools::clean_source(file.path(project.path,project.directory.tree$analysis,"read_data.R"),quiet=TRUE) 
+    devtools::clean_source(file.path(project.path,project.directory.tree$analysis,first.program),quiet=TRUE) 
     })
      if(!test){
      

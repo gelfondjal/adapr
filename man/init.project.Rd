@@ -4,7 +4,8 @@
 \alias{init.project}
 \title{initialize project}
 \usage{
-init.project(project.id, project.path = NA, publish.directory = NA)
+init.project(project.id, project.path = NA, publish.directory = NA,
+  first.program = "read_data.R")
 }
 \arguments{
 \item{project.id}{Project name, if missing then default}
@@ -12,6 +13,8 @@ init.project(project.id, project.path = NA, publish.directory = NA)
 \item{project.path}{Project home directory, if missing then default}
 
 \item{publish.directory}{Project branch exchange directory}
+
+\item{first.program}{Name of first program in project (read_data.R default)}
 }
 \value{
 logical for success or not
@@ -20,6 +23,8 @@ logical for success or not
 initialize project
 }
 \details{
+Sets project
+
 Wrapper for plant.tree
 }
 \examples{

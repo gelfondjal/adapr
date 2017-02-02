@@ -232,5 +232,6 @@ There are some convenience functions that can be used within the R console. Thes
 
 ```list.programs()``` will list the R scripts in the project.
 
+![Figure 7. Cheet sheet of major functions](function_maps.png)
 
 

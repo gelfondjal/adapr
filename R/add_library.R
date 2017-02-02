@@ -86,7 +86,7 @@ remove_package <- function(project.id=get.project(),library.name){
 install_project_packages <- function(project.id=get.project()){
   source_info <- pull_source_info(project.id)    
   library.file <- file.path(source_info$project.path,project.directory.tree$support,"common_libs.csv")
-  load.install.library.file(library.data.file= library.file,verbose=TRUE)
+  load.install.library.file(library.data.file= library.file,verbose=TRUE,install.all=TRUE)
   
   return(read_library(project.id))
 }

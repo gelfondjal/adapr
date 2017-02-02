@@ -1,6 +1,6 @@
 #' Git commit of project.
-#' @param project.id project to graph
 #' @param commit.message message describing edits
+#' @param project.id project to commit
 #' @return commit message
 #' @details Need git option active. Uses git2r package.
 #' @export
@@ -9,7 +9,7 @@
 #' commit.project("adaprHome","Did I change something?")
 #'} 
 #'
-commit.project <- function(project.id=get.project(),commit.message=""){
+commit.project <- function(commit.message="",project.id=get.project()){
 
   source_info <- pull_source_info(project.id)
 
