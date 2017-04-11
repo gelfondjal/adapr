@@ -20,4 +20,3 @@ Lists the branches available for loading in the adapr project
 source_info <- create_source_file_dir("adaprHome","tree_controller.R")
 } 
 }
-

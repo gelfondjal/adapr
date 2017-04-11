@@ -23,4 +23,3 @@ Uses the file suffix to return write.csv, png, pdf, save
  identical(utils::write.csv,guess.write.fcn("data.csv"))
 } 
 }
-

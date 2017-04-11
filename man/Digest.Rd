@@ -42,4 +42,3 @@ Uses digest from package "digest". Authors Dirk Eddelbuettel edd@debian.org for 
 } 
 
 }
-

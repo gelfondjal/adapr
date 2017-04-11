@@ -27,4 +27,3 @@ Is wrapper for redirect.tree. Does not move the project only indicates new locat
 relocate.project("adaprTest","mydirectory1","mydirectory2publish")
 } 
 }
-

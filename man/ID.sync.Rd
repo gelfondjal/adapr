@@ -25,4 +25,3 @@ file.info <-Condense.file.info(trees)
 ID.sync(file.info,projInfo$graph) 
 } 
 }
-

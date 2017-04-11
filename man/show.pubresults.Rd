@@ -25,4 +25,3 @@ show.pubresults("adaprHome")
 
 
 }
-

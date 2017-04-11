@@ -18,4 +18,3 @@ Find path for git executable
 \author{
 Adapted form devtools author Hadley Wickham
 }
-

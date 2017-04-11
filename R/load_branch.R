@@ -21,7 +21,10 @@ Load.branch <- function(file){
   
   file.info <- Get.file.info(source_info,data="",file0="",path.grep=file)
   
-  obj <- load(file.info[["fullname"]],envir=parent.frame())
+  #obj <- load(file.info[["fullname"]],envir=parent.frame())
+  
+  
+  obj <- readRDS(file.info[["fullname"]])
   
   # print(file.info[["fullname"]])
   
@@ -29,6 +32,8 @@ Load.branch <- function(file){
   
   source_info$dependency$update(df.update)
   
-  return(get(obj,envir=parent.frame()))
+  #return(get(obj,envir=parent.frame()))
+  
+  return(obj)
   
 }

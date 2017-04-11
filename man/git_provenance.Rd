@@ -27,4 +27,3 @@ Requires a Git commit snapshot within the project
 } 
 
 }
-

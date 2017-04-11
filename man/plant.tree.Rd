@@ -25,4 +25,3 @@ initialize project
 \details{
 Not for direct use. See init.project().
 }
-

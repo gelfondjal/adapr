@@ -29,4 +29,3 @@ projInfo <- get.project.info(si$dependency.dir)
 Sync.test(projInfo$graph,projInfo$tree)
 } 
 }
-

@@ -26,4 +26,3 @@ plot(projInfo$graph)
 } 
 
 }
-

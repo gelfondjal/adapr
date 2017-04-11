@@ -35,4 +35,3 @@ git.add(si$project.path,file0)
 \author{
 Uses git2r package.
 }
-

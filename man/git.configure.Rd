@@ -24,4 +24,3 @@ Configure user.name and email for git. Requires git installation.
 } 
 
 }
-

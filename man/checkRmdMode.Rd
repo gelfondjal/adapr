@@ -21,4 +21,3 @@ Checks whether interactive R markdown session is ON
 } 
 
 }
-

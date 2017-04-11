@@ -20,4 +20,3 @@ Write the dependcy object to file
 \details{
 Not for direct use. See finalize_dependency().
 }
-

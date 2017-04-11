@@ -18,4 +18,3 @@ Retrieve project swap directory
 \details{
 Do not use. Deprecated.
 }
-

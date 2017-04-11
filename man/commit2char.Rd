@@ -25,4 +25,3 @@ out <- paste("Git",commit2char(committed))
 } 
 
 }
-

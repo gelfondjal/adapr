@@ -24,4 +24,3 @@ send.pubresults("adaprHome")
 } 
 
 }
-

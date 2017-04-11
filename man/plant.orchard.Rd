@@ -18,4 +18,3 @@ Create project hub files in root directory
 } 
 
 }
-

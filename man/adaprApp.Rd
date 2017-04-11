@@ -9,4 +9,3 @@ adaprApp()
 \description{
 Launches Main app
 }
-

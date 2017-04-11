@@ -20,4 +20,3 @@ Loads a single R object from file
 processed <- Load.branch("read_data.R/process_data.Rdata")
 } 
 }
-

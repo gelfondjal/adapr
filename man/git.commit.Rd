@@ -31,4 +31,3 @@ git.commit(si$project.path,"test commit")
 } 
 
 }
-

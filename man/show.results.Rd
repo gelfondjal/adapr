@@ -23,4 +23,3 @@ show.results("adaprHome")
 } 
 
 }
-

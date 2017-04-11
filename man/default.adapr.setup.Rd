@@ -20,4 +20,3 @@ default.adapr.setup()
 } 
 
 }
-

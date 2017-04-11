@@ -39,4 +39,3 @@ project_report_send_rmd(si=source_info)
 } 
 
 }
-

@@ -21,4 +21,3 @@ Take list of dependency file data and changes the project path
 \details{
 Not for direct use. Used with swapping branches by rework.project.path()
 }
-

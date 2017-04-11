@@ -16,4 +16,3 @@ send.branch.si(source_info, branch_cut, all = FALSE)
 \description{
 Copy dependent programs to swap directory
 }
-

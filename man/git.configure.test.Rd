@@ -23,4 +23,3 @@ git.configure.test()
 \author{
 Uses git_path adapted form devtools author Hadley Wickham
 }
-

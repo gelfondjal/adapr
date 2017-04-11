@@ -24,4 +24,3 @@ Current default is sha1. If algorithm not recognized then will not change option
 } 
 
 }
-

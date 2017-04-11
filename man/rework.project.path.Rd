@@ -18,4 +18,3 @@ Collects all trees in dependency.dir and changes the project path
 \details{
 Not for direct use. Used with swapping branches
 }
-

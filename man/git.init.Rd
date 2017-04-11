@@ -27,4 +27,3 @@ Initiate git
  git.init(get.project.path("adaprHome"))
 } 
 }
-

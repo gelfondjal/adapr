@@ -26,4 +26,3 @@ identical(opt,opt2)
 } 
 
 }
-

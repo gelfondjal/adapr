@@ -29,4 +29,3 @@ Strips project directory out of dependency file
 } 
 
 }
-

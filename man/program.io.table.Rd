@@ -26,4 +26,3 @@ trees <- Harvest.trees(pull_source_info("adaprHome")$dependency.dir)
 program.io.table(trees)
 } 
 }
-

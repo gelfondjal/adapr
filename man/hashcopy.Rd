@@ -20,4 +20,3 @@ Given Project name, Return project publish directory
 \details{
 Only copies if there is a discrepancy in the file hash
 }
-

@@ -27,4 +27,3 @@ dag<-Make.summary.graph(dependency.obj=trees)
 plot(dag)
 } 
 }
-

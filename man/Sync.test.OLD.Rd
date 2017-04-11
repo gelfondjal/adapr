@@ -16,4 +16,3 @@ Sync.test.OLD(dagger, tree, plotl = TRUE)
 \description{
 check the synchrony of source files and their created objects
 }
-

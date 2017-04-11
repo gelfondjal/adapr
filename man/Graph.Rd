@@ -32,4 +32,3 @@ Write object and capture file information
  dev.off()
 } 
 }
-

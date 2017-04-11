@@ -26,4 +26,3 @@ Deprecated. See graph.project()
 } 
  
 }
-

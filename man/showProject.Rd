@@ -17,4 +17,3 @@ Opens project directory
 \details{
 Use BrowseURL to open project directory
 }
-

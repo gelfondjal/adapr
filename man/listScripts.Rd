@@ -18,4 +18,3 @@ Lists the R scripts in the adapr project
 \details{
 Deprecated see list.programs
 }
-

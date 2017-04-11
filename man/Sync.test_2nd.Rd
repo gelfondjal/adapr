@@ -19,4 +19,3 @@ list with synchronizing information
 \description{
 check the synchrony of source files and their created objects
 }
-

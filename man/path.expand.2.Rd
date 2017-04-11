@@ -23,4 +23,3 @@ See path.expand() in base R
  path.expand.2("~")
 } 
 }
-

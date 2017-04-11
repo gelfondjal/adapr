@@ -17,4 +17,3 @@ value 1 if success
 \description{
 Initializes dependency object source_info
 }
-

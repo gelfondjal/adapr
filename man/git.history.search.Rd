@@ -34,4 +34,3 @@ Performes git history search
 \author{
 Uses git_path adapted form devtools author Hadley Wickham
 }
-

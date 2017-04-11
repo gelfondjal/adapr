@@ -19,4 +19,3 @@ Opens results directory
 \details{
 Deprecated: use show.results(). Uses BrowseURL to open results directory
 }
-

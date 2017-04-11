@@ -34,4 +34,3 @@ fileinfo <- Create.file.info(dirname(testfile),basename(testfile),"cars dataset"
 Write.cap(cars,fileinfo,write.csv,source_info,row.names=FALSE)
 } 
 }
-

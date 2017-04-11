@@ -18,4 +18,3 @@ Initializes dependency object source_info
 \details{
 Not for direct use.
 }
-

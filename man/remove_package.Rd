@@ -26,4 +26,3 @@ remove_package("adaprHome","ggplot2")
 } 
 
 }
-

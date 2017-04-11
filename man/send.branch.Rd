@@ -14,4 +14,3 @@ send.branch(branch_cut, all = FALSE)
 \description{
 Copy dependent programs to swap directory
 }
-

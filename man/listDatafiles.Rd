@@ -18,4 +18,3 @@ Lists the data files available for reading in the adapr project
 \details{
 Deprecated. See list.datafiles()
 }
-

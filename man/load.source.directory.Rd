@@ -25,4 +25,3 @@ Looks for files with .R or .r suffixes.
  load.source.directory(path)
 } 
 }
-

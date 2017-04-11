@@ -2,8 +2,8 @@
 % Please edit documentation in R/dependency_class.R
 \docType{class}
 \name{dependency-class}
-\alias{dependency}
 \alias{dependency-class}
+\alias{dependency}
 \title{Dependency class}
 \description{
 Dependency class

@@ -18,4 +18,3 @@ Create source_info from project.id
 \details{
 Creates tree_controller.R directory. This directory is used for operation on the tree.
 }
-
