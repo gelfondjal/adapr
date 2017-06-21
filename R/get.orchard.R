@@ -31,6 +31,8 @@ get_orchard <- function(){
 }
 
 
+
+
 #' Removes project from orchard, but doesn't delete project from file system
 #' @param project.id0 which project to remove from orchard
 #' @return orchard
@@ -77,3 +79,72 @@ open_orchard <- function(){
   
   return()
 }
+
+
+#' List projects
+#' @param allInfo logical whether to return dat
+#' @return orchard
+#' @export
+#' @examples 
+#'\dontrun{
+#' list.projects(TRUE)
+#'} 
+#' 
+#' 
+
+list.projects <- function(allInfo=TRUE){
+  
+  out <- get_orchard()
+  if(!allInfo){return(out$project.id)}
+  return(out)
+  
+}
+
+#' List project file information disk space, modification timespan, days inactive
+#' @param project.id character vector of projects
+#' @return orchard
+#' @export
+#' @examples 
+#'\dontrun{
+#' list.projects(TRUE)
+#'} 
+#' 
+
+
+fileinfo.project <- function(project.id=list.projects()){
+  
+  size <- length(project.id)
+  
+  out <- data.frame(project.id=project.id,size=NA,startDate=Sys.time(),endDate=Sys.time())
+  
+  for(i in seq_along(project.id)){
+    try({
+  
+          allfiles <- list.files(get.project.path(project.id[i]),recursive = TRUE,full.names = TRUE)
+      
+          mtimes <- file.mtime(allfiles)
+          
+          out$startDate[i] <- min(mtimes)
+          
+          out$endDate[i] <- max(mtimes)
+          
+          out$ageDays[i] <- round(out$endDate[i]-out$startDate[i],1)
+          
+          out$inactiveDays[i] <- round(Sys.time()-out$endDate[i],1)
+          
+          out$size[i] <- sum(file.size(allfiles))
+      
+    })
+  
+  
+  
+  }
+  
+  return(out)
+  
+}#END: filespace.project
+
+
+
+
+

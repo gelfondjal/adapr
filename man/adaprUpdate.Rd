@@ -7,7 +7,7 @@
 adaprUpdate()
 }
 \value{
-message from git_
+message from github
 }
 \description{
 Updates latest adapr from gitHub.

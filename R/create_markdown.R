@@ -31,8 +31,7 @@ create_markdown <- function(target.file=paste0(get("source_info")$file$file,"md"
   adapr_options <- get_adapr_options()
 
   if(adapr_options$git=="TRUE"){
-	git_binary_path <- git_path(NULL)
-	author <- system2(git_binary_path, paste("config --global user.name"),stdout = TRUE)
+	author <- git2r::config()[["global"]]$user.name
   }else{author <- adapr_options$username}
 	
 	start.lines.generic <- c("---",

@@ -16,7 +16,7 @@ function for writing file
 Return function for writing common file types
 }
 \details{
-Uses the file suffix to return write.csv, png, pdf, save
+Uses the file suffix to return write.csv, png, pdf, save, saveRDS
 }
 \examples{
 \dontrun{

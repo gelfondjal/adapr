@@ -1,7 +1,7 @@
 #' Return function for writing common file types
 #' @param filename file to be written
 #' @return function for writing file
-#' @details Uses the file suffix to return write.csv, png, pdf, save
+#' @details Uses the file suffix to return write.csv, png, pdf, save, saveRDS
 #' @export 
 #' @examples 
 #'\dontrun{
@@ -11,7 +11,12 @@ guess.write.fcn <- function(filename){
   
   # returns the function for reading a file with the suffix in x
   
+  
+  
+  
   suffix <- tolower(gsub(".*\\.","",filename))
+  
+  if(gsub(".*\\.","",filename)=="RData"){return(saveRDS)}
   
   if(suffix=="png"){return(grDevices::png)}
   if(suffix=="pdf"){return(grDevices::pdf)}

@@ -1,5 +1,5 @@
 #' Updates latest adapr from gitHub.
-#' @return message from git_
+#' @return message from github
 #' @export
 #' @examples 
 #'\dontrun{

@@ -167,3 +167,48 @@ default.adapr.setup <- function(){
   
 }# END default set.up
 
+
+#' Create adaprTest example project
+#' @details To be run after default adapr set up.
+#' @param overwrite Logical indicating whether to overwrite existing project
+#' @export
+#' @examples 
+#'\dontrun{
+#' # Requires RStudio
+#'default.adapr.setup()
+#'
+#'} 
+#'
+
+loadAdaprTest <- function(overwrite=TRUE){
+  
+  # Loads an example project
+  
+  if(overwrite) {remove.project("adaprTest")}
+  
+  
+  if("adaprTest" %in% get_orchard()$project.id){
+    
+    
+    print("adaprTest already loaded try remove.project(\"adaprTest\")")
+    
+    return(1)
+  }else{
+    
+    projectLocation <- system.file("adaprTest.zip",package="adapr")
+    
+    newLocation <- get_adapr_options()$project.path
+    
+    #file.copy(projectLocation,newLocation,recursive = TRUE)
+  
+    utils::unzip(zipfile=projectLocation,exdir=newLocation,overwrite = TRUE)
+    
+    relocate.project("adaprTest")
+    
+    set.project("adaprTest")
+    
+  }
+
+  return(0)   
+
+}# END: loadAdaprTest
