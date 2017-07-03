@@ -29,6 +29,7 @@ Read <- function(file.name="data.csv",description="Data file",read.fcn=guess.rea
   }
   
   
+  
   if(dirname(file.name)!="."){
     inpath <- file.path(source_info$data.dir,dirname(file.name))
     file.name <- basename(file.name)
@@ -38,7 +39,7 @@ Read <- function(file.name="data.csv",description="Data file",read.fcn=guess.rea
   
   file.info <- Create.file.info(inpath,basename(file.name),description)
   
-  read.obj <- Read.cap(file.info,read.fcn,source_info,...)
+  read.obj <- Read.cap(file.info,read.fcn,options()$adaprScriptInfo,...)
   
   return(read.obj)
   

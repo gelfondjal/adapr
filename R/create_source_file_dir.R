@@ -68,6 +68,8 @@ create_source_file_dir <- function(project.id0=get("project.id"),source.file0=ge
   
   source_info$options$git <- ifelse(is.null(source_info$options$git),TRUE,source_info$options$git=="TRUE")
   
+  options(adaprScriptInfo = source_info) 
+  
   initialize_dependency_info(source_info)
   
   #Start html markup tracking
@@ -105,6 +107,8 @@ create_source_file_dir <- function(project.id0=get("project.id"),source.file0=ge
   
   #print(source_info)
   
+  options(adaprScriptInfo = source_info) 
+   
   return(source_info)
   
 }	

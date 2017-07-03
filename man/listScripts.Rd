@@ -4,7 +4,7 @@
 \alias{listScripts}
 \title{Lists the R scripts in the adapr project}
 \usage{
-listScripts(project.id = get("source_info")$project.id)
+listScripts(project.id = get.project())
 }
 \arguments{
 \item{project.id}{project.id}

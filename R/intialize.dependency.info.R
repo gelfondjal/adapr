@@ -67,9 +67,6 @@ initialize_dependency_info <- function(source_info_arg){
   })#try get
   }
   
-  
-  
-  
   #  git.add(project.path,file.path(dependency.file))	
   
   # load the libraries and the dependent source functions
@@ -103,12 +100,12 @@ initialize_dependency_info <- function(source_info_arg){
     
     if(grepl("(\\.r)|(\\.R)$",file.name)){
     
-      Read.cap(Create.file.info(dirname(file.name),basename(file.name),"Support file"),I,source_info_arg)
+      Read.cap(Create.file.info(dirname(file.name),basename(file.name),"Support file"),I,options()$adaprScriptInfo)
     }
   }		 
   
   file.name <- file.path(source_info_arg$support.dir,source_info_arg$support.library.file)
-  Read.cap(Create.file.info(dirname(file.name),basename(file.name),"Support file"),I,source_info_arg)
+  Read.cap(Create.file.info(dirname(file.name),basename(file.name),"Support file"),I,options()$adaprScriptInfo)
   
   
   

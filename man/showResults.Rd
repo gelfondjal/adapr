@@ -4,7 +4,7 @@
 \alias{showResults}
 \title{Opens results directory}
 \usage{
-showResults(si = get("source_info"), project.id = "", rscript = "")
+showResults(si = options()$adaprScriptInfo, project.id = "", rscript = "")
 }
 \arguments{
 \item{si}{is source_info object}

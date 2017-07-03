@@ -25,6 +25,7 @@ finalize_dependency <- function(RMD=TRUE,write=TRUE){
     
   }
   
+  source_info <- options()$adaprScriptInfo
  
   current.dir <- getwd()
   # Copy and render Rmd file

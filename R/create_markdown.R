@@ -47,8 +47,8 @@ create_markdown <- function(target.file=paste0(get("source_info")$file$file,"md"
 							                              ",", 
                         paste0("\"",si$file$file  ,"\""),")","\n",
 							      
-							      "```\n\n\n\n"),
-							"```{r,echo=FALSE} \n if(checkRmdMode()){dependency.out <- finalize_dependency() } \n ```")
+							      "\n```\n\n\n\n"),
+							"\n```{r,echo=FALSE} \n if(checkRmdMode()){dependency.out <- finalize_dependency() } \n```")
 								
 	start.lines.generic <- paste(start.lines.generic,collapse="\n")
 	

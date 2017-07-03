@@ -55,7 +55,7 @@ Graph <- function(file.name="data.csv",description="Result file",write.fcn=guess
   
   file.info <- Create.file.info(outpath,outfile,description)
   
-  write.obj <-Write.cap(obj,file.info,write.fcn,source_info,...)
+  write.obj <-Write.cap(obj,file.info,write.fcn,options()$adaprScriptInfo,...)
   
   return(file.info)
   

@@ -19,7 +19,7 @@ Load.branch <- function(file){
     
   }
   
-  file.info <- Get.file.info(source_info,data="",file0="",path.grep=file)
+  file.info <- Get.file.info(options()$adaprScriptInfo,data="",file0="",path.grep=file)
   
   obj <- load(file.info[["fullname"]],envir=parent.frame())
   
@@ -49,7 +49,7 @@ Load.branch <- function(file){
 #'\dontrun{
 #' processed <- load.flex("read_data.R/process_data.RData")
 #'} 
-load.flex <- function(file,read.fcn=readRDS,...){
+loadFlex <- function(file,read.fcn=readRDS,...){
   
   # Loads obj from source_info
   # updates dependency.file
@@ -62,7 +62,7 @@ load.flex <- function(file,read.fcn=readRDS,...){
     
   }
   
-  file.info <- Get.file.info(source_info,data="",file0="",path.grep=file)
+  file.info <- Get.file.info(options()$adaprScriptInfo,data="",file0="",path.grep=file)
   
   obj <- read.fcn(file.info[["fullname"]],...)
   

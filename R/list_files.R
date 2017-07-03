@@ -7,7 +7,7 @@
 #' source_info <- create_source_file_dir("adaprHome","tree_controller.R")
 #` listBranches()
 #'} 
-listBranches <- function(si=get("source_info")){
+listBranches <- function(si=get()$adaprScriptInfo){
   
   file_data <- si$all.files
   
@@ -41,7 +41,7 @@ listBranches <- function(si=get("source_info")){
 #'} 
 #'
 #' 
-list.branches <- function(project.id=get.project()){
+list.branches <- function(project.id=get()$adaprScriptInfo){
   
   file_data <- list(file=NULL)
   
@@ -80,7 +80,7 @@ list.branches <- function(project.id=get.project()){
 #' @details Deprecated see list.programs
 #' @export
 #' 
-listScripts<- function(project.id=get("source_info")$project.id){
+listScripts<- function(project.id=get.project()){
   warning("deprecated: see list.programs")
   
   trees <- Harvest.trees(file.path(get.project.path(project.id),project.directory.tree$dependency.dir))
@@ -129,7 +129,7 @@ list.programs <- function(project.id=get.project()){
 #' @details Deprecated. See list.datafiles()
 #' @export
 #' 
-listDatafiles <- function(si=get("source_info")){
+listDatafiles <- function(si=options()$adaprScriptInfo){
   
   warning("deprecated: see list.datafiles")
   
@@ -235,7 +235,7 @@ list.datafiles <- function(project.id=get.project()){
 #' @details Deprecated: use show.results(). Uses BrowseURL to open results directory
 #' @export
 #' 
-showResults <- function(si=get("source_info"),project.id="",rscript=""){
+showResults <- function(si=options()$adaprScriptInfo,project.id="",rscript=""){
   warning("deprecated: see show.results")
   if(project.id==""){
     utils::browseURL(si$results.dir)
@@ -257,7 +257,7 @@ showResults <- function(si=get("source_info"),project.id="",rscript=""){
 #' show.results("adaprHome")
 #'} 
 #'
-show.results <- function(project.id=get.project(),rscript=""){
+show.results <- function(project.id=get.project(),rscript=options()$adaprScriptInfo$file$file){
   
   si <- pull_source_info(project.id)
   

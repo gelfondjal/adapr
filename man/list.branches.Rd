@@ -4,7 +4,7 @@
 \alias{list.branches}
 \title{Lists the branches available for loading in the adapr project}
 \usage{
-list.branches(project.id = get.project())
+list.branches(project.id = get()$adaprScriptInfo)
 }
 \arguments{
 \item{project.id}{project to find branches within}
