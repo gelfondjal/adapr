@@ -102,16 +102,16 @@ list.projects <- function(allInfo=TRUE){
 
 #' List project file information disk space, modification timespan, days inactive
 #' @param project.id character vector of projects
-#' @return orchard
+#' @return dataframe with project information
 #' @export
 #' @examples 
 #'\dontrun{
-#' list.projects(TRUE)
+#' fileinfo.project()
 #'} 
 #' 
 
 
-fileinfo.project <- function(project.id=list.projects()){
+fileinfo.project <- function(project.id=list.projects()$project.id){
   
   size <- length(project.id)
   
@@ -128,11 +128,11 @@ fileinfo.project <- function(project.id=list.projects()){
           
           out$endDate[i] <- max(mtimes)
           
-          out$ageDays[i] <- round(out$endDate[i]-out$startDate[i],1)
+          out$ageDays[i] <- round(difftime(out$endDate[i],out$startDate[i],units = "days"),1)
           
-          out$inactiveDays[i] <- round(Sys.time()-out$endDate[i],1)
+          out$inactiveDays[i] <- round(difftime(Sys.time(),out$endDate[i],units = "days"),1)
           
-          out$size[i] <- sum(file.size(allfiles))
+          out$size[i] <- sum(file.size(allfiles),na.rm = TRUE)
       
     })
   
@@ -143,8 +143,3 @@ fileinfo.project <- function(project.id=list.projects()){
   return(out)
   
 }#END: filespace.project
-
-
-
-
-

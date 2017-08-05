@@ -4,20 +4,20 @@
 \alias{fileinfo.project}
 \title{List project file information disk space, modification timespan, days inactive}
 \usage{
-fileinfo.project(project.id = list.projects())
+fileinfo.project(project.id = list.projects()$project.id)
 }
 \arguments{
 \item{project.id}{character vector of projects}
 }
 \value{
-orchard
+dataframe with project information
 }
 \description{
 List project file information disk space, modification timespan, days inactive
 }
 \examples{
 \dontrun{
-list.projects(TRUE)
+fileinfo.project()
 } 
 
 }

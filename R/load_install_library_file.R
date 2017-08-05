@@ -8,9 +8,10 @@
 #' @export
 #' 
 #' 
+#' 
 load.install.library.file <- function(library.data.file=NA,subgroup=NULL,verbose=FALSE,install.all=FALSE){
   
-  if(is.na(library.data.file)){library.data.file <- file.path(get("source_info")$support.dir,get("source_info")$support.library.file)}
+  if(is.na(library.data.file)){library.data.file <- file.path(get.sourceInfo()$support.dir,get.sourceInfo()$support.library.file)}
   
   if(!file.exists(library.data.file)){
     print("No library information file")
@@ -62,10 +63,8 @@ load.install.library.file <- function(library.data.file=NA,subgroup=NULL,verbose
       
       bioc.list <- subset(packages.info,(packages.info$repos=="bioC")&(packages.info$install.check==FALSE))$Package
       
-      print(paste("Installing",bioc.list))
-      
-      
-      
+      print(paste("Installing Bioconductor",bioc.list))
+
       source("http://bioconductor.org/biocLite.R")
       
       tempfcn <- get("biocLite")
@@ -155,3 +154,160 @@ load.install.library.file <- function(library.data.file=NA,subgroup=NULL,verbose
   
   
 }
+
+
+#' Install package of specific version
+#' @param package package name to install
+#' @param version package version
+#' @param installVersion logical, TRUE for install a specific version, if FALSE then latest
+#' @param lib path to local library
+#' @param repos character of repository
+#' @param show.available logical to display whether the package is available
+#' @param ... Argument to install.packages/install.version functions
+#' @return Library information data
+#' @details Installs from CRAN and bioconductor packages. Local libraries will not be installed.
+#' @export
+#'
+
+install <- function(package,version=NULL,installVersion=FALSE,lib=.libPaths()[1],repos='cran',show.available=FALSE,...){
+  
+  if(repos=='cran'){
+    # Show available versions of the package
+    if(show.available){
+      print(versions::available.versions(package)[[package]])
+    }
+    # Install package no version specified (default is to use the most current version)
+    if(!installVersion){
+      utils::install.packages(package,lib=lib,...)
+      cat(paste0("Cran Package ",package," successfully installed!\n"))
+    }
+    # Install package with version specified
+    if(installVersion){
+      versions::install.versions(package, version, lib=lib,...)
+      cat(paste0("Cran Package ",package,version," successfully installed!\n"))
+    }
+  }# Cran package
+  # Install bioconductor package
+  if(repos=="bioc"){
+    if(!exists("biocLite")){
+      source("http://bioconductor.org/biocLite.R")
+    }
+    tempfcn <- get("biocLite")
+    tempfcn(package,ask=TRUE)
+    cat(paste0("Bioconductor Package ",package," successfully installed!\n"))
+  }# Bioc package
+    
+    
+}
+
+
+
+#' Check install of package of specific version
+#' @param package0 name of package
+#' @param version0 package version
+#' @param versionCheck logical to install specific version
+#' @param lib path to local library
+#' @return logical on installed status
+
+checkVersion <- function(package0,version0="",versionCheck=FALSE,lib=.libPaths()[1]){
+  
+  installed <- utils::installed.packages(lib)
+  packageTRUE <- package0 %in% rownames(installed)
+  if(versionCheck&packageTRUE){
+    packageTRUE <- gsub("\\-","\\.",as.character(utils::packageVersion(package0,lib)))==gsub("\\-","\\.",version0)
+  }
+  return(packageTRUE)
+  
+}
+
+
+
+
+#' Install package of specific version
+#' @param input data.frame with 3 columns package version repos to install
+#' @param lib path to local library
+#' @param versionCheck logical to install specific version
+#' @return Library information data
+#' @details Calls adapr::install and installs from CRAN and bioconductor packages. Local packages will not be installed.
+#'
+
+install.library <- function(input=get.library(),lib=.libPaths()[1],versionCheck=FALSE){
+
+    input$success <- FALSE
+
+    for(p in 1:nrow(input)){
+    
+      #cat(paste0("Installing package ",input$package[p],"...\n"))
+      
+      if(checkVersion(input$package[p],input$version[p],versionCheck,lib)){
+        
+        #cat(paste0("Version ",as.character(packageVersion(input$package[p],lib))," already installed!\n"))  
+        
+      }
+      else{
+        
+        install(input$package[p],version=input$version[p],installVersion=versionCheck,lib=lib,repos=input$repos[p],
+                show.available=FALSE,dependencies=FALSE)
+      
+      }
+     
+      
+      input$success[p] <- checkVersion(input$package[p],input$version[p],versionCheck,lib)
+      
+      input$installVersion[p] <-as.character(utils::packageVersion(input$package[p],lib))
+      
+      
+    }#loop over p package
+  
+  return(input)
+
+}
+
+
+
+#' Get library for a project
+#' @param project.id character vector of project
+#' @return dataframe of libraries
+#' @export
+#' @examples 
+#'\dontrun{
+#' get.library("adaprHome")
+#'} 
+#' 
+
+
+get.library <- function(project.id = get.project()){
+  
+  programs <- list.programs(project.id)
+  
+  path <- get.project.path(project.id)
+  
+  packageInfo <- plyr::ddply(programs,"source.file",function(program){
+    
+    results.dir <- file.path(path,adapr::project.directory.tree$results,program$source.file[1])
+    
+    packages <- file.path(results.dir,paste0("Session_info_",gsub("\\.","_",program$source.file[1]),".RObj"))
+    #print(packages)
+    load(file=packages)
+    if(!exists("obj")){obj <- NULL}
+    out <- obj$packages
+    
+    return(out)
+    
+  })
+  
+  packageInfo$repos <- tolower(substring(packageInfo$source,1,4))
+  
+  packageInfo <- subset(packageInfo,!duplicated(packageInfo$package))
+  
+  return(packageInfo)
+  
+}
+
+
+
+
+
+
+
+

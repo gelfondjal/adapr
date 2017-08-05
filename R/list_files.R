@@ -7,7 +7,7 @@
 #' source_info <- create_source_file_dir("adaprHome","tree_controller.R")
 #` listBranches()
 #'} 
-listBranches <- function(si=get()$adaprScriptInfo){
+listBranches <- function(si=get.sourceInfo()){
   
   file_data <- si$all.files
   
@@ -41,7 +41,7 @@ listBranches <- function(si=get()$adaprScriptInfo){
 #'} 
 #'
 #' 
-list.branches <- function(project.id=get()$adaprScriptInfo){
+list.branches <- function(project.id=get.project()){
   
   file_data <- list(file=NULL)
   
@@ -102,12 +102,22 @@ listScripts<- function(project.id=get.project()){
 #' list.programs("adaprHome")
 #'} 
 #'
+#'
 list.programs <- function(project.id=get.project()){
 
   trees <- Harvest.trees(file.path(get.project.path(project.id),project.directory.tree$dependency.dir))
   
   programs <- subset(trees,!duplicated(file.path(trees$source.file.path,trees$source.file)),
                      select=c("source.file","source.file.description"))
+  
+  run.times <- plyr::ddply(trees, "source.file", 
+                           function(x) {
+                             last.run.time <- max(difftime(as.POSIXct(x$target.mod.time), 
+                                                           as.POSIXct(x$source.run.time), units = "secs"), 
+                                                  na.rm = TRUE)
+                             return(data.frame(last.run.time.sec = last.run.time))
+                           })
+  programs <- merge(programs, run.times, by = "source.file")
   
   return(programs)
   
@@ -116,9 +126,21 @@ list.programs <- function(project.id=get.project()){
 
 
 
+#' Returns the information related to the adapr script
+#' @return list with information about the project
+#' @export
+#' @examples 
+#' \dontrun{
+#' get.sourceInfo()
+#'} 
+#'
 
-
-
+get.sourceInfo <- function(){
+  
+  return(options()$adaprScriptInfo)
+  
+  
+}
 
 
 
@@ -129,7 +151,7 @@ list.programs <- function(project.id=get.project()){
 #' @details Deprecated. See list.datafiles()
 #' @export
 #' 
-listDatafiles <- function(si=options()$adaprScriptInfo){
+listDatafiles <- function(si=get.sourceInfo()){
   
   warning("deprecated: see list.datafiles")
   

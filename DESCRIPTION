@@ -23,6 +23,7 @@ Imports:
      git2r,
     methods,
     parallel,
+    versions,
     doParallel
 Suggests:
   pkgKitten

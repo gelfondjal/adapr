@@ -4,7 +4,7 @@
 \alias{listBranches}
 \title{Lists the branches available for loading in the adapr project}
 \usage{
-listBranches(si = get()$adaprScriptInfo)
+listBranches(si = get.sourceInfo())
 }
 \arguments{
 \item{si}{is source_info object}

@@ -76,9 +76,12 @@ sprout.program <- function(project.id=NA,source.file.name=NA,description="",seed
 #'} 
 make.program <- function(r="",description="",project.id=get.project(),seed=2011,run=TRUE){
   
+  
+  r <- gsub(" ","_",r)
+  
   if(!(toupper(gsub(".*\\.","",r))=="R")){
     
-    print("Error make.program: Scripname doesn't end in .R")
+    print("Error make.program: Script name doesn't end in .R")
     
     return(FALSE)
     

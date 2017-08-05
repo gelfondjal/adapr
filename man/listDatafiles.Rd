@@ -4,7 +4,7 @@
 \alias{listDatafiles}
 \title{Lists the data files available for reading in the adapr project}
 \usage{
-listDatafiles(si = options()$adaprScriptInfo)
+listDatafiles(si = get.sourceInfo())
 }
 \arguments{
 \item{si}{is source_info object}
