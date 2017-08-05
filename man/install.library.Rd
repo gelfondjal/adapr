@@ -23,3 +23,10 @@ Install package of specific version
 \details{
 Calls adapr::install and installs from CRAN and bioconductor packages. Local packages will not be installed.
 }
+\examples{
+\dontrun{
+set.library("adaprHome")
+install.library()
+} 
+
+}
