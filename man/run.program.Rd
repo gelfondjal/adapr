@@ -4,7 +4,7 @@
 \alias{run.program}
 \title{Run an R script within a project using devtools::clean_source}
 \usage{
-run.program(r = get("source_info")$file$file, project.id = get.project(),
+run.program(r = get.sourceInfo()$file$file, project.id = get.project(),
   logRmd = FALSE)
 }
 \arguments{

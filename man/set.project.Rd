@@ -4,7 +4,7 @@
 \alias{set.project}
 \title{Checks or changes the specified adapr project in R option "adaprProject"}
 \usage{
-set.project(project.id = "", quickTest = FALSE)
+set.project(project.id = "", quickTest = TRUE)
 }
 \arguments{
 \item{project.id}{characters specifying project.id of working project}

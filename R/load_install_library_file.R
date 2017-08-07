@@ -208,6 +208,7 @@ install <- function(package,version=NULL,installVersion=FALSE,lib=.libPaths()[1]
 #' @param versionCheck logical to install specific version
 #' @param lib path to local library
 #' @return logical on installed status
+#' @export
 
 checkVersion <- function(package0,version0="",versionCheck=FALSE,lib=.libPaths()[1]){
   
@@ -229,11 +230,12 @@ checkVersion <- function(package0,version0="",versionCheck=FALSE,lib=.libPaths()
 #' @param versionCheck logical to install specific version
 #' @return Library information data
 #' @details Calls adapr::install and installs from CRAN and bioconductor packages. Local packages will not be installed.
+#' @export
 #' @examples 
 #'\dontrun{
 #' set.library("adaprHome")
 #' install.library()
-#'} 
+#' } 
 #'
 
 install.library <- function(input=get.library(),lib=.libPaths()[1],versionCheck=FALSE){
@@ -295,18 +297,18 @@ get.library <- function(project.id = get.project()){
     #print(packages)
     redd <- FALSE
     try({
-      redd <- TRUE
-      out <- readRDS(file=packages)
+     
+      out <- readRDS(file=packages)$packages
       
-    })
+    },silent=TRUE)
     
-    if(!redd){
+    if(!exists("out")){
       load(file=packages)
       if(!exists("obj")){obj <- NULL}
       out <- obj$packages
     }
     
-    return(out)
+   return(out)
     
   })
   

@@ -115,7 +115,7 @@ set_adapr_options <- function(optionname="",optionvalue=""){
 #'  set.project("adaprHome")
 #'} 
 #' 
-set.project <- function(project.id="",quickTest=FALSE){
+set.project <- function(project.id="",quickTest=TRUE){
   
   defaultProject <- "adaprHome"
   

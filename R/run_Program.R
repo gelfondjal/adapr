@@ -9,7 +9,7 @@
 #' run.program("read_data.R","adaprHome")
 #'} 
 #' 
-run.program <- function(r=get("source_info")$file$file,project.id=get.project(),logRmd=FALSE){
+run.program <- function(r=get.sourceInfo()$file$file,project.id=get.project(),logRmd=FALSE){
   
   source.file <- r
   

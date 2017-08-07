@@ -23,12 +23,12 @@ create_source_file_dir <- function(project.id0=get("project.id"),source.file0=ge
   data.dir <- file.path(project.path,project.tree$data)  # where the data are
   results.dir <- file.path(project.path,project.tree$results,source.file0) # Standard output
   tex.dir <- file.path(results.dir,project.directory.tree$tex.dir) # Publication quality output
-  dependency.dir <- file.path(project.path,project.tree$dependency.dir)
-  support.dir <- file.path(project.path,project.tree$support)
-  library.dir <- file.path(support.dir,project.tree$library.bank)
-  source.support.dir <- file.path(support.dir,gsub("\\.(R|r)$","_R",source.file0))
-  apps.dir <- file.path(support.dir,"Apps")
-  markdown.dir <- file.path(analysis.dir,"Markdown")
+  dependency.dir <- file.path(project.path,project.tree$dependency.dir) #where dependency files are stored
+  support.dir <- file.path(project.path,project.tree$support) # where functions and libraries are stored
+  library.dir <- file.path(support.dir,project.tree$library.bank) # where library is stored
+  source.support.dir <- file.path(support.dir,gsub("\\.(R|r)$","_R",source.file0)) # where source specific libraries are stored
+  apps.dir <- file.path(support.dir,"Apps") # where project apps are stored
+  markdown.dir <- file.path(analysis.dir,"Markdown")  # where the markdown directory is
   
   project.tree <- project.directory.tree
   
@@ -72,7 +72,7 @@ create_source_file_dir <- function(project.id0=get("project.id"),source.file0=ge
   
   initialize_dependency_info(source_info)
   
-  #Start html markup tracking
+  #Start html r markdown tracking
   
     
   if(source_info$options$git){
