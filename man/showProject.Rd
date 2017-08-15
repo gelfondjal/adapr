@@ -4,16 +4,20 @@
 \alias{showProject}
 \title{Opens project directory}
 \usage{
-showProject(si = get("source_info"), project.id = "")
+showProject(project.id = getProject())
 }
 \arguments{
-\item{si}{is source_info object}
-
 \item{project.id}{character string specifies project to open}
 }
 \description{
 Opens project directory
 }
 \details{
-Use BrowseURL to open project directory
+Use BrowseURL to open project directory.
+}
+\examples{
+\dontrun{
+showProject("adaprHome")
+} 
+
 }

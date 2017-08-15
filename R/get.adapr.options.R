@@ -4,12 +4,11 @@
 #' @export
 #' @examples 
 #'\dontrun{
-#' opt <- get_adapr_options()
+#' opt <- getAdaprOptions()
 #' print(opt)
 #'} 
 #' 
-
-get_adapr_options <- function(setoptions=FALSE){
+getAdaprOptions <- function(setoptions=FALSE){
     # 
   option.file <- "adapr_options.csv"
   
@@ -20,7 +19,6 @@ get_adapr_options <- function(setoptions=FALSE){
     dir.create(dirname(options.site),recursive=TRUE)
     
     options.site0 <- system.file(option.file,package='adapr')
-
     file.copy(options.site0,options.site)    
  
   }
@@ -39,8 +37,7 @@ get_adapr_options <- function(setoptions=FALSE){
   
   return(adapr_options)
 }
-
-
+get_adapr_options <- getAdaprOptions
 #' Returns Modifies the primary adapr option file
 #' @param optionname is name of option to modify
 #' @param optionvalue is new value to give optionname
@@ -48,17 +45,16 @@ get_adapr_options <- function(setoptions=FALSE){
 #' @export
 #' @examples 
 #'\dontrun{
-#' opt <- get_adapr_options()
-#' set_adapr_options("project.path",opt$project.path)
-#' opt2 <- get_adapr_options()
+#' opt <- getAdaprOptions()
+#' setAdaprOptions("project.path",opt$project.path)
+#' opt2 <- getAdaprOptions()
 #' identical(opt,opt2)
 #'} 
 #' 
-set_adapr_options <- function(optionname="",optionvalue=""){
+setAdaprOptions <- function(optionname="",optionvalue=""){
   # 
   
-  options <- get_adapr_options(FALSE)
-
+  options <- getAdaprOptions(FALSE)
   if((as.numeric(version$major) +as.numeric(version$minor)/10)>=3.2){
   
   if(optionname=="project.path"){
@@ -100,22 +96,17 @@ set_adapr_options <- function(optionname="",optionvalue=""){
   
   return(options)
 }
-
-
-
-
 #' Checks or changes the specified adapr project in R option "adaprProject"
 #' @param project.id characters specifying project.id of working project
 #' @param quickTest logical whether to check if project exists
 #' @return value is specified project or default project
 #' @details Default is adaprHome. Returns default if project does not exist.
-#' @export
 #'@examples 
 #'\dontrun{
-#'  set.project("adaprHome")
+#'  setProject("adaprHome")
 #'} 
 #' 
-set.project <- function(project.id="",quickTest=TRUE){
+setProject <- function(project.id="",quickTest=TRUE){
   
   defaultProject <- "adaprHome"
   
@@ -153,18 +144,17 @@ set.project <- function(project.id="",quickTest=TRUE){
   return(project.id)
   
 }
-
-
+set.project <- setProject
 #' Returns the  adapr project in R option "adaprProject"
 #' @return Value is specified project or default project
 #' @details Default is adaprHome. Returns default if project does not exist.
 #' @export
 #'@examples 
 #' \dontrun{
-#'  get.project()
+#'  getProject()
 #'} 
 #' 
-get.project <- function(){
+getProject <- function(){
   
   defaultProject <- "adaprHome"
   
@@ -179,7 +169,4 @@ get.project <- function(){
   }
   
 }
-
-
-
-
+get.project <- getProject()

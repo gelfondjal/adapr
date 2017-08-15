@@ -4,7 +4,7 @@
 \alias{read_library}
 \title{Read library file}
 \usage{
-read_library(project.id = get.project())
+read_library(project.id = getProject())
 }
 \arguments{
 \item{project.id}{project.id to read library file}

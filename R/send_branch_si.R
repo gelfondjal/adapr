@@ -4,7 +4,6 @@
 #' @param all logical indicating whether to send all branches in project 
 #' @export
 #' 
-
 send.branch.si <- function(source_info,branch_cut,all=FALSE){
   
   project_info <- get.project.info.si(source_info)

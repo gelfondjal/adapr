@@ -18,8 +18,6 @@
 #' showResults()  
 #'} 
 #' 
-
-
 Write <- function(obj=NULL,file.name="data.csv",description="Result file",write.fcn=guess.write.fcn(file.name),date=FALSE,...){
   
   # lightweight Write.cap take small number of args
@@ -66,9 +64,6 @@ Write <- function(obj=NULL,file.name="data.csv",description="Result file",write.
   return(file.info)
   
 }
-
-
-
 #' Tracks files written by functions not in adapr and captures the file information within dependency object
 #' @param file.name name of file
 #' @param description description of data file
@@ -83,13 +78,9 @@ Write <- function(obj=NULL,file.name="data.csv",description="Result file",write.
 #' showResults()  
 #'} 
 #'  
-
 WriteTrack <- function(file.name="data.csv",description="Result file"){
   
   out <- Graph(file.name,description,I)
  
   return(out$fullname)
 }
-
-
-

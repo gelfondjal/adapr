@@ -4,7 +4,7 @@
 \alias{parallelSync.project}
 \title{Uses DOSNOW package for parallel syncrhonization of project. Takes advantage of directed acyclic graph structure to run R script processes in parallel.}
 \usage{
-parallelSync.project(project.id = get.project(), n.cores = 2)
+parallelSync.project(project.id = getProject(), n.cores = 2)
 }
 \arguments{
 \item{project.id}{Project to synchronize.}

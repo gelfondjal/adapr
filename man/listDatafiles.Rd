@@ -4,10 +4,10 @@
 \alias{listDatafiles}
 \title{Lists the data files available for reading in the adapr project}
 \usage{
-listDatafiles(si = get.sourceInfo())
+listDatafiles(project.id = getProject())
 }
 \arguments{
-\item{si}{is source_info object}
+\item{project.id}{Project to look for data files within}
 }
 \value{
 description of data files
@@ -15,6 +15,9 @@ description of data files
 \description{
 Lists the data files available for reading in the adapr project
 }
-\details{
-Deprecated. See list.datafiles()
+\examples{
+\dontrun{
+listDatafiles("adaprHome")
+} 
+
 }

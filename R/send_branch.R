@@ -3,7 +3,6 @@
 #' @param all logical indicating whether to send all branches in project 
 #' @export
 #' 
-
 send.branch <- function(branch_cut,all=FALSE){
   
   
@@ -33,7 +32,6 @@ send.branch <- function(branch_cut,all=FALSE){
     branch.names <- igraph::V(project_info$graph)$file[branch]  # These are in order
     
     programs <- subset(project_info$tree,project_info$tree$source.file %in% c(branch.names))
-
     programs <- subset(programs,!duplicated(programs$source.file))
     
   }	

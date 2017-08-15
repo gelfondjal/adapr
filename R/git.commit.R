@@ -12,8 +12,6 @@
 #' git.commit(si$project.path,"test commit")
 #'} 
 #' 
-
-
 git.commit <- function(gitdir,message,branch = NULL, git_args = character(), git_binary = NULL){
   
   # git "commit" to the git repository in gitdir with message 
@@ -32,4 +30,3 @@ git.commit <- function(gitdir,message,branch = NULL, git_args = character(), git
   return(git.out)
   
 }
-

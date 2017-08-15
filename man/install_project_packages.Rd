@@ -4,7 +4,7 @@
 \alias{install_project_packages}
 \title{Installs all packages}
 \usage{
-install_project_packages(project.id = get.project())
+install_project_packages(project.id = getProject())
 }
 \arguments{
 \item{project.id}{project.id to install packages for R package to}

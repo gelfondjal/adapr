@@ -64,7 +64,6 @@ load.install.library.file <- function(library.data.file=NA,subgroup=NULL,verbose
       bioc.list <- subset(packages.info,(packages.info$repos=="bioC")&(packages.info$install.check==FALSE))$Package
       
       print(paste("Installing Bioconductor",bioc.list))
-
       source("http://bioconductor.org/biocLite.R")
       
       tempfcn <- get("biocLite")
@@ -98,7 +97,6 @@ load.install.library.file <- function(library.data.file=NA,subgroup=NULL,verbose
              
         packages.info$install.check[packages.info$repos %in% install.command.list] <- TRUE
       }
-
       
     })  
     
@@ -154,8 +152,6 @@ load.install.library.file <- function(library.data.file=NA,subgroup=NULL,verbose
   
   
 }
-
-
 #' Install package of specific version
 #' @param package package name to install
 #' @param version package version
@@ -168,7 +164,6 @@ load.install.library.file <- function(library.data.file=NA,subgroup=NULL,verbose
 #' @details Installs from CRAN and bioconductor packages. Local libraries will not be installed.
 #' @export
 #'
-
 install <- function(package,version=NULL,installVersion=FALSE,lib=.libPaths()[1],repos='cran',show.available=FALSE,...){
   
   if(repos=='cran'){
@@ -199,9 +194,6 @@ install <- function(package,version=NULL,installVersion=FALSE,lib=.libPaths()[1]
     
     
 }
-
-
-
 #' Check install of package of specific version
 #' @param package0 name of package
 #' @param version0 package version
@@ -209,7 +201,6 @@ install <- function(package,version=NULL,installVersion=FALSE,lib=.libPaths()[1]
 #' @param lib path to local library
 #' @return logical on installed status
 #' @export
-
 checkVersion <- function(package0,version0="",versionCheck=FALSE,lib=.libPaths()[1]){
   
   installed <- utils::installed.packages(lib)
@@ -220,10 +211,6 @@ checkVersion <- function(package0,version0="",versionCheck=FALSE,lib=.libPaths()
   return(packageTRUE)
   
 }
-
-
-
-
 #' Install package of specific version
 #' @param input data.frame with 3 columns package version repos to install
 #' @param lib path to local library
@@ -237,11 +224,8 @@ checkVersion <- function(package0,version0="",versionCheck=FALSE,lib=.libPaths()
 #' install.library()
 #' } 
 #'
-
 install.library <- function(input=get.library(),lib=.libPaths()[1],versionCheck=FALSE){
-
     input$success <- FALSE
-
     for(p in 1:nrow(input)){
     
       #cat(paste0("Installing package ",input$package[p],"...\n"))
@@ -267,11 +251,7 @@ install.library <- function(input=get.library(),lib=.libPaths()[1],versionCheck=
     }#loop over p package
   
   return(input)
-
 }
-
-
-
 #' Get library for a project
 #' @param project.id character vector of project
 #' @return dataframe of libraries
@@ -281,9 +261,7 @@ install.library <- function(input=get.library(),lib=.libPaths()[1],versionCheck=
 #' get.library("adaprHome")
 #'} 
 #' 
-
-
-get.library <- function(project.id = get.project()){
+get.library <- function(project.id = getProject()){
   
   programs <- list.programs(project.id)
   
@@ -319,11 +297,3 @@ get.library <- function(project.id = get.project()){
   return(packageInfo)
   
 }
-
-
-
-
-
-
-
-

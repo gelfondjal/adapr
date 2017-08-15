@@ -6,10 +6,9 @@
 #' @param capture.load.command Command for loading inference tree library
 #' @param controller logical to insert lines that operate on analysis tree
 #' @return Logical indicating success or not
-#' @details Will not overwrite existing program. Not for direct use. See make.program().
-#' @export
+#' @details Will not overwrite existing program. Not for direct use. See makeScript().
 #' 
-sprout.program <- function(project.id=NA,source.file.name=NA,description="",seed=2011,capture.load.command="library(adapr)",controller=FALSE){
+sprout.program <- function(project.id=NA,source.file.name=NA,description="",seed=2011,capture.load.command="library(\"adapr\")",controller=FALSE){
   
   
   if(controller){
@@ -29,7 +28,6 @@ sprout.program <- function(project.id=NA,source.file.name=NA,description="",seed
   
   final.line <- "dependency.out <- finalize_dependency()"
   
-
   
   controller.lines <- c( "#synctest.project()     #Tests project synchronization ",
                      "#sync.project()  # This runs all programs needed to synchronize",
@@ -38,7 +36,6 @@ sprout.program <- function(project.id=NA,source.file.name=NA,description="",seed
   if(controller){final.line <- controller.lines}
   
   strings.to.write <- c(rep("\n",1),start.lines.generic,rep("\n",1),start.lines.specific,initialize.lines,body.lines,final.line)
-
   #print(strings.to.write)
   
   target.file <- file.path(get.project.path(project.id),project.directory.tree$analysis,source.file.name)
@@ -47,7 +44,6 @@ sprout.program <- function(project.id=NA,source.file.name=NA,description="",seed
     
     dir.create(file.path(get.project.path(project.id),project.directory.tree$analysis),showWarnings=FALSE)
     
-
     
     write(strings.to.write,target.file)
     return(TRUE)
@@ -58,9 +54,6 @@ sprout.program <- function(project.id=NA,source.file.name=NA,description="",seed
   return(FALSE)
   
 }
-
-
-
 #' Generates the shell of a code that is project specific
 #' @param r is source file name or Filename to create
 #' @param description What program does
@@ -72,16 +65,16 @@ sprout.program <- function(project.id=NA,source.file.name=NA,description="",seed
 #' @export
 #' @examples 
 #'\dontrun{
-#'  make.program("read_data.R",description="reads data","adaprHome")
+#'  makeScript("read_data.R",description="reads data","adaprHome")
 #'} 
-make.program <- function(r="",description="",project.id=get.project(),seed=2011,run=TRUE){
+makeScript <- function(r="",description="",project.id=getProject(),seed=2011,run=TRUE){
   
   
   r <- gsub(" ","_",r)
   
   if(!(toupper(gsub(".*\\.","",r))=="R")){
     
-    print("Error make.program: Script name doesn't end in .R")
+    print("Error makeScript: Script name doesn't end in .R")
     
     return(FALSE)
     
@@ -89,8 +82,6 @@ make.program <- function(r="",description="",project.id=get.project(),seed=2011,
   
   out <- sprout.program(project.id,source.file.name=r,description=description,seed)
   
-  if(run){run.program(r,project.id)}
-
+  if(run){run.script(r,project.id)}
   return(out)
 }
-

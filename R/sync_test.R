@@ -2,8 +2,6 @@
 #' @param dagger a directed acyclic igraph representing dependencies
 #' @param tree  dependency tree corresponding to dagger
 #' @param plotl logical for plotting or not
-
-
 Sync.test.OLD <- function(dagger,tree,plotl=TRUE){
   
   #equire(igraph)

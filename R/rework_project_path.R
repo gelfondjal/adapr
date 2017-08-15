@@ -22,4 +22,3 @@ rework.project.path <- function(dependency.dir=get("source_info")$depedency.dir,
   }
   
 }# END: rework.project.path 
-

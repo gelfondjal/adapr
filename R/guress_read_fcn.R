@@ -20,4 +20,3 @@ guess.read.fcn <- function(filename){
   return(FALSE)
   
 }
-

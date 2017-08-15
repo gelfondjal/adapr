@@ -4,7 +4,7 @@
 \alias{get.library}
 \title{Get library for a project}
 \usage{
-get.library(project.id = get.project())
+get.library(project.id = getProject())
 }
 \arguments{
 \item{project.id}{character vector of project}

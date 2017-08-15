@@ -14,7 +14,6 @@
 #'} 
 #' 
 #' 
-
 git.info <- function(gitdir,filename,branch = NULL, git_args = character(), git_binary = NULL){
   
   # extract the git information related to a filename in the git repository in gitdir

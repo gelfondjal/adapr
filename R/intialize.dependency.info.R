@@ -103,13 +103,13 @@ initialize_dependency_info <- function(source_info_arg){
       Read.cap(Create.file.info(dirname(file.name),basename(file.name),"Support file"),I,options()$adaprScriptInfo)
     }
   }		 
-  
-  file.name <- file.path(source_info_arg$support.dir,source_info_arg$support.library.file)
-  Read.cap(Create.file.info(dirname(file.name),basename(file.name),"Support file"),I,options()$adaprScriptInfo)
+ #No longer linking the dependency on the library file!  
+    
+#  file.name <- file.path(source_info_arg$support.dir,source_info_arg$support.library.file)
+#  Read.cap(Create.file.info(dirname(file.name),basename(file.name),"Support file"),I,options()$adaprScriptInfo)
   
   
   
   return(dependency.file)
   
 }	
-

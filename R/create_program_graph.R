@@ -218,8 +218,6 @@ create_program_graph_v2<- function(project.id){
 #             
 # 
 # return(list(vertex=dfo,edges=froms,ggplot=proj.gg,rgrapher=isg))
-
-
 } #
  
  

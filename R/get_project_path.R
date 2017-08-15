@@ -8,7 +8,6 @@
 #' get.project.path("adaprHome")
 #'} 
 #' 
-
 get.project.path <- function(project_name=NULL){
   
   
@@ -24,7 +23,6 @@ get.project.path <- function(project_name=NULL){
   
   
 } #END get.project.path
-
 #' Given Project name, Return project publish directory
 #' @param project_name is string with project name 
 #' @details Reads "~/ProjectPaths/projectid_2_diretory.csv" into dataframe
@@ -35,7 +33,6 @@ get.project.path <- function(project_name=NULL){
 #' get.project.publish.path("adaprHome")
 #'} 
 #' 
-
 get.project.publish.path <- function(project_name=NULL){
   
   all.projects <- get_orchard()
@@ -50,5 +47,3 @@ get.project.publish.path <- function(project_name=NULL){
   
   
 } #END get.project.publish.path
-
-

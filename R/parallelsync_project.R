@@ -10,15 +10,10 @@
 #'} 
 #'
 #'
-
-parallelSync.project <- function(project.id = get.project(),n.cores=2){
-
+parallelSync.project <- function(project.id = getProject(),n.cores=2){
 graphdat <- graph.project(project.id)
-
 project.plot <- graphdat$ggplot
-
 # Identify files with no dependencies for running
-
 findNodependency <- function(graphdat,completed=""){
   
   isg <- graphdat$rgrapher #  data.frame()graphdat$edges
@@ -46,23 +41,15 @@ findNodependency <- function(graphdat,completed=""){
   return(hotlist)
   
 }
-
 nodeps <- findNodependency(graphdat)
-
-
 # Initialize broadcast files
-
 checkdir <- pull_source_info(project.id)$results.dir
-
 completedfile <- file.path(checkdir,"completed.csv")
 workfile <- file.path(checkdir,"working.csv")
 todofile <- file.path(checkdir,"todo.csv")
 graphfile <- file.path(checkdir,"graph.Rdata")
-
-
 workdat <- data.frame(rscript="",compute.node=NA)[-1,]
 todo <- data.frame(rscript=subset(graphdat$v,graphdat$v$synccolor!="Synchronized")$v)
-
 if(nrow(subset(graphdat$v,graphdat$v$synccolor=="Synchronized"))){
   completed <-data.frame(rscript=subset(graphdat$v,graphdat$v$synccolor=="Synchronized")$v,compute.node=0)
 }else{
@@ -70,27 +57,18 @@ if(nrow(subset(graphdat$v,graphdat$v$synccolor=="Synchronized"))){
   completed <-data.frame(rscript="",compute.node=0)[-1,]
   
 }
-
 utils::write.csv(completed,completedfile,row.names=FALSE)
 utils::write.csv(workdat,workfile,row.names=FALSE)
 utils::write.csv(todo,todofile,row.names=FALSE)
 save(graphdat,findNodependency,file=graphfile)
-
-
-
 load(graphfile)
-
 nodes <- data.frame(compute.node=1:n.cores,completedfile,workfile,todofile,
                     graphfile,
                     stringsAsFactors = FALSE)
-
-
 #clust <- snow::makeCluster(n.cores,type="SOCK")
 #parallel::registerDoSNOW(clust)
-
 clust <- parallel::makeCluster(n.cores,type="SOCK")
 doParallel::registerDoParallel(clust)
-
 presult <- plyr::ddply(nodes,"compute.node",function(x){
   
   
@@ -190,20 +168,10 @@ presult <- plyr::ddply(nodes,"compute.node",function(x){
   
   
 },.parallel = TRUE)
-
 	
 parallel::stopCluster(clust)
-
 return(presult)
-
-
 }
-
-
-
-
-
-
 #' Track parallelSync.project while in progress
 #' @param project.id Project to synchronize.
 #' @param check.interval how many seconds to delay until last check
@@ -215,9 +183,7 @@ return(presult)
 #' monitorParallelSync.project("adaprHome")
 #'} 
 #'
-
-
-monitorParallelSync.project <- function(project.id = get.project(),check.interval=5){
+monitorParallelSync.project <- function(project.id = getProject(),check.interval=5){
   
   graphdat <- graph.project(project.id)
   
@@ -249,7 +215,6 @@ monitorParallelSync.project <- function(project.id = get.project(),check.interva
     
   }
   
-
   
   load(graphfile)
   
@@ -277,7 +242,6 @@ monitorParallelSync.project <- function(project.id = get.project(),check.interva
     froms <- graphdat$edges 
       
     unsync.vertex <- unique(setdiff(subset(graphdat$vertex,graphdat$vertex$synccolor!="Synchronized")$v,complist$rscript))
-
     # check dfo namespace
     
     ranger <- range(dfo$x)
@@ -337,7 +301,6 @@ monitorParallelSync.project <- function(project.id = get.project(),check.interva
         
       }
       
-
       if(nrow(dfo)==1){
         
         proj.gg <- proj.gg + ggplot2::scale_y_continuous(limits=rangery)
@@ -377,7 +340,3 @@ monitorParallelSync.project <- function(project.id = get.project(),check.interva
     return(proj.gg)
   
 }
-
-
-
-

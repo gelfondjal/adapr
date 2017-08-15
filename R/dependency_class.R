@@ -23,4 +23,3 @@ dependency <- methods::setRefClass("dependency",
                               invisible(data)
                             })
 )
-

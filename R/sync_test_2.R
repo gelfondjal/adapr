@@ -3,8 +3,6 @@
 #' @param tree  dependency tree corresponding to dagger
 #' @param plotl logical for plotting or not
 #' @return list with synchronizing information
-
-
 Sync.test_2nd <- function(dagger,tree,plotl=TRUE){
   
   #equire(igraph)
@@ -103,9 +101,7 @@ Sync.test_2nd <- function(dagger,tree,plotl=TRUE){
   
   # if target output is out of sync then update the
   # source file that creates it
-
   # Don't need this anymore
-
 #  if(length(vertex.updates)>0){
 #    
 #    updated.vertex.info <- subset(file.info,fullname.abbr %in% vertex.updates)
@@ -121,9 +117,6 @@ Sync.test_2nd <- function(dagger,tree,plotl=TRUE){
   
 #  vertex.updates <- unique(c(vertex.updates,source.for.targets))
  
-
-
-
   
   # Propagate dependencies
   

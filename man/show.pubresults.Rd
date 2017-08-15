@@ -4,7 +4,7 @@
 \alias{show.pubresults}
 \title{Browses publication table for editing}
 \usage{
-show.pubresults(project.id = get.project())
+show.pubresults(project.id = getProject())
 }
 \arguments{
 \item{project.id}{Project to publish}

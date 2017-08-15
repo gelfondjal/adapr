@@ -1,19 +1,15 @@
 #' Returns the primary hub file with project location and id information
 #' @return orchard
 #' @export
-#' @examples 
+#' @details Not for direct use. See listProjects for direct use.
+#' @examples
 #'\dontrun{
 #' orchard <- get_orchard()
 #' print(subset(orchard,project.id=="adaprHome"))
 #'} 
 #' 
 #' 
-
 get_orchard <- function(){
-  
-  # 
-  
-  
   orchard.site <- file.path(path.expand.2("~"),"ProjectPaths","projectid_2_directory_adapr.csv")  
   
   if(!file.exists(orchard.site)){
@@ -29,23 +25,18 @@ get_orchard <- function(){
   
   return(orchard)
 }
-
-
-
-
 #' Removes project from orchard, but doesn't delete project from file system
 #' @param project.id0 which project to remove from orchard
-#' @return orchard
+#' @return Project listing data frame.
 #' @export
 #' @examples 
 #'\dontrun{
-#' remove.project("adaprHome")
-#' reidentify.project("adaprHome")
+#' removeProject("adaprHome")
+#' relcateProject("adaprHome")
 #'} 
 #' 
 #' 
-
-remove.project <- function(project.id0){
+removeProject <- function(project.id0){
   
   # 
   orchard.site <- file.path(path.expand.2("~"),"ProjectPaths","projectid_2_directory_adapr.csv")	
@@ -58,19 +49,17 @@ remove.project <- function(project.id0){
   
   return(orchard)
 }
-
-
+remove.project <- removeProject
 #' Browses orchard in file system
 #' @return orchard
 #' @export
 #' @examples 
 #'\dontrun{
-#' open_orchard()
+#' openProjectList()
 #'} 
 #' 
 #' 
-
-open_orchard <- function(){
+openProjectList <- function(){
   
   # 
   orchard.site <- file.path(path.expand.2("~"),"ProjectPaths","projectid_2_directory_adapr.csv")	
@@ -79,39 +68,33 @@ open_orchard <- function(){
   
   return()
 }
-
-
 #' List projects
 #' @param allInfo logical whether to return dat
 #' @return orchard
 #' @export
 #' @examples 
 #'\dontrun{
-#' list.projects(TRUE)
+#' listProjects(TRUE)
 #'} 
 #' 
 #' 
-
-list.projects <- function(allInfo=TRUE){
+listProjects <- function(allInfo=TRUE){
   
   out <- get_orchard()
   if(!allInfo){return(out$project.id)}
   return(out)
   
 }
-
 #' List project file information disk space, modification timespan, days inactive
 #' @param project.id character vector of projects
 #' @return dataframe with project information
 #' @export
 #' @examples 
 #'\dontrun{
-#' fileinfo.project()
+#' fileInfoProjects()
 #'} 
 #' 
-
-
-fileinfo.project <- function(project.id=list.projects()$project.id){
+fileInfoProjects <- function(project.id=listProjects()$project.id){
   
   size <- length(project.id)
   

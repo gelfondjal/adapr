@@ -44,10 +44,6 @@ Read <- function(file.name="data.csv",description="Data file",read.fcn=guess.rea
   return(read.obj)
   
 }
-
-
-
-
 #' Tracks files that read by functions not in adapr and captures the file information within dependency object
 #' @param file.name name of file (vectorized)
 #' @param description description of data file (vectorized)
@@ -69,7 +65,6 @@ ReadTrack <- function(file.name="data.csv",description="Data file"){
   # lightweight read.cap take small number of args
   # used file.name and description create file.information
   # reads from data directory
-
   if(!exists("source_info")){
     
     source_info <- list()

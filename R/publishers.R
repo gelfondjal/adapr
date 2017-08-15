@@ -8,8 +8,7 @@
 #' get.pubresults("adaprHome")
 #'} 
 #' 
-
-get.pubresults <- function(project.id=get.project()){
+get.pubresults <- function(project.id=getProject()){
   
   # Retrieves or creates publication table from project.id
   
@@ -25,7 +24,6 @@ get.pubresults <- function(project.id=get.project()){
   return(publication.table)
   
 }
-
 #' Read in results to publish & Copies results to the project's publication directory
 #' @param project.id Project to publish
 #' @return dataframe of files to publish
@@ -36,8 +34,7 @@ get.pubresults <- function(project.id=get.project()){
 #' send.pubresults("adaprHome")
 #'} 
 #' 
-send.pubresults <- function(project.id=get.project()){
-
+send.pubresults <- function(project.id=getProject()){
   publication.table <- get.pubresults(project.id)
   
   pubpath <- get.project.publish.path(project.id)
@@ -55,8 +52,6 @@ send.pubresults <- function(project.id=get.project()){
   return(pubout)
   
 }
-
-
 #' Browses publication table for editing
 #' @param project.id Project to publish
 #' @return dataframe of files to publish
@@ -68,7 +63,7 @@ send.pubresults <- function(project.id=get.project()){
 #'} 
 #' 
 #' 
-show.pubresults <- function(project.id=get.project()){
+show.pubresults <- function(project.id=getProject()){
   
   source_info <- pull_source_info(project.id)
   publication.file <- file.path(source_info$project.path,project.directory.tree$support,"files_to_publish.csv")
@@ -85,5 +80,3 @@ show.pubresults <- function(project.id=get.project()){
   
   
 }
-
-

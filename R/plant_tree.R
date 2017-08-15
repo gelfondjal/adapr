@@ -7,26 +7,25 @@
 #' @details Sets project
 #' @examples 
 #'\dontrun{
-#' init.project("adaprTest")
+#' initProject("adaprTest")
 #'} 
 #' @details Wrapper for plant.tree
 #' @export
-init.project <- function(project.id,project.path=NA,publish.directory=NA,first.program="read_data.R"){
+initProject <- function(project.id,project.path=NA,publish.directory=NA,first.program="read_data.R"){
   
   out <- plant.tree(project.id,project.path,publish.directory,first.program )
   
   set.project(project.id)
   
 }
-
+init.project <- initProject
 #' initialize project
 #' @param project.id Project name, if missing then default
 #' @param project.path Project home directory, if missing then default
 #' @param swap.directory Project branch exchange directory
 #' @param first.program Name of first program in project (read_data.R default)
 #' @return logical for success or not
-#' @details Not for direct use. See init.project().
-#' @export
+#' @details Not for direct use. See initProject().
 plant.tree <- function(project.id,project.path=NA,swap.directory=NA,first.program="read_data.R"){
   
   opts <- get_adapr_options()
@@ -66,7 +65,6 @@ plant.tree <- function(project.id,project.path=NA,swap.directory=NA,first.progra
     return(FALSE)
   }else{
     
-
     orchards.old <- utils::read.csv(orchard.site,as.is=TRUE)
     
     utils::write.csv(rbind(orchards.old,empty.orchard),orchard.site,row.names=FALSE)
@@ -102,7 +100,6 @@ plant.tree <- function(project.id,project.path=NA,swap.directory=NA,first.progra
   
   
 }
-
 #' Changes project directory/publish directory or identifies imported project
 #' @param project.id0 Project name
 #' @param project.path Project home directory
@@ -111,25 +108,22 @@ plant.tree <- function(project.id,project.path=NA,swap.directory=NA,first.progra
 #' @details Is wrapper for redirect.tree. Does not move the project only indicates new location.
 #' @examples 
 #'\dontrun{
-#' relocate.project("adaprTest","mydirectory1","mydirectory2publish")
+#' relocateProject("adaprTest","mydirectory1","mydirectory2publish")
 #'} 
 #' @export
-relocate.project <- function(project.id0,project.path=NA,swap.directory=NA){
+relocateProject <- function(project.id0,project.path=NA,swap.directory=NA){
   
   out <- redirect.tree(project.id0,project.path,swap.directory)
   
   return(out)
   
 }
-
-
-
+relocate.project <- relocateProject
 #' Changes project directory/publish directory or identifies imported project
 #' @param project.id0 Project name
 #' @param project.path Project home directory
 #' @param swap.directory Project publish directory
 #' @return logical for success or not
-#' @export
 #' @details Not for direct use. See relocate.project
 redirect.tree <- function(project.id0,project.path=NA,swap.directory=NA){
   
@@ -163,7 +157,6 @@ redirect.tree <- function(project.id0,project.path=NA,swap.directory=NA){
   	return(FALSE)
   	
   }
-
   empty.orchard <- data.frame(project.id=project.id0,project.path=project.path,swap.directory=swap.directory)
   
   orchard.site <- file.path(path.expand.2("~"),"ProjectPaths","projectid_2_directory_adapr.csv")	
@@ -181,17 +174,7 @@ redirect.tree <- function(project.id0,project.path=NA,swap.directory=NA){
     
   }else{
   	    print(paste(project.id0,"Project Identified"))
-
   	}
-
   utils::write.csv(rbind(all.orchards,empty.orchard),orchard.site,row.names=FALSE)
-
   return(TRUE)
-
 }
-
-
-
-
-
-

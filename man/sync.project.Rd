@@ -4,7 +4,7 @@
 \alias{sync.project}
 \title{Checks the synchronization project and runs scripts needed for synchronization}
 \usage{
-sync.project(project.id = get.project(), ask = FALSE)
+sync.project(project.id = getProject(), ask = FALSE)
 }
 \arguments{
 \item{project.id}{is project to synchronize}

@@ -26,8 +26,6 @@ plant.orchard <- function(){
   
   return(FALSE)
 }
-
-
 #' Create first project
 #' @param project.path Path where first project will go
 #' @param publish.path Path to share project results
@@ -59,6 +57,3 @@ first.project <- function(project.path="",publish.path=""){
   
   return(testout)
 }
-
-
-

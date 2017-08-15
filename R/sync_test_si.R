@@ -14,7 +14,6 @@ sync.test.si <- function(source_info,plotl0=FALSE){
   project_info <- get.project.info.si(source_info)
   
   return(Sync.test(project_info$graph,project_info$tree,plotl=plotl0))}
-
 #' Tests the synchrony of files in dependency tree
 #' @param project.id is project to test the synchrony of
 #' @return list with logical indicated whether project is synchronized or not and details about synchrony
@@ -25,15 +24,13 @@ sync.test.si <- function(source_info,plotl0=FALSE){
 #'} 
 #' 
 #' 
-synctest.project <- function(project.id=get.project()){
+synctest.project <- function(project.id=getProject()){
   
   source_info <- pull_source_info(project.id)
   
   project_info <- get.project.info.si(source_info)
   
   return(Sync.test(project_info$graph,project_info$tree,plotl=FALSE))}
-
-
 #' Checks the synchronization project and runs scripts needed for synchronization
 #' @param project.id is project to synchronize
 #' @param ask logical whether to report estimated run time prior to execution
@@ -46,11 +43,9 @@ synctest.project <- function(project.id=get.project()){
 #' 
 #' 
 #' 
-
-sync.project <- function(project.id=get.project(),ask=FALSE){
+sync.project <- function(project.id=getProject(),ask=FALSE){
 source_info <- pull_source_info(project.id)
 test.sync0 <- sync.test.si(source_info)
-
 if(test.sync0$synchronize){
   text <- paste(project.id,"Already synchonized")
   last.prog <- " "
@@ -124,7 +119,6 @@ if(test.sync0$synchronize){
       
       wait0 <- wait0 - run.times$last.run.time.sec[source.iter] 
       
-
     }
     failure.script <- ifelse(source.iter <= nrow(ID.sync.out),as.character(ID.sync.out$file[source.iter]),"")
     
@@ -143,7 +137,6 @@ if(test.sync0$synchronize){
     
     if(get_adapr_options()$git=="TRUE"){commit.project(paste("adapr Sync at",Sys.time()),project.id)}
   }
-
 return(text)
   
 }

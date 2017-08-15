@@ -2,19 +2,35 @@
 % Please edit documentation in R/list_files.R
 \name{listScripts}
 \alias{listScripts}
+\alias{listScripts}
 \title{Lists the R scripts in the adapr project}
 \usage{
-listScripts(project.id = get.project())
+listScripts(project.id = getProject())
+
+listScripts(project.id = getProject())
 }
 \arguments{
+\item{project.id}{project.id}
+
 \item{project.id}{project.id}
 }
 \value{
 dataframe of R scripts and descriptions
+
+dataframe of R scripts and descriptions
 }
 \description{
+Lists the R scripts in the adapr project
+
 Lists the R scripts in the adapr project
 }
 \details{
 Deprecated see list.programs
+}
+\examples{
+\dontrun{
+listScripts("adaprHome")
+} 
+
+
 }

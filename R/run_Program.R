@@ -2,6 +2,7 @@
 #' @param r R script within that project (r is short R script for convenience)
 #' @param project.id project id
 #' @param logRmd logical indicating whether to create R markdown log
+#' @aliases {run.program}
 #' @return value from clean_source from devtools package
 #' @export
 #'@examples 
@@ -9,7 +10,7 @@
 #' run.program("read_data.R","adaprHome")
 #'} 
 #' 
-run.program <- function(r=get.sourceInfo()$file$file,project.id=get.project(),logRmd=FALSE){
+runScript <- function(r=get.sourceInfo()$file$file,project.id=getProject(),logRmd=FALSE){
   
   source.file <- r
   
@@ -75,12 +76,7 @@ run.program <- function(r=get.sourceInfo()$file$file,project.id=get.project(),lo
   
   return(out)
 }
-
-
-
-
-
-
+run.script <- runScript
 #' Remove an R script from a project. Removes program, dependency, and results.
 #' @param source.file R script within that project
 #' @param project.id project id
@@ -94,7 +90,7 @@ run.program <- function(r=get.sourceInfo()$file$file,project.id=get.project(),lo
 #' remove.program("adaprHome","read_data.R")
 #'} 
 #' 
-remove.program <- function(project.id=get.project(),source.file=get("source_info")$file$file,ask=TRUE){
+removeScript <- function(project.id=getProject(),source.file=get("source_info")$file$file,ask=TRUE){
   # get project object
   
   if(ask){
@@ -119,11 +115,15 @@ remove.program <- function(project.id=get.project(),source.file=get("source_info
                             "Markdown",markdownfile)
   inside.results <- list.files(results,full.names=TRUE,recursive = TRUE)
   
-  while(length(inside.results)>0){
+  counter <- 0
+  
+  while((length(inside.results)>0)&(counter < 1000)){
   
   inside.out <- file.remove(inside.results)
   
   inside.results <- list.files(results,full.names=TRUE,recursive = TRUE,include.dirs = TRUE)
+  
+  counter <- counter + 1
   
   }
   
@@ -133,8 +133,4 @@ remove.program <- function(project.id=get.project(),source.file=get("source_info
     
   return(c(results,inside.out,results))
 }
-
-
-
-
-
+remove.script <- removeScript

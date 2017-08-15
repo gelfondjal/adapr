@@ -23,5 +23,5 @@ logical for success or not
 initialize project
 }
 \details{
-Not for direct use. See init.project().
+Not for direct use. See initProject().
 }

@@ -12,7 +12,6 @@ id_new_libs <- function(library.data.file){
   packages.info.all <- utils::read.csv(library.data.file,as.is=TRUE)
   
   adapr_packs <- c("adapr","stats","graphics","grDevices","utils","base")
-
    notadapr <- setdiff(devtools::loaded_packages()$package,adapr_packs)
    
    missing <- setdiff(notadapr,packages.info.all$Package)   					   					

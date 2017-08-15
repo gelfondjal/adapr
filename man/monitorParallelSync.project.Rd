@@ -4,7 +4,7 @@
 \alias{monitorParallelSync.project}
 \title{Track parallelSync.project while in progress}
 \usage{
-monitorParallelSync.project(project.id = get.project(), check.interval = 5)
+monitorParallelSync.project(project.id = getProject(), check.interval = 5)
 }
 \arguments{
 \item{project.id}{Project to synchronize.}

@@ -1,4 +1,3 @@
-
 #' Read library file
 #' @param project.id project.id to read library file 
 #' @return Library information data
@@ -9,10 +8,9 @@
 #' read_library("adaprHome")
 #'} 
 #' 
-read_library <- function(project.id=get.project()){
+read_library <- function(project.id=getProject()){
   source_info <- pull_source_info(project.id)    
   library.file <- file.path(source_info$project.path,project.directory.tree$support,"common_libs.csv")
-
   libout <- utils::read.csv(library.file,as.is=TRUE)
   
   libout <- libout[order(libout$Package),]
@@ -20,9 +18,6 @@ read_library <- function(project.id=get.project()){
   return(libout)
   
 }
-
-
-
 #' Add R package to a project
 #' @param project.id project.id to add R package to
 #' @param library.name R package name to add
@@ -36,8 +31,7 @@ read_library <- function(project.id=get.project()){
 #' add_package("adaprHome","ggplot2")
 #'} 
 #' 
-add_package <- function(project.id=get.project(),library.name,library.install=NA,library.specific=FALSE){
-
+add_package <- function(project.id=getProject(),library.name,library.install=NA,library.specific=FALSE){
   source_info <- pull_source_info(project.id)    
   library.file <- file.path(source_info$project.path,project.directory.tree$support,"common_libs.csv")
   subgroup <- data.frame(Package=library.name,repos=library.install,
@@ -46,9 +40,6 @@ add_package <- function(project.id=get.project(),library.name,library.install=NA
   library.info <- utils::read.csv(library.file,as.is=TRUE)
   return(library.info)
 }
-
-
-
 #' Remove R package to a project
 #' @param project.id project.id to add R package to
 #' @param library.name R package name to add
@@ -60,7 +51,7 @@ add_package <- function(project.id=get.project(),library.name,library.install=NA
 #' remove_package("adaprHome","ggplot2")
 #'} 
 #' 
-remove_package <- function(project.id=get.project(),library.name){
+remove_package <- function(project.id=getProject(),library.name){
   libout <- read_library(project.id)
   
   libout <- subset(libout,libout$Package!=library.name)
@@ -73,7 +64,6 @@ remove_package <- function(project.id=get.project(),library.name){
   
   return(libout)
 }
-
 #' Installs all packages
 #' @param project.id project.id to install packages for R package to
 #' @return Library information data
@@ -83,7 +73,7 @@ remove_package <- function(project.id=get.project(),library.name){
 #' \dontrun{
 #' install_project_packages("adaprHome")
 #'} 
-install_project_packages <- function(project.id=get.project()){
+install_project_packages <- function(project.id=getProject()){
   source_info <- pull_source_info(project.id)    
   library.file <- file.path(source_info$project.path,project.directory.tree$support,"common_libs.csv")
   load.install.library.file(library.data.file= library.file,verbose=TRUE,install.all=TRUE)

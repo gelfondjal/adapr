@@ -11,7 +11,6 @@
 #'} 
 #' 
 git_provenance <- function(project.id,filepath=0){
-
   if(filepath==0){filepath <- file.choose()}
   
   filehash <- Digest(file=filepath)
@@ -32,5 +31,3 @@ git_provenance <- function(project.id,filepath=0){
   
   return(list(file=filepath,gitHistory=provenance,currentDescription=file.data))
 }
-
-

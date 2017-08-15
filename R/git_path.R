@@ -29,5 +29,3 @@ git_path <- function(git_binary_name = NULL) {
   
   stop("Git does not seem to be installed on your system.", call. = FALSE)
 }
-
-

@@ -4,7 +4,7 @@
 \alias{send.pubresults}
 \title{Read in results to publish & Copies results to the project's publication directory}
 \usage{
-send.pubresults(project.id = get.project())
+send.pubresults(project.id = getProject())
 }
 \arguments{
 \item{project.id}{Project to publish}

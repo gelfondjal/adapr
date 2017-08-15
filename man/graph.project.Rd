@@ -5,7 +5,7 @@
 \title{Make plot of project programs only
 Summarize all programs. Sync status is assessed and indicated.}
 \usage{
-graph.project(project = get.project())
+graph.project(project = getProject())
 }
 \arguments{
 \item{project}{Project id of program}

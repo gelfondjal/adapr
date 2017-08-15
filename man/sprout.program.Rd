@@ -5,7 +5,7 @@
 \title{Generates the shell of a code that is project specific}
 \usage{
 sprout.program(project.id = NA, source.file.name = NA, description = "",
-  seed = 2011, capture.load.command = "library(adapr)",
+  seed = 2011, capture.load.command = "library(\\"adapr\\")",
   controller = FALSE)
 }
 \arguments{
@@ -28,5 +28,5 @@ Logical indicating success or not
 Generates the shell of a code that is project specific
 }
 \details{
-Will not overwrite existing program. Not for direct use. See make.program().
+Will not overwrite existing program. Not for direct use. See makeScript().
 }

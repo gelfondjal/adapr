@@ -37,8 +37,6 @@ Load.branch <- function(file){
   #return(obj)
   
 }
-
-
 #' Loads a single R object from file, more flexible than Load.branch or base::load
 #' @param file contains R object
 #' @param read.fcn function to read the file, default readRDS
@@ -77,10 +75,3 @@ loadFlex <- function(file,read.fcn=readRDS,...){
   return(obj)
   
 }
-
-
-
-
-
-
-

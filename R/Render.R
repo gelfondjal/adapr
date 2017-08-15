@@ -10,8 +10,6 @@
 #' source_info <- create_source_file_dir("adaprHome","read_data.R")
 #' Render_Rmd("read_data.Rmd")
 #'} 
-
-
 Render_Rmd <- function(Rmd.file,description="Rmarkdown",...){
   
   #equire(rmarkdown)

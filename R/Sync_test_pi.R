@@ -13,4 +13,3 @@
 #'
 #'
 Sync.test.pi <- function(project_info,plotl0=FALSE){return(Sync.test(project_info$graph,project_info$tree,plotl=plotl0))}
-

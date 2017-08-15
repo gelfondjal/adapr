@@ -11,11 +11,9 @@
 #' projInfo <- get.project.info(si$dependency.dir)
 #' Sync.test(projInfo$graph,projInfo$tree)
 #'} 
-
 Sync.test <- function(dagger,tree,plotl=FALSE){
   
   #equire(igraph)
-
   if(!igraph::is.dag(dagger)){stop("The computing dependencies have cycles.")}
   
   # track the run time of source files
@@ -26,7 +24,6 @@ Sync.test <- function(dagger,tree,plotl=FALSE){
  
   # find the out dated nodes
   file.check <- Check.file.mtime.source(dependency.object=tree)
-
   # vertices to update
   vertex.updates <- c()
   

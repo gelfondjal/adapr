@@ -16,20 +16,17 @@
 #'} 
 #' 
 #' 
-
-create_markdown <- function(target.file=paste0(get("source_info")$file$file,"md"),target.dir=get("source_info")$markdown.dir,style="html_document",description="Markdown",si,overwrite=FALSE){
+create_markdown <- function(target.file=paste0(get.sourceInfo()$file$file,"md"),target.dir=get.sourceInfo()$markdown.dir,style="html_document",description="Markdown",si,overwrite=FALSE){
 	
 	file.information <- Create.file.info(target.dir,target.file,description=description)
 		
 	target.file <- file.path(target.dir,target.file)
-
 #	Read.cap(file.information,read.fcn=I,source_info=si)
   
 	
 	if((!overwrite)&file.exists(target.file)){return(file.information)}
 	
   adapr_options <- get_adapr_options()
-
   if(adapr_options$git=="TRUE"){
 	author <- git2r::config()[["global"]]$user.name
   }else{author <- adapr_options$username}
@@ -39,26 +36,20 @@ create_markdown <- function(target.file=paste0(get("source_info")$file$file,"md"
 							paste("author:",paste0("\"",author,"\"")),
 							paste("output:",style),
 							"---",
-							"```{r,echo=FALSE,message=FALSE,warning=FALSE,include=FALSE}\n require(adapr) \n require(methods) \n
-							paste0(\"Created on \",(Sys.time() ))\n
-							```\n\n\n",
+							"```{r,echo=FALSE,message=FALSE,warning=FALSE,include=FALSE}\n require(\"adapr\") \n require(\"methods\") \n",
+              "paste0(\"Created on \",(Sys.time() ))\n",
+							"```\n\n\n",
 							paste0("```{r,echo=FALSE,message=FALSE,warning=FALSE,include=FALSE}\n # scriptLoader(",
-							          paste0("\"",si$project.id,"\""),
+							paste0("\"",si$project.id,"\""),
 							                              ",", 
-                        paste0("\"",si$file$file  ,"\""),")","\n",
+              paste0("\"",si$file$file  ,"\""),")","\n",
 							      
 							      "\n```\n\n\n\n"),
 							"\n```{r,echo=FALSE} \n if(checkRmdMode()){dependency.out <- finalize_dependency() } \n```")
 								
 	start.lines.generic <- paste(start.lines.generic,collapse="\n")
 	
-	
-
-	
 	write(start.lines.generic,target.file)
-	
-	
-	
 	
 	return(file.information)
 	

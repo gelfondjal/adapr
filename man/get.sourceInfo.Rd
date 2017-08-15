@@ -14,7 +14,7 @@ Returns the information related to the adapr script
 }
 \examples{
 \dontrun{
-get.sourceInfo()
+getSourceInfo()
 } 
 
 }

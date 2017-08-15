@@ -5,7 +5,7 @@
 \title{Make plot of network within html documents.
 Summarize all programs.}
 \usage{
-report.project(project.id = get.project(), graph.width = 960,
+report.project(project.id = getProject(), graph.width = 960,
   graph.height = 500)
 }
 \arguments{

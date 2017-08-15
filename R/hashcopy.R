@@ -15,9 +15,7 @@ for(original in originals){
   
 rewriteTF <- TRUE
 out <- FALSE
-
 target <- file.path(targetdir,basename(original))
-
 if(file.exists(target)){
   
   hash <- Digest(original,algo="sha1",file=TRUE,serialize=FALSE)   
@@ -26,21 +24,13 @@ if(file.exists(target)){
   rewriteTF <- hash!=hash.target
   
 }# check for target diff
-
-
 out[step] <- rewriteTF
-
 if(rewriteTF){
   
  out[step] <-  file.copy(originals,target,overwrite=TRUE)
   
 }# if target diff
-
 step <-step + 1 
-
 }#loop over originals
-
 return(out)
-
-
 }

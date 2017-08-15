@@ -4,7 +4,7 @@
 \alias{add_package}
 \title{Add R package to a project}
 \usage{
-add_package(project.id = get.project(), library.name, library.install = NA,
+add_package(project.id = getProject(), library.name, library.install = NA,
   library.specific = FALSE)
 }
 \arguments{

@@ -31,6 +31,5 @@ source_sync_si_load <- function (source_info)
     return(data.frame(last.run.time.sec = last.run.time))
   })
   run.times$source.file <- as.character(run.times$source.file)
-
   return(list(run.times = run.times,ID.sync.out=ID.sync.out,sync.out=sync.out))
 }

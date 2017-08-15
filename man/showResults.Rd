@@ -2,20 +2,25 @@
 % Please edit documentation in R/list_files.R
 \name{showResults}
 \alias{showResults}
-\title{Opens results directory}
+\title{Opens results directory of project or R script within a project}
 \usage{
-showResults(si = options()$adaprScriptInfo, project.id = "", rscript = "")
+showResults(project.id = getProject(),
+  rscript = options()$adaprScriptInfo$file$file)
 }
 \arguments{
-\item{si}{is source_info object}
-
 \item{project.id}{character string specifies project}
 
 \item{rscript}{character string specifies the R script result directory to open}
 }
 \description{
-Opens results directory
+Opens results directory of project or R script within a project
 }
 \details{
-Deprecated: use show.results(). Uses BrowseURL to open results directory
+Use BrowseURL to open results directory
+}
+\examples{
+\dontrun{
+showResults("adaprHome")
+} 
+
 }

@@ -19,7 +19,6 @@ git.add <- function(gitdir,filename,branch = NULL, git_args = character(), git_b
   # "add" filename in the git repository in gitdir
   
   repo <- git2r::repository(gitdir)
-
   git2r::add(repo,filename)    
   
 #  git_binary_path <- git_path(git_binary)

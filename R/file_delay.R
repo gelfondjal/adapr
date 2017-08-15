@@ -1,8 +1,3 @@
-
-
-
-
-
 filetime <- function(testdir){
   
  testdir <- "/Volumes/WORKING2/Projects/Goros/test_adapr/Data"
@@ -11,7 +6,6 @@ filetime <- function(testdir){
   
   
   tempfile <- file.path(testdir,"DELETEME.NOW")
-
   cputime <- Sys.time()
     
   write(cputime,tempfile)

@@ -4,7 +4,7 @@
 \alias{synctest.project}
 \title{Tests the synchrony of files in dependency tree}
 \usage{
-synctest.project(project.id = get.project())
+synctest.project(project.id = getProject())
 }
 \arguments{
 \item{project.id}{is project to test the synchrony of}

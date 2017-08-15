@@ -11,7 +11,6 @@
 #' #finalize_dependency() 
 #'} 
 #' 
-
 finalize_dependency <- function(RMD=TRUE,write=TRUE){
   
   # read in dependency object from dependency.file in source_info
@@ -42,7 +41,6 @@ finalize_dependency <- function(RMD=TRUE,write=TRUE){
   }
   Read.cap(source_info$rmdfile, I, source_info)
   file.remove(file.path(source_info$results.dir,source_info$rmdfile$file))
-
   
   Write(devtools::session_info(),paste0("Session_info_",source_info$file$db.name,".RObj"),paste0("sessionInfo for", source_info$file[["file"]]),save)
   
@@ -84,12 +82,9 @@ finalize_dependency <- function(RMD=TRUE,write=TRUE){
     dependency.out$target.mod.time[dep.row.iter] <- as.character(file.info(as.character(target.file))$mtime)
     
   }
-
-
   dependency.out <- subset(dependency.out,""!=dependency.out$target.hash)
   
   dependency.out <- subset(dependency.out,!duplicated(file.path(as.character(dependency.out$target.path),as.character(dependency.out$target.file))))
-
   setwd(current.dir)
     
   if(write){

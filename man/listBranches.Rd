@@ -4,10 +4,10 @@
 \alias{listBranches}
 \title{Lists the branches available for loading in the adapr project}
 \usage{
-listBranches(si = get.sourceInfo())
+listBranches(project.id = getProject())
 }
 \arguments{
-\item{si}{is source_info object}
+\item{project.id}{project to find branches within}
 }
 \value{
 dataframe of descriptions available branches
@@ -17,6 +17,8 @@ Lists the branches available for loading in the adapr project
 }
 \examples{
 \dontrun{
-source_info <- create_source_file_dir("adaprHome","tree_controller.R")
+listBranches("adaprHome")
 } 
+
+
 }

@@ -4,7 +4,7 @@
 \alias{get.pubresults}
 \title{Read result filepaths to publish}
 \usage{
-get.pubresults(project.id = get.project())
+get.pubresults(project.id = getProject())
 }
 \arguments{
 \item{project.id}{Project to publish}

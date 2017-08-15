@@ -9,7 +9,6 @@
 #'\dontrun{
 #'  git.init(get.project.path("adaprHome"))
 #'} 
-
 git.init <- function(gitdir,branch = NULL, git_binary = NULL){
   
   # extract the git information related to a filename in the git repository in gitdir

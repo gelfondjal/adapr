@@ -38,10 +38,8 @@ Check.file.hash.source <- function(dependency.dir=NULL,dependency.object=NULL){
   })
   
   failed.sources <- subset(source.hash.check,source.hash.check$hash.fail)
-
   failed.sources$file <- failed.sources$source.file
   failed.sources$path <- failed.sources$source.file.path
-
   #Check target hashes are current
   
   target.hash.check <- plyr::ddply(trees,c("source.file","source.file.path","target.path","target.file"),function(x){
