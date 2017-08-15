@@ -1,14 +1,14 @@
 #' Read library file
 #' @param project.id project.id to read library file 
-#' @return Library information data
-#' @details uses read.csv
+#' @return Autoloaded library information data
+#' @details Not for direct use. Uses read.csv to read autoloaded libraries.
 #' @export
 #' @examples 
 #' \dontrun{
-#' read_library("adaprHome")
+#' readLibrary("adaprHome")
 #'} 
 #' 
-read_library <- function(project.id=getProject()){
+readLibrary <- function(project.id=getProject()){
   source_info <- pull_source_info(project.id)    
   library.file <- file.path(source_info$project.path,project.directory.tree$support,"common_libs.csv")
   libout <- utils::read.csv(library.file,as.is=TRUE)
@@ -24,14 +24,14 @@ read_library <- function(project.id=getProject()){
 #' @param library.install Command to install library: NA for CRAN, bioC for bioconductor
 #' @param library.specific logical indicate whether package is for specific R script
 #' @return Library information data
-#' @details Installs and loads all packages
+#' @details Not for direct use. Installs and loads all packages
 #' @export
 #' @examples 
 #' \dontrun{
-#' add_package("adaprHome","ggplot2")
+#' addPackage("adaprHome","ggplot2")
 #'} 
 #' 
-add_package <- function(project.id=getProject(),library.name,library.install=NA,library.specific=FALSE){
+addPackage <- function(project.id=getProject(),library.name,library.install=NA,library.specific=FALSE){
   source_info <- pull_source_info(project.id)    
   library.file <- file.path(source_info$project.path,project.directory.tree$support,"common_libs.csv")
   subgroup <- data.frame(Package=library.name,repos=library.install,
@@ -52,7 +52,7 @@ add_package <- function(project.id=getProject(),library.name,library.install=NA,
 #'} 
 #' 
 remove_package <- function(project.id=getProject(),library.name){
-  libout <- read_library(project.id)
+  libout <- readLibrary(project.id)
   
   libout <- subset(libout,libout$Package!=library.name)
   source_info <- pull_source_info(project.id)    
@@ -78,7 +78,7 @@ install_project_packages <- function(project.id=getProject()){
   library.file <- file.path(source_info$project.path,project.directory.tree$support,"common_libs.csv")
   load.install.library.file(library.data.file= library.file,verbose=TRUE,install.all=TRUE)
   
-  return(read_library(project.id))
+  return(readLibrary(project.id))
 }
   
   
