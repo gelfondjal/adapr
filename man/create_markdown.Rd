@@ -4,8 +4,8 @@
 \alias{create_markdown}
 \title{Renders and Rmarkdown file}
 \usage{
-create_markdown(target.file = paste0(get.sourceInfo()$file$file, "md"),
-  target.dir = get.sourceInfo()$markdown.dir, style = "html_document",
+create_markdown(target.file = paste0(getSourceInfo()$file$file, "md"),
+  target.dir = getSourceInfo()$markdown.dir, style = "html_document",
   description = "Markdown", si, overwrite = FALSE)
 }
 \arguments{

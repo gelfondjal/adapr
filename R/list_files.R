@@ -44,24 +44,6 @@ list.branches <- listBranches
 #' Lists the R scripts in the adapr project
 #' @param  project.id project.id
 #' @return dataframe of R scripts and descriptions
-#' @details Deprecated see list.programs
-#' @export
-#' 
-listScripts<- function(project.id=getProject()){
-  warning("deprecated: see list.programs")
-  
-  trees <- Harvest.trees(file.path(get.project.path(project.id),project.directory.tree$dependency.dir))
-  
-  programs <- subset(trees,!duplicated(file.path(trees$source.file.path,trees$source.file)),
-                    select=c("source.file","source.file.description"))
-  
-  
-  return(programs)
-  
-}
-#' Lists the R scripts in the adapr project
-#' @param  project.id project.id
-#' @return dataframe of R scripts and descriptions
 #' @export
 #' @examples 
 #' \dontrun{
@@ -70,6 +52,8 @@ listScripts<- function(project.id=getProject()){
 #'
 #'
 listScripts <- function(project.id=getProject()){
+  
+  
   trees <- Harvest.trees(file.path(get.project.path(project.id),project.directory.tree$dependency.dir))
   
   programs <- subset(trees,!duplicated(file.path(trees$source.file.path,trees$source.file)),
@@ -95,7 +79,7 @@ listScripts <- function(project.id=getProject()){
 #' getSourceInfo()
 #'} 
 #'
-get.sourceInfo <- function(){
+getSourceInfo <- function(){
   
   return(options()$adaprScriptInfo)
   

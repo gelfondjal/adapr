@@ -24,7 +24,7 @@ finalize_dependency <- function(RMD=TRUE,write=TRUE){
     
   }
   
-  source_info <- get.sourceInfo()
+  source_info <- getSourceInfo()
  
   current.dir <- getwd()
   # Copy and render Rmd file

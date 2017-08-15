@@ -16,7 +16,7 @@
 #'} 
 #' 
 #' 
-create_markdown <- function(target.file=paste0(get.sourceInfo()$file$file,"md"),target.dir=get.sourceInfo()$markdown.dir,style="html_document",description="Markdown",si,overwrite=FALSE){
+create_markdown <- function(target.file=paste0(getSourceInfo()$file$file,"md"),target.dir=getSourceInfo()$markdown.dir,style="html_document",description="Markdown",si,overwrite=FALSE){
 	
 	file.information <- Create.file.info(target.dir,target.file,description=description)
 		

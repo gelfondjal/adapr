@@ -11,7 +11,7 @@
 #' 
 load.install.library.file <- function(library.data.file=NA,subgroup=NULL,verbose=FALSE,install.all=FALSE){
   
-  if(is.na(library.data.file)){library.data.file <- file.path(get.sourceInfo()$support.dir,get.sourceInfo()$support.library.file)}
+  if(is.na(library.data.file)){library.data.file <- file.path(getSourceInfo()$support.dir,getSourceInfo()$support.library.file)}
   
   if(!file.exists(library.data.file)){
     print("No library information file")
@@ -263,7 +263,7 @@ install.library <- function(input=get.library(),lib=.libPaths()[1],versionCheck=
 #' 
 get.library <- function(project.id = getProject()){
   
-  programs <- list.programs(project.id)
+  programs <- listScripts(project.id)
   
   path <- get.project.path(project.id)
   
