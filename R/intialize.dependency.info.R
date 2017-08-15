@@ -51,7 +51,7 @@ initialize_dependency_info <- function(source_info_arg){
     if(no.repository){
       
       #git.add(project.path,file.path(source.file.info[["path"]],source.file.info[["file"]]))	
-      #git.commit(project.path,"Intitialize git")
+      #gitXcommit(project.path,"Intitialize git")
       
       git2r::init(project.path)
       repo <- git2r::repository(project.path)

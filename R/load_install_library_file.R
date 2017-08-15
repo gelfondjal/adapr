@@ -4,7 +4,7 @@
 #' @param verbose Print which libraries are installed and loaded
 #' @param install.all logicial indicated whether to install all project packages
 #' @return Library information data
-#' @details Installs and loads all packages.Not for direct use. See install_project_packages().
+#' @details Installs and loads all packages.Not for direct use. See installProjectPackages().
 #' @export
 #' 
 #' 

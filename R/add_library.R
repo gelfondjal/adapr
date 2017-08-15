@@ -44,14 +44,14 @@ addPackage <- function(project.id=getProject(),library.name,library.install=NA,l
 #' @param project.id project.id to add R package to
 #' @param library.name R package name to add
 #' @return Library information data
-#' @details Remove line from file
+#' @details Not for direct use. Remove line from autoloading packages file.
 #' @export
 #' @examples 
 #' \dontrun{
-#' remove_package("adaprHome","ggplot2")
+#' removePackage("adaprHome","ggplot2")
 #'} 
 #' 
-remove_package <- function(project.id=getProject(),library.name){
+removePackage <- function(project.id=getProject(),library.name){
   libout <- readLibrary(project.id)
   
   libout <- subset(libout,libout$Package!=library.name)
@@ -67,13 +67,13 @@ remove_package <- function(project.id=getProject(),library.name){
 #' Installs all packages
 #' @param project.id project.id to install packages for R package to
 #' @return Library information data
-#' @details Installs packages 
+#' @details Not for direct use. Installs autoloaded packages.
 #' @export
 #' @examples 
 #' \dontrun{
-#' install_project_packages("adaprHome")
+#' installProjectPackages("adaprHome")
 #'} 
-install_project_packages <- function(project.id=getProject()){
+installProjectPackages <- function(project.id=getProject()){
   source_info <- pull_source_info(project.id)    
   library.file <- file.path(source_info$project.path,project.directory.tree$support,"common_libs.csv")
   load.install.library.file(library.data.file= library.file,verbose=TRUE,install.all=TRUE)

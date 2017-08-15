@@ -23,5 +23,5 @@ Library information data
 Loads librarys within the file library.list.file
 }
 \details{
-Installs and loads all packages.Not for direct use. See install_project_packages().
+Installs and loads all packages.Not for direct use. See installProjectPackages().
 }
