@@ -135,7 +135,7 @@ if(test.sync0$synchronize){
     text<-paste(last.prog,"failed sync for",project.id,"Script that failed:",failure.script)
   }else{
     
-    if(get_adapr_options()$git=="TRUE"){commit.project(paste("adapr Sync at",Sys.time()),project.id)}
+    if(get_adapr_options()$git=="TRUE"){commitProject(paste("adapr Sync at",Sys.time()),project.id)}
   }
 return(text)
   
