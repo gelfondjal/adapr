@@ -65,7 +65,7 @@ Sync.test.OLD <- function(dagger,tree,plotl=TRUE){
   
   # check for file hash inconsistencies
   
-  file.check <- Check.file.hash(dependency.object=tree)
+  file.check <- checkFileHash(dependency.object=tree)
   
   file.info <- Condense.file.info(tree)
   

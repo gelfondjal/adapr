@@ -16,7 +16,7 @@ Library information data
 Installs all packages
 }
 \details{
-Installs packages
+Not for direct use. Installs autoloaded packages.
 }
 \examples{
 \dontrun{
