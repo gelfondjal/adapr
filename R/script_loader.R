@@ -9,9 +9,9 @@ scriptLoader <- function(projectID,script){
   # initialize dependency file R object, store filename
   # project.path is for git
   
-  programPath <- file.path(get.project.path(projectID),project.directory.tree$analysis,script)
+  programPath <- file.path(getProjectPath(projectID),project.directory.tree$analysis,script)
   
-  resultsPath <- file.path(get.project.path(projectID),project.directory.tree$results,script)
+  resultsPath <- file.path(getProjectPath(projectID),project.directory.tree$results,script)
   
   setwd(resultsPath)
   

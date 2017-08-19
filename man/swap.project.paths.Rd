@@ -5,7 +5,7 @@
 \title{Take list of dependency file data and changes the project path}
 \usage{
 swap.project.paths(list.deps,
-  new.path = get.project.path(get("source_info")$project.id))
+  new.path = getProjectPath(get("source_info")$project.id))
 }
 \arguments{
 \item{list.deps}{list of dependency file data}

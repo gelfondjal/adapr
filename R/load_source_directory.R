@@ -5,7 +5,7 @@
 #' @export
 #' @examples 
 #'\dontrun{
-#'  path <- get.project.path("adaprHome")
+#'  path <- getProjectPath("adaprHome")
 #'  path <- file.path(path,"Programs",project.directory.tree$support)
 #'  load.source.directory(path)
 #'} 

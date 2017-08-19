@@ -5,10 +5,10 @@
 #' @export
 #' @examples 
 #' \dontrun{
-#' get.pubresults("adaprHome")
+#' getPubResults("adaprHome")
 #'} 
 #' 
-get.pubresults <- function(project.id=getProject()){
+getPubResults <- function(project.id=getProject()){
   
   # Retrieves or creates publication table from project.id
   
@@ -35,14 +35,14 @@ get.pubresults <- function(project.id=getProject()){
 #'} 
 #' 
 send.pubresults <- function(project.id=getProject()){
-  publication.table <- get.pubresults(project.id)
+  publication.table <- getPubResults(project.id)
   
-  pubpath <- get.project.publish.path(project.id)
+  pubpath <- getProjectPublishPath(project.id)
   
   if(nrow(publication.table)>0){
     
     publication.table <- publication.table[order(basename(publication.table$Path)),]  
-    file.copy(file.path(get.project.path(project.id),publication.table$Path),pubpath,overwrite=TRUE)
+    file.copy(file.path(getProjectPath(project.id),publication.table$Path),pubpath,overwrite=TRUE)
     pubout <- paste("Published",nrow(publication.table),project.id, "files",Sys.time(),"to",pubpath)
     
   }else{

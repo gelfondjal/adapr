@@ -22,7 +22,7 @@ Requires a Git commit snapshot within the project
 }
 \examples{
 \dontrun{
- projpath <- file.path(get.project.path("adaprHome"),"Programs")
+ projpath <- file.path(getProjectPath("adaprHome"),"Programs")
  git_provenance("adaprHome",file.path(projpath,"read_data.R"))
 } 
 

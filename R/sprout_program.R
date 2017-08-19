@@ -38,11 +38,11 @@ sprout.program <- function(project.id=NA,source.file.name=NA,description="",seed
   strings.to.write <- c(rep("\n",1),start.lines.generic,rep("\n",1),start.lines.specific,initialize.lines,body.lines,final.line)
   #print(strings.to.write)
   
-  target.file <- file.path(get.project.path(project.id),project.directory.tree$analysis,source.file.name)
+  target.file <- file.path(getProjectPath(project.id),project.directory.tree$analysis,source.file.name)
   
   if(!file.exists(target.file)){
     
-    dir.create(file.path(get.project.path(project.id),project.directory.tree$analysis),showWarnings=FALSE)
+    dir.create(file.path(getProjectPath(project.id),project.directory.tree$analysis),showWarnings=FALSE)
     
     
     write(strings.to.write,target.file)

@@ -265,7 +265,7 @@ getLibrary <- function(project.id = getProject()){
   
   programs <- listScripts(project.id)
   
-  path <- get.project.path(project.id)
+  path <- getProjectPath(project.id)
   
   packageInfo <- plyr::ddply(programs,"source.file",function(program){
     

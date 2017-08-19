@@ -5,10 +5,10 @@
 #' @export
 #' @examples 
 #'\dontrun{
-#' get.project.path("adaprHome")
+#' getProjectPath("adaprHome")
 #'} 
 #' 
-get.project.path <- function(project_name=NULL){
+getProjectPath <- function(project_name=NULL){
   
   
   all.projects <- get_orchard()
@@ -22,7 +22,7 @@ get.project.path <- function(project_name=NULL){
   return(as.character(project.out$project.path))
   
   
-} #END get.project.path
+} #END getProjectPath
 #' Given Project name, Return project publish directory
 #' @param project_name is string with project name 
 #' @details Reads "~/ProjectPaths/projectid_2_diretory.csv" into dataframe
@@ -30,10 +30,10 @@ get.project.path <- function(project_name=NULL){
 #' @export
 #' @examples 
 #'\dontrun{
-#' get.project.publish.path("adaprHome")
+#' getProjectPublishPath("adaprHome")
 #'} 
 #' 
-get.project.publish.path <- function(project_name=NULL){
+getProjectPublishPath <- function(project_name=NULL){
   
   all.projects <- get_orchard()
   
@@ -46,4 +46,4 @@ get.project.publish.path <- function(project_name=NULL){
   return(as.character(project.out$swap.directory))
   
   
-} #END get.project.publish.path
+} #END getProjectPublishPath

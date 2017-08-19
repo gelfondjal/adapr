@@ -14,14 +14,14 @@ runScript <- function(r=getSourceInfo()$file$file,project.id=getProject(),logRmd
   
   source.file <- r
   
-  scriptfile <- file.path(get.project.path(project.id),project.directory.tree$analysis,source.file)
+  scriptfile <- file.path(getProjectPath(project.id),project.directory.tree$analysis,source.file)
   
   # get project object
   if(!logRmd){
     out <- devtools::clean_source(scriptfile)
   }else{
     
-    results <- file.path(get.project.path(project.id),project.directory.tree$results,source.file)
+    results <- file.path(getProjectPath(project.id),project.directory.tree$results,source.file)
     
     dir.create(results,showWarnings=FALSE)
     
@@ -36,7 +36,7 @@ runScript <- function(r=getSourceInfo()$file$file,project.id=getProject(),logRmd
   
     temphtml <- file.path(results,paste0(dbname,"_adapr_results_log.html"))
     
-    dependency.file <- file.path(get.project.path(project.id),project.directory.tree$dependency.dir,
+    dependency.file <- file.path(getProjectPath(project.id),project.directory.tree$dependency.dir,
                                  paste0(source.file,".txt"))
     
     write(program,tempmkdown)
@@ -105,13 +105,13 @@ removeScript <- function(project.id=getProject(),source.file=get("source_info")$
   }
   
   
-  program <- file.path(get.project.path(project.id),project.directory.tree$analysis,source.file)
-  dependencyDir <- file.path(get.project.path(project.id),project.directory.tree$dependency.dir,
+  program <- file.path(getProjectPath(project.id),project.directory.tree$analysis,source.file)
+  dependencyDir <- file.path(getProjectPath(project.id),project.directory.tree$dependency.dir,
                 paste0(source.file,".txt"))
-  results <- file.path(get.project.path(project.id),project.directory.tree$results,source.file)
+  results <- file.path(getProjectPath(project.id),project.directory.tree$results,source.file)
   
   markdownfile <- gsub("\\.r$|\\.R","\\.Rmd",source.file)
-  markdownfile <- file.path(get.project.path(project.id),project.directory.tree$analysis,
+  markdownfile <- file.path(getProjectPath(project.id),project.directory.tree$analysis,
                             "Markdown",markdownfile)
   inside.results <- list.files(results,full.names=TRUE,recursive = TRUE)
   

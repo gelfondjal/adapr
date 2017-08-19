@@ -103,7 +103,7 @@ fileInfoProjects <- function(project.id=listProjects()$project.id){
   for(i in seq_along(project.id)){
     try({
   
-          allfiles <- list.files(get.project.path(project.id[i]),recursive = TRUE,full.names = TRUE)
+          allfiles <- list.files(getProjectPath(project.id[i]),recursive = TRUE,full.names = TRUE)
       
           mtimes <- file.mtime(allfiles)
           

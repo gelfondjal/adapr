@@ -24,6 +24,6 @@ Initiate git
 }
 \examples{
 \dontrun{
- git.init(get.project.path("adaprHome"))
+ git.init(getProjectPath("adaprHome"))
 } 
 }

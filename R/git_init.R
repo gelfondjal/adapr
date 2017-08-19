@@ -7,7 +7,7 @@
 #' @export
 #' @examples 
 #'\dontrun{
-#'  git.init(get.project.path("adaprHome"))
+#'  git.init(getProjectPath("adaprHome"))
 #'} 
 git.init <- function(gitdir,branch = NULL, git_binary = NULL){
   

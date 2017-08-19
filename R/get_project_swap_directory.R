@@ -3,7 +3,7 @@
 #' @return file path for swap directory
 #' @export
 #' @details Do not use. Deprecated.
-get.project.swap.directory <-function(project_name=NULL){
+getProjectSwapPath <-function(project_name=NULL){
   
   warning("get.projct.swap.directory is deprecated.")
   

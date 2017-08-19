@@ -5,7 +5,7 @@
 #' @return Updated list of dependency data
 #' @export
 #' 
-swap.project.paths <-   function(list.deps,new.path=get.project.path(get("source_info")$project.id)){
+swap.project.paths <-   function(list.deps,new.path=getProjectPath(get("source_info")$project.id)){
   
   # list.deps = list of dependency output files
   

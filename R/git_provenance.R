@@ -6,7 +6,7 @@
 #' @export
 #'@examples 
 #'\dontrun{
-#'  projpath <- file.path(get.project.path("adaprHome"),"Programs")
+#'  projpath <- file.path(getProjectPath("adaprHome"),"Programs")
 #'  git_provenance("adaprHome",file.path(projpath,"read_data.R"))
 #'} 
 #' 
@@ -15,7 +15,7 @@ git_provenance <- function(project.id,filepath=0){
   
   filehash <- Digest(file=filepath)
   
-  gitpath <- get.project.path(project.id)
+  gitpath <- getProjectPath(project.id)
   
   provenance <- git.history.search(gitpath,filehash)  
   

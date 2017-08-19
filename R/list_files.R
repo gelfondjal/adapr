@@ -54,7 +54,7 @@ list.branches <- listBranches
 listScripts <- function(project.id=getProject()){
   
   
-  trees <- Harvest.trees(file.path(get.project.path(project.id),project.directory.tree$dependency.dir))
+  trees <- Harvest.trees(file.path(getProjectPath(project.id),project.directory.tree$dependency.dir))
   
   programs <- subset(trees,!duplicated(file.path(trees$source.file.path,trees$source.file)),
                      select=c("source.file","source.file.description"))
@@ -155,9 +155,9 @@ showResults <- function(project.id=getProject(),rscript=options()$adaprScriptInf
   si <- pull_source_info(project.id)
   
   if(rscript==""){
-    utils::browseURL(file.path(get.project.path(project.id),project.directory.tree$results))
+    utils::browseURL(file.path(getProjectPath(project.id),project.directory.tree$results))
   }else{
-    resultdir <- file.path(get.project.path(project.id),project.directory.tree$results,rscript)
+    resultdir <- file.path(getProjectPath(project.id),project.directory.tree$results,rscript)
     utils::browseURL(resultdir)
   }
 }
@@ -173,5 +173,5 @@ showResults <- function(project.id=getProject(),rscript=options()$adaprScriptInf
  
 showProject <- function(project.id =getProject()){
  
-    utils::browseURL(get.project.path(project.id))
+    utils::browseURL(getProjectPath(project.id))
 }
