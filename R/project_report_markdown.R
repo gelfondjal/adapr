@@ -19,7 +19,7 @@ si <- source_info
 targetfile <- paste0("project_summary",".Rmd")
 targetdirectory <- si$results.dir
 createMarkdown(target.file=targetfile,target.dir=targetdirectory,style="html_document",description="\n",si,overwrite=TRUE)
-project.info <- get.project.info.si(si)
+project.info <- getProjectInfoSI(si)
 project.graph <- project.info$graph
 # START Make Sankey Plot
 # E(project.graph)$weight = 0.1

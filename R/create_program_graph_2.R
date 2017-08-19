@@ -19,7 +19,7 @@ createProgramGraph <- function(project.id){
 #equire(plyr)	
 #equire(igraph)
 si <- pull_source_info(project.id)
-projinfo <- get.project.info.si(si)
+projinfo <- getProjectInfoSI(si)
 outputs <- subset(projinfo$tree,projinfo$tree$dependency=="out",select=c("source.file","target.path","target.file"))
 outputs$fullname <- file.path(outputs$target.path,outputs$target.file)
 outputs <- merge(outputs,projinfo$all.files,by="fullname")

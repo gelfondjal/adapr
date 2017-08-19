@@ -19,7 +19,7 @@ Returns the source files needed to repair synchrony
 }
 \examples{
 \dontrun{
-projInfo <- get.project.info(pull_source_info("adaprHome")$dependency.dir)
+projInfo <- getProjectInfo(pull_source_info("adaprHome")$dependency.dir)
 trees <- Harvest.trees(pull_source_info("adaprHome")$dependency.dir)
 file.info <-condenseFileInfo(trees)
 ID.sync(file.info,projInfo$graph) 

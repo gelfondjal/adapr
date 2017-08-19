@@ -5,10 +5,10 @@
 #'@examples 
 #'\dontrun{
 #' source_info <- create_source_file_dir("adaprHome","tree_controller.R")
-#' get.project.info.si(source_info)
+#' getProjectInfoSI(source_info)
 #'} 
 #' 
-get.project.info.si <- function(source_info){
+getProjectInfoSI <- function(source_info){
   
   # get project object
   

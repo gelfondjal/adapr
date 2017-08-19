@@ -11,7 +11,7 @@
 #'} 
 sync.test.si <- function(source_info,plotl0=FALSE){
   
-  project_info <- get.project.info.si(source_info)
+  project_info <- getProjectInfoSI(source_info)
   
   return(Sync.test(project_info$graph,project_info$tree,plotl=plotl0))}
 #' Tests the synchrony of files in dependency tree
@@ -28,7 +28,7 @@ synctest.project <- function(project.id=getProject()){
   
   source_info <- pull_source_info(project.id)
   
-  project_info <- get.project.info.si(source_info)
+  project_info <- getProjectInfoSI(source_info)
   
   return(Sync.test(project_info$graph,project_info$tree,plotl=FALSE))}
 #' Checks the synchronization project and runs scripts needed for synchronization

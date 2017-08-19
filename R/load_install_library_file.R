@@ -224,7 +224,7 @@ checkVersion <- function(package0,version0="",versionCheck=FALSE,lib=.libPaths()
 #' install.library()
 #' } 
 #'
-install.library <- function(input=get.library(),lib=.libPaths()[1],versionCheck=FALSE){
+install.library <- function(input=getLibrary(),lib=.libPaths()[1],versionCheck=FALSE){
     input$success <- FALSE
     for(p in 1:nrow(input)){
     
@@ -258,10 +258,10 @@ install.library <- function(input=get.library(),lib=.libPaths()[1],versionCheck=
 #' @export
 #' @examples 
 #'\dontrun{
-#' get.library("adaprHome")
+#' getLibrary("adaprHome")
 #'} 
 #' 
-get.library <- function(project.id = getProject()){
+getLibrary <- function(project.id = getProject()){
   
   programs <- listScripts(project.id)
   

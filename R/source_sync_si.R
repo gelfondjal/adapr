@@ -16,7 +16,7 @@ source.sync.si <- function(source_info,run=TRUE,plot.to.file=FALSE){
   # Compute run times
   
   
-  project_info <- get.project.info.si(source_info)
+  project_info <- getProjectInfoSI(source_info)
   
   sync.out <- Sync.test.pi(project_info)
   

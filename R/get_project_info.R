@@ -7,11 +7,11 @@
 #' @export
 #' @examples 
 #'\dontrun{
-#' projInfo <- get.project.info(pull_source_info("adaprHome")$dependency.dir)
+#' projInfo <- getProjectInfo(pull_source_info("adaprHome")$dependency.dir)
 #' plot(projInfo$graph) 
 #'} 
 #' 
-get.project.info <- function(dependency.dir){
+getProjectInfo <- function(dependency.dir){
   
   # get project object
   

@@ -19,7 +19,7 @@ create_program_graph_v2<- function(project.id){
 # 
 # si <- pull_source_info(project.id)
 # 
-# projinfo <- get.project.info.si(si)
+# projinfo <- getProjectInfoSI(si)
 # 
 # unsync.vertex <- c("",as.character(sync.test.si(si)$sources.to.sync$fullname.abbr))
 # 

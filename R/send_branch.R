@@ -8,7 +8,7 @@ send.branch <- function(branch_cut,all=FALSE){
   
   source_info <- get("source_info")
   
-  project_info <- get.project.info.si(source_info)
+  project_info <- getProjectInfoSI(source_info)
   
   if(!all){
     

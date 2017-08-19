@@ -4,7 +4,7 @@
 \alias{install.library}
 \title{Install package of specific version}
 \usage{
-install.library(input = get.library(), lib = .libPaths()[1],
+install.library(input = getLibrary(), lib = .libPaths()[1],
   versionCheck = FALSE)
 }
 \arguments{
