@@ -6,11 +6,11 @@
 #' @export
 #' @examples 
 #'\dontrun{
-#' create_program_graph("adaprHome")
+#' createProgramGraph("adaprHome")
 #'} 
 #'  
  
-create_program_graph<- function(project.id){
+createProgramGraph <- function(project.id){
 	
 # computes transitively connected subpgraph of project DAG
 # given a project id (project.id)
@@ -180,7 +180,7 @@ return(list(vertex=dfo,edges=froms,ggplot=proj.gg,rgrapher=isg))
 #'  
 graph.project <- function(project=getProject()){
   
-  out <- create_program_graph(project)
+  out <- createProgramGraph(project)
   
   return(out)
 }

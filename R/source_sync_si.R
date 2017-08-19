@@ -49,7 +49,7 @@ source.sync.si <- function(source_info,run=TRUE,plot.to.file=FALSE){
   
   #Plot.biggraph.horizontal(project_info$graph,title="Files to syncrhonise",black.vertex.list=propagated.names)			
   
-  create_program_graph(source_info$project.id)
+  createProgramGraph(source_info$project.id)
   
   if(plot.to.file){grDevices::graphics.off()}
   
@@ -89,7 +89,7 @@ source.sync.si <- function(source_info,run=TRUE,plot.to.file=FALSE){
       if(plot.to.file){grDevices::png(syncPlotFile)}
       
       
-      create_program_graph(source_info$project.id)
+      createProgramGraph(source_info$project.id)
       
       if(plot.to.file){grDevices::graphics.off()}
       

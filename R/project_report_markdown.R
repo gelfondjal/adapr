@@ -18,7 +18,7 @@ function (source_info, graph.width = 960, graph.height = 500)
 si <- source_info
 targetfile <- paste0("project_summary",".Rmd")
 targetdirectory <- si$results.dir
-create_markdown(target.file=targetfile,target.dir=targetdirectory,style="html_document",description="\n",si,overwrite=TRUE)
+createMarkdown(target.file=targetfile,target.dir=targetdirectory,style="html_document",description="\n",si,overwrite=TRUE)
 project.info <- get.project.info.si(si)
 project.graph <- project.info$graph
 # START Make Sankey Plot
@@ -49,7 +49,7 @@ reduced.project.graph.file <- file.path(source_info$results.dir,
                                         "reduced_networks.png")
 #sankeyPlot$save(reduced.project.graph.file, cdn = TRUE)
 grDevices::png(reduced.project.graph.file,graph.width,graph.height)
-programGraph <- create_program_graph(source_info$project.id)
+programGraph <- createProgramGraph(source_info$project.id)
 print(programGraph$ggplot)
 grDevices::graphics.off()
 programs <- subset(project.info$tree, !duplicated(project.info$tree$source.file), 

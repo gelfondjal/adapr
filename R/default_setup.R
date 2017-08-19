@@ -156,7 +156,7 @@ defaultAdaprSetup <- function(){
     
     setAdaprOptions("publish.path", publish.path.start)
     
-    first.project(project.path.start, publish.path.start)
+    firstProject(project.path.start, publish.path.start)
     
     
   }else{

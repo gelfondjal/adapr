@@ -34,10 +34,10 @@ plant.orchard <- function(){
 #' @examples 
 #'\dontrun{
 #'  opt <- get_adapr_options()
-#'  first.project(opt$project.path,opt$publish.path)
+#'  firstProject(opt$project.path,opt$publish.path)
 #'} 
 #' 
-first.project <- function(project.path="",publish.path=""){
+firstProject <- function(project.path="",publish.path=""){
 #project.path <- "/Users/Gelfond/Documents/Projects"
 #publish.path <- "/Users/Gelfond/Documents/Projects/Swap"
   orchard.site <- get_orchard()	

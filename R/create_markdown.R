@@ -12,11 +12,11 @@
 #'\dontrun{
 #' source_info <- create_source_file_dir("adaprHome","tree_controller.R")
 #' #Create markdown file in markdown directory for tree_controller.R
-#' create_markdown()
+#' createMarkdown()
 #'} 
 #' 
 #' 
-create_markdown <- function(target.file=paste0(getSourceInfo()$file$file,"md"),target.dir=getSourceInfo()$markdown.dir,style="html_document",description="Markdown",si,overwrite=FALSE){
+createMarkdown <- function(target.file=paste0(getSourceInfo()$file$file,"md"),target.dir=getSourceInfo()$markdown.dir,style="html_document",description="Markdown",si,overwrite=FALSE){
 	
 	file.information <- createFileInfo(target.dir,target.file,description=description)
 		

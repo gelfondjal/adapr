@@ -22,7 +22,7 @@ Deprecated. See graph.project()
 }
 \examples{
 \dontrun{
- create_program_graph_v2("adaprHome")
+ createProgramGraph2("adaprHome")
 } 
  
 }

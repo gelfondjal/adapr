@@ -89,7 +89,7 @@ create_source_file_dir <- function(project.id0=get("project.id"),source.file0=ge
   
   targetfile <- paste0(source_info$file$file,"md")
   targetdir <- source_info$markdown.dir
-  source_info$rmdfile <- create_markdown(target.file= targetfile,target.dir=targetdir,style="html_document",description=source_info$file$description,source_info)
+  source_info$rmdfile <- createMarkdown(target.file= targetfile,target.dir=targetdir,style="html_document",description=source_info$file$description,source_info)
   
   # Create publication file list
   

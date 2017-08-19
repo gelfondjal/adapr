@@ -37,7 +37,7 @@ target.directory2 <- file.path(target.directory,paste0("Results_",si$project.id)
 dir.create(target.directory2,recursive=TRUE,showWarnings=FALSE)
 targetfile <- paste0("project_summary",".Rmd")
 #targetdirectory <- si$results.dir
-create_markdown(target.file=targetfile,target.dir=target.directory2,style="html_document",description="\n",si,overwrite=TRUE)
+createMarkdown(target.file=targetfile,target.dir=target.directory2,style="html_document",description="\n",si,overwrite=TRUE)
 mdtoremove <- file.path(target.directory2,targetfile)
 project.info <- get.project.info.si(si)
 project.graph <- project.info$graph
@@ -61,7 +61,7 @@ reduced.project.graph.file <- file.path(target.directory2,
                                        "reduced_networks.png")
 #sankeyPlot$save(reduced.project.graph.file, cdn = TRUE)
 grDevices::png(reduced.project.graph.file,graph.width,graph.height)
-programGraph <- create_program_graph(si$project.id)
+programGraph <- createProgramGraph(si$project.id)
 print(programGraph$ggplot)
 grDevices::graphics.off()
 programs <- subset(project.info$tree, !duplicated(project.info$tree$source.file), 

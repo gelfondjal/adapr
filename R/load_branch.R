@@ -19,7 +19,7 @@ Load.branch <- function(file){
     
   }
   
-  file.info <- Get.file.info(options()$adaprScriptInfo,data="",file0="",path.grep=file)
+  file.info <- getFileInfo(options()$adaprScriptInfo,data="",file0="",path.grep=file)
   
   obj <- load(file.info[["fullname"]],envir=parent.frame())
   
@@ -60,7 +60,7 @@ loadFlex <- function(file,read.fcn=readRDS,...){
     
   }
   
-  file.info <- Get.file.info(options()$adaprScriptInfo,data="",file0="",path.grep=file)
+  file.info <- getFileInfo(options()$adaprScriptInfo,data="",file0="",path.grep=file)
   
   obj <- read.fcn(file.info[["fullname"]],...)
   
