@@ -101,6 +101,7 @@ setAdaprOptions <- function(optionname="",optionvalue=""){
 #' @param quickTest logical whether to check if project exists
 #' @return value is specified project or default project
 #' @details Default is adaprHome. Returns default if project does not exist.
+#' @export
 #'@examples 
 #'\dontrun{
 #'  setProject("adaprHome")
@@ -144,7 +145,6 @@ setProject <- function(project.id="",quickTest=TRUE){
   return(project.id)
   
 }
-set.project <- setProject
 #' Returns the  adapr project in R option "adaprProject"
 #' @return Value is specified project or default project
 #' @details Default is adaprHome. Returns default if project does not exist.

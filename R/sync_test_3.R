@@ -20,7 +20,7 @@ Sync.test <- function(dagger,tree,plotl=FALSE){
   # track the modification time of target files
   igraph::V(dagger)$time <- ifelse(igraph::V(dagger)$file.class=="source",igraph::V(dagger)$run.time,igraph::V(dagger)$mod.time)
    
-  file.info <- Condense.file.info(tree)
+  file.info <- condenseFileInfo(tree)
  
   # find the out dated nodes
   file.check <- checkFileMtimeSource(dependency.object=tree)

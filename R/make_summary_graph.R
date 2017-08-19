@@ -39,7 +39,7 @@ Make.summary.graph <- function(dependency.dir=NULL,dependency.object=NULL,plot.g
   file.type.df$shape <- shape.vector[as.character(file.type.df$file.type)]
   
   
-  all.file.info <- Condense.file.info(trees)
+  all.file.info <- condenseFileInfo(trees)
   
   all.file.info$fullname.abbr <- file.path(all.file.info$path.abbr,all.file.info$file)
   

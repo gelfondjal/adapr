@@ -5,10 +5,10 @@
 #' @examples 
 #'\dontrun{
 #'  trees <- Harvest.trees(pull_source_info("adaprHome")$dependency.dir)
-#' Condense.file.info(trees)
+#' condenseFileInfo(trees)
 #' } 
 #' 
-Condense.file.info <- function(trees){
+condenseFileInfo <- function(trees){
   
   source.files <- subset(trees,!duplicated(trees$source.file))
   

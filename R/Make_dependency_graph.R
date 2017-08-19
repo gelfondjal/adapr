@@ -13,7 +13,7 @@ Make.dependency.graph.obj <- function(dependency.out){
   # return dependency graph
   
   
-  file.info <- Condense.file.info(dependency.out)
+  file.info <- condenseFileInfo(dependency.out)
   
   
   dependencies <- dependency.out

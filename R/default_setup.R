@@ -209,7 +209,7 @@ loadAdaprTest <- function(overwrite=TRUE){
     
     relocate.project("adaprTest")
     
-    set.project("adaprTest")
+    setProject("adaprTest")
     
   }
   return(0)   

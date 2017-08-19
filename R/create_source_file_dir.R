@@ -12,7 +12,7 @@
 #' 
 create_source_file_dir <- function(project.id0=get("project.id"),source.file0=get("source.file"),source.description=""){
   #equire(devtools)
-  set.project(project.id0,TRUE)
+  setProject(project.id0,TRUE)
   
   project.path <- get.project.path(project.id0)
   project.tree <- project.directory.tree
@@ -52,7 +52,7 @@ create_source_file_dir <- function(project.id0=get("project.id"),source.file0=ge
   try({
     treedf <- Harvest.trees(dependency.dir)
     not.this.source <- subset(treedf,(treedf$source.file!=source_info$file[["file"]])&(!is.na(dependency)))
-    if (nrow(not.this.source)){source_info$all.files<- Condense.file.info(not.this.source)}
+    if (nrow(not.this.source)){source_info$all.files<- condenseFileInfo(not.this.source)}
   },silent=TRUE)
   
   source_info$dependency.file <- paste(source.file.info[2],".txt",sep="")	

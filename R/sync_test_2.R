@@ -74,7 +74,7 @@ Sync.test_2nd <- function(dagger,tree,plotl=TRUE){
   
   file.check <- checkFileHash(dependency.object=tree)
   
-  file.info <- Condense.file.info(tree)
+  file.info <- condenseFileInfo(tree)
   
   # get the abbreviated names from the tree to match to the vertex
   

@@ -18,7 +18,7 @@ get.project.info.si <- function(source_info){
   
   g.all <- Make.summary.graph(dependency.dir=NULL,dependency.object=trees,plot.graph=FALSE)
   
-  file.info.object <- Condense.file.info(trees)
+  file.info.object <- condenseFileInfo(trees)
   
   return(list("tree"=trees,"graph"=g.all,"all.files"=file.info.object))
   

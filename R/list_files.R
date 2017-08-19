@@ -21,7 +21,7 @@ listBranches <- function(project.id=getProject()){
   try({
     treedf <- Harvest.trees(dependency.dir)
     not.this.source <- subset(treedf,(!is.na(dependency)))
-    file_data$file<- Condense.file.info(not.this.source)
+    file_data$file<- condenseFileInfo(not.this.source)
   },silent=TRUE)
   
   if(length(file_data$file)==0){
@@ -113,7 +113,7 @@ listDatafiles <- function(project.id=getProject()){
   try({
     treedf <- Harvest.trees(dependency.dir)
     not.this.source <- subset(treedf,(!is.na(dependency)))
-    file_data$file <- Condense.file.info(not.this.source)
+    file_data$file <- condenseFileInfo(not.this.source)
   },silent=TRUE)
   
   

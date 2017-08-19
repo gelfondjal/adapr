@@ -15,7 +15,7 @@ initProject <- function(project.id,project.path=NA,publish.directory=NA,first.pr
   
   out <- plant.tree(project.id,project.path,publish.directory,first.program )
   
-  set.project(project.id)
+  setProject(project.id)
   
 }
 init.project <- initProject
