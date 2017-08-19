@@ -105,14 +105,14 @@ defaultAdaprSetup <- function(){
     gituser <- readline("Please ender your preferred Git user name:    ")
     gitemail <- readline("Please ender your preferred Git email <somebody@somewhere.com>:   ")
     
-    git.configure(gituser,gitemail)
+    gitConfigure(gituser,gitemail)
     
     try({
       email <-  git2r::config()[["global"]]$user.email
     })
     
     
-    if (!grepl("@",email)) {return("Git is not configured. Run: git.configure(user.name, user.email)")}
+    if (!grepl("@",email)) {return("Git is not configured. Run: gitConfigure(user.name, user.email)")}
     
   }else{print("Git configured")}
   

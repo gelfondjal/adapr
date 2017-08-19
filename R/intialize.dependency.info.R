@@ -35,7 +35,7 @@ initialize_dependency_info <- function(source_info_arg){
   
   try({
     
-    #gitout <- git.init(project.path)
+    #gitout <- gitInit(project.path)
     
     #setwd(source_info_arg$analysis.dir)
     
@@ -50,24 +50,24 @@ initialize_dependency_info <- function(source_info_arg){
     
     if(no.repository){
       
-      #git.add(project.path,file.path(source.file.info[["path"]],source.file.info[["file"]]))	
+      #gitAdd(project.path,file.path(source.file.info[["path"]],source.file.info[["file"]]))	
       #gitXcommit(project.path,"Intitialize git")
       
       git2r::init(project.path)
       repo <- git2r::repository(project.path)
-      git.add(project.path,file.path(source.file.info[["path"]],source.file.info[["file"]]))
+      gitAdd(project.path,file.path(source.file.info[["path"]],source.file.info[["file"]]))
       git2r::commit(repo,message ="Initialize git")
       
       print("Initialized git repo")
       
     }
     
-    git.add(project.path,file.path(source.file.info[["path"]],source.file.info[["file"]]))	
+    gitAdd(project.path,file.path(source.file.info[["path"]],source.file.info[["file"]]))	
     
   })#try get
   }
   
-  #  git.add(project.path,file.path(dependency.file))	
+  #  gitAdd(project.path,file.path(dependency.file))	
   
   # load the libraries and the dependent source functions
   
@@ -96,7 +96,7 @@ initialize_dependency_info <- function(source_info_arg){
   
   for(file.name in support.files){
     
-    if(source_info_arg$options$git){try({ git.add(project.path,file.name) })}
+    if(source_info_arg$options$git){try({ gitAdd(project.path,file.name) })}
     
     if(grepl("(\\.r)|(\\.R)$",file.name)){
     

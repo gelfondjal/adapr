@@ -21,7 +21,7 @@ commitProject <- function(commit.message="",project.id=getProject()){
   
   all.programs <- matrix(list.files(analysis.dir,recursive=TRUE,full.names=TRUE))
   
-  add <-  apply(all.programs,1,function(x){git.add(source_info$project.path,filename=x)})
+  add <-  apply(all.programs,1,function(x){gitAdd(source_info$project.path,filename=x)})
   
   committed <- git2r::commit(repo,message =paste(synccheck,commit.message))
   out <- paste("Git",commit2char(committed))

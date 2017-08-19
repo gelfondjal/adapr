@@ -7,17 +7,17 @@
 #'@examples 
 #'\dontrun{
 #'  projpath <- file.path(getProjectPath("adaprHome"),"Programs")
-#'  git_provenance("adaprHome",file.path(projpath,"read_data.R"))
+#'  gitProvenance("adaprHome",file.path(projpath,"read_data.R"))
 #'} 
 #' 
-git_provenance <- function(project.id,filepath=0){
+gitProvenance <- function(project.id,filepath=0){
   if(filepath==0){filepath <- file.choose()}
   
   filehash <- Digest(file=filepath)
   
   gitpath <- getProjectPath(project.id)
   
-  provenance <- git.history.search(gitpath,filehash)  
+  provenance <- gitHistorySearch(gitpath,filehash)  
   
   si <- pull_source_info(project.id)
   

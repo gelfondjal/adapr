@@ -5,11 +5,11 @@
 #' @examples 
 #'\dontrun{
 #' #Requires git installation
-#' git.configure.test()
+#' gitConfigureTest()
 #'} 
 #' 
 #' 
-git.configure.test <-  function () {
+gitConfigureTest <-  function () {
     config.out <- 99
     
     try({

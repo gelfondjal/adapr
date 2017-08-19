@@ -6,10 +6,10 @@
 #' @examples 
 #'\dontrun{
 #' # Requires Git installation
-#'  git.configure("jonG","gelfond@somewhere.com")
+#'  gitConfigure("jonG","gelfond@somewhere.com")
 #'} 
 #' 
-git.configure <- function(user.name,user.email){
+gitConfigure <- function(user.name,user.email){
   
   
   git2r::config(global=TRUE,user.name,user.email)

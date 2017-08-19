@@ -11,10 +11,10 @@
 #'\dontrun{
 #' si <- pull_source_info("adaprHome")
 #' file0 <- file.path(si$project.path,project.directory.tree$analysis,"read_data.R")
-#' git.add(si$project.path,file0) 
+#' gitAdd(si$project.path,file0) 
 #'} 
 #' 
-git.add <- function(gitdir,filename,branch = NULL, git_args = character(), git_binary = NULL){
+gitAdd <- function(gitdir,filename,branch = NULL, git_args = character(), git_binary = NULL){
   
   # "add" filename in the git repository in gitdir
   
