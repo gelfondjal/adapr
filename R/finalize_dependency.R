@@ -31,11 +31,11 @@ finalize_dependency <- function(RMD=TRUE,write=TRUE){
   file.copy(source_info$rmdfile$fullname,file.path(source_info$results.dir,source_info$rmdfile$file),overwrite=TRUE)
   if(!checkRmdMode()){
   outputfile <- rmarkdown::render(file.path(source_info$results.dir,source_info$rmdfile$file))
-  outfile <- Create.file.info(source_info$results.dir, basename(outputfile), paste("rendered Rmarkdown of", source_info$file$file))
+  outfile <- createFileInfo(source_info$results.dir, basename(outputfile), paste("rendered Rmarkdown of", source_info$file$file))
   Write.cap(NULL, outfile, I, source_info)
   }else{
     outputfile <- gsub("Rmd","html",file.path(source_info$results.dir,source_info$rmdfile$file))
-    outfile <- Create.file.info(source_info$results.dir, basename(outputfile), paste("rendered Rmarkdown of", source_info$file$file))
+    outfile <- createFileInfo(source_info$results.dir, basename(outputfile), paste("rendered Rmarkdown of", source_info$file$file))
     if(!file.exists(outfile$fullname)){write(0,outfile$fullname)} # Write a stub for tracking
     Write.cap(NULL, outfile, I, source_info)
   }

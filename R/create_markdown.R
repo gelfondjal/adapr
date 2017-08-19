@@ -18,7 +18,7 @@
 #' 
 create_markdown <- function(target.file=paste0(getSourceInfo()$file$file,"md"),target.dir=getSourceInfo()$markdown.dir,style="html_document",description="Markdown",si,overwrite=FALSE){
 	
-	file.information <- Create.file.info(target.dir,target.file,description=description)
+	file.information <- createFileInfo(target.dir,target.file,description=description)
 		
 	target.file <- file.path(target.dir,target.file)
 #	Read.cap(file.information,read.fcn=I,source_info=si)

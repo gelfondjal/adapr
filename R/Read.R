@@ -37,7 +37,7 @@ Read <- function(file.name="data.csv",description="Data file",read.fcn=guess.rea
   
   if(!file.exists(file.path(inpath,file.name))){stop(paste("Read error: file does not exists:",file.path(inpath,file.name)))}
   
-  file.info <- Create.file.info(inpath,basename(file.name),description)
+  file.info <- createFileInfo(inpath,basename(file.name),description)
   
   read.obj <- Read.cap(file.info,read.fcn,options()$adaprScriptInfo,...)
   
@@ -88,7 +88,7 @@ ReadTrack <- function(file.name="data.csv",description="Data file"){
   
   if(!file.exists(file.path(inpath,file.name[i]))){stop(paste("Read error: file does not exists:",file.path(inpath,file.name)))}
   
-  file.info <- Create.file.info(inpath,basename(file.name[i]),description[i])
+  file.info <- createFileInfo(inpath,basename(file.name[i]),description[i])
   
   read.obj <- Read.cap(file.info,I,source_info)
   }

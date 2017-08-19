@@ -57,7 +57,7 @@ Write <- function(obj=NULL,file.name="data.csv",description="Result file",write.
   
   outfile <- basename(file.name)
   
-  file.info <- Create.file.info(outpath,outfile,description)
+  file.info <- createFileInfo(outpath,outfile,description)
   
   write.obj <-Write.cap(obj,file.info,write.fcn,options()$adaprScriptInfo,...)
   

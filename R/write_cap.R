@@ -11,7 +11,7 @@
 #'\dontrun{
 #' source_info <- create_source_file_dir("adaprHome","tree_controller.R")
 #' testfile <- file.path(source_info$results.dir,"test.csv")
-#' fileinfo <- Create.file.info(dirname(testfile),basename(testfile),"cars dataset")
+#' fileinfo <- createFileInfo(dirname(testfile),basename(testfile),"cars dataset")
 #' Write.cap(cars,fileinfo,write.csv,source_info,row.names=FALSE)
 #'} 
 Write.cap <- function(obj=NULL,file.info,write.fcn,source_info,...){

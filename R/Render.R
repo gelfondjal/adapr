@@ -23,7 +23,7 @@ Render_Rmd <- function(Rmd.file,description="Rmarkdown",...){
   }
   
   
-  mdfile <- Create.file.info(source_info$markdown.dir,Rmd.file,description)
+  mdfile <- createFileInfo(source_info$markdown.dir,Rmd.file,description)
   
   Read.cap(mdfile,I,source_info)#,envir=parent.frame())
   
@@ -35,7 +35,7 @@ Render_Rmd <- function(Rmd.file,description="Rmarkdown",...){
   
   file.remove(shiftmdfile)
     
-  outfile <- Create.file.info(source_info$results.dir,basename(outputfile),paste("rendered Rmarkdown of",description))
+  outfile <- createFileInfo(source_info$results.dir,basename(outputfile),paste("rendered Rmarkdown of",description))
     
   Write.cap(NULL,outfile,I,source_info)#,envir=parent.frame())
   

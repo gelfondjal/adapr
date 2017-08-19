@@ -10,10 +10,10 @@
 #'\dontrun{
 #' file0 <- file.path(pull_source_info("adaprHome")$project.path,
 #' project.directory.tree$analysis,"read_data.R")
-#' Create.file.info(dirname(file0),basename(file0),"a program that reads")
+#' createFileInfo(dirname(file0),basename(file0),"a program that reads")
 #'} 
 #' 
-Create.file.info <- function(path,file,description="",dbname="",si=NULL){
+createFileInfo <- function(path,file,description="",dbname="",si=NULL){
   
   if(!is.null(si)){
     t <- c(path,file)

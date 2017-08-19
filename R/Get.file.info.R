@@ -29,7 +29,7 @@ Get.file.info <- function(source_info,data="",file0="",path.grep=""){
   
   if(nrow(file.row)>1){stop("Attempt to retreive non-unique file information")}
   
-  file.info.out <- Create.file.info(file.row$path,file.row$file,file.row$description)
+  file.info.out <- createFileInfo(file.row$path,file.row$file,file.row$description)
   
   return(file.info.out)
   

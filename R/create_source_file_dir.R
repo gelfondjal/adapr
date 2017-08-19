@@ -39,7 +39,7 @@ create_source_file_dir <- function(project.id0=get("project.id"),source.file0=ge
   
   apply(matrix(c(analysis.dir,data.dir,results.dir,tex.dir,dependency.dir,support.dir,library.dir,apps.dir,source.support.dir,markdown.dir   )),1,dir.create,showWarnings=FALSE,recursive=TRUE)
   
-  source.file.info <- Create.file.info(analysis.dir,source.file0,description=source.description)	
+  source.file.info <- createFileInfo(analysis.dir,source.file0,description=source.description)	
   
   source_info <- list(analysis.dir=analysis.dir,data.dir=data.dir,tex.dir=tex.dir,results.dir=results.dir,support.dir = support.dir,library.dir=library.dir,
                       dependency.dir=dependency.dir,file=source.file.info,source.support.dir=source.support.dir,markdown.dir=markdown.dir,support.library.file="common_libs.csv")
