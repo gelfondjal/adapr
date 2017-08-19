@@ -1,17 +1,17 @@
-#' Checks the consistency of the dependency directory with the files within the file system
-#' Reports the source scripts that need to be updated!
+#' Checks the consistency of the dependency directory with the files within the file system.
+#' Reports the source scripts that need to be updated.
 #' @param dependency.dir Directory with dependency information files
 #' @param dependency.object data frame with dependency information
 #' @details Only needs one or the other argument. 
-#' @return list of information about file hase mismatches
+#' @return list of information about file hash mismatches
 #' @export
 #' @examples 
 #' \dontrun{
 #' 
-#' Check.file.hash.source(pull_source_info("adaprHome")$dependency.dir)
+#' checkFileHashSource(pull_source_info("adaprHome")$dependency.dir)
 #' } 
 #' 
-Check.file.hash.source <- function(dependency.dir=NULL,dependency.object=NULL){
+checkFileHashSource <- function(dependency.dir=NULL,dependency.object=NULL){
   
   #equire(plyr)
   

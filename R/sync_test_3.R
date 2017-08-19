@@ -23,7 +23,7 @@ Sync.test <- function(dagger,tree,plotl=FALSE){
   file.info <- Condense.file.info(tree)
  
   # find the out dated nodes
-  file.check <- Check.file.mtime.source(dependency.object=tree)
+  file.check <- checkFileMtimeSource(dependency.object=tree)
   # vertices to update
   vertex.updates <- c()
   
@@ -54,7 +54,7 @@ Sync.test <- function(dagger,tree,plotl=FALSE){
   
   # check for file hash inconsistencies
   
-  file.check <- Check.file.hash.source(dependency.object=tree)
+  file.check <- checkFileHashSource(dependency.object=tree)
   
   # get the abbreviated names from the tree to match to the vertex
   

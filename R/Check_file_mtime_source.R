@@ -7,10 +7,10 @@
 #' @export
 #' @examples 
 #'\dontrun{
-#'  Check.file.mtime.source(pull_source_info("adaprHome")$dependency.dir)
+#'  checkFileMtimeSource(pull_source_info("adaprHome")$dependency.dir)
 #'} 
 #' 
-Check.file.mtime.source <- function(dependency.dir=NULL,dependency.object=NULL){
+checkFileMtimeSource <- function(dependency.dir=NULL,dependency.object=NULL){
   
   #equire(plyr)
   
