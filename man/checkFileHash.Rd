@@ -22,7 +22,7 @@ Not for direct use. Only needs one or the other argument.
 }
 \examples{
 \dontrun{
-checkFileHash(pull_source_info("adaprHome")$dependency.dir)
+checkFileHash(pullSourceInfo("adaprHome")$dependency.dir)
 } 
 
 

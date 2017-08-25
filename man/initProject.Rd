@@ -25,7 +25,7 @@ initialize project
 \details{
 Sets project
 
-Wrapper for plant.tree
+Wrapper for plantTree
 }
 \examples{
 \dontrun{

@@ -13,10 +13,10 @@
 #' @examples 
 #'\dontrun{
 #'  source_info <- create_source_file_dir("adaprHome","tree_controller.R")
-#' project_report_send_rmd(si=source_info)
+#' projectReportSend(si=source_info)
 #'} 
 #'
-project_report_send_rmd <- function (target.directory=get("source_info")$project.path,si,send.data=FALSE, graph.width = 960, graph.height = 500) 
+projectReportSend <- function (target.directory=get("source_info")$project.path,si,send.data=FALSE, graph.width = 960, graph.height = 500) 
 {
   ##ibrary(pander)
   make.relative.hyperlink <- function(directory.to.clip,files,links){
@@ -80,7 +80,7 @@ sorted.names <- igraph::V(project.info$graph)$file[igraph::topological.sort(proj
 sorted.names <- sorted.names[sorted.names %in% tab.out$source.file]
 tab.out <- tab.out[match(sorted.names, tab.out$source.file), ]
 program.split <- split(project.info$tree, project.info$tree$source.file)
-summaries.out <- lapply(program.split, program.io.table)
+summaries.out <- lapply(program.split, programIOTable)
 outputs <- list()
 for (source.iter in names(summaries.out)) {
   temp <- summaries.out[[source.iter]]

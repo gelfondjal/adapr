@@ -6,7 +6,7 @@
 #' @details Not for direct use. See sync.project() and synctest.project().
 #' @examples 
 #'\dontrun{
-#' si <- pull_source_info("adaprHome")
+#' si <- pullSourceInfo("adaprHome")
 #' projInfo  <- getProjectInfo(si$dependency.dir)
 #' Sync.test.pi(projInfo)
 #'} 

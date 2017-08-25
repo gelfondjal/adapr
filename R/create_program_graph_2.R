@@ -18,7 +18,7 @@ createProgramGraph <- function(project.id){
 #equire(ggplot2)
 #equire(plyr)	
 #equire(igraph)
-si <- pull_source_info(project.id)
+si <- pullSourceInfo(project.id)
 projinfo <- getProjectInfoSI(si)
 outputs <- subset(projinfo$tree,projinfo$tree$dependency=="out",select=c("source.file","target.path","target.file"))
 outputs$fullname <- file.path(outputs$target.path,outputs$target.file)

@@ -4,7 +4,7 @@
 #' @export
 #' @examples 
 #'\dontrun{
-#'  trees <- readDependency(pull_source_info("adaprHome")$dependency.dir)
+#'  trees <- readDependency(pullSourceInfo("adaprHome")$dependency.dir)
 #' condenseFileInfo(trees)
 #' } 
 #' 

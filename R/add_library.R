@@ -9,7 +9,7 @@
 #'} 
 #' 
 readLibrary <- function(project.id=getProject()){
-  source_info <- pull_source_info(project.id)    
+  source_info <- pullSourceInfo(project.id)    
   library.file <- file.path(source_info$project.path,project.directory.tree$support,"common_libs.csv")
   libout <- utils::read.csv(library.file,as.is=TRUE)
   
@@ -32,7 +32,7 @@ readLibrary <- function(project.id=getProject()){
 #'} 
 #' 
 addPackage <- function(project.id=getProject(),library.name,library.install=NA,library.specific=FALSE){
-  source_info <- pull_source_info(project.id)    
+  source_info <- pullSourceInfo(project.id)    
   library.file <- file.path(source_info$project.path,project.directory.tree$support,"common_libs.csv")
   subgroup <- data.frame(Package=library.name,repos=library.install,
                        specific=as.logical(library.specific))  
@@ -55,7 +55,7 @@ removePackage <- function(project.id=getProject(),library.name){
   libout <- readLibrary(project.id)
   
   libout <- subset(libout,libout$Package!=library.name)
-  source_info <- pull_source_info(project.id)    
+  source_info <- pullSourceInfo(project.id)    
   library.data.file <- file.path(source_info$project.path,project.directory.tree$support,"common_libs.csv")
   
   libout <- libout[order(libout$Package),]
@@ -74,7 +74,7 @@ removePackage <- function(project.id=getProject(),library.name){
 #' installProjectPackages("adaprHome")
 #'} 
 installProjectPackages <- function(project.id=getProject()){
-  source_info <- pull_source_info(project.id)    
+  source_info <- pullSourceInfo(project.id)    
   library.file <- file.path(source_info$project.path,project.directory.tree$support,"common_libs.csv")
   loadInstallLibraryFile(library.data.file= library.file,verbose=TRUE,install.all=TRUE)
   

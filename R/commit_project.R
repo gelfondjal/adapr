@@ -10,7 +10,7 @@
 #'} 
 #'
 commitProject <- function(commit.message="",project.id=getProject()){
-  source_info <- pull_source_info(project.id)
+  source_info <- pullSourceInfo(project.id)
   test.sync0 <- sync.test.si(source_info)$synchronized
   synccheck <- ifelse(test.sync0,"SYNCHRONIZED","NOT SYNCd")
   setwd(source_info$project.path)

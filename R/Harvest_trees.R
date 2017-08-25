@@ -5,7 +5,7 @@
 #' @export
 #' @examples 
 #'\dontrun{
-#' readDependency(pull_source_info("adaprHome")$dependency.dir) 
+#' readDependency(pullSourceInfo("adaprHome")$dependency.dir) 
 #'} 
 #' 
 #' 

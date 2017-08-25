@@ -5,8 +5,8 @@
 #' @export
 #' @examples 
 #'\dontrun{
-#' projInfo <- getProjectInfo(pull_source_info("adaprHome")$dependency.dir)
-#' trees <- readDependency(pull_source_info("adaprHome")$dependency.dir)
+#' projInfo <- getProjectInfo(pullSourceInfo("adaprHome")$dependency.dir)
+#' trees <- readDependency(pullSourceInfo("adaprHome")$dependency.dir)
 #' file.info <-condenseFileInfo(trees)
 #' idSync(file.info,projInfo$graph) 
 #'} 

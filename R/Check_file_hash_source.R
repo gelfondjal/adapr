@@ -8,7 +8,7 @@
 #' @examples 
 #' \dontrun{
 #' 
-#' checkFileHashSource(pull_source_info("adaprHome")$dependency.dir)
+#' checkFileHashSource(pullSourceInfo("adaprHome")$dependency.dir)
 #' } 
 #' 
 checkFileHashSource <- function(dependency.dir=NULL,dependency.object=NULL){

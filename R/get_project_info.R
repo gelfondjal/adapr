@@ -7,7 +7,7 @@
 #' @export
 #' @examples 
 #'\dontrun{
-#' projInfo <- getProjectInfo(pull_source_info("adaprHome")$dependency.dir)
+#' projInfo <- getProjectInfo(pullSourceInfo("adaprHome")$dependency.dir)
 #' plot(projInfo$graph) 
 #'} 
 #' 

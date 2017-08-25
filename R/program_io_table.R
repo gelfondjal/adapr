@@ -6,10 +6,10 @@
 #' @export
 #' @examples 
 #'\dontrun{
-#' trees <- readDependency(pull_source_info("adaprHome")$dependency.dir)
-#' program.io.table(trees)
+#' trees <- readDependency(pullSourceInfo("adaprHome")$dependency.dir)
+#' programIOTable(trees)
 #'} 
-program.io.table <- function(dependency.out){
+programIOTable <- function(dependency.out){
   
   meta.summary <-  dependency.out[order(dependency.out$dependency),]
   

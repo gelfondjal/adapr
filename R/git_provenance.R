@@ -19,7 +19,7 @@ gitProvenance <- function(project.id,filepath=0){
   
   provenance <- gitHistorySearch(gitpath,filehash)  
   
-  si <- pull_source_info(project.id)
+  si <- pullSourceInfo(project.id)
   
   files <- condenseFileInfo(readDependency(si$dependency.dir))
                               

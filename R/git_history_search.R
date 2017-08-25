@@ -9,7 +9,7 @@
 #' @export
 #' @examples 
 #'\dontrun{
-#'  si <- pull_source_info("adaprHome")
+#'  si <- pullSourceInfo("adaprHome")
 #'  gitHistorySearch(si$project.path,"read_data.R")
 #'} 
 #' 

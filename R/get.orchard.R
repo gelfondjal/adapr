@@ -14,7 +14,7 @@ get_orchard <- function(){
   
   if(!file.exists(orchard.site)){
     
-    plant.orchard()
+    plantOrchard()
       
     return(NULL)
   }

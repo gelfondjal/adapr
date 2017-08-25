@@ -22,7 +22,7 @@ Only take dependency directory XOR dependency.data
 }
 \examples{
 \dontrun{
-trees <- readDependency(pull_source_info("adaprHome")$dependency.dir)
+trees <- readDependency(pullSourceInfo("adaprHome")$dependency.dir)
 dag<-makeSummaryGraph(dependency.obj=trees)
 plot(dag)
 } 

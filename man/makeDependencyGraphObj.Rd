@@ -17,7 +17,7 @@ Creates an graph object from a dependency object
 }
 \examples{
 \dontrun{
-trees <- readDependency(pull_source_info("adaprHome")$dependency.dir)
+trees <- readDependency(pullSourceInfo("adaprHome")$dependency.dir)
 dag<-makeDependencyGraphObj(trees)
 } 
 }

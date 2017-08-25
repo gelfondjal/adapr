@@ -6,7 +6,7 @@
 #' @export
 #' @examples 
 #' \dontrun{
-#' checkFileHash(pull_source_info("adaprHome")$dependency.dir)
+#' checkFileHash(pullSourceInfo("adaprHome")$dependency.dir)
 #' } 
 #' 
 #' 

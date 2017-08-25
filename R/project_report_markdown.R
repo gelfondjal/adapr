@@ -9,10 +9,10 @@
 #' @examples 
 #'\dontrun{
 #'  source_info <- create_source_file_dir("adaprHome","tree_controller.R")
-#'  project_report_markdown(source_info)
+#'  projectReportMarkdown(source_info)
 #'} 
 #'
-project_report_markdown<-
+projectReportMarkdown<-
 function (source_info, graph.width = 960, graph.height = 500) 
 {
 si <- source_info
@@ -68,7 +68,7 @@ sorted.names <- igraph::V(project.info$graph)$file[igraph::topological.sort(proj
 sorted.names <- sorted.names[sorted.names %in% tab.out$source.file]
 tab.out <- tab.out[match(sorted.names, tab.out$source.file), ]
 program.split <- split(project.info$tree, project.info$tree$source.file)
-summaries.out <- lapply(program.split, program.io.table)
+summaries.out <- lapply(program.split, programIOTable)
 outputs <- list()
 for (source.iter in names(summaries.out)) {
   temp <- summaries.out[[source.iter]]
@@ -118,9 +118,9 @@ return(fileout)
 #'}  
 report.project <- function (project.id=getProject(), graph.width = 960, graph.height = 500){
   
-  source_info <- pull_source_info(project.id)
+  source_info <- pullSourceInfo(project.id)
   
-  out <- project_report_markdown(source_info,graph.width, graph.height)
+  out <- projectReportMarkdown(source_info,graph.width, graph.height)
   
   out <- gsub("Rmd$","html",out)
   

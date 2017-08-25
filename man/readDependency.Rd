@@ -20,7 +20,7 @@ adapts to relative or absolute directories
 }
 \examples{
 \dontrun{
-readDependency(pull_source_info("adaprHome")$dependency.dir) 
+readDependency(pullSourceInfo("adaprHome")$dependency.dir) 
 } 
 
 

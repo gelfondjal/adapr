@@ -26,7 +26,7 @@ sync.test.si <- function(source_info,plotl0=FALSE){
 #' 
 synctest.project <- function(project.id=getProject()){
   
-  source_info <- pull_source_info(project.id)
+  source_info <- pullSourceInfo(project.id)
   
   project_info <- getProjectInfoSI(source_info)
   
@@ -44,7 +44,7 @@ synctest.project <- function(project.id=getProject()){
 #' 
 #' 
 sync.project <- function(project.id=getProject(),ask=FALSE){
-source_info <- pull_source_info(project.id)
+source_info <- pullSourceInfo(project.id)
 test.sync0 <- sync.test.si(source_info)
 if(test.sync0$synchronize){
   text <- paste(project.id,"Already synchonized")

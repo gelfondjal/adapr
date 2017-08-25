@@ -17,7 +17,7 @@
 # #equire(ggplot2)
 # #equire(plyr)	
 # 
-# si <- pull_source_info(project.id)
+# si <- pullSourceInfo(project.id)
 # 
 # projinfo <- getProjectInfoSI(si)
 # 

@@ -9,11 +9,11 @@
 #'\dontrun{
 #' initProject("adaprTest")
 #'} 
-#' @details Wrapper for plant.tree
+#' @details Wrapper for plantTree
 #' @export
 initProject <- function(project.id,project.path=NA,publish.directory=NA,first.program="read_data.R"){
   
-  out <- plant.tree(project.id,project.path,publish.directory,first.program )
+  out <- plantTree(project.id,project.path,publish.directory,first.program )
   
   setProject(project.id)
   
@@ -26,7 +26,7 @@ init.project <- initProject
 #' @param first.program Name of first program in project (read_data.R default)
 #' @return logical for success or not
 #' @details Not for direct use. See initProject().
-plant.tree <- function(project.id,project.path=NA,swap.directory=NA,first.program="read_data.R"){
+plantTree <- function(project.id,project.path=NA,swap.directory=NA,first.program="read_data.R"){
   
   opts <- get_adapr_options()
   
@@ -54,7 +54,7 @@ plant.tree <- function(project.id,project.path=NA,swap.directory=NA,first.progra
   
   orchard.site <- file.path(path.expand.2("~"),"ProjectPaths","projectid_2_directory_adapr.csv")	
   
-  if(!file.exists(orchard.site)){plant.orchard()}
+  if(!file.exists(orchard.site)){plantOrchard()}
   
   all.orchards <- get_orchard()
   
@@ -161,7 +161,7 @@ redirect.tree <- function(project.id0,project.path=NA,swap.directory=NA){
   
   orchard.site <- file.path(path.expand.2("~"),"ProjectPaths","projectid_2_directory_adapr.csv")	
   
-  if(!file.exists(orchard.site)){plant.orchard()}
+  if(!file.exists(orchard.site)){plantOrchard()}
   
   all.orchards <- get_orchard()
   

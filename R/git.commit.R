@@ -8,7 +8,7 @@
 #' @export
 #' @examples 
 #'\dontrun{
-#'  si <- pull_source_info("adaprHome")
+#'  si <- pullSourceInfo("adaprHome")
 #' gitCommit(si$project.path,"test commit")
 #'} 
 #' 

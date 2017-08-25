@@ -3,14 +3,14 @@
 #' @param n.cores Number of cores to use. Should be >1, but less than number of logical CPUs.
 #' @return data.frame with success/failure status.
 #' @export
-#' @details Experimental. See also monitorParallelSync.project(), sync.project() and synctest.project(). Uses Results/tree_controller.R directory to pass work/completion data between nodes.
+#' @details Experimental. See also monitorParallelSync(), sync.project() and synctest.project(). Uses Results/tree_controller.R directory to pass work/completion data between nodes.
 #' @examples 
 #'\dontrun{
 #' parallelsync.project("adaprHome")
 #'} 
 #'
 #'
-parallelSync.project <- function(project.id = getProject(),n.cores=2){
+parallelSync <- function(project.id = getProject(),n.cores=2){
 graphdat <- graphProject(project.id)
 project.plot <- graphdat$ggplot
 # Identify files with no dependencies for running
@@ -43,7 +43,7 @@ findNodependency <- function(graphdat,completed=""){
 }
 nodeps <- findNodependency(graphdat)
 # Initialize broadcast files
-checkdir <- pull_source_info(project.id)$results.dir
+checkdir <- pullSourceInfo(project.id)$results.dir
 completedfile <- file.path(checkdir,"completed.csv")
 workfile <- file.path(checkdir,"working.csv")
 todofile <- file.path(checkdir,"todo.csv")
@@ -172,18 +172,18 @@ presult <- plyr::ddply(nodes,"compute.node",function(x){
 parallel::stopCluster(clust)
 return(presult)
 }
-#' Track parallelSync.project while in progress
+#' Track parallelSync while in progress
 #' @param project.id Project to synchronize.
 #' @param check.interval how many seconds to delay until last check
 #' @return ggplot of project graph
 #' @export
-#' @details Must use separate R process from parallelSync.project(). Refreshes project plot with compute node labels are working or completed
+#' @details Must use separate R process from parallelSync(). Refreshes project plot with compute node labels are working or completed
 #' @examples 
 #'\dontrun{
-#' monitorParallelSync.project("adaprHome")
+#' monitorParallelSync("adaprHome")
 #'} 
 #'
-monitorParallelSync.project <- function(project.id = getProject(),check.interval=5){
+monitorParallelSync <- function(project.id = getProject(),check.interval=5){
   
   graphdat <- graphProject(project.id)
   
@@ -191,7 +191,7 @@ monitorParallelSync.project <- function(project.id = getProject(),check.interval
  
   # Read broadcast files
   
-  checkdir <- pull_source_info(project.id)$results.dir
+  checkdir <- pullSourceInfo(project.id)$results.dir
   
   completedfile <- file.path(checkdir,"completed.csv")
   workfile <- file.path(checkdir,"working.csv")

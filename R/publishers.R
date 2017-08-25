@@ -12,7 +12,7 @@ getPubResults <- function(project.id=getProject()){
   
   # Retrieves or creates publication table from project.id
   
-  source_info <- pull_source_info(project.id)
+  source_info <- pullSourceInfo(project.id)
   publication.file <- file.path(source_info$project.path,project.directory.tree$support,"files_to_publish.csv")
   if(file.exists(publication.file)){
     publication.table <- utils::read.csv(publication.file,as.is=TRUE)
@@ -65,7 +65,7 @@ send.pubresults <- function(project.id=getProject()){
 #' 
 show.pubresults <- function(project.id=getProject()){
   
-  source_info <- pull_source_info(project.id)
+  source_info <- pullSourceInfo(project.id)
   publication.file <- file.path(source_info$project.path,project.directory.tree$support,"files_to_publish.csv")
   if(file.exists(publication.file)){
   

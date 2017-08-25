@@ -12,7 +12,7 @@ listBranches <- function(project.id=getProject()){
   
   file_data <- list(file=NULL)
   
-  si <- pull_source_info(project.id)
+  si <- pullSourceInfo(project.id)
   
   dependency.dir <- si$dependency.dir
   
@@ -97,7 +97,7 @@ getSourceInfo <- function(){
 listDatafiles <- function(project.id=getProject()){
   
   
-  si <- pull_source_info(project.id)
+  si <- pullSourceInfo(project.id)
   
   si$data.dir <- file.path(si$project.path,project.directory.tree$data)
   allfiles <- data.frame(file=list.files(si$data.dir,recursive=TRUE,full.names = 1),stringsAsFactors = FALSE)
@@ -152,7 +152,7 @@ listDatafiles <- function(project.id=getProject()){
 #'
 showResults <- function(project.id=getProject(),rscript=options()$adaprScriptInfo$file$file){
   
-  si <- pull_source_info(project.id)
+  si <- pullSourceInfo(project.id)
   
   if(rscript==""){
     utils::browseURL(file.path(getProjectPath(project.id),project.directory.tree$results))

@@ -24,7 +24,7 @@ Only needs one or the other argument.
 }
 \examples{
 \dontrun{
- checkFileMtimeSource(pull_source_info("adaprHome")$dependency.dir)
+ checkFileMtimeSource(pullSourceInfo("adaprHome")$dependency.dir)
 } 
 
 }

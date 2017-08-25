@@ -25,7 +25,7 @@ Creates a list containing information about a file
 }
 \examples{
 \dontrun{
-file0 <- file.path(pull_source_info("adaprHome")$project.path,
+file0 <- file.path(pullSourceInfo("adaprHome")$project.path,
 project.directory.tree$analysis,"read_data.R")
 createFileInfo(dirname(file0),basename(file0),"a program that reads")
 } 

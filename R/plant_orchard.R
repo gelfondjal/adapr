@@ -3,10 +3,10 @@
 #' @export
 #' @examples 
 #'\dontrun{
-#'  plant.orchard()
+#'  plantOrchard()
 #'} 
 #'
-plant.orchard <- function(){
+plantOrchard <- function(){
   
   # 
   
@@ -48,12 +48,12 @@ firstProject <- function(project.path="",publish.path=""){
   	
   	# Create orchard
   	
-  	plant.orchard()
+  	plantOrchard()
  
   }
  
   
-  testout <- plant.tree(project.id,project.path,publish.path)   
+  testout <- plantTree(project.id,project.path,publish.path)   
   
   return(testout)
 }

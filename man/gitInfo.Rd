@@ -26,7 +26,7 @@ Retrieves the information from git about a file
 }
 \examples{
 \dontrun{
-si <- pull_source_info("adaprHome")
+si <- pullSourceInfo("adaprHome")
 file0 <- file.path(si$project.path,project.directory.tree$analysis,"read_data.R")
 gitInfo(si$project.path,file0) 
 } 

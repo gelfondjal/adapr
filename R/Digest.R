@@ -13,7 +13,7 @@
 #' @export
 #' @examples 
 #'\dontrun{
-#'  file0 <- file.path(pull_source_info("adaprHome")$project.path,
+#'  file0 <- file.path(pullSourceInfo("adaprHome")$project.path,
 #'  project.directory.tree$analysis,"read_data.R")
 #'  Digest(file=file0)
 #'} 
