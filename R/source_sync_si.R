@@ -27,13 +27,13 @@ source.sync.si <- function(source_info,run=TRUE,plot.to.file=FALSE){
     return(NULL)}
   
   
-  ID.sync.out <- sync.out$sources.to.sync
+  idSync.out <- sync.out$sources.to.sync
   
-  if(nrow(ID.sync.out)==0){
+  if(nrow(idSync.out)==0){
     warning("There is nothing to run")
   }
   
-  tree.to.run <- subset(project_info$tree,project_info$tree$source.file %in% ID.sync.out$file)	
+  tree.to.run <- subset(project_info$tree,project_info$tree$source.file %in% idSync.out$file)	
   
   
   sync.out <- sync.test.si(source_info)
@@ -70,7 +70,7 @@ source.sync.si <- function(source_info,run=TRUE,plot.to.file=FALSE){
   
   if(run){
     
-    for(source.iter in 1:(nrow(ID.sync.out)+1)){
+    for(source.iter in 1:(nrow(idSync.out)+1)){
       
       sync.out <- sync.test.si(source_info)
       
@@ -82,7 +82,7 @@ source.sync.si <- function(source_info,run=TRUE,plot.to.file=FALSE){
       remaining.time <- paste0(sum(subset(run.times,run.times$source.file %in% sync.out$sources.to.sync$file)$last.run.time.sec,na.rm=TRUE)," secs")
       
       title.of.graph <- paste(ifelse(sync.out$synchronized,"Sychronized Remaining","Files to synchronize"),"Run time = ",remaining.time,
-                      "\n",ID.sync.out$file[source.iter])        
+                      "\n",idSync.out$file[source.iter])        
                               
                       
       
@@ -93,7 +93,7 @@ source.sync.si <- function(source_info,run=TRUE,plot.to.file=FALSE){
       
       if(plot.to.file){grDevices::graphics.off()}
       
-      if(source.iter<=nrow(ID.sync.out)){devtools::clean_source(file.path(ID.sync.out$path[source.iter],ID.sync.out$file[source.iter]))}
+      if(source.iter<=nrow(idSync.out)){devtools::clean_source(file.path(idSync.out$path[source.iter],idSync.out$file[source.iter]))}
       
       
     }

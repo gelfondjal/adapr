@@ -21,7 +21,7 @@ gitProvenance <- function(project.id,filepath=0){
   
   si <- pull_source_info(project.id)
   
-  files <- condenseFileInfo(Harvest.trees(si$dependency.dir))
+  files <- condenseFileInfo(readDependency(si$dependency.dir))
                               
   file.data <- subset(files,files$file.hash==filehash)   
   

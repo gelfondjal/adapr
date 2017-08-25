@@ -5,11 +5,11 @@
 #' @export
 #' @examples 
 #'\dontrun{
-#' Harvest.trees(pull_source_info("adaprHome")$dependency.dir) 
+#' readDependency(pull_source_info("adaprHome")$dependency.dir) 
 #'} 
 #' 
 #' 
-Harvest.trees <- function(dependency.dir){
+readDependency <- function(dependency.dir){
   
   #collects all trees in dependency.dir
   

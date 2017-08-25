@@ -14,7 +14,7 @@ getProjectInfoSI <- function(source_info){
   
   dependency.dir <- source_info$dependency.dir
   
-  trees <- Harvest.trees(dependency.dir)
+  trees <- readDependency(dependency.dir)
   
   g.all <- Make.summary.graph(dependency.dir=NULL,dependency.object=trees,plot.graph=FALSE)
   

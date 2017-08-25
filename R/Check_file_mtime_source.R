@@ -16,7 +16,7 @@ checkFileMtimeSource <- function(dependency.dir=NULL,dependency.object=NULL){
   
   if(is.null(dependency.object)){
     
-    trees <- Harvest.trees(dependency.dir)
+    trees <- readDependency(dependency.dir)
     trees <- subset(trees,!is.na(trees$dependency))
   }else{trees <- dependency.object}
  

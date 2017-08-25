@@ -6,7 +6,7 @@
 #' @export
 #' @examples 
 #'\dontrun{
-#' trees <- Harvest.trees(pull_source_info("adaprHome")$dependency.dir)
+#' trees <- readDependency(pull_source_info("adaprHome")$dependency.dir)
 #' dag<-Make.summary.graph(dependency.obj=trees)
 #' plot(dag)
 #'} 
@@ -16,7 +16,7 @@ Make.summary.graph <- function(dependency.dir=NULL,dependency.object=NULL,plot.g
   
   if(is.null(dependency.object)){
     
-    trees <- Harvest.trees(dependency.dir)
+    trees <- readDependency(dependency.dir)
     
     trees <- subset(trees,!is.na(dependency))
   }else{trees <- dependency.object}

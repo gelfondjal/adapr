@@ -22,7 +22,7 @@ Not for direct use.
 }
 \examples{
 \dontrun{
-trees <- Harvest.trees(pull_source_info("adaprHome")$dependency.dir)
+trees <- readDependency(pull_source_info("adaprHome")$dependency.dir)
 program.io.table(trees)
 } 
 }

@@ -6,11 +6,11 @@
 #' @examples 
 #'\dontrun{
 #' projInfo <- getProjectInfo(pull_source_info("adaprHome")$dependency.dir)
-#' trees <- Harvest.trees(pull_source_info("adaprHome")$dependency.dir)
+#' trees <- readDependency(pull_source_info("adaprHome")$dependency.dir)
 #' file.info <-condenseFileInfo(trees)
-#' ID.sync(file.info,projInfo$graph) 
+#' idSync(file.info,projInfo$graph) 
 #'} 
-ID.sync <- function(file.info,dag.to.sync){
+idSync <- function(file.info,dag.to.sync){
   
   #
   # 
@@ -37,4 +37,4 @@ ID.sync <- function(file.info,dag.to.sync){
   
   
   
-} #END: ID.sync
+} #END: idSync

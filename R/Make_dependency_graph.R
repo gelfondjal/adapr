@@ -4,7 +4,7 @@
 #' @export
 #' @examples 
 #'\dontrun{
-#' trees <- Harvest.trees(pull_source_info("adaprHome")$dependency.dir)
+#' trees <- readDependency(pull_source_info("adaprHome")$dependency.dir)
 #' dag<-Make.dependency.graph.obj(trees)
 #'} 
 Make.dependency.graph.obj <- function(dependency.out){

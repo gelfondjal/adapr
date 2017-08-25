@@ -19,7 +19,7 @@ listBranches <- function(project.id=getProject()){
   # Search for branches (intermediate results loaded by other R scripts)
   
   try({
-    treedf <- Harvest.trees(dependency.dir)
+    treedf <- readDependency(dependency.dir)
     not.this.source <- subset(treedf,(!is.na(dependency)))
     file_data$file<- condenseFileInfo(not.this.source)
   },silent=TRUE)
@@ -54,7 +54,7 @@ list.branches <- listBranches
 listScripts <- function(project.id=getProject()){
   
   
-  trees <- Harvest.trees(file.path(getProjectPath(project.id),project.directory.tree$dependency.dir))
+  trees <- readDependency(file.path(getProjectPath(project.id),project.directory.tree$dependency.dir))
   
   programs <- subset(trees,!duplicated(file.path(trees$source.file.path,trees$source.file)),
                      select=c("source.file","source.file.description"))
@@ -111,7 +111,7 @@ listDatafiles <- function(project.id=getProject()){
   dependency.dir <- si$dependency.dir
   
   try({
-    treedf <- Harvest.trees(dependency.dir)
+    treedf <- readDependency(dependency.dir)
     not.this.source <- subset(treedf,(!is.na(dependency)))
     file_data$file <- condenseFileInfo(not.this.source)
   },silent=TRUE)

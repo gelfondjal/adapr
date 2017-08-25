@@ -16,5 +16,5 @@ dependency data.frame
 Read the dependcy data from file
 }
 \details{
-Not for direct use. See Harvest.trees().
+Not for direct use. See readDependency().
 }

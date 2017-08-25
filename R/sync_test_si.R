@@ -55,7 +55,7 @@ if(test.sync0$synchronize){
   
   run.times <- syncer$run.times
   
-  ID.sync.out <- syncer$ID.sync.out
+  idSync.out <- syncer$idSync.out
   
   sync.out <- syncer$sync.out
   
@@ -63,13 +63,13 @@ if(test.sync0$synchronize){
   
   if(ask){
   
-    print(ID.sync.out)
+    print(idSync.out)
     
     execute <- readline(paste("Synchronizing project",project.id,"will take about",ceiling(wait0/60),"minutes. Proceed? y/n"))
     
     if(substring(tolower(execute),1,1)!="y"){
       print(paste("Not executed:",project.id,"will take about",ceiling(wait0/60),"minutes. Proceed? y/n"))
-      out <- merge(subset(ID.sync.out,select=c("file","run.order")),run.times,by.x="file",by.y="source.file")
+      out <- merge(subset(idSync.out,select=c("file","run.order")),run.times,by.x="file",by.y="source.file")
       out <- out[order(out$run.order),]
       return(out)
       
@@ -79,7 +79,7 @@ if(test.sync0$synchronize){
   #progress <- shiny::Progress$new()
   #on.exit(progress$close())
   
-  n.scripts.to.sync <- nrow(ID.sync.out)
+  n.scripts.to.sync <- nrow(idSync.out)
   
   startmessage <- paste("Start sync approximate Time:", wait0, "seconds",n.scripts.to.sync,"scripts")
   
@@ -92,24 +92,24 @@ if(test.sync0$synchronize){
     full.time <- wait0
     last.prog <- "Go"
     source.iter <- 0
-    while((last.prog != "") & source.iter < nrow(ID.sync.out)){
+    while((last.prog != "") & source.iter < nrow(idSync.out)){
       source.iter <- source.iter + 1
-      #for (source.iter in 1:nrow(ID.sync.out)) {
+      #for (source.iter in 1:nrow(idSync.out)) {
       
-      warning(paste(ID.sync.out$file[source.iter],paste0(source.iter,"/",n.scripts.to.sync),wait0,"seconds remaining"))
+      warning(paste(idSync.out$file[source.iter],paste0(source.iter,"/",n.scripts.to.sync),wait0,"seconds remaining"))
       
      
       last.prog <- ""
       
       
       try({
-        devtools::clean_source(file.path(ID.sync.out$path[source.iter],ID.sync.out$file[source.iter]))
+        devtools::clean_source(file.path(idSync.out$path[source.iter],idSync.out$file[source.iter]))
         
-        #run.program(input$project.id,ID.sync.out$file[source.iter],TRUE)  
+        #run.program(input$project.id,idSync.out$file[source.iter],TRUE)  
         
         #Sys.sleep(3)
         
-        last.prog <- ID.sync.out$file[source.iter]
+        last.prog <- idSync.out$file[source.iter]
         
         
       })
@@ -120,7 +120,7 @@ if(test.sync0$synchronize){
       wait0 <- wait0 - run.times$last.run.time.sec[source.iter] 
       
     }
-    failure.script <- ifelse(source.iter <= nrow(ID.sync.out),as.character(ID.sync.out$file[source.iter]),"")
+    failure.script <- ifelse(source.iter <= nrow(idSync.out),as.character(idSync.out$file[source.iter]),"")
     
   }#END progress bar
   

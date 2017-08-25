@@ -153,7 +153,7 @@ Sync.test_2nd <- function(dagger,tree,plotl=TRUE){
   
   stale.graph <- igraph::induced.subgraph(dagger.propagated,igraph::V(dagger.updated)[igraph::V(dagger.updated)$name %in% updated.vertex.dependency],impl="create_from_scratch")
   
-  sources.to.sync <- ID.sync(file.info,stale.graph)
+  sources.to.sync <- idSync(file.info,stale.graph)
   
   return(list(synchronized=ifelse(nrow(sources.to.sync)>0,FALSE,TRUE),updated.graph = dagger.updated,propagated.graph=dagger.propagated,stale.graph=stale.graph,sources.to.sync=sources.to.sync))
   

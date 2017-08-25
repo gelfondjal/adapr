@@ -50,7 +50,7 @@ create_source_file_dir <- function(project.id0=get("project.id"),source.file0=ge
   source_info$options <- get_adapr_options(TRUE)
   
   try({
-    treedf <- Harvest.trees(dependency.dir)
+    treedf <- readDependency(dependency.dir)
     not.this.source <- subset(treedf,(treedf$source.file!=source_info$file[["file"]])&(!is.na(dependency)))
     if (nrow(not.this.source)){source_info$all.files<- condenseFileInfo(not.this.source)}
   },silent=TRUE)
