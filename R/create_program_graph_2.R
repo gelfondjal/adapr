@@ -175,10 +175,10 @@ return(list(vertex=dfo,edges=froms,ggplot=proj.gg,rgrapher=isg))
 #' @export
 #' @examples 
 #'\dontrun{
-#' graph.project("adaprHome")
+#' graphProject("adaprHome")
 #'} 
 #'  
-graph.project <- function(project=getProject()){
+graphProject <- function(project=getProject()){
   
   out <- createProgramGraph(project)
   

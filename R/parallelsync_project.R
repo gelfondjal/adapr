@@ -11,7 +11,7 @@
 #'
 #'
 parallelSync.project <- function(project.id = getProject(),n.cores=2){
-graphdat <- graph.project(project.id)
+graphdat <- graphProject(project.id)
 project.plot <- graphdat$ggplot
 # Identify files with no dependencies for running
 findNodependency <- function(graphdat,completed=""){
@@ -185,7 +185,7 @@ return(presult)
 #'
 monitorParallelSync.project <- function(project.id = getProject(),check.interval=5){
   
-  graphdat <- graph.project(project.id)
+  graphdat <- graphProject(project.id)
   
   project.plot <- graphdat$ggplot
  

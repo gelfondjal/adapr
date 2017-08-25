@@ -5,9 +5,9 @@
 #' @export 
 #' @examples 
 #'\dontrun{
-#'  identical(utils::write.csv,guess.write.fcn("data.csv"))
+#'  identical(utils::write.csv,guessWriteFcn("data.csv"))
 #'} 
-guess.write.fcn <- function(filename){
+guessWriteFcn <- function(filename){
   
   # returns the function for reading a file with the suffix in x
   

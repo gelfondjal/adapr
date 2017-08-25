@@ -5,7 +5,7 @@
 \title{Write object and capture file information}
 \usage{
 Write(obj = NULL, file.name = "data.csv", description = "Result file",
-  write.fcn = guess.write.fcn(file.name), date = FALSE, ...)
+  write.fcn = guessWriteFcn(file.name), date = FALSE, ...)
 }
 \arguments{
 \item{obj}{object to write}

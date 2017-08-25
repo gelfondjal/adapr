@@ -18,7 +18,7 @@
 #' showResults()  
 #'} 
 #' 
-Write <- function(obj=NULL,file.name="data.csv",description="Result file",write.fcn=guess.write.fcn(file.name),date=FALSE,...){
+Write <- function(obj=NULL,file.name="data.csv",description="Result file",write.fcn=guessWriteFcn(file.name),date=FALSE,...){
   
   # lightweight Write.cap take small number of args
   # used file.name and description create file.information
