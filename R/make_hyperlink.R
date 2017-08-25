@@ -6,9 +6,9 @@
 #' @export
 #' @examples 
 #'\dontrun{
-#'  make.hyperlink("myPath","click here to my path")
+#'  makeHyperlink("myPath","click here to my path")
 #'}
-make.hyperlink <- function(files,links){
+makeHyperlink <- function(files,links){
   
   link.command <- rep("",length(files))
   

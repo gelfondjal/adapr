@@ -7,10 +7,10 @@
 #' @examples 
 #'\dontrun{
 #' trees <- readDependency(pull_source_info("adaprHome")$dependency.dir)
-#' dag<-Make.summary.graph(dependency.obj=trees)
+#' dag<-makeSummaryGraph(dependency.obj=trees)
 #' plot(dag)
 #'} 
-Make.summary.graph <- function(dependency.dir=NULL,dependency.object=NULL,plot.graph=FALSE){
+makeSummaryGraph <- function(dependency.dir=NULL,dependency.object=NULL,plot.graph=FALSE){
   
   #equire(igraph)
   
@@ -21,7 +21,7 @@ Make.summary.graph <- function(dependency.dir=NULL,dependency.object=NULL,plot.g
     trees <- subset(trees,!is.na(dependency))
   }else{trees <- dependency.object}
   
-  g.all <- Make.dependency.graph.obj(trees)
+  g.all <- makeDependencyGraphObj(trees)
   
   suffixes <- gsub(".*\\.","",igraph::V(g.all)$name)  	
   

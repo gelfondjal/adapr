@@ -5,9 +5,9 @@
 #' @examples 
 #'\dontrun{
 #' trees <- readDependency(pull_source_info("adaprHome")$dependency.dir)
-#' dag<-Make.dependency.graph.obj(trees)
+#' dag<-makeDependencyGraphObj(trees)
 #'} 
-Make.dependency.graph.obj <- function(dependency.out){
+makeDependencyGraphObj <- function(dependency.out){
   
   # make dependency graph using dependency.out object
   # return dependency graph

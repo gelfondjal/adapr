@@ -62,7 +62,7 @@ run.times <- plyr::ddply(project.info$tree, "source.file", function(x) {
   return(data.frame(last.run.time.sec = last.run.time))
 })
 tab.out <- merge(programs, run.times, by = "source.file")
-tab.out$source.link <- make.hyperlink(tab.out$source.file.fullname, 
+tab.out$source.link <- makeHyperlink(tab.out$source.file.fullname, 
                                       tab.out$source.file)
 sorted.names <- igraph::V(project.info$graph)$file[igraph::topological.sort(project.info$graph)]
 sorted.names <- sorted.names[sorted.names %in% tab.out$source.file]
@@ -72,7 +72,7 @@ summaries.out <- lapply(program.split, program.io.table)
 outputs <- list()
 for (source.iter in names(summaries.out)) {
   temp <- summaries.out[[source.iter]]
-  temp$File <- make.hyperlink(temp$Fullname, temp$File)
+  temp$File <- makeHyperlink(temp$Fullname, temp$File)
   outputs[[source.iter]] <- subset(temp, select = c("IO", 
                                                     "File", "Description"))
   rownames(outputs[[source.iter]])    <- NULL                                                 
@@ -85,7 +85,7 @@ names(tabtopander) <- c("Source","Description","Last run time (sec)")
 write("\n",file.path(targetdirectory,targetfile),append=TRUE)
 write(knitr::kable(tabtopander),file.path(targetdirectory,targetfile),append=TRUE)
 write("\n",file.path(targetdirectory,targetfile),append=TRUE)
-tabtopander <- data.frame(`Dependency Graph` = make.hyperlink(reduced.project.graph.file,"Project Graph"))
+tabtopander <- data.frame(`Dependency Graph` = makeHyperlink(reduced.project.graph.file,"Project Graph"))
 rownames(tabtopander) <- 1:nrow(tabtopander)
 write("\n\n",file.path(targetdirectory,targetfile),append=TRUE)
 write(knitr::kable(tabtopander),file.path(targetdirectory,targetfile),append=TRUE)

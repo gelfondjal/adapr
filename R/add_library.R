@@ -36,7 +36,7 @@ addPackage <- function(project.id=getProject(),library.name,library.install=NA,l
   library.file <- file.path(source_info$project.path,project.directory.tree$support,"common_libs.csv")
   subgroup <- data.frame(Package=library.name,repos=library.install,
                        specific=as.logical(library.specific))  
-  library.info <- load.install.library.file(library.file,subgroup)
+  library.info <- loadInstallLibraryFile(library.file,subgroup)
   library.info <- utils::read.csv(library.file,as.is=TRUE)
   return(library.info)
 }
@@ -76,7 +76,7 @@ removePackage <- function(project.id=getProject(),library.name){
 installProjectPackages <- function(project.id=getProject()){
   source_info <- pull_source_info(project.id)    
   library.file <- file.path(source_info$project.path,project.directory.tree$support,"common_libs.csv")
-  load.install.library.file(library.data.file= library.file,verbose=TRUE,install.all=TRUE)
+  loadInstallLibraryFile(library.data.file= library.file,verbose=TRUE,install.all=TRUE)
   
   return(readLibrary(project.id))
 }

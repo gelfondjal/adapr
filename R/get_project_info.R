@@ -17,7 +17,7 @@ getProjectInfo <- function(dependency.dir){
   
   trees <- readDependency(dependency.dir)
   
-  g.all <- Make.summary.graph(dependency.dir=NULL,dependency.object=trees,plot.graph=FALSE)
+  g.all <- makeSummaryGraph(dependency.dir=NULL,dependency.object=trees,plot.graph=FALSE)
   
   file.info.object <- condenseFileInfo(trees)
   

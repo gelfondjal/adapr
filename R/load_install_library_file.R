@@ -9,7 +9,7 @@
 #' 
 #' 
 #' 
-load.install.library.file <- function(library.data.file=NA,subgroup=NULL,verbose=FALSE,install.all=FALSE){
+loadInstallLibraryFile <- function(library.data.file=NA,subgroup=NULL,verbose=FALSE,install.all=FALSE){
   
   if(is.na(library.data.file)){library.data.file <- file.path(getSourceInfo()$support.dir,getSourceInfo()$support.library.file)}
   
@@ -221,10 +221,10 @@ checkVersion <- function(package0,version0="",versionCheck=FALSE,lib=.libPaths()
 #' @examples 
 #'\dontrun{
 #' set.library("adaprHome")
-#' install.library()
+#' installLibrary()
 #' } 
 #'
-install.library <- function(input=getLibrary(),lib=.libPaths()[1],versionCheck=FALSE){
+installLibrary <- function(input=getLibrary(),lib=.libPaths()[1],versionCheck=FALSE){
     input$success <- FALSE
     for(p in 1:nrow(input)){
     

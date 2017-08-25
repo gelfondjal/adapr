@@ -7,9 +7,9 @@
 #'\dontrun{
 #'  path <- getProjectPath("adaprHome")
 #'  path <- file.path(path,"Programs",project.directory.tree$support)
-#'  load.source.directory(path)
+#'  runSourceDirectory(path)
 #'} 
-load.source.directory <- function(source.directory){
+runSourceDirectory <- function(source.directory){
   
   source.file.list <- list.files(source.directory,pattern="(\\.R$)|(\\.r$)",full.names=TRUE,include.dirs=FALSE)
   

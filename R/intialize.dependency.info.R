@@ -72,9 +72,9 @@ initialize_dependency_info <- function(source_info_arg){
   # load the libraries and the dependent source functions
   
   
-  load.install.library.file(file.path(source_info_arg$support.dir,source_info_arg$support.library.file))
-  load.source.directory(source_info_arg$support.dir)
-  load.source.directory(source_info_arg$source.support.dir)
+  loadInstallLibraryFile(file.path(source_info_arg$support.dir,source_info_arg$support.library.file))
+  runSourceDirectory(source_info_arg$support.dir)
+  runSourceDirectory(source_info_arg$source.support.dir)
   
   outlibraries <- id_new_libs(file.path(source_info_arg$support.dir,source_info_arg$support.library.file))
   
