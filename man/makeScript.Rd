@@ -25,7 +25,7 @@ Logical indicating failure or not
 Generates the shell of a code that is project specific
 }
 \details{
-Will not overwrite existing program. Executes program stub. Mostly wrapper for sprout.program.
+Will not overwrite existing program. Executes program stub. Mostly wrapper for sproutProgram.
 }
 \examples{
 \dontrun{

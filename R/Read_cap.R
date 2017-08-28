@@ -1,4 +1,4 @@
-#' Read data and capture the file information within dependency object
+#' Lower level function that reads data and capture the file information within dependency object
 #' @param file.info file information list 
 #' @param read.fcn function for reading the file
 #' @param source_info source information list

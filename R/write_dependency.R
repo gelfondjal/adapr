@@ -1,4 +1,4 @@
-#' Write the dependcy object to file
+#' Lower level function that writes the dependency object to file
 #' @param dependency.object dependency object to output
 #' @param dependency.pointer filename to write
 #' @return TRUE

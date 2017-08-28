@@ -2,7 +2,7 @@
 % Please edit documentation in R/plant_tree.R
 \name{relocateProject}
 \alias{relocateProject}
-\title{Changes project directory/publish directory or identifies imported project}
+\title{Lower level function that changes project directory/publish directory or identifies imported project}
 \usage{
 relocateProject(project.id0, project.path = NA, swap.directory = NA)
 }
@@ -17,10 +17,10 @@ relocateProject(project.id0, project.path = NA, swap.directory = NA)
 logical for success or not
 }
 \description{
-Changes project directory/publish directory or identifies imported project
+Lower level function that changes project directory/publish directory or identifies imported project
 }
 \details{
-Is wrapper for redirect.tree. Does not move the project only indicates new location.
+Is wrapper for redirectTree. Does not move the project only indicates new location.
 }
 \examples{
 \dontrun{

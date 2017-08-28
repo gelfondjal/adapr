@@ -1,4 +1,4 @@
-#' Generates the shell of a code that is project specific
+#' Lower level function that generates the shell of a code that is project specific
 #' @param project.id Name of project
 #' @param source.file.name Filename to create
 #' @param description What program does
@@ -8,7 +8,7 @@
 #' @return Logical indicating success or not
 #' @details Will not overwrite existing program. Not for direct use. See makeScript().
 #' 
-sprout.program <- function(project.id=NA,source.file.name=NA,description="",seed=2011,capture.load.command="library(\"adapr\")",controller=FALSE){
+sproutProgram <- function(project.id=NA,source.file.name=NA,description="",seed=2011,capture.load.command="library(\"adapr\")",controller=FALSE){
   
   
   if(controller){
@@ -31,7 +31,7 @@ sprout.program <- function(project.id=NA,source.file.name=NA,description="",seed
   
   controller.lines <- c( "#synctest.project()     #Tests project synchronization ",
                      "#sync.project()  # This runs all programs needed to synchronize",
-                       "#report.project()              #This summarizes project in html")
+                       "#reportProject()              #This summarizes project in html")
   
   if(controller){final.line <- controller.lines}
   
@@ -61,7 +61,7 @@ sprout.program <- function(project.id=NA,source.file.name=NA,description="",seed
 #' @param seed Random start seed
 #' @param run Execute r script?
 #' @return Logical indicating failure or not
-#' @details Will not overwrite existing program. Executes program stub. Mostly wrapper for sprout.program.
+#' @details Will not overwrite existing program. Executes program stub. Mostly wrapper for sproutProgram.
 #' @export
 #' @examples 
 #'\dontrun{
@@ -80,7 +80,7 @@ makeScript <- function(r="",description="",project.id=getProject(),seed=2011,run
     
   }
   
-  out <- sprout.program(project.id,source.file.name=r,description=description,seed)
+  out <- sproutProgram(project.id,source.file.name=r,description=description,seed)
   
   if(run){run.script(r,project.id)}
   return(out)

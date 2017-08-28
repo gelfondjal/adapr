@@ -1,4 +1,4 @@
-#' Write data and capture the file information within dependency object
+#' Lower level function that writes data and captures the file information within dependency object
 #' @param obj object to write, if null then open graphics device
 #' @param file.info file information list 
 #' @param write.fcn function to write file

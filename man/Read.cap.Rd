@@ -2,7 +2,7 @@
 % Please edit documentation in R/Read_cap.R
 \name{Read.cap}
 \alias{Read.cap}
-\title{Read data and capture the file information within dependency object}
+\title{Lower level function that reads data and capture the file information within dependency object}
 \usage{
 Read.cap(file.info, read.fcn, source_info, ...)
 }
@@ -19,7 +19,7 @@ Read.cap(file.info, read.fcn, source_info, ...)
 object read from files
 }
 \description{
-Read data and capture the file information within dependency object
+Lower level function that reads data and capture the file information within dependency object
 }
 \examples{
 \dontrun{

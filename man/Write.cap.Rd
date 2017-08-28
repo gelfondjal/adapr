@@ -2,7 +2,7 @@
 % Please edit documentation in R/write_cap.R
 \name{Write.cap}
 \alias{Write.cap}
-\title{Write data and capture the file information within dependency object}
+\title{Lower level function that writes data and captures the file information within dependency object}
 \usage{
 Write.cap(obj = NULL, file.info, write.fcn, source_info, ...)
 }
@@ -21,7 +21,7 @@ Write.cap(obj = NULL, file.info, write.fcn, source_info, ...)
 file.info file information returned
 }
 \description{
-Write data and capture the file information within dependency object
+Lower level function that writes data and captures the file information within dependency object
 }
 \details{
 Not usually direct use. See Write() and Graph().

@@ -3,7 +3,7 @@
 #' @param all logical indicating whether to send all branches in project 
 #' @export
 #' 
-send.branch <- function(branch_cut,all=FALSE){
+sendBranch <- function(branch_cut,all=FALSE){
   
   
   source_info <- get("source_info")

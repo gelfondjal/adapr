@@ -78,9 +78,9 @@ plantTree <- function(project.id,project.path=NA,swap.directory=NA,first.program
     dir.create(file.path(project.path,project.directory.tree$data))
     
        
-    sprout.program(project.id,source.file.name=NA,description="",seed=2011,capture.load.command="library(adapr)",controller=TRUE)
+    sproutProgram(project.id,source.file.name=NA,description="",seed=2011,capture.load.command="library(adapr)",controller=TRUE)
     
-    test <- sprout.program(project.id,source.file.name=first.program,description="reads data",seed=2011,capture.load.command="library(adapr)",controller=FALSE)
+    test <- sproutProgram(project.id,source.file.name=first.program,description="reads data",seed=2011,capture.load.command="library(adapr)",controller=FALSE)
     try({
     devtools::clean_source(file.path(project.path,project.directory.tree$analysis,first.program),quiet=TRUE) 
     })
@@ -100,12 +100,12 @@ plantTree <- function(project.id,project.path=NA,swap.directory=NA,first.program
   
   
 }
-#' Changes project directory/publish directory or identifies imported project
+#' Lower level function that changes project directory/publish directory or identifies imported project
 #' @param project.id0 Project name
 #' @param project.path Project home directory
 #' @param swap.directory Project publish directory
 #' @return logical for success or not
-#' @details Is wrapper for redirect.tree. Does not move the project only indicates new location.
+#' @details Is wrapper for redirectTree. Does not move the project only indicates new location.
 #' @examples 
 #'\dontrun{
 #' relocateProject("adaprTest","mydirectory1","mydirectory2publish")
@@ -113,7 +113,7 @@ plantTree <- function(project.id,project.path=NA,swap.directory=NA,first.program
 #' @export
 relocateProject <- function(project.id0,project.path=NA,swap.directory=NA){
   
-  out <- redirect.tree(project.id0,project.path,swap.directory)
+  out <- redirectTree(project.id0,project.path,swap.directory)
   
   return(out)
   
@@ -125,7 +125,7 @@ relocate.project <- relocateProject
 #' @param swap.directory Project publish directory
 #' @return logical for success or not
 #' @details Not for direct use. See relocate.project
-redirect.tree <- function(project.id0,project.path=NA,swap.directory=NA){
+redirectTree <- function(project.id0,project.path=NA,swap.directory=NA){
   
   opts <- get_adapr_options()
   

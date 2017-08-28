@@ -2,7 +2,7 @@
 % Please edit documentation in R/write_dependency.R
 \name{write.dependency}
 \alias{write.dependency}
-\title{Write the dependcy object to file}
+\title{Lower level function that writes the dependency object to file}
 \usage{
 write.dependency(dependency.object, dependency.pointer)
 }
@@ -15,7 +15,7 @@ write.dependency(dependency.object, dependency.pointer)
 TRUE
 }
 \description{
-Write the dependcy object to file
+Lower level function that writes the dependency object to file
 }
 \details{
 Not for direct use. See finalize_dependency().

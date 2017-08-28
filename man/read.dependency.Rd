@@ -2,7 +2,7 @@
 % Please edit documentation in R/read_dependency.R
 \name{read.dependency}
 \alias{read.dependency}
-\title{Read the dependcy data from file}
+\title{Lower level function that reads the script dependcy data from file}
 \usage{
 read.dependency(dependency.pointer)
 }
@@ -13,7 +13,7 @@ read.dependency(dependency.pointer)
 dependency data.frame
 }
 \description{
-Read the dependcy data from file
+Lower level function that reads the script dependcy data from file
 }
 \details{
 Not for direct use. See readDependency().

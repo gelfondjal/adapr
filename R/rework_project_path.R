@@ -1,10 +1,10 @@
-#' Collects all trees in dependency.dir and changes the project path
+#' Lower level function that collects all trees in dependency.dir and changes the project path
 #' @param dependency.dir location of dependency files to rework
 #' @param new.path file path for the new project path
 #' @details Not for direct use. Used with swapping branches
 #' @export
 #' 
-rework.project.path <- function(dependency.dir=get("source_info")$depedency.dir,new.path=getProjectPath(get("source_info")$project.id)){
+reworkProjectPath <- function(dependency.dir=get("source_info")$depedency.dir,new.path=getProjectPath(get("source_info")$project.id)){
   
   
   
@@ -12,7 +12,7 @@ rework.project.path <- function(dependency.dir=get("source_info")$depedency.dir,
   
   list.deps <- lapply(dep.files,read.dependency)
   
-  fixed.deps <- swap.project.paths(list.deps,new.path)
+  fixed.deps <- swapProjectPath(list.deps,new.path)
   
   names(fixed.deps) <- dep.files
   
@@ -21,4 +21,4 @@ rework.project.path <- function(dependency.dir=get("source_info")$depedency.dir,
     utils::write.table(fixed.deps[[dep.file.iter]],dep.file.iter,sep="\t",row.names=FALSE)
   }
   
-}# END: rework.project.path 
+}# END: reworkProjectPath 

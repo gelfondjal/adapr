@@ -114,9 +114,9 @@ return(fileout)
 #' @export
 #'@examples 
 #'\dontrun{
-#' report.project("adaprHome")
+#' reportProject("adaprHome")
 #'}  
-report.project <- function (project.id=getProject(), graph.width = 960, graph.height = 500){
+reportProject <- function (project.id=getProject(), graph.width = 960, graph.height = 500){
   
   source_info <- pullSourceInfo(project.id)
   

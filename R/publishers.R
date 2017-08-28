@@ -31,10 +31,10 @@ getPubResults <- function(project.id=getProject()){
 #' @export
 #' @examples 
 #' \dontrun{
-#' send.pubresults("adaprHome")
+#' publishResults("adaprHome")
 #'} 
 #' 
-send.pubresults <- function(project.id=getProject()){
+publishResults <- function(project.id=getProject()){
   publication.table <- getPubResults(project.id)
   
   pubpath <- getProjectPublishPath(project.id)
