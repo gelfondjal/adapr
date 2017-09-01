@@ -1,4 +1,4 @@
-#' Renders and Rmarkdown file
+#' Creates an Rmarkdown file in specified directory
 #' @param target.file Markdown file to create
 #' @param target.dir Directory to send target file
 #' @param style Markdown target style

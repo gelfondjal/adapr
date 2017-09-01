@@ -2,7 +2,7 @@
 % Please edit documentation in R/create_markdown.R
 \name{createMarkdown}
 \alias{createMarkdown}
-\title{Renders and Rmarkdown file}
+\title{Creates an Rmarkdown file in specified directory}
 \usage{
 createMarkdown(target.file = paste0(getSourceInfo()$file$file, "md"),
   target.dir = getSourceInfo()$markdown.dir, style = "html_document",
@@ -25,7 +25,7 @@ createMarkdown(target.file = paste0(getSourceInfo()$file$file, "md"),
 File information
 }
 \description{
-Renders and Rmarkdown file
+Creates an Rmarkdown file in specified directory
 }
 \details{
 Uses rmarkdown library to access objects in the R script. Will track dependencies for objects used within Rmd file.

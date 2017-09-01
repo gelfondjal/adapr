@@ -1,16 +1,16 @@
-#' Synchronize project by running necessary R scripts
+#' Lower level function that synchronizes project by running necessary R scripts
 #' @param source_info Project information within source_info list
 #' @param run logical indicated whether to run or just identify asynchrony
 #' @param plot.to.file logical for writing file in tree_controller.R directory
 #' @return Data.frame with sources needed to synchronize with run times
 #' @export
-#' @details Not usually direct use. See sync.project() and synctest.project().
+#' @details Not usually direct use. See syncProject() and syncTestProject().
 #' @examples 
 #'\dontrun{
 #' source_info <- create_source_file_dir("adaprHome","tree_controller.R")
-#' source.sync.si(source_info)
+#' sourceSyncSI(source_info)
 #'} 
-source.sync.si <- function(source_info,run=TRUE,plot.to.file=FALSE){
+sourceSyncSI <- function(source_info,run=TRUE,plot.to.file=FALSE){
   
   # Run in order 
   # Compute run times
@@ -18,7 +18,7 @@ source.sync.si <- function(source_info,run=TRUE,plot.to.file=FALSE){
   
   project_info <- getProjectInfoSI(source_info)
   
-  sync.out <- Sync.test.pi(project_info)
+  sync.out <- syncTestPI(project_info)
   
   if(sync.out$synchronized){
     
@@ -36,7 +36,7 @@ source.sync.si <- function(source_info,run=TRUE,plot.to.file=FALSE){
   tree.to.run <- subset(project_info$tree,project_info$tree$source.file %in% idSync.out$file)	
   
   
-  sync.out <- sync.test.si(source_info)
+  sync.out <- syncTestSI(source_info)
   
   propagated.names <- igraph::V(sync.out$propagated.graph)$name[igraph::V(sync.out$propagated.graph)$synced=="No"]
   
@@ -72,7 +72,7 @@ source.sync.si <- function(source_info,run=TRUE,plot.to.file=FALSE){
     
     for(source.iter in 1:(nrow(idSync.out)+1)){
       
-      sync.out <- sync.test.si(source_info)
+      sync.out <- syncTestSI(source_info)
       
       if(sync.out$synchronized){
         propagated.names <- ""
@@ -109,4 +109,4 @@ source.sync.si <- function(source_info,run=TRUE,plot.to.file=FALSE){
   return(run.times)
   
   
-}# source.sync.si
+}# sourceSyncSI

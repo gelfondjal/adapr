@@ -150,7 +150,7 @@ listDatafiles <- function(project.id=getProject()){
 #' showResults("adaprHome")
 #'} 
 #'
-showResults <- function(project.id=getProject(),rscript=options()$adaprScriptInfo$file$file){
+showResults <- function(project.id=getProject(),rscript=getSourceInfo()$file$file){
   
   si <- pullSourceInfo(project.id)
   
@@ -175,3 +175,43 @@ showProject <- function(project.id =getProject()){
  
     utils::browseURL(getProjectPath(project.id))
 }
+
+
+#' Returns project's data directory, allows relative directories. Used within an R script.
+#' @param project.id project specifies which data directory
+#' @return path to data directory
+#' @export
+#' @examples 
+#' \dontrun{
+#' dataDir(getProject())
+#'} 
+dataDir <- function(project.id =getProject()){
+  
+  dataDir <- file.path(getProjectPath(project.id),project.directory.tree$data)
+  
+  return(dataDir)
+  
+}
+
+#' Returns project's results directory, allows relative directories. Only used within an R script, after create_source_file_dir.
+#' @param sourceInfo R source_info list created by create_source_file_dir
+#' @return path to data directory
+#' @export
+#' @examples 
+#' \dontrun{
+#' resultsDir(getSourceInfo())
+#'} 
+resultsDir <- function(sourceInfo = getSourceInfo()){
+  
+  resultsDir <- sourceInfo$results.dir
+  
+  return(resultsDir)
+  
+}
+
+
+
+
+
+
+

@@ -2,7 +2,7 @@
 % Please edit documentation in R/parallelsync_project.R
 \name{monitorParallelSync}
 \alias{monitorParallelSync}
-\title{Track parallelSync while in progress}
+\title{Experimental (use with caution) track parallelSync while in progress}
 \usage{
 monitorParallelSync(project.id = getProject(), check.interval = 5)
 }
@@ -15,7 +15,7 @@ monitorParallelSync(project.id = getProject(), check.interval = 5)
 ggplot of project graph
 }
 \description{
-Track parallelSync while in progress
+Experimental (use with caution) track parallelSync while in progress
 }
 \details{
 Must use separate R process from parallelSync(). Refreshes project plot with compute node labels are working or completed

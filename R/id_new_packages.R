@@ -1,11 +1,11 @@
-#' Captures libraries that are not loaded automatically
+#' Lower level function that captures packages that are explicitly loaded, not loaded automatically
 #' @param library.data.file CSV File with a set of library names and repository locations
 #' @return Libraries loaded that were not automatically loaded
 #' @details Captures unaccounted for library within library information file. Not for direct use.
 #' @export
 #' 
 #' 
-id_new_libs <- function(library.data.file){
+idPackages <- function(library.data.file){
  
  #library.data.file= "/Users/Gelfond/Documents/Projects/Aflatoxin/Programs/support_functions/common_libs.csv"
  

@@ -21,7 +21,7 @@
 # 
 # projinfo <- getProjectInfoSI(si)
 # 
-# unsync.vertex <- c("",as.character(sync.test.si(si)$sources.to.sync$fullname.abbr))
+# unsync.vertex <- c("",as.character(syncTestSI(si)$sources.to.sync$fullname.abbr))
 # 
 # projgraph <- projinfo$graph
 # 

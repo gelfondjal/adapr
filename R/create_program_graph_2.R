@@ -23,7 +23,7 @@ projinfo <- getProjectInfoSI(si)
 outputs <- subset(projinfo$tree,projinfo$tree$dependency=="out",select=c("source.file","target.path","target.file"))
 outputs$fullname <- file.path(outputs$target.path,outputs$target.file)
 outputs <- merge(outputs,projinfo$all.files,by="fullname")
-unsync.vertex <- c("",as.character(sync.test.si(si)$sources.to.sync$fullname.abbr))
+unsync.vertex <- c("",as.character(syncTestSI(si)$sources.to.sync$fullname.abbr))
 projgraph <- projinfo$graph
 sources <- unique(projinfo$tree$source.file)
 vertexnames <- subset(projinfo$all.files,file %in%sources)$fullname.abbr

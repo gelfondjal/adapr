@@ -4,12 +4,17 @@
 \alias{commitProject}
 \title{Git commit of project.}
 \usage{
-commitProject(commit.message = "", project.id = getProject())
+commitProject(commit.message = "", project.id = getProject(),
+  addAll = FALSE, checkSync = TRUE)
 }
 \arguments{
 \item{commit.message}{message describing edits}
 
 \item{project.id}{project to commit}
+
+\item{addAll}{logical for adding every R script and support file to commit}
+
+\item{checkSync}{logical for checking sync status}
 }
 \value{
 commit message
@@ -18,7 +23,7 @@ commit message
 Git commit of project.
 }
 \details{
-Need git option active. Uses git2r package.
+Need git option active. Uses git2r package. addAll = TRUE will increase compute time.
 }
 \examples{
 \dontrun{

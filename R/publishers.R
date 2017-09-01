@@ -59,11 +59,11 @@ publishResults <- function(project.id=getProject()){
 #' @export
 #' @examples 
 #' \dontrun{
-#' show.pubresults("adaprHome")
+#' browsePubFiles("adaprHome")
 #'} 
 #' 
 #' 
-show.pubresults <- function(project.id=getProject()){
+browsePubFiles <- function(project.id=getProject()){
   
   source_info <- pullSourceInfo(project.id)
   publication.file <- file.path(source_info$project.path,project.directory.tree$support,"files_to_publish.csv")

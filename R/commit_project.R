@@ -1,27 +1,34 @@
 #' Git commit of project.
 #' @param commit.message message describing edits
 #' @param project.id project to commit
+#' @param addAll logical for adding every R script and support file to commit
+#' @param checkSync logical for checking sync status
 #' @return commit message
-#' @details Need git option active. Uses git2r package.
+#' @details Need git option active. Uses git2r package. addAll = TRUE will increase compute time.
 #' @export
 #' @examples 
 #' \dontrun{
 #' commitProject("adaprHome","Did I change something?")
 #'} 
 #'
-commitProject <- function(commit.message="",project.id=getProject()){
+commitProject <- function(commit.message="",project.id=getProject(),addAll = FALSE,checkSync=TRUE){
   source_info <- pullSourceInfo(project.id)
-  test.sync0 <- sync.test.si(source_info)$synchronized
-  synccheck <- ifelse(test.sync0,"SYNCHRONIZED","NOT SYNCd")
+  if(checkSync){
+    test.sync0 <- syncTestSI(source_info)$synchronized
+    synccheck <- ifelse(test.sync0,"SYNCHRONIZED","NOT SYNCd")
+  }else{
+    syncckeck <- "No sync test"
+  }
   setwd(source_info$project.path)
   
   repo <- git2r::repository(source_info$project.path)
   
   analysis.dir <- file.path(source_info$project.path,project.directory.tree$analysis)
   
-  all.programs <- matrix(list.files(analysis.dir,recursive=TRUE,full.names=TRUE))
-  
-  add <-  apply(all.programs,1,function(x){gitAdd(source_info$project.path,filename=x)})
+  if(addAll){
+    all.programs <- matrix(list.files(analysis.dir,recursive=TRUE,full.names=TRUE))
+    add <-  apply(all.programs,1,function(x){gitAdd(source_info$project.path,filename=x)})
+  }
   
   committed <- git2r::commit(repo,message =paste(synccheck,commit.message))
   out <- paste("Git",commit2char(committed))

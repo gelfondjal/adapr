@@ -1,12 +1,12 @@
-#' Uses DOSNOW package for parallel syncrhonization of project. Takes advantage of directed acyclic graph structure to run R script processes in parallel.
+#' Experimental (use with caution) parallel syncrhonization of project. Takes advantage of directed acyclic graph structure to run R script processes in parallel.
 #' @param project.id Project to synchronize.
 #' @param n.cores Number of cores to use. Should be >1, but less than number of logical CPUs.
 #' @return data.frame with success/failure status.
 #' @export
-#' @details Experimental. See also monitorParallelSync(), sync.project() and synctest.project(). Uses Results/tree_controller.R directory to pass work/completion data between nodes.
+#' @details Experimental. See also monitorParallelSync(), syncProject() and syncTestProject(). Uses Results/tree_controller.R directory to pass work/completion data between nodes.
 #' @examples 
 #'\dontrun{
-#' parallelsync.project("adaprHome")
+#' parallelsyncProject("adaprHome")
 #'} 
 #'
 #'
@@ -172,7 +172,7 @@ presult <- plyr::ddply(nodes,"compute.node",function(x){
 parallel::stopCluster(clust)
 return(presult)
 }
-#' Track parallelSync while in progress
+#' Experimental (use with caution) track parallelSync while in progress
 #' @param project.id Project to synchronize.
 #' @param check.interval how many seconds to delay until last check
 #' @return ggplot of project graph

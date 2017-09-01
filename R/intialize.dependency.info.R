@@ -76,7 +76,7 @@ initialize_dependency_info <- function(source_info_arg){
   runSourceDirectory(source_info_arg$support.dir)
   runSourceDirectory(source_info_arg$source.support.dir)
   
-  outlibraries <- id_new_libs(file.path(source_info_arg$support.dir,source_info_arg$support.library.file))
+  outlibraries <- idPackages(file.path(source_info_arg$support.dir,source_info_arg$support.library.file))
   
   if (length(outlibraries)>0) {print(paste("Libraries not automatically loaded",outlibraries))}
   
@@ -95,11 +95,11 @@ initialize_dependency_info <- function(source_info_arg){
   # add source files to dependency set was	
   
   for(file.name in support.files){
-    
-    if(source_info_arg$options$git){try({ gitAdd(project.path,file.name) })}
-    
+    print(file.name)
+   
     if(grepl("(\\.r)|(\\.R)$",file.name)){
-    
+      if(source_info_arg$options$git){try({ gitAdd(project.path,file.name) })}
+      
       Read.cap(createFileInfo(dirname(file.name),basename(file.name),"Support file"),I,options()$adaprScriptInfo)
     }
   }		 

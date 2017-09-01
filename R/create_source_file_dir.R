@@ -47,7 +47,7 @@ create_source_file_dir <- function(project.id0=get("project.id"),source.file0=ge
   source_info$project.id <- project.id0
   source_info$project.path <- project.path	
   
-  source_info$options <- get_adapr_options(TRUE)
+  source_info$options <- getAdaprOptions(TRUE)
   
   try({
     treedf <- readDependency(dependency.dir)

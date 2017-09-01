@@ -1,17 +1,17 @@
-#' check the synchrony of source files and their created objects
+#' Lower level function that checks the synchrony of source files and their created objects
 #' @param dagger a directed acyclic igraph representing dependencies
 #' @param tree  dependency tree corresponding to dagger
 #' @param plotl logical for plotting or not
 #' @export
 #' @return list with synchronizing information
-#' @details Not for direct use. See sync.project() and synctest.project().
+#' @details Not for direct use. See syncProject() and syncTestProject().
 #' @examples 
 #'\dontrun{
 #'  si <- pullSourceInfo("adaprHome")
 #' projInfo <- getProjectInfo(si$dependency.dir)
-#' Sync.test(projInfo$graph,projInfo$tree)
+#' syncTest(projInfo$graph,projInfo$tree)
 #'} 
-Sync.test <- function(dagger,tree,plotl=FALSE){
+syncTest <- function(dagger,tree,plotl=FALSE){
   
   #equire(igraph)
   if(!igraph::is.dag(dagger)){stop("The computing dependencies have cycles.")}
@@ -96,7 +96,6 @@ Sync.test <- function(dagger,tree,plotl=FALSE){
     }
     
   }
-  
   
   
   dagger.propagated <- dagger

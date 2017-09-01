@@ -29,8 +29,8 @@ sproutProgram <- function(project.id=NA,source.file.name=NA,description="",seed=
   final.line <- "dependency.out <- finalize_dependency()"
   
   
-  controller.lines <- c( "#synctest.project()     #Tests project synchronization ",
-                     "#sync.project()  # This runs all programs needed to synchronize",
+  controller.lines <- c( "#syncTestProject()     #Tests project synchronization ",
+                     "#syncProject()  # This runs all programs needed to synchronize",
                        "#reportProject()              #This summarizes project in html")
   
   if(controller){final.line <- controller.lines}
@@ -82,6 +82,6 @@ makeScript <- function(r="",description="",project.id=getProject(),seed=2011,run
   
   out <- sproutProgram(project.id,source.file.name=r,description=description,seed)
   
-  if(run){run.script(r,project.id)}
+  if(run){runScript(r,project.id)}
   return(out)
 }

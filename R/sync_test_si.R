@@ -3,34 +3,34 @@
 #' @param plotl0 Logical indicated whether to plot the updated files
 #' @return list or logical indicated whether project is synchronized or not
 #' @export
-#' @details Not usually direct use. See sync.project() and synctest.project().
+#' @details Not usually direct use. See syncProject() and syncTestProject().
 #' @examples 
 #'\dontrun{
 #' source_info <- create_source_file_dir("adaprHome","tree_controller.R")
-#' sync.test.si(source_info)
+#' syncTestSI(source_info)
 #'} 
-sync.test.si <- function(source_info,plotl0=FALSE){
+syncTestSI <- function(source_info,plotl0=FALSE){
   
   project_info <- getProjectInfoSI(source_info)
   
-  return(Sync.test(project_info$graph,project_info$tree,plotl=plotl0))}
+  return(syncTest(project_info$graph,project_info$tree,plotl=plotl0))}
 #' Tests the synchrony of files in dependency tree
 #' @param project.id is project to test the synchrony of
 #' @return list with logical indicated whether project is synchronized or not and details about synchrony
 #' @export
 #' @examples 
 #'\dontrun{
-#' synctest.project("adaprHome")
+#' syncTestProject("adaprHome")
 #'} 
 #' 
 #' 
-synctest.project <- function(project.id=getProject()){
+syncTestProject <- function(project.id=getProject()){
   
   source_info <- pullSourceInfo(project.id)
   
   project_info <- getProjectInfoSI(source_info)
   
-  return(Sync.test(project_info$graph,project_info$tree,plotl=FALSE))}
+  return(syncTest(project_info$graph,project_info$tree,plotl=FALSE))}
 #' Checks the synchronization project and runs scripts needed for synchronization
 #' @param project.id is project to synchronize
 #' @param ask logical whether to report estimated run time prior to execution
@@ -38,20 +38,20 @@ synctest.project <- function(project.id=getProject()){
 #' @export
 #' @examples 
 #'\dontrun{
-#' sync.project("adaprHome")
+#' syncProject("adaprHome")
 #'} 
 #' 
 #' 
 #' 
-sync.project <- function(project.id=getProject(),ask=FALSE){
+syncProject <- function(project.id=getProject(),ask=FALSE){
 source_info <- pullSourceInfo(project.id)
-test.sync0 <- sync.test.si(source_info)
+test.sync0 <- syncTestSI(source_info)
 if(test.sync0$synchronize){
   text <- paste(project.id,"Already synchonized")
   last.prog <- " "
  }else{
   
-  syncer <- source_sync_si_load(source_info)
+  syncer <- sourceSyncSILoad(source_info)
   
   run.times <- syncer$run.times
   
@@ -124,11 +124,6 @@ if(test.sync0$synchronize){
     
   }#END progress bar
   
- 
-  #withProgress(session,min=1,max=3,expr={
-  #    setProgress(message = 'Synchronizing',detail=paste("Approximate Time:", wait, "seconds"),value=2)
-  #  test.sync <- source.sync.si(source_info,run=TRUE,TRUE)
-  #    setProgress(value=3)
   
   text<-paste("Sync successful for",project.id)
   if(last.prog==""){    
