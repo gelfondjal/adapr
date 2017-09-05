@@ -2,7 +2,7 @@
 % Please edit documentation in R/source_sync_si.R
 \name{sourceSyncSI}
 \alias{sourceSyncSI}
-\title{Lower level function that synchronizes project by running necessary R scripts}
+\title{Lower level function that synchronizes project by running necessary R scripts. Loads from source_info list.}
 \usage{
 sourceSyncSI(source_info, run = TRUE, plot.to.file = FALSE)
 }
@@ -17,7 +17,7 @@ sourceSyncSI(source_info, run = TRUE, plot.to.file = FALSE)
 Data.frame with sources needed to synchronize with run times
 }
 \description{
-Lower level function that synchronizes project by running necessary R scripts
+Lower level function that synchronizes project by running necessary R scripts. Loads from source_info list.
 }
 \details{
 Not usually direct use. See syncProject() and syncTestProject().

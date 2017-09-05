@@ -1,4 +1,4 @@
-#' Lower level function that synchronizes project by running necessary R scripts
+#' Lower level function that synchronizes project by running necessary R scripts. Loads from source_info list.
 #' @param source_info Project information within source_info list
 #' @param run logical indicated whether to run or just identify asynchrony
 #' @param plot.to.file logical for writing file in tree_controller.R directory

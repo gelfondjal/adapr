@@ -1,6 +1,7 @@
 #' Make plot of project programs only
 #' Summarize all programs. Sync status is assessed and indicated.
 #' @param project.id Project id of program
+#' @param testSync Logical to test synchronization status
 #' @return List of data.frame of programs vertices, data.frame of edges, ggplot ,rgrapher=igraph
 #' @details Uses ggplot2
 #' @export
@@ -10,7 +11,7 @@
 #'} 
 #'  
  
-createProgramGraph <- function(project.id){
+createProgramGraph <- function(project.id,testSync=TRUE){
 	
 # computes transitively connected subpgraph of project DAG
 # given a project id (project.id)
@@ -170,6 +171,7 @@ return(list(vertex=dfo,edges=froms,ggplot=proj.gg,rgrapher=isg))
 #' Make plot of project programs only
 #' Summarize all programs. Sync status is assessed and indicated.
 #' @param project Project id of program
+#' @param testSync logical to test synchronization status
 #' @return List of data.frame of programs vertices, data.frame of edges, ggplot ,rgrapher=igraph
 #' @details Uses ggplot2. Is a wrapper for create_program_graph.
 #' @export
@@ -178,7 +180,7 @@ return(list(vertex=dfo,edges=froms,ggplot=proj.gg,rgrapher=isg))
 #' graphProject("adaprHome")
 #'} 
 #'  
-graphProject <- function(project=getProject()){
+graphProject <- function(project=getProject(),testSync=TRUE){
   
   out <- createProgramGraph(project)
   

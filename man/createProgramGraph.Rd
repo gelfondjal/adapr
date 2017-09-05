@@ -5,10 +5,12 @@
 \title{Make plot of project programs only
 Summarize all programs. Sync status is assessed and indicated.}
 \usage{
-createProgramGraph(project.id)
+createProgramGraph(project.id, testSync = TRUE)
 }
 \arguments{
 \item{project.id}{Project id of program}
+
+\item{testSync}{Logical to test synchronization status}
 }
 \value{
 List of data.frame of programs vertices, data.frame of edges, ggplot ,rgrapher=igraph
