@@ -5,7 +5,8 @@
 \title{initialize project}
 \usage{
 plantTree(project.id, project.path = NA, swap.directory = NA,
-  first.program = "read_data.R")
+  first.program = "read_data.R", project.libraryTF = FALSE,
+  library.path = "")
 }
 \arguments{
 \item{project.id}{Project name, if missing then default}
@@ -15,6 +16,10 @@ plantTree(project.id, project.path = NA, swap.directory = NA,
 \item{swap.directory}{Project branch exchange directory}
 
 \item{first.program}{Name of first program in project (read_data.R default)}
+
+\item{project.libraryTF}{Logical to use a local (not default) library}
+
+\item{library.path}{= path to local (not default) library}
 }
 \value{
 logical for success or not

@@ -25,6 +25,35 @@ get_orchard <- function(){
   
   return(orchard)
 }
+
+
+#' Updates the project list file to include project specific libraries.
+#' @return orchard
+#' @export
+#' @details Adds 2 columns to project listing. (project.library and library.path). This enables project specific libraries.
+#' @examples
+#'\dontrun{
+#' orchard <- updateOrchardLibraries()
+#' print(subset(orchard,project.id=="adaprHome"))
+#'} 
+#' 
+updateOrchardLibraries <- function(){
+  
+  projectListing <- get_orchard()
+  
+  if("project.libraryTF" %in% names(projectListing)) {return(projectListing)}
+  
+  widerOrchard <- data.frame(get_orchard(),project.libraryTF=FALSE,library.path="",stringsAsFactors = FALSE)
+  
+  orchard.site <- file.path(path.expand.2("~"),"ProjectPaths","projectid_2_directory_adapr.csv")
+  
+  utils::write.csv(widerOrchard,orchard.site,row.names=FALSE)
+  
+  return(get_orchard())
+  
+}
+
+
 #' Removes project from orchard, but doesn't delete project from file system
 #' @param project.id0 which project to remove from orchard
 #' @return Project listing data frame.

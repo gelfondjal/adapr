@@ -2,22 +2,27 @@
 % Please edit documentation in R/plant_tree.R
 \name{redirectTree}
 \alias{redirectTree}
-\title{Changes project directory/publish directory or identifies imported project}
+\title{Lower level function that that changes project directory/publish directory or identifies imported project}
 \usage{
-redirectTree(project.id0, project.path = NA, swap.directory = NA)
+redirectTree(project.id0, project.path = NA, swap.directory = NA,
+  project.libraryTF = FALSE, library.path = "")
 }
 \arguments{
 \item{project.id0}{Project name}
 
-\item{project.path}{Project home directory}
+\item{project.path}{Project Parent directory (Directory that contains project)}
 
 \item{swap.directory}{Project publish directory}
+
+\item{project.libraryTF}{Logical to use a local (not default) library}
+
+\item{library.path}{= path to local (not default) library}
 }
 \value{
 logical for success or not
 }
 \description{
-Changes project directory/publish directory or identifies imported project
+Lower level function that that changes project directory/publish directory or identifies imported project
 }
 \details{
 Not for direct use. See relocate.project

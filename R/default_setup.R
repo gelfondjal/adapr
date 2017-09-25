@@ -3,8 +3,8 @@
 #' @export
 #' @examples 
 #'\dontrun{
-#' # Requires RStudio
-#'default.adapr.setup()
+#' # Requires pandoc location or RStudio
+#' default.adapr.setup()
 #'
 #'} 
 #'
@@ -17,6 +17,21 @@ defaultAdaprSetup <- function(){
   #equire(devtools)
   
   print("Will make project directories in computer Document directory and create adaprHome project.")
+  
+  print("Easier setup in RStudio.")
+  
+  print("For custom setup in non-default directories, use R Profile and adaprHomeDir R options: See adaprHomeDir().")
+  
+  yesno <- readline("Do want to setup in default directories? y/n")
+  
+  defaultSetUp <- substring(yesno,1,1) %in% c("y","Y")
+  
+  if(!defaultSetUp){
+    print(paste("AdaprHomeDir is",adaprHomeDir()))
+    yesno <- readline("Did you already set up adaprHomeDir option in R profile? y/n")
+    defaultSetUp2 <- substring(yesno,1,1) %in% c("y","Y")
+    if(!defaultSetUp2){stop("Set option adaprHomeDir in R Profile first.")}
+    }
   
   print(paste("Step",step,"of",total,"Identifying RSTUDIO step"))
   step <- step + 1
@@ -41,7 +56,7 @@ defaultAdaprSetup <- function(){
  
   PATHer <- sysEnvironment[["PATH"]]
   
-  oldoptions <- get_adapr_options()
+  oldoptions <- getAdaprOptions()
   
   oldpath <- oldoptions$PATH
   if(!rstudio){
@@ -120,6 +135,10 @@ defaultAdaprSetup <- function(){
   
   orchards <- get_orchard()
   
+  libdirectory <- readline("R library location? (leave blank if default)")
+  
+  setAdaprOptions("library",ifelse(libdirectory=="",.libPaths()[1],libdirectory))
+  
   print(paste("Step",step,"of",total,"Creating 1st project adaprHome"))
   step <- step + 1
   
@@ -179,8 +198,8 @@ defaultAdaprSetup <- function(){
 #' @export
 #' @examples 
 #'\dontrun{
-#' # Requires RStudio
-#'default.adapr.setup()
+#' # 
+#'  loadAdaprTest()
 #'
 #'} 
 #'
@@ -194,7 +213,7 @@ loadAdaprTest <- function(overwrite=TRUE){
   if("adaprTest" %in% get_orchard()$project.id){
     
     
-    print("adaprTest already loaded try remove.project(\"adaprTest\")")
+    print("adaprTest already loaded try removeProject(\"adaprTest\")")
     
     return(1)
   }else{
@@ -207,7 +226,7 @@ loadAdaprTest <- function(overwrite=TRUE){
   
     utils::unzip(zipfile=projectLocation,exdir=newLocation,overwrite = TRUE)
     
-    relocate.project("adaprTest")
+    relocateProject("adaprTest")
     
     setProject("adaprTest")
     

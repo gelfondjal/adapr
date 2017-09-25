@@ -5,7 +5,8 @@
 \title{initialize project}
 \usage{
 initProject(project.id, project.path = NA, publish.directory = NA,
-  first.program = "read_data.R")
+  first.program = "read_data.R", project.libraryTF = FALSE,
+  library.path = "")
 }
 \arguments{
 \item{project.id}{Project name, if missing then default}
@@ -15,6 +16,10 @@ initProject(project.id, project.path = NA, publish.directory = NA,
 \item{publish.directory}{Project branch exchange directory}
 
 \item{first.program}{Name of first program in project (read_data.R default)}
+
+\item{project.libraryTF}{Logical to use a local (not default) library}
+
+\item{library.path}{Path to local (not default) library}
 }
 \value{
 logical for success or not
@@ -23,7 +28,7 @@ logical for success or not
 initialize project
 }
 \details{
-Sets project
+Sets up project for first time. Defaults to main library. If using a local library, then leaving library path equal to "" puts the library within the project folder.
 
 Wrapper for plantTree
 }

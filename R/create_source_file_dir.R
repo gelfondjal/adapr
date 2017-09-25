@@ -3,7 +3,7 @@
 #' @param source.file0 filename of the source
 #' @param source.description character description of what the source file does 
 #' @return source_info list describing the project
-#' @details Intializes git for the project, adds program git tracking, and initializes dependency tracking
+#' @details Intializes git for the project, adds program git tracking, creates project library and initializes dependency tracking
 #' @export
 #' @examples 
 #'\dontrun{

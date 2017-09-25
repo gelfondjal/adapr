@@ -17,8 +17,8 @@ To be run after default adapr set up.
 }
 \examples{
 \dontrun{
-# Requires RStudio
-default.adapr.setup()
+# 
+ loadAdaprTest()
 
 } 
 

@@ -26,7 +26,7 @@ createMarkdown <- function(target.file=paste0(getSourceInfo()$file$file,"md"),ta
 	
 	if((!overwrite)&file.exists(target.file)){return(file.information)}
 	
-  adapr_options <- get_adapr_options()
+  adapr_options <- getAdaprOptions()
   if(adapr_options$git=="TRUE"){
 	author <- git2r::config()[["global"]]$user.name
   }else{author <- adapr_options$username}

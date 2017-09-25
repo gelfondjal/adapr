@@ -14,7 +14,7 @@ Use on ADAPR start up. Requires RStudio to work. Will make project directories i
 }
 \examples{
 \dontrun{
-# Requires RStudio
+# Requires pandoc location or RStudio
 default.adapr.setup()
 
 } 

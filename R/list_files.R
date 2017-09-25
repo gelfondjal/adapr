@@ -175,8 +175,6 @@ showProject <- function(project.id =getProject()){
  
     utils::browseURL(getProjectPath(project.id))
 }
-
-
 #' Returns project's data directory, allows relative directories. Used within an R script.
 #' @param project.id project specifies which data directory
 #' @return path to data directory
@@ -192,7 +190,6 @@ dataDir <- function(project.id =getProject()){
   return(dataDir)
   
 }
-
 #' Returns project's results directory, allows relative directories. Only used within an R script, after create_source_file_dir.
 #' @param sourceInfo R source_info list created by create_source_file_dir
 #' @return path to data directory
@@ -208,10 +205,3 @@ resultsDir <- function(sourceInfo = getSourceInfo()){
   return(resultsDir)
   
 }
-
-
-
-
-
-
-

@@ -5,7 +5,8 @@
 \title{Install package of specific version}
 \usage{
 install(package, version = NULL, installVersion = FALSE,
-  lib = .libPaths()[1], repos = "cran", show.available = FALSE, ...)
+  lib = .libPaths()[1], repos = getOption("repos"),
+  show.available = FALSE, ...)
 }
 \arguments{
 \item{package}{package name to install}

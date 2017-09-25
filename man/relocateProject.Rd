@@ -2,9 +2,10 @@
 % Please edit documentation in R/plant_tree.R
 \name{relocateProject}
 \alias{relocateProject}
-\title{Lower level function that changes project directory/publish directory or identifies imported project}
+\title{changes project directory/publish directory or identifies imported project}
 \usage{
-relocateProject(project.id0, project.path = NA, swap.directory = NA)
+relocateProject(project.id0, project.path = NA, swap.directory = NA,
+  project.libraryTF = FALSE, library.path = "")
 }
 \arguments{
 \item{project.id0}{Project name}
@@ -12,12 +13,16 @@ relocateProject(project.id0, project.path = NA, swap.directory = NA)
 \item{project.path}{Project home directory}
 
 \item{swap.directory}{Project publish directory}
+
+\item{project.libraryTF}{Logical to use a local (not default) library}
+
+\item{library.path}{= path to local (not default) library}
 }
 \value{
 logical for success or not
 }
 \description{
-Lower level function that changes project directory/publish directory or identifies imported project
+changes project directory/publish directory or identifies imported project
 }
 \details{
 Is wrapper for redirectTree. Does not move the project only indicates new location.

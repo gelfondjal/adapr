@@ -21,7 +21,7 @@ source_info list describing the project
 Create source file directories
 }
 \details{
-Intializes git for the project, adds program git tracking, and initializes dependency tracking
+Intializes git for the project, adds program git tracking, creates project library and initializes dependency tracking
 }
 \examples{
 \dontrun{

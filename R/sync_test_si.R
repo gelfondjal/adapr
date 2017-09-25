@@ -130,14 +130,12 @@ if(test.sync0$synchronize){
     text<-paste(last.prog,"failed sync for",project.id,"Script that failed:",failure.script)
   }else{
     
-    if(get_adapr_options()$git=="TRUE"){commitProject(paste("adapr Sync at",Sys.time()),project.id)}
+    if(getAdaprOptions()$git=="TRUE"){commitProject(paste("adapr Sync at",Sys.time()),project.id)}
   }
 return(text)
   
 }
   
-
-
 #' Partial project synchronization of dependencies to an Rscript. Runs only scripts needed for synchronization.
 #' @param rscript script to synchronize the output of
 #' @param project.id is project to synchronize
@@ -242,10 +240,8 @@ syncTrunk <- function(rscript,project.id=getProject(),ask=FALSE){
     text<-paste(last.prog,"failed sync for",project.id,"Script that failed:",failure.script)
   }else{
     
-    if(get_adapr_options()$git=="TRUE"){commitProject(paste("adapr Sync at",Sys.time()),project.id)}
+    if(getAdaprOptions()$git=="TRUE"){commitProject(paste("adapr Sync at",Sys.time()),project.id)}
   }
   return(text)
   
 }
-
-

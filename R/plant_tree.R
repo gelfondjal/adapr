@@ -3,32 +3,38 @@
 #' @param project.path Project home directory, if missing then default
 #' @param publish.directory Project branch exchange directory
 #' @param first.program Name of first program in project (read_data.R default)
+#' @param project.libraryTF Logical to use a local (not default) library
+#' @param library.path  Path to local (not default) library
 #' @return logical for success or not
-#' @details Sets project
+#' @details Sets up project for first time. Defaults to main library. If using a local library, then leaving library path equal to "" puts the library within the project folder.
 #' @examples 
 #'\dontrun{
 #' initProject("adaprTest")
 #'} 
 #' @details Wrapper for plantTree
 #' @export
-initProject <- function(project.id,project.path=NA,publish.directory=NA,first.program="read_data.R"){
+initProject <- function(project.id,project.path=NA,publish.directory=NA,first.program="read_data.R",project.libraryTF=FALSE,
+                        library.path=""){
   
-  out <- plantTree(project.id,project.path,publish.directory,first.program )
+  out <- plantTree(project.id,project.path,publish.directory,first.program,project.libraryTF,library.path)
   
   setProject(project.id)
   
 }
-init.project <- initProject
+#init.project <- initProject
 #' initialize project
 #' @param project.id Project name, if missing then default
 #' @param project.path Project home directory, if missing then default
 #' @param swap.directory Project branch exchange directory
 #' @param first.program Name of first program in project (read_data.R default)
+#' @param project.libraryTF Logical to use a local (not default) library
+#' @param library.path = path to local (not default) library
 #' @return logical for success or not
 #' @details Not for direct use. See initProject().
-plantTree <- function(project.id,project.path=NA,swap.directory=NA,first.program="read_data.R"){
+plantTree <- function(project.id,project.path=NA,swap.directory=NA,first.program="read_data.R",project.libraryTF=FALSE,
+                      library.path=""){
   
-  opts <- get_adapr_options()
+  opts <- getAdaprOptions()
   
   if(is.na(project.path)){
     project.path <- opts$project.path
@@ -50,7 +56,8 @@ plantTree <- function(project.id,project.path=NA,swap.directory=NA,first.program
   project.path <- file.path(project.path,project.id)
   swap.directory <- file.path(swap.directory,project.id)
   
-  empty.orchard <- data.frame(project.id=project.id,project.path=project.path,swap.directory=swap.directory)
+  empty.orchard <- data.frame(project.id=project.id,project.path=project.path,swap.directory=swap.directory,
+                              project.libraryTF=project.libraryTF,library.path=library.path)
   
   orchard.site <- file.path(path.expand.2("~"),"ProjectPaths","projectid_2_directory_adapr.csv")	
   
@@ -65,7 +72,7 @@ plantTree <- function(project.id,project.path=NA,swap.directory=NA,first.program
     return(FALSE)
   }else{
     
-    orchards.old <- utils::read.csv(orchard.site,as.is=TRUE)
+    orchards.old <- get_orchard()
     
     utils::write.csv(rbind(orchards.old,empty.orchard),orchard.site,row.names=FALSE)
     
@@ -80,7 +87,7 @@ plantTree <- function(project.id,project.path=NA,swap.directory=NA,first.program
        
     sproutProgram(project.id,source.file.name=NA,description="",seed=2011,capture.load.command="library(adapr)",controller=TRUE)
     
-    test <- sproutProgram(project.id,source.file.name=first.program,description="reads data",seed=2011,capture.load.command="library(adapr)",controller=FALSE)
+    test <- sproutProgram(project.id,source.file.name=first.program,description="reads data",seed=2011,capture.load.command="library(\"adapr\")",controller=FALSE)
     try({
     devtools::clean_source(file.path(project.path,project.directory.tree$analysis,first.program),quiet=TRUE) 
     })
@@ -100,10 +107,12 @@ plantTree <- function(project.id,project.path=NA,swap.directory=NA,first.program
   
   
 }
-#' Lower level function that changes project directory/publish directory or identifies imported project
+#' changes project directory/publish directory or identifies imported project
 #' @param project.id0 Project name
 #' @param project.path Project home directory
 #' @param swap.directory Project publish directory
+#' @param project.libraryTF Logical to use a local (not default) library
+#' @param library.path = path to local (not default) library
 #' @return logical for success or not
 #' @details Is wrapper for redirectTree. Does not move the project only indicates new location.
 #' @examples 
@@ -111,23 +120,28 @@ plantTree <- function(project.id,project.path=NA,swap.directory=NA,first.program
 #' relocateProject("adaprTest","mydirectory1","mydirectory2publish")
 #'} 
 #' @export
-relocateProject <- function(project.id0,project.path=NA,swap.directory=NA){
+relocateProject <- function(project.id0,project.path=NA,swap.directory=NA,project.libraryTF=FALSE,
+                            library.path=""){
   
-  out <- redirectTree(project.id0,project.path,swap.directory)
+  out <- redirectTree(project.id0,project.path,swap.directory,project.libraryTF,library.path)
   
   return(out)
   
 }
-relocate.project <- relocateProject
-#' Changes project directory/publish directory or identifies imported project
+
+
+#' Lower level function that that changes project directory/publish directory or identifies imported project
 #' @param project.id0 Project name
-#' @param project.path Project home directory
+#' @param project.path Project Parent directory (Directory that contains project)
 #' @param swap.directory Project publish directory
+#' @param project.libraryTF Logical to use a local (not default) library
+#' @param library.path = path to local (not default) library
 #' @return logical for success or not
 #' @details Not for direct use. See relocate.project
-redirectTree <- function(project.id0,project.path=NA,swap.directory=NA){
+redirectTree <- function(project.id0,project.path=NA,swap.directory=NA,project.libraryTF=FALSE,
+                         library.path=""){
   
-  opts <- get_adapr_options()
+  opts <- getAdaprOptions()
   
   # Set missing to default
   
@@ -157,7 +171,8 @@ redirectTree <- function(project.id0,project.path=NA,swap.directory=NA){
   	return(FALSE)
   	
   }
-  empty.orchard <- data.frame(project.id=project.id0,project.path=project.path,swap.directory=swap.directory)
+  empty.orchard <- data.frame(project.id=project.id0,project.path=project.path,swap.directory=swap.directory,
+                              project.libraryTF=project.libraryTF,library.path=library.path)
   
   orchard.site <- file.path(path.expand.2("~"),"ProjectPaths","projectid_2_directory_adapr.csv")	
   

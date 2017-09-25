@@ -1,5 +1,5 @@
-#' Given Project name, Return project directory
-#' @param project_name is string with project name 
+#' Given Project id, Return project directory
+#' @param project.id0 is string with project name 
 #' @details Reads "~/ProjectPaths/projectid_2_diretory.csv" into dataframe
 #' @return string containing project directory
 #' @export
@@ -8,21 +8,57 @@
 #' getProjectPath("adaprHome")
 #'} 
 #' 
-getProjectPath <- function(project_name=NULL){
+getProjectPath <- function(project.id0=getProject()){
   
   
   all.projects <- get_orchard()
   
-  if(is.null(project_name)){return(all.projects)}
+  if(is.null(project.id0)){return(all.projects)}
   
-  project.out <- subset(all.projects,all.projects$project.id==project_name)
+  project.out <- subset(all.projects,all.projects$project.id==project.id0)
   
   if(nrow(project.out)!=1){stop("Project.id cannot be used to resolve project path")}
   
   return(as.character(project.out$project.path))
   
   
-} #END getProjectPath
+} #END getProjectLibrary
+
+#' Given Project name, Return project library directory
+#' @param project.id0 is string with project name 
+#' @details Reads "~/ProjectPaths/projectid_2_diretory.csv" into dataframe
+#' @return string containing project library directory. Will return empty string if default library.
+#' @details Will create directory if doesn't already exist.
+#' @export
+#' @examples 
+#'\dontrun{
+#' getProjectLibrary("adaprHome")
+#'} 
+#' 
+getProjectLibrary <- function(project.id0=getProject()){
+
+  all.projects <- get_orchard()
+  
+  project.out <- subset(all.projects,all.projects$project.id==project.id0)
+  
+  if(nrow(project.out)!=1){stop("Project.id cannot be used to resolve project path")}
+  
+  if(as.character(project.out$project.library)=="FALSE"){return(getAdaprOptions()$library)}
+  
+  pather <- as.character(project.out$library.path)
+  
+  if((is.na(pather))|(pather=="")){pather <- file.path(getProjectPath(),project.directory.tree$support,project.directory.tree$library.bank)}
+  
+  pather <- file.path(pather,.Platform$OS.type,gsub("\\.","_",make.names(utils::sessionInfo()$platform)))
+  
+  if(!dir.exists(pather)){dir.create(pather)}
+  
+  return(pather)
+  
+  
+} #END getProjectLibrary
+
+
 #' Given Project name, Return project publish directory
 #' @param project_name is string with project name 
 #' @details Reads "~/ProjectPaths/projectid_2_diretory.csv" into dataframe

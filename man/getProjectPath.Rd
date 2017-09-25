@@ -2,18 +2,18 @@
 % Please edit documentation in R/get_project_path.R
 \name{getProjectPath}
 \alias{getProjectPath}
-\title{Given Project name, Return project directory}
+\title{Given Project id, Return project directory}
 \usage{
-getProjectPath(project_name = NULL)
+getProjectPath(project.id0 = getProject())
 }
 \arguments{
-\item{project_name}{is string with project name}
+\item{project.id0}{is string with project name}
 }
 \value{
 string containing project directory
 }
 \description{
-Given Project name, Return project directory
+Given Project id, Return project directory
 }
 \details{
 Reads "~/ProjectPaths/projectid_2_diretory.csv" into dataframe

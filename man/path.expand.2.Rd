@@ -2,7 +2,7 @@
 % Please edit documentation in R/path_expand.2.R
 \name{path.expand.2}
 \alias{path.expand.2}
-\title{Swap / for \\ in path expand}
+\title{Location of options file and project listing. Swap / for \\ in path expand.}
 \usage{
 path.expand.2(x)
 }
@@ -13,10 +13,10 @@ path.expand.2(x)
 Full filepath to x
 }
 \description{
-Swap / for \\ in path expand
+Location of options file and project listing. Swap / for \\ in path expand.
 }
 \details{
-See path.expand() in base R
+See path.expand() in base R. Can be controlled in R profile by adding adaprHomeDir option. See adaprHomeDir().
 }
 \examples{
 \dontrun{

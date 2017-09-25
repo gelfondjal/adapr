@@ -19,7 +19,7 @@ Create first project
 }
 \examples{
 \dontrun{
- opt <- get_adapr_options()
+ opt <- getAdaprOptions()
  firstProject(opt$project.path,opt$publish.path)
 } 
 

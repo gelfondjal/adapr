@@ -164,7 +164,7 @@ loadInstallLibraryFile <- function(library.data.file=NA,subgroup=NULL,verbose=FA
 #' @details Installs from CRAN and bioconductor packages. Local libraries will not be installed.
 #' @export
 #'
-install <- function(package,version=NULL,installVersion=FALSE,lib=.libPaths()[1],repos='cran',show.available=FALSE,...){
+install <- function(package,version=NULL,installVersion=FALSE,lib=.libPaths()[1],repos=getOption("repos"),show.available=FALSE,...){
   
   if(repos=='cran'){
     # Show available versions of the package

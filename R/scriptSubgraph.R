@@ -14,13 +14,11 @@ scriptSubgraph <- function(project.id=getProject(),plotTF=FALSE){
   
   si <- pullSourceInfo(project.id)
   projinfo <- getProjectInfoSI(si)
-
   projgraph <- projinfo$graph
   
   sources <- unique(projinfo$tree$source.file)
   
   vertexnames <- subset(projinfo$all.files,file %in%sources)$fullname.abbr
-
   # Get all script output files
   
   inedges <- igraph::adjacent_vertices(projgraph, vertexnames,"out")
@@ -36,7 +34,6 @@ scriptSubgraph <- function(project.id=getProject(),plotTF=FALSE){
   # Remove output files from graph
   
   graph2 <- igraph::simplify(igraph::delete_vertices(dfoo,setdiff(igraph::V(dfoo)$name,vertexnames)))
-
   lo <- igraph::layout.sugiyama(projgraph)
   
   tp <- function(x){
@@ -50,7 +47,6 @@ scriptSubgraph <- function(project.id=getProject(),plotTF=FALSE){
   
   longgraph <- NULL
   isg <- graph2
-
   isgdf <- igraph::as_data_frame(isg)
   noedges <- 0
   
@@ -60,26 +56,21 @@ scriptSubgraph <- function(project.id=getProject(),plotTF=FALSE){
     noedges <- 1
     isgdf <- igraph::as_data_frame(igraph::graph.data.frame(data.frame(from=vertexnames[1],to=vertexnames[1])))
   }
-
   # Sometimes 1 Vertex can mess up graph layouts
     
   if(length(vertexnames)==1){
     
     dfo <- data.frame(v=vertexnames[1],x=0,y=0)	
-
     dfo <- merge(dfo,subset(projinfo$all.files,select=c("fullname.abbr","fullname","description")),by.x="v",by.y="fullname.abbr")
-
   }else{
     dfo <- tp(igraph::layout.sugiyama(isg)$layout)
   
   }
-
   if(plotTF){graphics::plot(isg,vertex.label=basename(igraph::V(isg)$name),layout=dfo)}
   
   return(list(subgraph=isg,layout=dfo))
   
 }   # End subgraph
-
 #' Produces subgraph of dependencies of R script
 #' @param rscript R script name
 #' @param project.id Project graph
@@ -93,9 +84,7 @@ scriptSubgraph <- function(project.id=getProject(),plotTF=FALSE){
 #'  plot(subGraph[[1]],vertex.label=basename(igraph::V(subGraph[[1]])$name),layout=subGraph[[2]])
 #'} 
 #' 
-
 getDepSubgraph <- function(rscript,project.id=getProject(),plotTF=FALSE){
-
   subGraph <- scriptSubgraph(project.id,plotTF=FALSE)
   
   endVertex <- igraph::V(subGraph$subgraph)$name[basename(igraph::V(subGraph$subgraph)$name)==rscript]
@@ -123,20 +112,16 @@ getDepSubgraph <- function(rscript,project.id=getProject(),plotTF=FALSE){
   
   
 }
-
 #' Identifies dependencies in a DAG
 #' @param endVertex vertex
 #' @param isg Project graph
 #' @details Lower level function. Uses recursion, may contain non-unique vertices. 
 #' @return list with subgraph in igraph format, data frame format, and layout for plottingss
 #' @export
-
 getUpstream <- function(endVertex,isg){
-
   if(!igraph::is.dag(isg)){stop("Error in getUpstream: not a DAG")}
   
   verts <- names(igraph::adjacent_vertices(isg, endVertex,"in")[[1]])
-
   if(length(verts)==0){return(c(endVertex))}
   
   for(i in seq_along(verts)){
@@ -148,5 +133,3 @@ getUpstream <- function(endVertex,isg){
   return(verts)
   
 }
-
-
