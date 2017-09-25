@@ -208,7 +208,8 @@ loadAdaprTest <- function(overwrite=TRUE){
   # Loads an example project
   
   if(overwrite) {removeProject("adaprTest")}
-  
+  #setwd(getAdaprOptions()$project.path)
+  #zip("adaprTest.zip",files="adaprTest")
   
   if("adaprTest" %in% get_orchard()$project.id){
     
