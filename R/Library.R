@@ -77,7 +77,7 @@ Library <- function(package,repository="cran",github="",project.id=getProject())
   
 }  
 ### EOF ###
-#' Returns character string of adapr R package dependencies
+#' Returns character string of adapr R package import dependencies
 #' @return character vector of package names
 #' @export
 #' @examples

@@ -2,7 +2,7 @@
 % Please edit documentation in R/Library.R
 \name{adaprDependencies}
 \alias{adaprDependencies}
-\title{Returns character string of adapr R package dependencies}
+\title{Returns character string of adapr R package import dependencies}
 \usage{
 adaprDependencies()
 }
@@ -10,7 +10,7 @@ adaprDependencies()
 character vector of package names
 }
 \description{
-Returns character string of adapr R package dependencies
+Returns character string of adapr R package import dependencies
 }
 \examples{
 \dontrun{

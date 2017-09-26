@@ -219,14 +219,16 @@ loadAdaprTest <- function(overwrite=TRUE){
     return(1)
   }else{
     
-    projectLocation <- system.file("adaprTest.zip",package="adapr")
+    projectLocation <- system.file("adaprTest.zip", package = "adapr")
     
     newLocation <- getAdaprOptions()$project.path
     
-    #file.copy(projectLocation,newLocation,recursive = TRUE)
-  
-    utils::unzip(zipfile=projectLocation,exdir=newLocation,overwrite = TRUE)
+    newDir <- file.path(newLocation,"adaprTest")
+
+        dir.create(newDir)
     
+    utils::unzip(zipfile = projectLocation, exdir = newDir, 
+                 overwrite = TRUE)
     relocateProject("adaprTest")
     
     setProject("adaprTest")

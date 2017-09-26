@@ -237,21 +237,27 @@ installLibrary <- function(input=getLibrary(),lib=.libPaths()[1],versionCheck=FA
       }
       else{
         
-        install(input$package[p],version=input$version[p],installVersion=versionCheck,lib=lib,repos=input$repos[p],
-                show.available=FALSE,dependencies=FALSE)
+        adapr::install(input$package[p],version=input$version[p],installVersion=versionCheck,lib=lib,repos=input$repos[p],
+                show.available=FALSE,dependencies=!versionCheck)
       
       }
      
       
       input$success[p] <- checkVersion(input$package[p],input$version[p],versionCheck,lib)
+      input$installVersion[p] <- ""
       
-      input$installVersion[p] <-as.character(utils::packageVersion(input$package[p],lib))
-      
+      try({
+        input$installVersion[p] <- as.character(utils::packageVersion(input$package[p], 
+                                                                      .libPaths()))
+      })
       
     }#loop over p package
   
   return(input)
 }
+
+
+
 #' Get library for a project
 #' @param project.id character vector of project
 #' @return dataframe of libraries
