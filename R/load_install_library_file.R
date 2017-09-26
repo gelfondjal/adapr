@@ -224,7 +224,7 @@ checkVersion <- function(package0,version0="",versionCheck=FALSE,lib=.libPaths()
 #' installLibrary()
 #' } 
 #'
-installLibrary <- function(input=getLibrary(),lib=.libPaths()[1],versionCheck=FALSE){
+installLibrary <- function(input=getLibrary(),lib=getProjectLibrary(),versionCheck=FALSE){
     input$success <- FALSE
     for(p in 1:nrow(input)){
     
