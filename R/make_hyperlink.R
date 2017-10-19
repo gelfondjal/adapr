@@ -12,6 +12,8 @@ makeHyperlink <- function(files,links){
   
   link.command <- rep("",length(files))
   
+  if(length(files)==0){stop("Error makeHyperlink: no files to link")}
+  
   for(file.iter in 1:length(files)){
     link.command[file.iter] <- paste0("<a href=\"file:///",files[file.iter],"\">",links[file.iter],"</a>")
     

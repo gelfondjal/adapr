@@ -208,8 +208,9 @@ loadAdaprTest <- function(overwrite=TRUE){
   # Loads an example project
   
   if(overwrite) {removeProject("adaprTest")}
-  #setwd(getAdaprOptions()$project.path)
-  #zip("adaprTest.zip",files="adaprTest")
+  #setwd(file.path(getAdaprOptions()$project.path,"adaprTest"))
+  #testFiles <- list.files(file.path(getAdaprOptions()$project.path,"adaprTest"),recursive=TRUE,all.files=FALSE)
+  #zip("adaprTest.zip",files=testFiles)
   
   if("adaprTest" %in% get_orchard()$project.id){
     

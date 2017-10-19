@@ -1,4 +1,4 @@
-#' Loads librarys within the file library.list.file
+#' This function is no longer supported. Loads libraries within the file library.list.file
 #' @param library.data.file CSV File with a set of library names and repository locations
 #' @param subgroup data frame with Package, repos, and specific columns
 #' @param verbose Print which libraries are installed and loaded
@@ -41,6 +41,8 @@ loadInstallLibraryFile <- function(library.data.file=NA,subgroup=NULL,verbose=FA
   }
   
   }#if not install.all, take subset of packages
+  
+  
   
   for(library.iter in 1:nrow(packages.info)){
     
@@ -159,12 +161,13 @@ loadInstallLibraryFile <- function(library.data.file=NA,subgroup=NULL,verbose=FA
 #' @param lib path to local library
 #' @param repos character of repository
 #' @param show.available logical to display whether the package is available
+#' @param packageSource character describing where the papckage is from.
 #' @param ... Argument to install.packages/install.version functions
 #' @return Library information data
 #' @details Installs from CRAN and bioconductor packages. Local libraries will not be installed.
 #' @export
 #'
-install <- function(package,version=NULL,installVersion=FALSE,lib=.libPaths()[1],repos=getOption("repos"),show.available=FALSE,...){
+install <- function(package,version=NULL,installVersion=FALSE,lib=.libPaths()[1],repos=getOption("repos"),show.available=FALSE,packageSource="",...){
   
   if(repos=='cran'){
     # Show available versions of the package
@@ -191,6 +194,17 @@ install <- function(package,version=NULL,installVersion=FALSE,lib=.libPaths()[1]
     tempfcn(package,ask=TRUE)
     cat(paste0("Bioconductor Package ",package," successfully installed!\n"))
   }# Bioc package
+    
+    
+  if(repos=="gith"){
+   	
+   	gitname <- gsub(".*\\(|\\).*","",packageSource)
+   	
+   	if(!installVersion){gitname <- gsub("@.*","",gitname)}
+   	
+   	devtools::install_github(gitname)
+
+  }# github package 
     
     
 }
@@ -226,7 +240,7 @@ checkVersion <- function(package0,version0="",versionCheck=FALSE,lib=.libPaths()
 #'
 installLibrary <- function(input=getLibrary(),lib=getProjectLibrary(),versionCheck=FALSE){
     input$success <- FALSE
-    for(p in 1:nrow(input)){
+    for(p in seq_along(input[,1])){
     
       #cat(paste0("Installing package ",input$package[p],"...\n"))
       
@@ -238,7 +252,7 @@ installLibrary <- function(input=getLibrary(),lib=getProjectLibrary(),versionChe
       else{
         
         adapr::install(input$package[p],version=input$version[p],installVersion=versionCheck,lib=lib,repos=input$repos[p],
-                show.available=FALSE,dependencies=!versionCheck)
+                show.available=FALSE,dependencies=!versionCheck,packageSource=input$source[p])
       
       }
      

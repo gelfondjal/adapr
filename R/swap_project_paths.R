@@ -15,11 +15,15 @@ swapProjectPath <-   function(list.deps,new.path=getProjectPath(get("source_info
   shaved.variables <- c("path","source.file.path","target.path","project.path")
   
   
+  if(length(list.deps)==0){stop("Error in swapProjectPath no dependencies")}
+  
   for(i in 1:length(list.deps)){
     
     for(char.shave in shaved.variables){
       
-      for(file.iter in 1:nrow(list.deps[[i]])){
+      
+      
+      for(file.iter in seq_along(list.deps[[i]][,1])){
         
         old.project.path <- list.deps[[i]]$project.path[file.iter] 	
         

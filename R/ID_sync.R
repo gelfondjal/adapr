@@ -28,7 +28,7 @@ idSync <- function(file.info,dag.to.sync){
   
   if(nrow(repair.sync.file.info)>0){
   
-  	repair.sync.file.info$run.order <- 1:nrow(repair.sync.file.info)
+  	repair.sync.file.info$run.order <- seq(1,nrow(repair.sync.file.info))
   }else{
   	
   	repair.sync.file.info$run.order <- integer(0)

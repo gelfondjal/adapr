@@ -6,7 +6,7 @@
 \usage{
 install(package, version = NULL, installVersion = FALSE,
   lib = .libPaths()[1], repos = getOption("repos"),
-  show.available = FALSE, ...)
+  show.available = FALSE, packageSource = "", ...)
 }
 \arguments{
 \item{package}{package name to install}
@@ -20,6 +20,8 @@ install(package, version = NULL, installVersion = FALSE,
 \item{repos}{character of repository}
 
 \item{show.available}{logical to display whether the package is available}
+
+\item{packageSource}{character describing where the papckage is from.}
 
 \item{...}{Argument to install.packages/install.version functions}
 }

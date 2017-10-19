@@ -19,6 +19,9 @@ scriptSubgraph <- function(project.id=getProject(),plotTF=FALSE){
   sources <- unique(projinfo$tree$source.file)
   
   vertexnames <- subset(projinfo$all.files,file %in%sources)$fullname.abbr
+  
+  if(length(vertexnames)==1){stop("scriptSubgraph: Only 1 R script")}
+  
   # Get all script output files
   
   inedges <- igraph::adjacent_vertices(projgraph, vertexnames,"out")
@@ -99,11 +102,16 @@ getDepSubgraph <- function(rscript,project.id=getProject(),plotTF=FALSE){
   
   igraph::E(subGraph$subgraph)$arrow.size <- 0.25
   
+  try({
+  
   fromTo <- igraph::ends(subGraph$subgraph,1:length(igraph::E(subGraph$subgraph)))
   
   hotEdges <- which((fromTo[,1] %in% upStream)&(fromTo[,2] %in% upStream))
   
   igraph::E(subGraph$subgraph)$color[hotEdges] <- "red"
+  
+  })
+  
   if(plotTF){
     graphics::plot(subGraph$subgraph,vertex.label=basename(igraph::V(subGraph$subgraph)$name),
                    layout=subGraph$layout,main=paste("Partial Synch for",rscript,"in",project.id,"project"))

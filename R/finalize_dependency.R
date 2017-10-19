@@ -72,7 +72,7 @@ finalize_dependency <- function(RMD=TRUE,write=TRUE){
   
   # note: nrow(dependency.out) must be > 0
   
-  for(dep.row.iter in 1:nrow(dependency.out)){
+  for(dep.row.iter in seq_along(dependency.out[,1])){
     
     target.file <- file.path(dependency.out$target.path[dep.row.iter],dependency.out$target.file[dep.row.iter])
     

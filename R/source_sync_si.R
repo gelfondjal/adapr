@@ -68,7 +68,10 @@ sourceSyncSI <- function(source_info,run=TRUE,plot.to.file=FALSE){
   
   print("Starting synchronization")
   
-  if(run){
+  
+
+  
+  if(run&(nrow(idSync.out)>0)){
     
     for(source.iter in 1:(nrow(idSync.out)+1)){
       

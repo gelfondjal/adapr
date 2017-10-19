@@ -2,7 +2,7 @@
 % Please edit documentation in R/load_install_library_file.R
 \name{loadInstallLibraryFile}
 \alias{loadInstallLibraryFile}
-\title{Loads librarys within the file library.list.file}
+\title{This function is no longer supported. Loads libraries within the file library.list.file}
 \usage{
 loadInstallLibraryFile(library.data.file = NA, subgroup = NULL,
   verbose = FALSE, install.all = FALSE)
@@ -20,7 +20,7 @@ loadInstallLibraryFile(library.data.file = NA, subgroup = NULL,
 Library information data
 }
 \description{
-Loads librarys within the file library.list.file
+This function is no longer supported. Loads libraries within the file library.list.file
 }
 \details{
 Installs and loads all packages.Not for direct use. See installProjectPackages().

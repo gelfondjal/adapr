@@ -29,7 +29,7 @@ checkFileMtimeSource <- function(dependency.dir=NULL,dependency.object=NULL){
       current.mtime <- file.info(file=file.path(x$source.file.path[1],x$source.file[1]))$mtime
     })
     
-    mtime.fail <- current.mtime  != x$source.mod.time   
+    mtime.fail <- as.character(current.mtime)  != as.character(x$source.mod.time   )
     
     return(data.frame( mtime.fail))
   })
@@ -47,7 +47,11 @@ checkFileMtimeSource <- function(dependency.dir=NULL,dependency.object=NULL){
      	 current.mtime <- file.info(file=file.path(x$target.path[1],x$target.file[1]))$mtime
    		 })
     
-		x$mtime.fail <- current.mtime  != x$target.mod.time
+    # Only gets 1 second level time resoluion, some OS may achieve more resolution	
+    	
+		x$mtime.fail <- as.character(current.mtime)  != as.character(x$target.mod.time)
+		
+		
 		return(x)
     
      })

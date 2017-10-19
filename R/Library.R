@@ -101,6 +101,7 @@ deps <- c("gdata",
   "methods",
   "parallel",
   "versions",
+  "packrat",
   "doParallel")
 
 return(deps)

@@ -24,6 +24,9 @@ projectReportSend <- function (target.directory=get("source_info")$project.path,
     files <- gsub("^/","",gsub(directory.to.clip,"",files,fixed=TRUE))
     
     link.command <- rep("", length(files))
+    
+    if(length(files)==0){stop("projectReportSend: Error no files to link")}
+    
     for (file.iter in 1:length(files)) {
       link.command[file.iter] <- paste0("<a href=\"file:", 
                                         files[file.iter], "\">", links[file.iter], "</a>")
@@ -41,22 +44,7 @@ createMarkdown(target.file=targetfile,target.dir=target.directory2,style="html_d
 mdtoremove <- file.path(target.directory2,targetfile)
 project.info <- getProjectInfoSI(si)
 project.graph <- project.info$graph
-# START Make Sankey Plot
-#E(project.graph)$weight = 0.1
-#edgelist <- get.data.frame(project.graph)
-#colnames(edgelist) <- c("source", "target", "value")
-#edgelist$source <- as.character(edgelist$source)
-#edgelist$target <- as.character(edgelist$target)
-#support.names <- subset(project.info$all.files, description == 
-#                          "Support file")$fullname.abbr
-#edgelist <- subset(edgelist, !(source %in% support.names) & 
-#                     !grepl("Session_info", edgelist$source, fixed = TRUE) & 
-#                     !grepl("Session_info", edgelist$target, fixed = TRUE))
-#sankeyPlot <- rCharts$new()
-#sankeyPlot$setLib("http://timelyportfolio.github.io/rCharts_d3_sankey/libraries/widgets/d3_sankey")
-#sankeyPlot$set(data = edgelist, nodeWidth = 15, nodePadding = 10, 
-#               layout = 32, width = graph.width, height = graph.height)
-# END: Make Sankey Plot
+
 reduced.project.graph.file <- file.path(target.directory2, 
                                        "reduced_networks.png")
 #sankeyPlot$save(reduced.project.graph.file, cdn = TRUE)
@@ -125,6 +113,7 @@ if(!send.data){
   
 tempwd <- getwd()
 setwd(si$project.path)
+
 # Copy filesover
   
   targetdir <- file.path(target.directory,paste0("Results_",si$project.id))
@@ -136,15 +125,16 @@ setwd(si$project.path)
   
   nfiles <- length(all.files)
   
-  for(file.iter in 1:nfiles){
+  for(file.iter in seq_along(all.files)){
     fn <- all.files[file.iter]
     
     dir <- dirname(all.files[file.iter])
     
     file.copy(fn,file.path(targetdir,dir),overwrite=TRUE)
     
-    
   }#loop over files
+  
+ 
   
 file.remove(mdtoremove)
 setwd(tempwd)

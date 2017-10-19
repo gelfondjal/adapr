@@ -74,6 +74,8 @@ ReadTrack <- function(file.name="data.csv",description="Data file"){
   }
   
   # Vectorize
+  if(length(file.name)==0){stop("Error: ReadTrack (adapr) error: file length 0")}
+  
   if(length(file.name)>1){
     if(length(description)==1){description <- rep(description,length(file.name))}
     if(length(description)!=length(file.name)){stop("ReadTrack (adapr) error: file length description mismatch")}
