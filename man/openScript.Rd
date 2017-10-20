@@ -2,7 +2,7 @@
 % Please edit documentation in R/openScript.R
 \name{openScript}
 \alias{openScript}
-\title{Opens script form a project with default R program. Can open markdown files as well.}
+\title{Opens script from a project with default R program. Can open markdown files as well.}
 \usage{
 openScript(rscript = "", project.id = getProject())
 }
@@ -12,7 +12,7 @@ openScript(rscript = "", project.id = getProject())
 \item{project.id}{string for project id to search within.}
 }
 \description{
-Opens script form a project with default R program. Can open markdown files as well.
+Opens script from a project with default R program. Can open markdown files as well.
 }
 \details{
 If rscript argument is blank, then lists available scripts for convenience.

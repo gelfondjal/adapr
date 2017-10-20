@@ -1,4 +1,4 @@
-#' Opens script form a project with default R program. Can open markdown files as well.
+#' Opens script from a project with default R program. Can open markdown files as well.
 #' @param rscript R script or Mardown filename to open
 #' @param project.id string for project id to search within.
 #' @details If rscript argument is blank, then lists available scripts for convenience. 
