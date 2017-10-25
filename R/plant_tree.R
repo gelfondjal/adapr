@@ -125,6 +125,8 @@ relocateProject <- function(project.id0,project.path=NA,swap.directory=NA,projec
   
   out <- redirectTree(project.id0,project.path,swap.directory,project.libraryTF,library.path)
   
+  setProject(project.id0)
+  
   return(out)
   
 }

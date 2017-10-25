@@ -5,18 +5,20 @@
 \title{Generates the shell of a code that is project specific}
 \usage{
 makeScript(r = "", description = "", project.id = getProject(),
-  seed = 2011, run = TRUE)
+  seed = 2011, run = TRUE, openTF = TRUE)
 }
 \arguments{
 \item{r}{is source file name or Filename to create}
 
-\item{description}{What program does}
+\item{description}{Character string describing what program does}
 
-\item{project.id}{Name of project}
+\item{project.id}{Character string for name of project}
 
 \item{seed}{Random start seed}
 
-\item{run}{Execute r script?}
+\item{run}{Logical for execution of r script}
+
+\item{openTF}{Logcial for opening R script}
 }
 \value{
 Logical indicating failure or not
@@ -25,7 +27,7 @@ Logical indicating failure or not
 Generates the shell of a code that is project specific
 }
 \details{
-Will not overwrite existing program. Executes program stub. Mostly wrapper for sproutProgram.
+Will not overwrite existing program. Executes program and opens stub program. Mostly wrapper for sproutProgram.
 }
 \examples{
 \dontrun{

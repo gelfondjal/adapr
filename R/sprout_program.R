@@ -24,7 +24,7 @@ sproutProgram <- function(project.id=NA,source.file.name=NA,description="",seed=
   
   initialize.lines <- paste0("source_info <- create_source_file_dir(","source.description=",paste0("\"",description,"\")"))
   
-  body.lines <- c(rep("\n",1),"# Program body here",rep("\n",2),"# End Program Body",rep("\n",1))
+  body.lines <- c(rep("\n",1),"#Library statements here",rep("\n",2),"# Program body here",rep("\n",2),"# End Program Body",rep("\n",1))
   
   final.line <- "dependency.out <- finalize_dependency()"
   
@@ -56,18 +56,19 @@ sproutProgram <- function(project.id=NA,source.file.name=NA,description="",seed=
 }
 #' Generates the shell of a code that is project specific
 #' @param r is source file name or Filename to create
-#' @param description What program does
-#' @param project.id Name of project
+#' @param description Character string describing what program does
+#' @param project.id Character string for name of project
 #' @param seed Random start seed
-#' @param run Execute r script?
+#' @param run Logical for execution of r script
+#' @param openTF Logcial for opening R script
 #' @return Logical indicating failure or not
-#' @details Will not overwrite existing program. Executes program stub. Mostly wrapper for sproutProgram.
+#' @details Will not overwrite existing program. Executes program and opens stub program. Mostly wrapper for sproutProgram.
 #' @export
 #' @examples 
 #'\dontrun{
 #'  makeScript("read_data.R",description="reads data","adaprHome")
 #'} 
-makeScript <- function(r="",description="",project.id=getProject(),seed=2011,run=TRUE){
+makeScript <- function(r="",description="",project.id=getProject(),seed=2011,run=TRUE,openTF=TRUE){
   
   
   r <- gsub(" ","_",r)
@@ -82,6 +83,16 @@ makeScript <- function(r="",description="",project.id=getProject(),seed=2011,run
   
   out <- sproutProgram(project.id,source.file.name=r,description=description,seed)
   
-  if(run){runScript(r,project.id)}
+  if(run){
+    runScript(r,project.id)
+    
+  }
+  
+  if(openTF){
+ 
+    openScript(r,project.id)
+    
+  }
+  
   return(out)
 }

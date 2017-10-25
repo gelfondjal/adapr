@@ -20,7 +20,7 @@ scriptSubgraph <- function(project.id=getProject(),plotTF=FALSE){
   
   vertexnames <- subset(projinfo$all.files,file %in%sources)$fullname.abbr
   
-  if(length(vertexnames)==1){stop("scriptSubgraph: Only 1 R script")}
+ # if(length(vertexnames)==1){stop("scriptSubgraph: Only 1 R script")}
   
   # Get all script output files
   
@@ -65,6 +65,8 @@ scriptSubgraph <- function(project.id=getProject(),plotTF=FALSE){
     
     dfo <- data.frame(v=vertexnames[1],x=0,y=0)	
     dfo <- merge(dfo,subset(projinfo$all.files,select=c("fullname.abbr","fullname","description")),by.x="v",by.y="fullname.abbr")
+    dfo <- matrix(1,1,2)
+    
   }else{
     dfo <- tp(igraph::layout.sugiyama(isg)$layout)
   
@@ -88,6 +90,7 @@ scriptSubgraph <- function(project.id=getProject(),plotTF=FALSE){
 #'} 
 #' 
 getDepSubgraph <- function(rscript,project.id=getProject(),plotTF=FALSE){
+  
   subGraph <- scriptSubgraph(project.id,plotTF=FALSE)
   
   endVertex <- igraph::V(subGraph$subgraph)$name[basename(igraph::V(subGraph$subgraph)$name)==rscript]
@@ -102,6 +105,8 @@ getDepSubgraph <- function(rscript,project.id=getProject(),plotTF=FALSE){
   
   igraph::E(subGraph$subgraph)$arrow.size <- 0.25
   
+  if(length(igraph::E(subGraph$subgraph)$arrow.size)){
+  
   try({
   
   fromTo <- igraph::ends(subGraph$subgraph,1:length(igraph::E(subGraph$subgraph)))
@@ -111,6 +116,7 @@ getDepSubgraph <- function(rscript,project.id=getProject(),plotTF=FALSE){
   igraph::E(subGraph$subgraph)$color[hotEdges] <- "red"
   
   })
+  }# if nonzero edges
   
   if(plotTF){
     graphics::plot(subGraph$subgraph,vertex.label=basename(igraph::V(subGraph$subgraph)$name),
