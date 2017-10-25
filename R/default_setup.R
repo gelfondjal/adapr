@@ -194,6 +194,7 @@ defaultAdaprSetup <- function(){
 }# END default set.up
 #' Create adaprTest example project
 #' @details To be run after default adapr set up.
+#' @param localLibraryTF Logical for local library or not
 #' @param overwrite Logical indicating whether to overwrite existing project
 #' @export
 #' @examples 
@@ -203,7 +204,7 @@ defaultAdaprSetup <- function(){
 #'
 #'} 
 #'
-loadAdaprTest <- function(overwrite=TRUE){
+loadAdaprTest <- function(localLibraryTF=FALSE,overwrite=TRUE){
   
   # Loads an example project
   
@@ -231,7 +232,7 @@ loadAdaprTest <- function(overwrite=TRUE){
     
     utils::unzip(zipfile = projectLocation, exdir = newDir, 
                  overwrite = TRUE)
-    relocateProject("adaprTest")
+    relocateProject("adaprTest",project.libraryTF = localLibraryTF)
     
     setProject("adaprTest")
     

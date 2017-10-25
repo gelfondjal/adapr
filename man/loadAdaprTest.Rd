@@ -4,9 +4,11 @@
 \alias{loadAdaprTest}
 \title{Create adaprTest example project}
 \usage{
-loadAdaprTest(overwrite = TRUE)
+loadAdaprTest(localLibraryTF = FALSE, overwrite = TRUE)
 }
 \arguments{
+\item{localLibraryTF}{Logical for local library or not}
+
 \item{overwrite}{Logical indicating whether to overwrite existing project}
 }
 \description{
