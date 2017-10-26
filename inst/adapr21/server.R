@@ -22,21 +22,6 @@ shinyServer(function(input, output,session) {
     helpText(paste("*",input$project.id,"*"))
   })
   
-  output$createproject <- renderText({
-    textout <- ifelse(nrow(get_orchard())==0,"Configure Project Directories.","Waiting to create project.")
-    if(input$submitProject!=0){
-      isolate({
-        no.spaces<-make.names(input$project.id.make)
-        no.spaces2<-gsub("\\.","_",no.spaces)        
-        textout <- ifelse( plant.tree(no.spaces2, fixWindowsDashes(input$project.directory), fixWindowsDashes(input$swap.directory)),
-                           paste("Made project",no.spaces2),"Failed")
-      })
-    }
-    
-    all.orchards <<- adapr::get_orchard() #read.csv(file.path(path.expand.2("~"), "ProjectPaths", "projectid_2_directory.csv"), as.is = TRUE)
-    
-    textout  
-  })
   
   output$selectUI<-renderUI({
     input$submitProject
@@ -66,70 +51,6 @@ shinyServer(function(input, output,session) {
   
   
   
-  ##########################################################################################
-  ### PROGRAMS AND LIBRARIES TAB
-
-  
-  output$projectselected2<-renderUI({
-    helpText(paste("*",input$project.id,"*"))
-  })
-  
-  output$myChart <- renderTable({
-    temp <- subset(all.orchards,project.id==input$project.id,select="project.path")
-    names(temp) <- "Project Filepath"
-    rownames(temp) <- "Location:"
-    temp
-  })
-  
-  output$text1 <- renderText({
-    if(input$submit!=0){
-      isolate({
-        no.spaces<-make.names(input$filename)
-        no.spaces2<-gsub("\\.","_",no.spaces)
-        program.name<-gsub("(.*)_(.*)","\\1.\\2",no.spaces2)
-        if(sprout.program(input$project.id,source.file.name=program.name,input$description)){
-          temp <- subset(all.orchards,project.id==input$project.id,select="project.path")
-          clean_source(file.path(temp,project.directory.tree$analysis,program.name),quiet=TRUE) 
-          #run program in a new r session after you make it
-          paste(program.name,"Created")
-        }
-        else {"Failed"}
-      })
-    }
-  })
-  
-  output$libraryTable <- renderTable({
-    if(input$submitLibrary!=0){ 
-      source_info <- pull_source_info(input$project.id)    
-      library.file <- file.path(source_info$project.path,project.directory.tree$support,"common_libs.csv")
-      library.table <- read.csv(library.file,as.is=FALSE)
-      library.table <- library.table[order(library.table$Package),]
-      if(is.null(library.table$specific)){library.table$specific <- FALSE}
-      library.table$specific <- as.logical(library.table$specific )
-      #    print(library.file)
-      #   load.install.library.file(library.data.file)
-      library.table }
-  })
-  
-  
-  output$addLibraryTable <- renderTable({
-    source_info <- pull_source_info(input$project.id)    
-    library.file <- file.path(source_info$project.path,project.directory.tree$support,"common_libs.csv")
-    if(input$submitLibrary!=0){                                             
-      isolate({  
-        if(!(input$library.name %in% c("","mylibrary"))){
-          subgroup <- data.frame(Package=input$library.name,repos=input$library.install,
-                                 specific=as.logical(input$library.specific))  
-          load.install.library.file(library.file,subgroup)
-          print(read.csv(library.file))
-          subgroup
-        }# if real library 
-      })
-    }   
-  })
-  
-
-  ##########################################################################################
   ### REPORT TAB
 
   output$projectselected3<-renderUI({
@@ -138,7 +59,7 @@ shinyServer(function(input, output,session) {
   
   output$selectAppUI<-renderUI({
     input$submitProject
-    source_info <- pull_source_info(input$project.id)    
+    source_info <- pullSourceInfo(input$project.id)    
     app.list <- list.files(file.path(source_info$project.path,project.directory.tree$support,"Apps"))
     selectInput(inputId = "powerApp", label="Select App", choices=app.list, 
                 selected = app.list[1])
@@ -147,8 +68,8 @@ shinyServer(function(input, output,session) {
   output$projectus <- renderText({ 
     if(input$submitReport!=0){                                             
       isolate({  
-        source_info <- pull_source_info(input$project.id)
-        project_report_markdown(source_info) 
+        source_info <- pullSourceInfo(input$project.id)
+        projectReportMarkdown(source_info) 
         browseURL(paste0("file://",(file.path(source_info$results.dir,"project_summary.html"))))
         paste("Creating report",input$project.id)   
       })
@@ -163,9 +84,9 @@ shinyServer(function(input, output,session) {
   output$ProgramDAG_report <- renderPlot({ 
     if(input$make_report_graph!=0){
       
-      report_graph <<- create_program_graph(input$project.id)
+      report_graph <<- createProgramGraph(input$project.id)
      
-      report_tree <<- Harvest.trees(pull_source_info(input$project.id)$dependency.dir)
+      report_tree <<- readDependency(pullSourceInfo(input$project.id)$dependency.dir)
       report_graph$ggplot
      
       #p <- ggplotly(temp$ggplot)
@@ -342,7 +263,7 @@ shinyServer(function(input, output,session) {
     text.out <- "Waiting"
     if(input$submitRunApp!=0){                                             
       isolate({  
-        source_info <- pull_source_info(input$project.id)
+        source_info <- pullSourceInfo(input$project.id)
         
         app.dir <- file.path(source_info$project.path,project.directory.tree$support,"Apps",input$powerApp)
       
@@ -388,7 +309,7 @@ shinyServer(function(input, output,session) {
   })
   
 #  output$syncPlot <- renderImage({
-#    source_info <- pull_source_info(input$project.id)
+#    source_info <- pullSourceInfo(input$project.id)
 #    filename <- file.path(source_info$project.path,project.directory.tree$results,
 #                          "tree_controller.R","sync_updater.png")
 #    filename <- gsub("\\\\","/",filename)
@@ -400,47 +321,29 @@ shinyServer(function(input, output,session) {
   output$syncTest <- renderText({ 
     if(input$submitSyncTest!=0){                                             
       isolate({  
-        source_info <- pull_source_info(input$project.id)
-        test.sync0 <- sync.test.si(source_info)
+        source_info <- pullSourceInfo(input$project.id)
+        test.sync0 <- syncTestSI(source_info)
         print(paste(input$project.id,ifelse(identical(test.sync0$synchronize,TRUE),"Syncrhonized","Not Synchronized")))
       })
     } 
   }) 
   
-#  output$syncer <- renderPlot({ 
-#    if(input$submitSyncRun!=0){                                             
-#      #isolate({  
-#      source_info <- pull_source_info(input$project.id)
-#      filename <- file.path(source_info$project.path,project.directory.tree$results,
-#                            "tree_controller.R","sync_updater.png")
-#      htmlfile <- file.path(source_info$project.path,project.directory.tree$results,
-#                            "tree_controller.R","syncrhonize.html")
-#      html.out <- paste("<img src=sync_updater.png>")
-#      write(html.out,htmlfile)
-#      browseURL(paste0("file://",htmlfile))
-#      test.sync <- source.sync.si(source_info,run=TRUE,TRUE)
-#      #  test.sync <- sync.test.si(source_info)
-#      #   print(test.sync)
-#      # print("Hello")
-#      # })
-#    }
-#  })
   output$progressbar<-renderText({
     if(input$submitSyncRun!=0){
       isolate({
         text<-paste("Waiting to synchronize",input$project.id) 
-        source_info <- pull_source_info(input$project.id)
-        test.sync0 <- sync.test.si(source_info)
+        source_info <- pullSourceInfo(input$project.id)
+        test.sync0 <- syncTestSI(source_info)
         
         if(test.sync0$synchronize){
           text <- paste(input$project.id,"Already synchonized")
         }else{
         
-        syncer <- source_sync_si_load(source_info)
+        syncer <- sourceSyncSILoad(source_info)
         
         run.times <- syncer$run.times
         
-        ID.sync.out <- syncer$ID.sync.out
+        ID.sync.out <- syncer$idSync.out
         
         sync.out <- syncer$sync.out
      
@@ -478,6 +381,7 @@ shinyServer(function(input, output,session) {
          
       
           try({
+            
           clean_source(file.path(ID.sync.out$path[source.iter],ID.sync.out$file[source.iter]))
             
           #run.program(input$project.id,ID.sync.out$file[source.iter],TRUE)  
@@ -497,7 +401,7 @@ shinyServer(function(input, output,session) {
           
           
           
-        }
+        } #loop over running scripts
         
         })#END progress bar
         
@@ -508,7 +412,7 @@ shinyServer(function(input, output,session) {
         #  test.sync <- source.sync.si(source_info,run=TRUE,TRUE)
       #    setProgress(value=3)
       
-      text<-paste(startmessage,"Sync successful for",input$project.id)
+      text<-paste(startmessage,"Sync successful for",input$project.id,ifelse(adapr_options$git=="TRUE","& git committed",""))
       if(last.prog==""){    
         text<-paste(last.prog,"failed sync for",input$project.id,"Check",failure.script)
           }
@@ -526,20 +430,15 @@ shinyServer(function(input, output,session) {
       	
       	if(adapr_options$git=="TRUE"){
       	
-        source_info <- pull_source_info(input$project.id)
+        source_info <- pullSourceInfo(input$project.id)
         #test.sync <- source.sync.si(source_info,run=TRUE)
         
-        test.sync0 <- sync.test.si(source_info)$synchronized
+        test.sync0 <- syncTestSI(source_info)$synchronized
         synccheck <- ifelse(test.sync0,"SYNCHRONIZED","NOT SYNCd")
         
-        setwd(source_info$project.path)
-        analysis.dir <- file.path(source_info$project.path,project.directory.tree$analysis)
-        all.programs <- matrix(list.files(analysis.dir,recursive=TRUE,full.names=TRUE))
-        add <-  apply(all.programs,1,function(x){git.add(source_info$project.path,filename=x)})
-        commited <- git.commit(analysis.dir,paste(synccheck,input$commit.message))
-        #  test.sync <- sync.test.si(source_info)
-        #   print(test.sync)
-        print(paste("Git","\n",add,"\n",commited))
+        commited <- commitProject(paste(synccheck,input$commit.message),input$project.id)
+        #  test.sync <- syncTestSI(source_info)
+
         
         }else{
         	
@@ -555,7 +454,7 @@ shinyServer(function(input, output,session) {
 
   output$ProgramDAG <- renderPlot({
     if(input$makeGraph!=0){
-    temp <<- create_program_graph(input$project.id)
+    temp <<- createProgramGraph(input$project.id)
     temp$ggplot
     #p <- ggplotly(temp$ggplot)
     #print(p)
@@ -565,7 +464,7 @@ shinyServer(function(input, output,session) {
   
 
   output$click_info <- renderPrint({
-    #temp <- create_program_graph(input$project.id)
+    #temp <- createProgramGraph(input$project.id)
     # Because it's a ggplot2, we don't need to supply xvar or yvar; if this
     # were a base graphics plot, we'd need those.
     nearPoints(temp$vertex, input$ProgramDAG_click, addDist = TRUE, threshold = 100, maxpoints = 1)
@@ -601,7 +500,7 @@ shinyServer(function(input, output,session) {
   
   output$Programs <- renderTable({
     # Retrieve publication table
-    source_info <- pull_source_info(input$project.id)
+    source_info <- pullSourceInfo(input$project.id)
     publication.file <- file.path(source_info$project.path,project.directory.tree$support,"files_to_publish.csv")
     publication.table <- get_publication_table(input$project.id)    
     outtable <- publication.table
@@ -662,9 +561,9 @@ shinyServer(function(input, output,session) {
     
     if(input$publish.button!=0){
     isolate({
-      source_info <- pull_source_info(input$project.id)
+      source_info <- pullSourceInfo(input$project.id)
       
-      publication.table <- get_publication_table(input$project.id)  
+      publication.table <- getPubResults(input$project.id)  
       
       
       if(nrow(publication.table)>0){
@@ -689,7 +588,7 @@ shinyServer(function(input, output,session) {
   output$Sent <- renderText({ 
     if(input$submitSend!=0){                                             
       isolate({  
-        source_info <- pull_source_info(input$project.id)
+        source_info <- pullSourceInfo(input$project.id)
         target.directory <- get.project.publish.path(input$project.id)
 		    project_report_send_rmd(target.directory=target.directory,source_info,send.data=ifelse(input$send.data=="TRUE",TRUE,FALSE),
 									 graph.width = 960, graph.height = 500) 
@@ -703,122 +602,7 @@ shinyServer(function(input, output,session) {
   ##########################################################################################
   ###CONFIGURE TAB
   
-  
-  output$Git<-renderUI({ 
-    if(input$submitGitCheck!=0){
-    if(adapr_options$git=="TRUE"){
-    
-    textout <- "Waiting to check Git"
 
-      temp <- git.configure.test()
-      if(temp==0){
-        textout<-"Git is configured."
-      }
-      else{
-        textout<-a("Git is not configured. Click here to get Git",href="http://git-scm.com/downloads")
-      }
-    }
-    textout <-  ifelse(adapr_options$git=="TRUE","git active","ADAPR OPTION git FALSE\n git not active")
-    
-    }else{
-      
-      textout <- ifelse(adapr_options$git=="TRUE","git active","ADAPR OPTION git FALSE\n git not active")
-      textout
-    }
-    textout
-  })
-
-  output$Gitlogin<-renderText({
-    textout <- "Check git user/email"
-    
-    if(input$submitGitLogin!=0){
-      
-    if(adapr_options$git=="TRUE"){
-
-    
-    textout<-"Waiting to log into Git"
-
-      login<-git.configure(input$git.username,input$git.email)
-      if(login[[1]]==0&login[[2]]==0){
-        textout<-"Login successful"
-      }
-      else{textout<-"Login failed."} 
-    }
-    textout
-    
-    }else{
-      
-      textout <- ifelse(adapr_options$git=="TRUE","git active","ADAPR OPTION git FALSE\n git not active")
-      textout
-    }
-    textout
-  })
-  
-
-  output$GitOnOff <- renderText({
-    
-    textonoff <- "Change git On/Off status"
-    
-    if(input$submitGitOFF%%2!=0){
-      
-      if(adapr_options$git=="TRUE"){
-        
-        set_adapr_options("git","FALSE")
-        
-        adapr_options <<- get_adapr_options()
-        
-        textonoff <- "Git turned off"
-        
-      }else{
-        
-        textonoff <- "Git turned on"
-        set_adapr_options("git","TRUE")        
-        adapr_options <<- get_adapr_options()
-        
-        
-      }
-     
-      
-    }
-    
-    textonoff
-    
-  })
-  
-  output$First.project<-renderText({
-    textout<-ifelse(nrow(get_orchard())==0,"Configure Project Directories.","Project Directory Configured.")
-    if((input$submitFirst.project%%2)!=0){
-      
-      set_adapr_options("project.path",fixWindowsDashes(input$project1.directory))
-                           
-      set_adapr_options("publish.path",fixWindowsDashes(input$publish.directory))
-      
-      adapr_options <<- get_adapr_options()
-      
-      login <- (dir.exists(adapr_options$project.path))&(dir.exists(adapr_options$publish.path))
-      if(login){
-        textout<-"Project Directories Identified"
-      }
-      else{
-        textout<-paste("Project Not Started!",input$submitFirst.project)
-      } 
-    }
-    textout
-  })
-  
-  
-  
-  output$IT2<-renderText({
-    textout<-"Waiting to update to latest version of adapr"
-    if (input$installit2!=0){
-      install_github("gelfondjal/adapr")
-      library(adapr)
-      textout<-"adapr has been installed."
-    }
-    textout
-  })
-  
-  
   ##########################################################################################
  
 })

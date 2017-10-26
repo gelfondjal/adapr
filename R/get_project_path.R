@@ -49,7 +49,10 @@ getProjectLibrary <- function(project.id0=getProject()){
   
   if((is.na(pather))|(pather=="")){pather <- file.path(getProjectPath(),project.directory.tree$support,project.directory.tree$library.bank)}
   
-  pather <- file.path(pather,.Platform$OS.type,gsub("\\.","_",make.names(utils::sessionInfo()$platform)))
+  
+  rversion <- gsub("\\.","_",paste0(R.Version()$major,"_",R.Version()$minor))
+  
+  pather <- file.path(pather,rversion,.Platform$OS.type,gsub("\\.","_",make.names(utils::sessionInfo()$platform)))
   
   if(!dir.exists(pather)){
     dir.create(pather,recursive = TRUE)
