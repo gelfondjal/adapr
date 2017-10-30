@@ -17,6 +17,7 @@ guessWriteFcn <- function(filename){
   suffix <- tolower(gsub(".*\\.","",filename))
   
   if(gsub(".*\\.","",filename)=="RData"){return(saveRDS)}
+  if(tolower(gsub(".*\\.","",filename)=="rda")){return(saveRDS)}
   
   if(suffix=="png"){return(grDevices::png)}
   if(suffix=="pdf"){return(grDevices::pdf)}
