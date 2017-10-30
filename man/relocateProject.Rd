@@ -2,7 +2,7 @@
 % Please edit documentation in R/plant_tree.R
 \name{relocateProject}
 \alias{relocateProject}
-\title{changes project directory/publish directory or identifies imported project}
+\title{changes project directory/publish directory/library locataion or identifies imported project}
 \usage{
 relocateProject(project.id0, project.path = NA, swap.directory = NA,
   project.libraryTF = FALSE, library.path = "")
@@ -22,7 +22,7 @@ relocateProject(project.id0, project.path = NA, swap.directory = NA,
 logical for success or not
 }
 \description{
-changes project directory/publish directory or identifies imported project
+changes project directory/publish directory/library locataion or identifies imported project
 }
 \details{
 Is wrapper for redirectTree. Does not move the project only indicates new location.

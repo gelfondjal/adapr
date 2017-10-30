@@ -16,7 +16,7 @@ plantOrchard <- function(){
     
     dir.create(file.path(path.expand.2("~"),"ProjectPaths"))
     
-    empty.orchard <- data.frame(project.id="",project.path="",swap.directory="",project.library="",library.path="")[-1,]	
+    empty.orchard <- data.frame(project.id="",project.path="",swap.directory="",project.libraryTF="FALSE",library.path="")[-1,]	
     
     utils::write.csv(empty.orchard,orchard.site,row.names=FALSE)
     

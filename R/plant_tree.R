@@ -107,7 +107,7 @@ plantTree <- function(project.id,project.path=NA,swap.directory=NA,first.program
   
   
 }
-#' changes project directory/publish directory or identifies imported project
+#' changes project directory/publish directory/library locataion or identifies imported project
 #' @param project.id0 Project name
 #' @param project.path Project home directory
 #' @param swap.directory Project publish directory
