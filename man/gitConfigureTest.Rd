@@ -4,10 +4,13 @@
 \alias{gitConfigureTest}
 \title{Checks git configuration. Requires git installation}
 \usage{
-gitConfigureTest()
+gitConfigureTest(globalTF = TRUE)
+}
+\arguments{
+\item{globalTF}{logical specifying global git configuration}
 }
 \value{
-integer 0 if configured otherwise 99 if not
+output from git2r::config
 }
 \description{
 Checks git configuration. Requires git installation
@@ -21,5 +24,5 @@ gitConfigureTest()
 
 }
 \author{
-Uses git_path adapted form devtools author Hadley Wickham
+Uses git2r::config in git2r package.
 }

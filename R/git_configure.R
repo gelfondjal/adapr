@@ -1,11 +1,11 @@
-#' Configure user.name and email for git. Requires git installation.
+#' Configure user.name and email for git. 
 #' @param user.name Chris Someone
 #' @param user.email someone[at]somewhere.com
 #' @return output from git
 #' @export
 #' @examples 
 #'\dontrun{
-#' # Requires Git installation
+#' # Uses git2r package
 #'  gitConfigure("jonG","gelfond@somewhere.com")
 #'} 
 #' 

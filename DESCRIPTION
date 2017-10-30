@@ -1,7 +1,7 @@
 Package: adapr
 Type: Package
 Title: Implementation of an Accountable Data Analysis Process 
-Version: 1.0.2
+Version: 2.0.0
 Date: 2017-01-30
 Author: Jon Gelfond, Martin Goros
 Maintainer: Jonathan Gelfond <gelfondjal@uthscsa.edu>
@@ -24,9 +24,9 @@ Imports:
     methods,
     parallel,
     versions,
-    packrat,
     doParallel
 Suggests:
-  pkgKitten
+  pkgKitten,    
+  packrat
 RoxygenNote: 6.0.1
 VignetteBuilder: knitr

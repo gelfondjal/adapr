@@ -155,8 +155,6 @@ redirectTree <- function(project.id0,project.path=NA,swap.directory=NA,project.l
     swap.directory <- opts$publish.path
   }
   
-  
-  
   project.path <- file.path(project.path,project.id0)
   swap.directory <- file.path(swap.directory,project.id0)
   

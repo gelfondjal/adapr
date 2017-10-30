@@ -37,7 +37,8 @@ getAdaprOptions <- function(setoptions=FALSE){
   
   return(adapr_options)
 }
-getAdaprOptions <- getAdaprOptions
+
+
 #' Returns Modifies the primary adapr option file
 #' @param optionname is name of option to modify
 #' @param optionvalue is new value to give optionname
@@ -77,15 +78,27 @@ setAdaprOptions <- function(optionname="",optionvalue=""){
   
   }#check dir exists if r version gt or = 3.2
   
+  if(optionname=="git"){
+    
+    
+    if(!(optionvalue %in% c("TRUE","FALSE"))){
+      
+      stop("Option git needs to be \"TRUE\" or \"FALSE\"")
+    }
+    
+    if((getAdaprOptions()$git=="FALSE")&(optionvalue=="TRUE")){
+      print("Use gitCongifure to set git user information")
+      print(gitConfigureTest())
+    }  
+  } # check git options are TRUE or FALSE
   
+
   options[[optionname]] <- optionvalue
   
   dfout <- NULL
   
   for(i in 1:length(options)){
-    
     dfout <- rbind(dfout,data.frame(option=names(options[i]),value=options[[i]]))
-    
   }
   
   option.file <- "adapr_options.csv"
