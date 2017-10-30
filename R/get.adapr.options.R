@@ -86,10 +86,28 @@ setAdaprOptions <- function(optionname="",optionvalue=""){
       stop("Option git needs to be \"TRUE\" or \"FALSE\"")
     }
     
-    if((getAdaprOptions()$git=="FALSE")&(optionvalue=="TRUE")){
+    # Check git configuration when turning on git 
+    
+    testActive <- length(getAdaprOptions()$git)==0
+    
+    if(!testActive){testActive <- getAdaprOptions()$git=="FALSE"}
+ 
+    if(testActive&(optionvalue=="TRUE")){
+      
       print("Use gitCongifure to set git user information")
       print(gitConfigureTest())
-    }  
+      
+      email <- ""
+      
+      try({
+        email <-  git2r::config()[["global"]]$user.email
+      })
+      
+      
+      if (!grepl("@",email)) {print("Git is not configured. Run: gitConfigure(user.name, user.email)")}
+      
+      
+    } #END: Check git configuration when turning on git  
   } # check git options are TRUE or FALSE
   
 
