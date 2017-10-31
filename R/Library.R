@@ -36,8 +36,7 @@ Library <- function(package,repository="cran",github="",project.id=getProject())
     
     if(!loadTest){
       
-      utils::install.packages(adaprDependencies(),lib=subDir,dependencies = TRUE)
-      utils::install.packages("adapr",lib=subDir,dependencies = TRUE)
+      adaprInstall(library.location=subDir ,betaTF=FALSE)
       
     }
     
@@ -76,6 +75,9 @@ Library <- function(package,repository="cran",github="",project.id=getProject())
   return(loadTest)
   
 }  
+
+
+
 ### EOF ###
 #' Returns character string of adapr R package import dependencies
 #' @return character vector of package names

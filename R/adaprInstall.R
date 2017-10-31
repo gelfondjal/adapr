@@ -1,0 +1,33 @@
+#' Install adapr in a library
+#' adaprInstall.R
+#' @param library.location file path to library
+#' @param betaTF logical indicating whether to install from github or CRAN.
+#' @return logical for succesful creation or not
+#' @details Installs dependencies
+#' @export
+#' @examples 
+#'\dontrun{
+#'  adaprInstall(library.location=getProjectLibrary("adaprHome") ,betaTF=FALSE)
+#'} 
+#'
+adaprInstall <- function(library.location=getProjectLibrary("adaprHome"),betaTF=getAdaprOptions()$adaprBeta){
+
+successTF <- FALSE 
+  
+try({
+
+utils::install.packages(adaprDependencies(),lib=library.location,dependencies = TRUE)
+  
+  
+if(betaTF){
+  devtools::install_github("gelfondjal/adapr",lib=library.location)
+}else{
+  utils::install.packages("adapr",lib=library.location,dependencies = TRUE) 
+}
+  
+successTF <- TRUE
+
+})
+return(successTF)
+
+}

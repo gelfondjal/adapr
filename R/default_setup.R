@@ -139,10 +139,22 @@ defaultAdaprSetup <- function(){
   
   libdirectory <- readline("R library location? (leave blank if default)")
   
-  setAdaprOptions("library",ifelse(libdirectory=="",.libPaths()[1],libdirectory))
+  libdirectory <- ifelse(libdirectory=="",.libPaths()[1],libdirectory)
+  
+  setAdaprOptions("library",libdirectory)
+  
   
   print(paste("Step",step,"of",total,"Creating 1st project adaprHome"))
   step <- step + 1
+  
+ 
+  yesno <- readline("Do you want to use adapr beta features (adapr installed from github) y/n?")
+  
+  adaprBeta <- substring(yesno,1,1) %in% c("y","Y")
+  
+  setAdaprOptions("adaprBeta",as.character(adaprBeta))
+  
+  adaprInstall(libdirectory)
   
   
   if(!("adaprHome" %in% orchards$project.id)){
