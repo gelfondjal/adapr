@@ -80,6 +80,29 @@ defaultAdaprSetup <- function(){
   
   setAdaprOptions("PATH",oldpath)
   
+
+  
+  orchards <- get_orchard()
+  
+  libdirectory <- readline("R library location? (leave blank if default)")
+  
+  libdirectory <- ifelse(libdirectory=="",.libPaths()[1],libdirectory)
+  
+  setAdaprOptions("library",libdirectory)
+
+  
+  
+    
+ 
+ 
+  yesno <- readline("Do you want to use adapr beta features (adapr installed from github) y/n?")
+  
+  adaprBeta <- substring(yesno,1,1) %in% c("y","Y")
+  
+  setAdaprOptions("adaprBeta",as.character(adaprBeta))
+  
+  adaprInstall(libdirectory)
+  
   # Check git
   
   print(paste("Step",step,"of",total,"Check git version control"))
@@ -100,61 +123,44 @@ defaultAdaprSetup <- function(){
   }
   
   if(wantgit & grepl("Git does not",git_binary_path)){ 
-  	
-  	  warning("Git is not installed. Some version control features limited.
-  	          Please download and configure (git-scm.com). Try GIT client GUI!!")
-  	
-  	}
+    
+    warning("Git is not installed. Some version control features limited.
+            Please download and configure (git-scm.com). Try GIT client GUI!!")
+    
+  }
   # Check git config  
   
   if(wantgit){
-  
-  email <- ""
-  
-  try({
-    email <- git2r::config()[["global"]]$user.email
-  })
-  
-  if(!grepl("@",email)){
     
-    print("Please enter Git User name")
-    
-    gituser <- readline("Please ender your preferred Git user name:    ")
-    gitemail <- readline("Please ender your preferred Git email <somebody@somewhere.com>:   ")
-    
-    gitConfigure(gituser,gitemail)
+    email <- ""
     
     try({
-      email <-  git2r::config()[["global"]]$user.email
+      email <- git2r::config()[["global"]]$user.email
     })
     
+    if(!grepl("@",email)){
+      
+      print("Please enter Git User name")
+      
+      gituser <- readline("Please ender your preferred Git user name:    ")
+      gitemail <- readline("Please ender your preferred Git email <somebody@somewhere.com>:   ")
+      
+      gitConfigure(gituser,gitemail)
+      
+      try({
+        email <-  git2r::config()[["global"]]$user.email
+      })
+      
+      
+      if (!grepl("@",email)) {return("Git is not configured. Run: gitConfigure(user.name, user.email)")}
+      
+    }else{print("Git configured")}
     
-    if (!grepl("@",email)) {return("Git is not configured. Run: gitConfigure(user.name, user.email)")}
-    
-  }else{print("Git configured")}
-  
   }# configure git
-  
-  orchards <- get_orchard()
-  
-  libdirectory <- readline("R library location? (leave blank if default)")
-  
-  libdirectory <- ifelse(libdirectory=="",.libPaths()[1],libdirectory)
-  
-  setAdaprOptions("library",libdirectory)
   
   
   print(paste("Step",step,"of",total,"Creating 1st project adaprHome"))
   step <- step + 1
-  
- 
-  yesno <- readline("Do you want to use adapr beta features (adapr installed from github) y/n?")
-  
-  adaprBeta <- substring(yesno,1,1) %in% c("y","Y")
-  
-  setAdaprOptions("adaprBeta",as.character(adaprBeta))
-  
-  adaprInstall(libdirectory)
   
   
   if(!("adaprHome" %in% orchards$project.id)){
