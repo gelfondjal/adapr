@@ -12,6 +12,25 @@
 #' 
 runScript <- function(r=getSourceInfo()$file$file,project.id=getProject(),logRmd=FALSE){
   
+  if((length(r)==0)|(r=="")){
+    
+    files <- list.files(file.path(getProjectPath(getProject()),"Programs"))
+    
+    files <- grep("\\.R",files,value=TRUE)
+    
+    df <- listScripts()
+    df <- df[order(df$source.file),]
+    print(df)
+    
+    n <- as.integer(readline("Which script?"))
+    
+    if(!(n %in% 1:length(files))){n <- 1}
+    
+    r <- df$source.file[n]
+    
+  }
+  
+  
   source.file <- r
   
   scriptfile <- file.path(getProjectPath(project.id),project.directory.tree$analysis,source.file)
@@ -76,7 +95,8 @@ runScript <- function(r=getSourceInfo()$file$file,project.id=getProject(),logRmd
   
   return(out)
 }
-run.script <- runScript
+
+
 #' Remove an R script from a project. Removes program, dependency, and results.
 #' @param source.file R script within that project
 #' @param project.id project id
@@ -90,6 +110,9 @@ run.script <- runScript
 #' remove.program("adaprHome","read_data.R")
 #'} 
 #' 
+#' 
+#' 
+
 removeScript <- function(project.id=getProject(),source.file=get("source_info")$file$file,ask=TRUE){
   # get project object
   
@@ -133,4 +156,4 @@ removeScript <- function(project.id=getProject(),source.file=get("source_info")$
     
   return(c(results,inside.out,results))
 }
-remove.script <- removeScript
+
