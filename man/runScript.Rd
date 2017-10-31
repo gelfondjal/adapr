@@ -21,6 +21,9 @@ value from clean_source from devtools package
 \description{
 Run an R script within a project using devtools::clean_source
 }
+\details{
+Lists scripts if no current script is active or r script is "".
+}
 \examples{
 \dontrun{
 run.program("read_data.R","adaprHome")

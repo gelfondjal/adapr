@@ -16,13 +16,13 @@ successTF <- FALSE
   
 try({
 
-utils::install.packages(adaprDependencies(),lib=library.location,dependencies = TRUE)
+utils::install.packages(adaprDependencies(),lib=library.location,dependencies = c("Depends","Imports"))
   
   
 if(betaTF){
   devtools::install_github("gelfondjal/adapr",lib=library.location)
 }else{
-  utils::install.packages("adapr",lib=library.location,dependencies = TRUE) 
+  utils::install.packages("adapr",lib=library.location,dependencies = c("Depends","Imports")) 
 }
   
 successTF <- TRUE

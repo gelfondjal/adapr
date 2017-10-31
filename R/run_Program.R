@@ -4,6 +4,7 @@
 #' @param logRmd logical indicating whether to create R markdown log
 #' @aliases {run.program}
 #' @return value from clean_source from devtools package
+#' @details Lists scripts if no current script is active or r script is "".
 #' @export
 #'@examples 
 #'\dontrun{
