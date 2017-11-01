@@ -32,11 +32,14 @@ if(betaTF){
   utils::install.packages("adapr",lib=library.location,dependencies = c("Depends","Imports")) 
 }
   
-require(adapr)  
+ 
   
 successTF <- TRUE
 
 })
+  
+  require(adapr)   
+  
 return(successTF)
 
 }
