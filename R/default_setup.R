@@ -101,7 +101,7 @@ defaultAdaprSetup <- function(){
   
   setAdaprOptions("adaprBeta",as.character(adaprBeta))
   
-  adaprInstall(libdirectory)
+  if(!checkVersion("adapr",lib=libdirectory)){adaprInstall(libdirectory)}
   
   # Check git
   

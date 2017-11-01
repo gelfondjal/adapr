@@ -251,6 +251,11 @@ installLibrary <- function(input=getLibrary(),lib=getProjectLibrary(),versionChe
       }
       else{
         
+        dependencies <- !versionCheck
+        
+        if(dependencies){dependencies <- c("Depends","Imports")}
+        
+        
         adapr::install(input$package[p],version=input$version[p],installVersion=versionCheck,lib=lib,repos=input$repos[p],
                 show.available=FALSE,dependencies=!versionCheck,packageSource=input$source[p])
       
