@@ -14,17 +14,22 @@ adaprInstall <- function(library.location=getProjectLibrary("adaprHome"),betaTF=
 
 successTF <- FALSE 
   
-  search_item <- paste("package", "adapr", sep = ":")
-  while(search_item %in% search())
-  {
-    detach(search_item, unload = TRUE, character.only = TRUE)
-  }
+ 
 
 
 try({
 
-utils::install.packages(adaprDependencies(),lib=library.location,dependencies = c("Depends","Imports"))
+utils::install.packages(adaprDependencies(),lib=library.location,dependencies = c("Depends","Imports"),type = "source")
   
+})
+
+#search_item <- paste("package", "adapr", sep = ":")
+#while(search_item %in% search())
+#{
+#  detach(search_item, unload = TRUE, character.only = TRUE)
+#}
+
+try({  
   
 if(betaTF){
   devtools::install_github("gelfondjal/adapr",lib=library.location,dependencies = c("Depends","Imports"))
