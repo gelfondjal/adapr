@@ -54,11 +54,15 @@ getProjectLibrary <- function(project.id0=getProject()){
   
   pather <- file.path(pather,rversion,.Platform$OS.type,gsub("\\.","_",make.names(utils::sessionInfo()$platform)))
   
+  libprevious <- .libPaths()[1]
+  
   if(!dir.exists(pather)){
     dir.create(pather,recursive = TRUE)
-    utils::install.packages(adaprDependencies(),lib=pather,dependencies = TRUE)
-    utils::install.packages("adapr",lib=pather,dependencies = TRUE)
+    .libPaths(pather)
+    adaprInstall(library.location=pather)
     }
+  
+  .libPaths(libprevious)
   
   return(pather)
   
