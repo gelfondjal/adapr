@@ -86,7 +86,7 @@ plantTree <- function(project.id,project.path=NA,swap.directory=NA,first.program
     
     if(project.libraryTF){setProject(project.id)}
        
-    sproutProgram(project.id,source.file.name=NA,description="",seed=2011,capture.load.command="library(adapr)",controller=TRUE)
+    sproutProgram(project.id,source.file.name=NA,description="",seed=2011,capture.load.command="library(\"adapr\")",controller=TRUE)
     
     test <- sproutProgram(project.id,source.file.name=first.program,description="reads data",seed=2011,capture.load.command="library(\"adapr\")",controller=FALSE)
     try({
