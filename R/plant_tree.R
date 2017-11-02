@@ -84,6 +84,7 @@ plantTree <- function(project.id,project.path=NA,swap.directory=NA,first.program
     
     dir.create(file.path(project.path,project.directory.tree$data))
     
+    if(project.libraryTF){setProject(project.id)}
        
     sproutProgram(project.id,source.file.name=NA,description="",seed=2011,capture.load.command="library(adapr)",controller=TRUE)
     
