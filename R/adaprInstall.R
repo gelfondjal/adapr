@@ -27,7 +27,7 @@ utils::install.packages(adaprDependencies(),lib=library.location,dependencies = 
   
   
 if(betaTF){
-  devtools::install_github("gelfondjal/adapr",lib=library.location)
+  devtools::install_github("gelfondjal/adapr",lib=library.location,dependencies = c("Depends","Imports"))
 }else{
   utils::install.packages("adapr",lib=library.location,dependencies = c("Depends","Imports")) 
 }
