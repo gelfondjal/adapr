@@ -16,7 +16,7 @@
 initProject <- function(project.id,project.path=NA,publish.directory=NA,first.program="read_data.R",project.libraryTF=FALSE,
                         library.path=""){
   
-  project.libraryTF <-ifelse(!is.na(as.logical(project.out$project.library)),as.logical(project.out$project.library),ifelse(project.libraryTF=="packrat",
+  project.libraryTF <-ifelse(!is.na(as.logical(project.libraryTF)),as.logical(project.libraryTF),ifelse(project.libraryTF=="packrat",
                                                                                                                                 "packrat","FALSE"))
   project.libraryTF <- as.character(project.libraryTF)
   
