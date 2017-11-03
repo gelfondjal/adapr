@@ -29,7 +29,7 @@ listBranches <- function(project.id=getProject()){
     return(NULL)
   }
   
-  file_sub  <- subset(file_data$file,grepl("(RData$)|(Rdata$)",file_data$file$file),select = c("file","path","description"))
+  file_sub  <- subset(file_data$file,grepl("(rda$)|(rdata$)",tolower(file_data$file$file)),select = c("file","path","description"))
   
   if(length(file_sub$file)==0){
     print("No available branches")

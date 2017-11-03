@@ -3,7 +3,7 @@
 #' @param project.path Project home directory, if missing then default
 #' @param publish.directory Project branch exchange directory
 #' @param first.program Name of first program in project (read_data.R default)
-#' @param project.libraryTF Logical to use a local (not default) library
+#' @param project.libraryTF character string "packrat" for using packrat package or Logical to use a local (not default) library
 #' @param library.path  Path to local (not default) library
 #' @return logical for success or not
 #' @details Sets up project for first time. Defaults to main library. If using a local library, then leaving library path equal to "" puts the library within the project folder.
@@ -15,6 +15,10 @@
 #' @export
 initProject <- function(project.id,project.path=NA,publish.directory=NA,first.program="read_data.R",project.libraryTF=FALSE,
                         library.path=""){
+  
+  project.libraryTF <-ifelse(!is.na(as.logical(project.out$project.library)),as.logical(project.out$project.library),ifelse(project.libraryTF=="packrat",
+                                                                                                                                "packrat","FALSE"))
+  project.libraryTF <- as.character(project.libraryTF)
   
   out <- plantTree(project.id,project.path,publish.directory,first.program,project.libraryTF,library.path)
   

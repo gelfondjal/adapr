@@ -228,6 +228,8 @@ loadAdaprTest <- function(localLibraryTF=FALSE,overwrite=TRUE){
   
   # Loads an example project
   
+  localLibraryTF <- ifelse(localLibraryTF=="packrat","packrat",as.logical(localLibraryTF))
+  
   if(overwrite) {removeProject("adaprTest")}
   #setwd(file.path(getAdaprOptions()$project.path,"adaprTest"))
   #testFiles <- list.files(file.path(getAdaprOptions()$project.path,"adaprTest"),recursive=TRUE,all.files=FALSE)

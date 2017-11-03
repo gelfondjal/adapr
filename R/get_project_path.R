@@ -43,7 +43,9 @@ getProjectLibrary <- function(project.id0=getProject()){
   
   if(nrow(project.out)!=1){stop("Project.id cannot be used to resolve project path")}
   
-  if(as.character(project.out$project.library)=="FALSE"){return(getAdaprOptions()$library)}
+  testLibrary <- ifelse(is.na(as.logical(project.out$project.library)),TRUE,!as.logical(project.out$project.library))
+
+  if(testLibrary&(project.out$project.library!="packrat")){return(getAdaprOptions()$library)}
   
   pather <- as.character(project.out$library.path)
   

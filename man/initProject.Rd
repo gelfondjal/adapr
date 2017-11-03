@@ -17,7 +17,7 @@ initProject(project.id, project.path = NA, publish.directory = NA,
 
 \item{first.program}{Name of first program in project (read_data.R default)}
 
-\item{project.libraryTF}{Logical to use a local (not default) library}
+\item{project.libraryTF}{character string "packrat" for using packrat package or Logical to use a local (not default) library}
 
 \item{library.path}{Path to local (not default) library}
 }
