@@ -234,7 +234,7 @@ checkVersion <- function(package0,version0="",versionCheck=FALSE,lib=.libPaths()
 #' @export
 #' @examples 
 #'\dontrun{
-#' set.library("adaprHome")
+#' setProject("adaprHome")
 #' installLibrary()
 #' } 
 #'

@@ -11,107 +11,80 @@ vignette: >
 
 ##Introduction
 
-Reproducibility and accountability are increasingly demanded in statistical computing. This implies a need for new computing systems and environments that can transparently, easily, and robustly satisfy reproducibility and accountability standards. To this end, we have developed a system and R package called adapr (Accountable Data Analysis Process in R) that is built on the idea of accountable units. An accountable unit is a data file (statistic, table or graphic) that can be associated with a provenance, meaning how it was created, when it was created and who created it. A key concept is that an accountable unit is sharable and can be incorporated into a collaborative project wherein multiple investigators may use different systems to produce a composite publication. Reproducing such composite publications may be highly complex requiring repeating computations on multiple systems from multiple authors; however, determining the provenance of each unit should be much simpler, requiring only a search in a result database. adapr organizes analytic computations within a project as a directed acyclic graph (DAG) in which data, computer programs, and outputs are nodes.  adapr works by integrating a version control system (Git), cryptographic hashes, and a dependency tracking database. The adapr package enables treatment of the analysis as a single unit that evovles over time as stored within the version control system. The implementation uses an R Shiny interface (adaprApp) creating an efficient user experience concealing the complexity and reducing overhead of tracking relative to standard data analytic coding.
-
-We present the Accountable Data Analysis Process in R (ADAPR) system in R to facilitate reproducible calculations. The objective is to use a structured, transparent, and self-contained system that would allow users to quickly and easily generate reports and manage the complexity of analyses with minimal additional overhead. The byproduct this structured system of this is system is that multiple data analysts can interpret and collaborate on the same project.
+Reproducibility and accountability are increasingly demanded in statistical computing. This implies a need for new computing systems and environments that can transparently, easily, and robustly satisfy reproducibility and accountability standards. To this end, we have developed a system and R package called adapr (Accountable Data Analysis Process in R) that is built on the idea of accountable file provenance. \pkg{adapr} organizes analytic computations within a project as a directed acyclic graph (DAG) in which data, computer programs, and outputs are nodes.  adapr works by integrating a version control system (Git), cryptographic hashes, and a dependency tracking database. The adapr package enables treatment of the analysis as a single unit that evovles over time as stored within the version control system. The implementation uses an R Shiny interface (adaprApp) creating an efficient user experience concealing the complexity and reducing overhead of tracking relative to standard data analytic coding.
 
 ##Defining a Project
 
-An adapr project is a set of related analyses from a given dataset. The project is a self-contained folder with all data, resources (with the exception of R libraries, which are version tracked), and results. 
+An adapr project is a set of related R Scripts that conduct analyses related to data within a data directory or database. The project is a self-contained folder with all data, resources (with the exception of base R libraries, which are version tracked), and results. 
 
 In order to initially set up adapr, there is a helper 
-function `adapr::default.adapr.setup()` that will ask a short sequence of questions (preferred username, version control preference, etc.) and 
-will create the first adapr project adaprHome within the document directory of the computer. The setup function requires RStudio to work as
-this application locates resources such as `pandoc` automatically and sets environment variables accordingly. The setup function creates a directory at the top level of the user directories
+function `adapr::default.adapr.setup()` that will ask a short sequence of questions (working directory, preferred username, version control preference, etc.) and will create the first adapr project adaprHome within the spedicified document directory of the computer. The setup function requires RStudio to work or requires the user to locate resources such as `pandoc` automatically and sets environment variables accordingly. The setup function creates a directory at the top level of the user directories
 called `ProjectPaths` with two files `projectid_2_directory_adapr.csv` and `adapr_options.csv` that are required to locate projects and configure adapr, respectively.
 
+Projects can be created within the R console using the ```initProject``` function ```initProject("MyProject","Path to project","Path to publish directory")``` or with the adapr App (launched by `adaprApp()`). When a new project is created, the project is created as a single folder within a file system (OS X or Windows) with the following structure:
 
+*	Data Directory (Where data files are stored)
+*	Program Directory
+    +	  Set of R script files operating on the Data 
+    +	  Support Directory
+        -	Library File (list of R packages used by project)
+        -	List of R functions automatically loaded by R scripts within 2.1
+        -	Folder containing R Shiny Apps
+    +	  Markdown Directory (list of R markdown files corresponding to each R script in 2.1.)
+    +	  Dependency Directory (list of dependency files corresponding to each R script in 2.1.)
+*	Results Directory
+    +	List of Results folders named corresponding to each R script in 2.1.
 
-Projects can be created within the R console using the ```init.project``` function ```init.project("MyProject","Path to project","Path to publish directory")``` or with the adapr App (launched by `adaprApp()`). When a new project is created, the project is created as a single folder within a file system (OS X or Windows) with the following structure:
+The fundamental unit of the project is an R script that has two corresponding elements. The first is a Results folder with the same name as the R Script. This Results Directory for each R script resides within the Results directory.  The second is an R markdown file with the same name (with file extension .Rmd) within the Markdown directory (See above). A `read_data.R` program is created automatically upon creation of the project. This creates a results directory (`Results/read_data.R/`) and an R markdown file (2.3 `Markdown/read_data.Rmd`).
 
-1.	Data Directory (Where data files are stored)
-
-2.	Program Directory
-
-2.1.	Set of R script files operating on the Data 
-
-2.2.	Support Directory
-
-2.2.1.	Library File (list of R packages used by project)
-
-2.2.2.	List of R functions automatically loaded by R scripts within 2.1
-
-2.2.3.	Folder containing R Shiny Apps
-
-2.3.	Markdown Directory (list of R markdown files corresponding to each R script in 2.1.)
-
-2.4.	Dependency Directory (list of dependency files corresponding to each R script in 2.1.)
-
-3.	Results Directory
-
-3.1.	List of Results folders named corresponding to each R script in 2.1.
-
-The fundamental unit of the project is an R script that has two corresponding elements. The first is a Results folder with the same name as the R Script. This results folder (3.1) resides within the Results directory (3).  The second is an R markdown file with the same name (with file extension .Rmd) within the Markdown directory (See 2.3 above). A `read_data.R` program is created automatically upon creation of the project. This creates a results directory (`Results/read_data.R/`) and an R markdown file (2.3 `Markdown/read_data.Rmd`).
-
-In addition to the main project directory, each project is associated with a “Publish” directory that can be used to share results with collaborators. The Publish directory could be a Dropbox, file server or web server directory. See figure 1 for the Create Project tab. A list of all projects can be obtained using the ```get_orchard()``` command. The function ```remove.project(project.id)``` will remove the project from the orchard file, which dissociates the project from adapr, but
-does not remove the project from the file system. The function ```relocate.project()``` tree will edit the location for which adapr will associate with the project, 
+In addition to the main project directory, each project is associated with a “Publish” directory that can be used to share results with collaborators. The Publish directory could be a Dropbox, file server or web server directory. A list of all projects can be obtained using the ```listProjects()``` command. The function ```removeProject(project.id)``` will remove the project from the project listing file, which dissociates the project from adapr, but does not remove the project from the file system. The function ```relocateProject()``` tree will edit the location for which adapr will associate with the project, 
 and ```relocate.project()``` can be used to identify projects built by others.
 
 The following functions operate on the project level:
 
-```get_orchard()  #Returns the project listing```
+```listProjects()  #Returns the project listing```
 
-```open_orchard() # Browses the project listing file for editing```
+```openProjectList() # Browses the project listing file for editing```
 
-```init.project("myProject",project.path,project.publication.path)  #Creates myproject in the following location ```
+```initProject("myProject",project.path,project.publication.path)  #Creates myproject in the following location ```
 
-```remove.project("myProject") # Removes the project from the project listing```
+```removeProject("myProject") # Removes the project from the project listing```
 
-```relocate.project("myProject",project.path,project.publication.path)  #Identifies or Import new project location, but does not move the project ```
+```relocateProject("myProject",project.path,project.publication.path)  #Identifies or Import new project location, but does not move the project ```
 
-```set.project("myProject") #Changes options() so that myproject is the default project```
+```setProject("myProject") #Changes options() so that myproject is the default project. Most functions use this as default project ID.```
 
-```get.project()  # Retrieves the working/default project. Used by other functions avoid respecification of the project ID```
+```getProject()  # Retrieves the working/default project. Used by other functions avoid respecification of the project ID```
 
-```report.project("myProject")  # Creates a html report of all programs and I/O with descriptions and run times.```
+```reportProject("myProject")  # Creates a html report of all programs and I/O with descriptions and run times.```
 
-```graph.project("myProject") # Displays the project DAG indicating which programs are out of synch```
+```graphProject("myProject") # Displays the project DAG indicating which programs are out of synch```
 
-```synctest.project()     #Tests project synchronization```
+```synctestProject()     #Tests project synchronization```
 
-```sync.project("myProject")  #Synchronizes the project DAG```
+```syncProject("myProject")  #Synchronizes the project DAG```
 
-```list.programs("adaprHome") # lists the programs in the adaprHome project with descriptions```
+```listScripts("adaprHome") # lists the programs in the adaprHome project with descriptions```
 
-```show.project()  # Browses/opens project folder in file system```
+```showProject()  # Browses/opens project folder in file system```
 
-```commit.project("myProject",commitMessage)  # Perform a git commit for version control```.
+```commitProject("myProject",commitMessage)  # Perform a git commit for version control```.
 
-```send.pubresults("myProject")  #Copies selected result files to publication directory```
+```publishResults("myProject")  #Copies selected result files to publication directory```
 
-
-
-![Figure 1.The project select tab. 1. Pulldown to select project. 2. Create New Project. Project ID is text input for project name (Project ID has R variable name syntax). Project directory is the file path to the project. The publish directory is where published files will be copied to. 3. Redirect project panel allows the identification or discovery of an existing project that is imported. Publication and project paths for existing projects could be changed here.](project_tab.png)
 
 ##Writing adapr R scripts
 
-
-
-Programs can be created by using ```make.program``` that takes three main arguments 1) project ID, 2) program name,
+Programs can be created by using ```makeScript``` that takes three main arguments 1) project ID, 2) program name,
 3) program description. Programs can be created, executed, listed, and removed using the following 4 commands:
 
-```make.program("adaprHome","MyProgram.R","Produces little") # Creates program```
+```makeScript("MyProgram.R","Produces little","adaprHome") # Creates program```
 
-```run.program("adaprHome","MyProgram.R") # Executes Program and creates and optionally creates an R markdown log```
+```runScript("MyProgram.R","adaprHome",logRmd=TRUE) # Executes Program and creates and optionally creates an R markdown log```
 
-```list.programs("adaprHome") # lists the programs in the adaprHome project with descriptions```.
+```listScripts("adaprHome") # lists the programs in the adaprHome project with descriptions```.
 
-```remove.program("adaprHome","MyProgram.R") # Removes Program and Results```
-
-
-Creating an adapr R script is done within the adapr app from the “Make Programs” tab. Each program has a text string description. See Figure 2. When a program is created through the app, the program is executed creating a Results directory, R markdown file, and a dependency file that contains the read/write history of the file. 
-
-![Figure 2. Make program tab. 1. Specify the R script name within the specified project. See upper left corner. Here `Finasteride_adapr` project is specified. 2. Manage libraries. Add an R package to a project as a resource for that project. Pressing the button updates the packages associated with the projects.](program_tab.png)
+```removeScipt("adaprHome","MyProgram.R") # Removes Program and Results```
 
 
 The adapr R scripts have a header that creates a list object source_info that contains the read/write and project information, and a footer that writes the read/write dependencies into a file corresponding to the R script within the Program/Dependency directory. The read/write information is collected within the body of the R script by wrapping the read/write commands within three R commands. The first is the read command:
@@ -148,15 +121,14 @@ graphics.off()
 This code snippet creates a file in the results directory of the project called histogram.png with a histogram of 100 standard normal variables. If the ```Read/Write``` functions are not used for reading/writing then the input/output can be still be tracked using the funtions ```ReadTrack/WriteTrack```. Another useful function is the following
 
 ```
-LoadedObject <- Load.branch("read_data.R/mydata.Rdata"")
+LoadedObject <- loadFlex("read_data.R/mydata.rda"")
 ```
 
-This function reads in an R data object with the `.Rdata` file extension written by another program. This function searches through all results from the project to identify file, and returns the corresponding R object (assigned to in LoadedObject example). The function follows ```Write(mydata,"mydata.Rdata","some data")``` within another R script (read_data.R) to avoid reading the same file twice and to pass preprocessed data from one R script to another. Each R script ends with a footer
+This function reads in an R data object with the `.rda` file extension written by another program. This function searches through all results from the project to identify file, and returns the corresponding R object (assigned to in LoadedObject example). The function follows ```Write(mydata,"mydata.rda","some data")``` within another R script (read_data.R) to avoid reading the same file twice and to pass preprocessed data from one R script to another. Each R script ends with a footer
 ```
 dependency.out <- finalize_dependency()
 ```
 that collects the file hashes of reads and writes and writes the dependency information to the Programs/Dependency directory. IMPORTANT: If `finalize_dependency()` function does not execute, then the R markdown file will not be rendered and the dependencies will not be available for use by other R scripts.
-
 
 ## Literate programing using R Markdown
 
@@ -164,12 +136,10 @@ An R markdown file is created automatically when an R script is created within t
 
 ## Managing R packages
 
-Package management is needed for reproducibility. R packages needed for each R script can be added in the usual manner, and projects currently use the
-default R library. However, the ADAPR app facilitates loading packages and tracking which packages are used by creating a common library file with package names that contains a list of packages used by project. The package versions are recorded within the program support directories. Each package is specified therein is as specific to a particular R script or not. If the package is not labeled as specific to an R script is will be automatically loaded for each R script in the project. These packages are managed with the Programs tab of the app. Figure 2.  The packages need not be specified by the app, but can be included in the R scripts header prior to the creation of `source_info`. The function ` create_source_file_dir` will detect and record libraries that are already loaded.
+Package management is needed for reproducibility. R packages needed for each R script can be installed in the usual manner if using the default R library. However, the adapr facilitates installation, loading, and tracking of packages. For project that use a project-specific library, the ``` Library()``` function combines the ```install.packages``` function with the ```library``` fuction.  ```Library("ggplot2","cran")``` will install the package ```ggplot2``` from the ```cran``` archive into the project specific library (if necessary) and then load the pacakge for use. The package versions are recorded within the program results directories using the ```session_info()``` function from the ```devtools``` package. 
 
 If the project is imported by another user, the data regarding the packages needed will be used by 
-`create_source_file_dir` in the program header and packages needed for the project will be automatically installed. The functions ```add_package(project.id,package,install.command,specific)``` and ```remove_package(project.id,package.name)``` will add or remove an R package from a project. To install all packages for a project, use the function
-`install_project_packages(project.id)`. 
+the ```installLibrary``` function to install all neede R packages. Alternatively, the needed R packages will be installed and loaded by the ```Library``` function if it is used throughout the project. 
 
 #Summarizing and visualizing projects
 
@@ -180,12 +150,12 @@ a graph of the project with R scripts and their dependencies.
 
 #Synchronizing and version control
 
-Two critical parts of accountability and reproducibility are addressed within adapr and the Synchronize tab of the app. First, the app can check the synchronicity of the project, and the function ```synctest.project("project.id")``` reports the synchronization status of the project. That is, if the project DAG has parent nodes with later file modification times than the children nodes, then the project is not synchronized. Also, if the file hash (data fingerprint) of the file hash changed from the corresponding hash within the dependency file, then the project is out of not synchronized. The functions and the app detect lack of synchrony and can execute the corresponding R scripts that are needed to achieve synchrony. The function ```sync.project("project.id")``` will run all scripts needed for synchronizing. See Figure 4. Next, adapr uses the git version control system, which can be operated within the Synchonize tab. While adapr uses calls to the gitr package, Git must be installed for the Git search features to work. There are platform independent and free Git clients available for download (https://git-scm.com/downloads/guis). The commit button within the app takes a project snapshot of all R scripts and adds the synchronization status (synchronized or not) to the commit message. Likewise, ```commit.project("myProject",commitMessage)``` will perform a git commit from the R console. Because the file names and file hashes are stored within the version control system any data or result file can be matched within the version control history to determine its provenance.  
+Two critical parts of accountability and reproducibility are addressed within adapr and the Synchronize tab of the app. First, the app can check the synchronicity of the project, and the function ```synctestProject("project.id")``` reports the synchronization status of the project. That is, if the file modification times or the file hash (data fingerprint) of the input, output, or script file changed from the corresponding modification times or hash within the dependency file, then the project is out of sync or not synchronized. The functions and the app detect lack of synchrony and can execute the corresponding R scripts that are needed to achieve synchrony. The function ```syncProject("project.id")``` will run all scripts needed for synchronizing. See Figure 4. Next, adapr uses the git version control system, which can be operated within the Synchonize tab. While adapr uses calls to the gitr package, Git must be installed for the Git search features to work. There are platform independent and free Git clients available for download (https://git-scm.com/downloads/guis). The commit button within the app takes a project snapshot of all R scripts and adds the synchronization status (synchronized or not) to the commit message. Likewise, ```commitProject("myProject",commitMessage)``` will perform a git commit from the R console. Because the file names and file hashes are stored within the version control system any data or result file can be matched within the version control history to determine its provenance.  
 
 It is important to note that adapr automatically creates a project specific repository and adds all R script files into the project's Git repository, but it does not automatically use formal version control for data or results files because these files may be too large for the version control system to efficiently track the changes. However, the file hash is computed and stored within the `Dependency` directory for all files that are read or written within the project so that all relevant files and their provenances can be identified if a commit was made when the file was read/written. File histories can be identified within the Run Report tab that executes a file hash search and returns
 the Git commit associated with the file including the date, author, and file description. 
-The project can be committed (a snanpshot taken) with the ```commit.project(project.id,message)``` command.
-The Git history of a file is also obtained with the ```git_provenance(project.id, filepath)``` function which requires Git to be installed.
+The project can be committed (a snanpshot taken) with the ```commitProject(project.id,message)``` command.
+The Git history of a file is also obtained with the ```gitProvenance(project.id, filepath)``` function which requires Git to be installed.
 
 There is an interactive project map feature within the synchronize tab. The "Examine Program Graph" button displays the DAG of all the project's R scripts colored by there synchronization status. These scripts can be 
 executed by clicking on the colored point, and their file I/O can be examined by selecting or "brushing" over the colored point. This reveals the file I/O graphic in an adjacent panel. These files are labeled by
@@ -198,40 +168,33 @@ lists for an R script can overwhelm the visual space of these graphics. This wil
 
 The specific results from the project or the entire project can be sent within the Send tab of the app. This tab creates a file within the Programs/Support_functions directory that contains a list of files that are selected for publication (i.e., copied to the project’s publication directory, which may be a shared server folder, a web server, or cloud server such as Dropbox). A button automatically sends these files to the publication directory. Also, the full project can be copied to the publication directory. The data directory is not sent by default to protect potentially sensitive data elements. There is a selector option for sending the data (or not) and a button for sending the full project. See Figure 5. There are 4 functions related to publishing:
 
-```get.pubresults(project.id) # Get data frame of files for publication```
+```getPubResults(project.id) # Get data frame of files for publication```
 
-```send.pubresults(project.id) # Copy selected files to publication directory```
+```publishResults(project.id) # Copy selected files to publication directory```
 
-```show.pubresults(project.id) # Browses publication table for editing```
+```browsePubFiles(project.id) # Browses publication table for editing```
 
-![Figure 5. Send Tab. 1. Select files to publish by copying to the publication directory. 2. Send a copy of the full project to the publication directory.](send_tab.png)
 
-#Configuration Tab
+#Configuration
 
-The adapr package can be updated and configured within the configure tab shown in Figure 6. adapr options can be set with `set_adapr_options()`.  
-The ```set_adapr_options(option,value)``` function the first argument is the option and the second argument is the option value as a character string. The "git" option takes ```TRUE``` or ```FALSE``` depending on whether 
+The current configuration options can be retrieved with ```getAdaprOptions()```. This function reads the information from the ```ProjectPaths``` folder in the root directory. This location can be changed setting the R option ```adaprHomeDir``` within the R profile. The adapr package can be configured with the `setAdaprOptions()`.  The ```setAdaprOptions(option,value)``` function the first argument is the option and the second argument is the option value as a character string. The "git" option takes ```TRUE``` or ```FALSE``` depending on whether 
 git is used. For example, ```set_adapr_options("git","TRUE")``` will modify the file
-"adapr_options.csv" and initiate Git. The "path" option indicates the paths for finding resources such as pandoc. There are also "project.path" and "publish.path" options that indicate default publication directories.
-
-Selecting the git user can be done with the ```git.configure(user.name,user.email)``` function.
-
-![Figure 6. Configure Tab. 1. Setup default project path where projects will be created. 2. Check Git. Check Git configuration. Add user name and email as Git user. Turn Git option on/off. 3. Install and update adapr package from github.](configure_tab.png)
-
-
-
+"adapr_options.csv". The "path" option indicates the paths for finding resources such as pandoc. There are also "project.path" and "publish.path" options that indicate default publication directories. Selecting the git user can be done with the ```gitConfigure(user.name,user.email)``` function.
 
 ## Also helpful
 
-There are some convenience functions that can be used within the R console. These functions can be executed without specifying the project, if ```set.project(project.id)``` is used to indicate the working project using the "adaprProject" R option within ```options```. 
+There are some convenience functions that can be used within the R console. These functions can be executed without specifying the project, if ```setProject(project.id)``` is used to indicate the working project using the "adaprProject" R option within ```options```. 
 
-```show.project()``` and ```show.results()``` will open the project or results directory with the file browser.
+```showProject()``` and ```showResults()``` will open the project or results directory with the file browser.
 
-```list.branches()``` will list branches, orgins, and description that are available for loading.
+```listBranches()``` will list branches, orgins, and description that are available for loading.
 
-```list.datafiles()``` will list the files and descriptions in the `Data` directory.
+```listDatafiles()``` will list the files and descriptions in the `Data` directory.
 
-```list.programs()``` will list the R scripts in the project.
+```listScripts()``` will list the R scripts in the project.
 
-![Figure 7. Cheet sheet of major functions](function_maps.png)
+```searchScripts()``` will search for a string in the set of R scripts and markdown files.
+
+```openScripts()``` opens script directly or selecting from a list of project scripts.
 
 

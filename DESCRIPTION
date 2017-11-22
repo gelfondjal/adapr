@@ -1,32 +1,38 @@
 Package: adapr
 Type: Package
-Title: Implementation of an Accountable Data Analysis Process 
+Title: Implementation of an Accountable Data Analysis Process
 Version: 2.0.0
 Date: 2017-01-30
 Author: Jon Gelfond, Martin Goros
 Maintainer: Jonathan Gelfond <gelfondjal@uthscsa.edu>
-Description: Tracks reading and writing within R scripts that are organized into a directed acyclic graph. Contains an interactive shiny application adaprApp(). Uses git2r package, Git and file hashes to track version histories of input and output. See package vignette for how to get started. V1.02 adds parallel execution of project scripts and function map in vignette. Makes project specification argument last in order.
+Description: Tracks reading and writing within R scripts that are organized into
+    a directed acyclic graph. Contains an interactive shiny application adaprApp().
+    Uses git2r package, Git and file hashes to track version histories of input
+    and output. See package vignette for how to get started. V1.02 adds parallel
+    execution of project scripts and function map in vignette. Makes project
+    specification argument last in order.
 License: LGPL-2
-Depends: R (>= 3.1)
+Depends:
+    R (>= 3.1)
 Imports:
-   gdata,
-     plotly,
+    gdata,
+    plotly,
     ggplot2,
     shiny,
     shinydashboard,
     knitr,
     rmarkdown,
-     igraph,
+    igraph,
     digest,
     devtools,
-     plyr,
-     git2r,
+    plyr,
+    git2r,
     methods,
     parallel,
     versions,
+    archivist,
     doParallel
 Suggests:
-  pkgKitten,    
-  packrat
+    packrat
 RoxygenNote: 6.0.1
 VignetteBuilder: knitr

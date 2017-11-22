@@ -13,7 +13,10 @@
 #' 
 runScript <- function(r=getSourceInfo()$file$file,project.id=getProject(),logRmd=FALSE){
   
-  if((length(r)==0)|(r=="")){
+  
+  r <- ifelse((length(r)==0),"",r)
+  
+  if((r=="")){
     
     files <- list.files(file.path(getProjectPath(getProject()),"Programs"))
     

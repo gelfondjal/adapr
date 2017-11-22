@@ -47,6 +47,9 @@ getProjectLibrary <- function(project.id0=getProject()){
 
   if(testLibrary&(project.out$project.library!="packrat")){return(getAdaprOptions()$library)}
   
+  if(testLibrary&(project.out$project.library=="packrat")){return(.libPaths())}
+  
+  
   pather <- as.character(project.out$library.path)
   
   if((is.na(pather))|(pather=="")){pather <- file.path(getProjectPath(),project.directory.tree$support,project.directory.tree$library.bank)}

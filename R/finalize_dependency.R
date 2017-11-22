@@ -42,7 +42,7 @@ finalize_dependency <- function(RMD=TRUE,write=TRUE){
   Read.cap(source_info$rmdfile, I, source_info)
   file.remove(file.path(source_info$results.dir,source_info$rmdfile$file))
   
-  Write(devtools::session_info(),paste0("Session_info_",source_info$file$db.name,".RObj"),paste0("sessionInfo for", source_info$file[["file"]]),save)
+  Write(devtools::session_info(),paste0("Session_info_",source_info$file$db.name,".RObj"),paste0("sessionInfo for", source_info$file[["file"]]),saveRDS)
   
   # Render the markdown
     

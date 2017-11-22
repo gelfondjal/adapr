@@ -4,13 +4,15 @@
 \alias{listProjects}
 \title{List projects}
 \usage{
-listProjects(allInfo = TRUE)
+listProjects(project.id0 = "", allInfo = TRUE)
 }
 \arguments{
-\item{allInfo}{logical whether to return dat}
+\item{project.id0}{character for specific project. Empty string default will list all projects.}
+
+\item{allInfo}{logical whether to return all data}
 }
 \value{
-orchard
+data frame with project information
 }
 \description{
 List projects

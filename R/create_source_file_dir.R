@@ -21,6 +21,7 @@ create_source_file_dir <- function(project.id0=get("project.id"),source.file0=ge
   analysis.dir <- file.path(project.path,project.tree$analysis) # where the programs are
   data.dir <- file.path(project.path,project.tree$data)  # where the data are
   results.dir <- file.path(project.path,project.tree$results,source.file0) # Standard output
+  archivist.dir <- file.path(results.dir,"archivist")
   tex.dir <- file.path(results.dir,project.directory.tree$tex.dir) # Publication quality output
   dependency.dir <- file.path(project.path,project.tree$dependency.dir) #where dependency files are stored
   support.dir <- file.path(project.path,project.tree$support) # where functions and libraries are stored
@@ -37,7 +38,9 @@ create_source_file_dir <- function(project.id0=get("project.id"),source.file0=ge
   
   # Create necessary directories
   
-  apply(matrix(c(analysis.dir,data.dir,results.dir,tex.dir,dependency.dir,support.dir,library.dir,apps.dir,source.support.dir,markdown.dir   )),1,dir.create,showWarnings=FALSE,recursive=TRUE)
+  apply(matrix(c(analysis.dir,data.dir,results.dir,tex.dir,dependency.dir,support.dir,library.dir,apps.dir,source.support.dir,markdown.dir,archivist.dir   )),1,dir.create,showWarnings=FALSE,recursive=TRUE)
+  
+  suppressWarnings(archivist::createLocalRepo(archivist.dir))
   
   source.file.info <- createFileInfo(analysis.dir,source.file0,description=source.description)	
   

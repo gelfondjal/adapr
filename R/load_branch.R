@@ -30,7 +30,7 @@ Load.branch <- function(file){
   
   df.update <- data.frame(target.file=file.info[["file"]],target.path=file.info[["path"]],target.description=file.info[["description"]],dependency="in",stringsAsFactors=FALSE)
   
-  source_info$dependency$update(df.update)
+  options()$adaprScriptInfo$dependency$update(df.update)
   
   return(get(obj,envir=parent.frame()))
   
@@ -68,10 +68,40 @@ loadFlex <- function(file,read.fcn=readRDS,...){
   
   df.update <- data.frame(target.file=file.info[["file"]],target.path=file.info[["path"]],target.description=file.info[["description"]],dependency="in",stringsAsFactors=FALSE)
   
-  source_info$dependency$update(df.update)
+  options()$adaprScriptInfo$dependency$update(df.update)
   
   #return(get(obj,envir=parent.frame()))
   
   return(obj)
   
 }
+
+
+#' Loads a single R object from file for a R Shiny app
+#' @param project.id project name from which to load file
+#' @param path directory that contains file to be loaded
+#' @param file contains R object
+#' @param read.fcn function to read the file, default readRDS
+#' @param ... arguments passed to read.fcn
+#' @return object for file that was read
+#' @export
+#' @examples 
+#'\dontrun{
+#' processed <- AppLoadFlex("adaprTest","Results/read_data.R","cardata.RData")
+#'} 
+AppLoadFlex <- function(project.id=getProject(),path,file,read.fcn=readRDS,...){
+  
+  # Loads obj from source_info
+  # updates dependency.file
+  
+  fullpath <- file.path(getProjectPath(project.id),path,file)
+  
+  obj <- read.fcn(fullpath,...)
+  
+  return(obj)
+  
+}
+
+
+
+

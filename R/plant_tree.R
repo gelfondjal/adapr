@@ -3,7 +3,7 @@
 #' @param project.path Project home directory, if missing then default
 #' @param publish.directory Project branch exchange directory
 #' @param first.program Name of first program in project (read_data.R default)
-#' @param project.libraryTF character string "packrat" for using packrat package or Logical to use a local (not default) library
+#' @param project.libraryTF character string "packrat","TRUE","FALSE" for using packrat package or Logical to use a local (not default) library
 #' @param library.path  Path to local (not default) library
 #' @return logical for success or not
 #' @details Sets up project for first time. Defaults to main library. If using a local library, then leaving library path equal to "" puts the library within the project folder.

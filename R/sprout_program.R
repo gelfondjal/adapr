@@ -54,6 +54,9 @@ sproutProgram <- function(project.id=NA,source.file.name=NA,description="",seed=
   return(FALSE)
   
 }
+
+
+
 #' Generates the shell of a code that is project specific
 #' @param r is source file name or Filename to create
 #' @param description Character string describing what program does
@@ -96,3 +99,11 @@ makeScript <- function(r="",description="",project.id=getProject(),seed=2011,run
   
   return(out)
 }
+
+
+
+
+
+
+
+

@@ -25,7 +25,7 @@ Calls adapr::install and installs from CRAN and bioconductor packages. Local pac
 }
 \examples{
 \dontrun{
-set.library("adaprHome")
+setProject("adaprHome")
 installLibrary()
 } 
 

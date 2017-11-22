@@ -76,8 +76,9 @@ openProjectList <- function(){
   return()
 }
 #' List projects
-#' @param allInfo logical whether to return dat
-#' @return orchard
+#' @param allInfo logical whether to return all data
+#' @param project.id0 character for specific project. Empty string default will list all projects.
+#' @return data frame with project information
 #' @export
 #' @examples 
 #'\dontrun{
@@ -85,10 +86,11 @@ openProjectList <- function(){
 #'} 
 #' 
 #' 
-listProjects <- function(allInfo=TRUE){
+listProjects <- function(project.id0="",allInfo=TRUE){
   
   out <- get_orchard()
   if(!allInfo){return(out$project.id)}
+  if(project.id0!=""){out <- subset(out,out$project.id==project.id0)}
   return(out)
   
 }

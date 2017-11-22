@@ -19,7 +19,7 @@ successTF <- FALSE
 
  try({
 
- devtools::install(adaprDependencies(),lib=library.location,dependencies = c("Depends","Imports"))
+  devtools::install(adaprDependencies(),lib=library.location,dependencies = c("Depends","Imports"))
 
  })
 #

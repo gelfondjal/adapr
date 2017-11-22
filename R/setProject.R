@@ -15,6 +15,25 @@ setProject <- function(project.id="",quickTest=TRUE){
   
   test <- is.null(options()$adaprProject)
   
+  if(project.id==""){
+    
+    projects <- listProjects()$project.id
+
+    print(projects)
+    
+    n <- (readline("Which project (specify project or row number)?"))
+    
+    if(!(n %in% 1:length(projects))){
+      project.id <- n
+    }else{
+  
+      project.id <- projects[as.integer(n)]
+      
+      
+      }
+    
+  }
+  
   if(test){
     if(project.id==""){
       options(adaprProject = defaultProject)

@@ -25,7 +25,7 @@ openScript <- function(rscript="",project.id = getProject()){
     df <- df[order(df$source.file),]
     print(df)
     
-    n <- as.integer(readline("Which script?"))
+    n <- as.integer(readline("Which script (specify row number)?"))
     
     if(!(n %in% 1:length(files))){n <- 1}
     

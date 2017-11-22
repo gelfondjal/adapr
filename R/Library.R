@@ -58,7 +58,7 @@ Library <- function(package,repository="cran",github="",project.id=getProject())
   # CRAN 
   if(where %in% c("cran","bioc")){
     adapr::install(package,version=NULL,lib=subDir,repos=where,
-            show.available=FALSE,dependencies=TRUE)
+            show.available=FALSE,dependencies=c("Imports","Depends"))
     }
   if(where=="github"){   
       # Trying github

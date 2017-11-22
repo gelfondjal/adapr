@@ -37,6 +37,7 @@ createMarkdown <- function(target.file=paste0(getSourceInfo()$file$file,"md"),ta
 							paste("output:",style),
 							"---",
 							"```{r,echo=FALSE,message=FALSE,warning=FALSE,include=FALSE}\n require(\"adapr\") \n require(\"methods\") \n",
+							"require(\"knitr\") \n",
               "paste0(\"Created on \",(Sys.time() ))\n",
 							"```\n\n\n",
 							paste0("```{r,echo=FALSE,message=FALSE,warning=FALSE,include=FALSE}\n # scriptLoader(",

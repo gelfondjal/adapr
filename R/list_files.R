@@ -36,7 +36,7 @@ listBranches <- function(project.id=getProject()){
     return(NULL)
   }
   
-  file_sub$path <- gsub(".*/","",file_sub$path)
+  file_sub$path <- gsub(file.path(getProjectPath(),"Results/"),"",file_sub$path)
   return(file_sub)
   
 }
