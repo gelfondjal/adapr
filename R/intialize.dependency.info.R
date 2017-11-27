@@ -70,9 +70,9 @@ initialize_dependency_info <- function(source_info_arg){
   #  gitAdd(project.path,file.path(dependency.file))	
   
   # load the libraries and the dependent source functions
+
+  loadInstallLibraryFile(file.path(source_info_arg$support.dir,source_info_arg$support.library.file)) # Vestigial from adapr 1.0
   
-  
-  loadInstallLibraryFile(file.path(source_info_arg$support.dir,source_info_arg$support.library.file))
   runSourceDirectory(source_info_arg$support.dir)
   runSourceDirectory(source_info_arg$source.support.dir)
   
@@ -84,7 +84,6 @@ initialize_dependency_info <- function(source_info_arg){
   
   support.files <- unlist(lapply(c(source_info_arg$support.dir,source_info_arg$source.support.dir)
   										,list.files,recursive=FALSE,full.names=TRUE,include.dirs=FALSE))
-    
     
   #print(support.files)  
   

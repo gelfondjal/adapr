@@ -121,7 +121,7 @@ graphics.off()
 This code snippet creates a file in the results directory of the project called histogram.png with a histogram of 100 standard normal variables. If the ```Read/Write``` functions are not used for reading/writing then the input/output can be still be tracked using the funtions ```ReadTrack/WriteTrack```. Another useful function is the following
 
 ```
-LoadedObject <- loadFlex("read_data.R/mydata.rda"")
+LoadedObject <- loadFlex("read_data.R/mydata.rda")
 ```
 
 This function reads in an R data object with the `.rda` file extension written by another program. This function searches through all results from the project to identify file, and returns the corresponding R object (assigned to in LoadedObject example). The function follows ```Write(mydata,"mydata.rda","some data")``` within another R script (read_data.R) to avoid reading the same file twice and to pass preprocessed data from one R script to another. Each R script ends with a footer
@@ -146,7 +146,7 @@ the ```installLibrary``` function to install all neede R packages. Alternatively
 All programs and results are summarized within a single HTML document with descriptions, dependency information, and links to programs and results. This information can be obtained within the Report tab of the app. After clicking the “Report” button, the HTML project summary is written to the `Results/Tree_controller.R/` directory. The Report tab also is capable of launching project R Shiny apps that access project data or Results. The Report tab can also check the file provenance within projects. See Figure 3. The function ```create_program_graph(project.id)``` will generate
 a graph of the project with R scripts and their dependencies.
 
-![Figure 3. Run report tab. 1. The Create Report button will create an html report listing all R script input/outputs. 2. RunApp selects and launches App within the project App directory. 3. The Identify file button initiates a file select dialogue and the version control history based upon the file hash is given.](project_report_tab.png)
+![Figure 1. Run report tab. 1. The Create Report button will create an html report listing all R script input/outputs. 2. RunApp selects and launches App within the project App directory. 3. The Identify file button initiates a file select dialogue and the version control history based upon the file hash is given.](project_report_tab.png)
 
 #Synchronizing and version control
 
@@ -162,7 +162,7 @@ executed by clicking on the colored point, and their file I/O can be examined by
 their descriptions and can be opened by clicking on the file or their file directories may be browsed by selecting or "brushing" over the colored file labels. A limitation is that very large DAGs or very large input/output 
 lists for an R script can overwhelm the visual space of these graphics. This will be addressed in future versions of the app.
 
-![Figure 4. Synchronize Tab. 1. Check the synchronization status and synchronize project by running necessary R scripts. A pop-up progress bar will open. 2. Commit Message associated with Git version control snapshot of project. Commit Project button operates Git. 3. Examine program graph creates or updates two interactive plots. 4. R Script Graph shows dependencies of R scripts. Clicking on button runs the R scripts. Selecting or brushing button opens panel 5. 5. Displays the inputs and output of the selected R script. Clicking on the file label opens the file or selecting opens the file folder.](synchronize_tab.png)
+![Figure 2. Synchronize Tab. 1. Check the synchronization status and synchronize project by running necessary R scripts. A pop-up progress bar will open. 2. Commit Message associated with Git version control snapshot of project. Commit Project button operates Git. 3. Examine program graph creates or updates two interactive plots. 4. R Script Graph shows dependencies of R scripts. Clicking on button runs the R scripts. Selecting or brushing button opens panel 5. 5. Displays the inputs and output of the selected R script. Clicking on the file label opens the file or selecting opens the file folder.](synchronize_tab.png)
 
 #Sharing Results
 

@@ -26,6 +26,13 @@ File information list
 \description{
 Write object and capture file information
 }
+\details{
+Main writing function for adapr to use in the body of the program. This is a wrapper function for Write.cap.
+Write dependencies of the script are captured with this function. \code{Write} will guess which function to use, but
+the use can specify any function that writes an R object to a file.
+The \file{.rda} suffix will write so that \code{loadFlex} can load the object within another R script in the
+same project.
+}
 \examples{
 \dontrun{
 # Within an R script:

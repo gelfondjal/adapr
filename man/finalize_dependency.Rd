@@ -20,7 +20,11 @@ Writes dependency data to file in "Dependency" directory
 \details{
 Operates git tracking of program and dependency file.
 
-Strips project directory out of dependency file
+Strips project directory out of dependency file.
+Passes workspace to R markdown file and render.
+Stores file modification and hash for all dependencies.
+Writes dependency information to \file{Dependency} directory.
+Adds dependency file and Session information to Git.
 }
 \examples{
 \dontrun{

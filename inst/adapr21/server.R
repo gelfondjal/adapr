@@ -291,7 +291,7 @@ shinyServer(function(input, output,session) {
    # print("Hello")
     if(input$IDfile!=0){                                             
       isolate({  
-        provenanceOutput <-  git_provenance(input$project.id)
+        provenanceOutput <-  gitProvenance(input$project.id)
         print(((provenanceOutput)))
       })
     } 

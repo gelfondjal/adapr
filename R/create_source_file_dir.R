@@ -3,7 +3,15 @@
 #' @param source.file0 filename of the source
 #' @param source.description character description of what the source file does 
 #' @return source_info list describing the project
-#' @details Intializes git for the project, adds program git tracking, creates project library and initializes dependency tracking
+#' @details Intializes git for the project, adds program git tracking, creates project library and initializes dependency tracking.
+#' Creates directories for Project and Results. Initialize the file tracking object source_info.
+#' Gathers file information on all project files.Initialize Git for project (if using Git).
+#' Adds dependencies files to Git
+#' Initialized archivist  repo for script 
+#' Run all R scripts in support_function directory 
+#' Run all R scripts in script specific support_function/myRscript.R directory 
+#' Create R markdown file with same file prefix (if not already done).
+#' Create publication file (if not already done). 
 #' @export
 #' @examples 
 #'\dontrun{
@@ -39,6 +47,8 @@ create_source_file_dir <- function(project.id0=get("project.id"),source.file0=ge
   # Create necessary directories
   
   apply(matrix(c(analysis.dir,data.dir,results.dir,tex.dir,dependency.dir,support.dir,library.dir,apps.dir,source.support.dir,markdown.dir,archivist.dir   )),1,dir.create,showWarnings=FALSE,recursive=TRUE)
+  
+  print("Created Script directories")
   
   suppressWarnings(archivist::createLocalRepo(archivist.dir))
   

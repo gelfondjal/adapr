@@ -10,7 +10,7 @@ Description: Tracks reading and writing within R scripts that are organized into
     Uses git2r package, Git and file hashes to track version histories of input
     and output. See package vignette for how to get started. V1.02 adds parallel
     execution of project scripts and function map in vignette. Makes project
-    specification argument last in order.
+    specification argument last in order. V2.0 adds project specific libraries, packrat option, and adaprSheet().
 License: LGPL-2
 Depends:
     R (>= 3.1)

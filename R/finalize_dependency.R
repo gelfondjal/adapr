@@ -2,7 +2,11 @@
 #' @param RMD Logical denoting whether the finalizing occurs in markdown vs R script
 #' @param write Logical indicated to write the dependency object
 #' @details Operates git tracking of program and dependency file. 
-#' @details Strips project directory out of dependency file
+#' @details Strips project directory out of dependency file.
+#' Passes workspace to R markdown file and render.
+#' Stores file modification and hash for all dependencies.
+#' Writes dependency information to \file{Dependency} directory.
+#' Adds dependency file and Session information to Git.
 #' @return dependency.object 
 #' @export
 #' @examples 
@@ -44,6 +48,7 @@ finalize_dependency <- function(RMD=TRUE,write=TRUE){
   
   Write(devtools::session_info(),paste0("Session_info_",source_info$file$db.name,".RObj"),paste0("sessionInfo for", source_info$file[["file"]]),saveRDS)
   
+
   # Render the markdown
     
   dependency.file <- file.path(source_info$dependency.dir,source_info$dependency.file)
@@ -57,6 +62,8 @@ finalize_dependency <- function(RMD=TRUE,write=TRUE){
   print(c("# of output files",n.output.files))
   
   project.path <- dependency.out$project.path[1]
+  
+  gitAdd(project.path,paste0("Session_info_",source_info$file$db.name,".RObj"))
   
   dependency.out$source.git <- NA
     if(source_info$options$git){
