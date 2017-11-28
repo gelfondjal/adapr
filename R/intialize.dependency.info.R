@@ -55,13 +55,14 @@ initialize_dependency_info <- function(source_info_arg){
       
       git2r::init(project.path)
       repo <- git2r::repository(project.path)
+      gitIgnoreLibrary(project.id)
       gitAdd(project.path,file.path(source.file.info[["path"]],source.file.info[["file"]]))
       git2r::commit(repo,message ="Initialize git")
       
       print("Initialized git repo")
       
     }
-    
+    gitIgnoreLibrary(project.id)
     gitAdd(project.path,file.path(source.file.info[["path"]],source.file.info[["file"]]))	
     
   })#try get
