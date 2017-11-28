@@ -57,7 +57,7 @@ setProject <- function(project.id="",quickTest=TRUE){
       options(adaprProject = project.id)
       .libPaths(getProjectLibrary(project.id))
     }else{
-      warning("adapr::set.project project.id does not exist")
+      warning("adapr::setProject project.id does not exist")
       project.id <- defaultProject
       options(adaprProject = project.id)
       .libPaths(getProjectLibrary(defaultProject))
@@ -72,6 +72,10 @@ setProject <- function(project.id="",quickTest=TRUE){
   return(project.id)
   
 }
+
+
+
+
 #' Returns the  adapr project in R option "adaprProject"
 #' @return Value is specified project or default project
 #' @details Default is adaprHome. Returns default if project does not exist.

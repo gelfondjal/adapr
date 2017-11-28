@@ -35,6 +35,7 @@ initProject <- function(project.id,project.path=NA,publish.directory=NA,first.pr
 #' @param library.path = path to local (not default) library
 #' @return logical for success or not
 #' @details Not for direct use. See initProject().
+#' @export
 plantTree <- function(project.id,project.path=NA,swap.directory=NA,first.program="read_data.R",project.libraryTF=FALSE,
                       library.path=""){
   
@@ -42,12 +43,15 @@ plantTree <- function(project.id,project.path=NA,swap.directory=NA,first.program
   
   if(is.na(project.path)){
     project.path <- opts$project.path
+  }
+  
+  if(is.na(swap.directory)){
     swap.directory <- opts$publish.path
-    }
+  }
+  
   
   if(!dir.exists(project.path)|!dir.exists(swap.directory)){
-  	
-    
+
   	print("Project Directories invalid")
   	
   	if(!dir.exists(project.path)){print(paste("Project Directory doesn't exist",project.path))}

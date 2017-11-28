@@ -73,7 +73,7 @@ syncProject <- function (project.id = getProject(), ask = FALSE)
     }
     
     
-    ggproject <- createProgramGraph(getProject(),testSync=FALSE)
+    ggproject <- createProgramGraph(project.id,testSync=FALSE)
     ggproject$vertex$synccolor <- factor(ggproject$vertex$synccolor,levels=c("Synchronized","Not Synchronized","Running"))
     
     

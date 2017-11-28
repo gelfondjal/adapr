@@ -14,14 +14,11 @@ adaprInstall <- function(library.location=getProjectLibrary("adaprHome"),betaTF=
 
 successTF <- FALSE 
 
-
-
-
  try({
 
   devtools::install(adaprDependencies(),lib=library.location,dependencies = c("Depends","Imports"))
 
- })
+ },silent = TRUE)
 #
 # #search_item <- paste("package", "adapr", sep = ":")
 # #while(search_item %in% search())
