@@ -195,6 +195,6 @@ There are some convenience functions that can be used within the R console. Thes
 
 ```searchScripts()``` will search for a string in the set of R scripts and markdown files.
 
-```openScripts()``` opens script directly or selecting from a list of project scripts.
+```openScript()``` opens script directly or selecting from a list of project scripts.
 
 

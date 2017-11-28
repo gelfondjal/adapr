@@ -63,7 +63,6 @@ finalize_dependency <- function(RMD=TRUE,write=TRUE){
   
   project.path <- dependency.out$project.path[1]
   
-  gitAdd(project.path,paste0("Session_info_",source_info$file$db.name,".RObj"))
   
   dependency.out$source.git <- NA
     if(source_info$options$git){
@@ -114,6 +113,8 @@ finalize_dependency <- function(RMD=TRUE,write=TRUE){
     
     if(source_info$options$git){
     	try({	gitAdd(project.path,file.path(dependency.file))	})
+      try({gitAdd(project.path,paste0("Session_info_",source_info$file$db.name,".RObj"))})
+      
     }
        
     
