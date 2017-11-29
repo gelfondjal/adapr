@@ -22,6 +22,8 @@ checkFileMtimeSource <- function(dependency.dir=NULL,dependency.object=NULL){
  
   source.df <- subset(trees,!duplicated(trees$source.hash))
   
+  missingIsTrue <- function(x){return(ifelse(is.na(x),TRUE,x))}
+  
   source.mtime.check <- plyr::ddply(source.df,c("source.file","source.file.path"),function(x){
     
     current.mtime <- ""
@@ -29,7 +31,9 @@ checkFileMtimeSource <- function(dependency.dir=NULL,dependency.object=NULL){
       current.mtime <- file.info(file=file.path(x$source.file.path[1],x$source.file[1]))$mtime
     })
     
-    mtime.fail <- as.character(current.mtime)  != as.character(x$source.mod.time   )
+    mtime.fail <- missingIsTrue(as.character(current.mtime)  != as.character(x$source.mod.time   ))
+    
+   # mtime.fail <- ifelse(is.na(mtime.fail),TRUE,mtime.fail)
     
     return(data.frame( mtime.fail))
   })
@@ -49,8 +53,7 @@ checkFileMtimeSource <- function(dependency.dir=NULL,dependency.object=NULL){
     
     # Only gets 1 second level time resoluion, some OS may achieve more resolution	
     	
-		x$mtime.fail <- as.character(current.mtime)  != as.character(x$target.mod.time)
-		
+		x$mtime.fail <- missingIsTrue(as.character(current.mtime)  != as.character(x$target.mod.time))
 		
 		return(x)
     

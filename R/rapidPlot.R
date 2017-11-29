@@ -24,9 +24,9 @@ rapidPlot <- function(previousGraph,project.id = getProject(),message="Running")
   froms <- previousGraph$edges
   
   #noedges <- length(previousGraph$edges)==0
-  noedges <- ifelse(is.na(previousGraph$edges),TRUE,length(previousGraph$edges)==0)
+  noedges <- ifelse(is.na(previousGraph$edges)[1],TRUE,length(previousGraph$edges)==0)
   
-  vertexnames <- unique(previousGraph$v)
+  vertexnames <- unique(previousGraph$v$v)
   dotsize0 <- 10
   if (length(vertexnames) == 1) {
     

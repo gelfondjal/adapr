@@ -25,6 +25,8 @@ checkFileHashSource <- function(dependency.dir=NULL,dependency.object=NULL){
   
   #Check source hashes are current
   
+  missingIsTrue <- function(x){return(ifelse(is.na(x),TRUE,x))}
+  
   source.hash.check <- plyr::ddply(source.df,c("source.file","source.file.path"),function(x){
     
     	current.hash <- ""
@@ -32,7 +34,7 @@ checkFileHashSource <- function(dependency.dir=NULL,dependency.object=NULL){
      	current.hash <- Digest(file=file.path(x$source.file.path[1],x$source.file[1]),serialize=FALSE)
    		 })
     
-		hash.fail <- current.hash != x$source.hash    
+		hash.fail <- missingIsTrue(current.hash != x$source.hash)    
 	    
     return(data.frame(hash.fail))
   })
@@ -49,7 +51,7 @@ checkFileHashSource <- function(dependency.dir=NULL,dependency.object=NULL){
      	 current.hash <- Digest(file=file.path(x$target.path[1],x$target.file[1]),serialize=FALSE)
    		 })
     
-		x$hash.fail <- current.hash != x$target.hash    
+		x$hash.fail <- missingIsTrue(current.hash != x$target.hash)    
 		
 		return(x)
     
