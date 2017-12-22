@@ -21,11 +21,12 @@ Searches R scripts and R markdown files within a project.
 }
 \details{
 Uses grep. Counts lines with matches, but repeats within a line are not counted.
+Searches 3 directories: Programs, support_functions, and Markdown
 }
 \examples{
 \dontrun{
-# Opens read_data.R within the adaprHome project
-searchScripts("read_data.R","adaprHome")
+# Searches read_data.R within the adaprHome project
+searchScripts("read","adaprHome")
 
 } 
 

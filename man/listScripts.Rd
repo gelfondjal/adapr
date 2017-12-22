@@ -10,7 +10,7 @@ listScripts(project.id = getProject())
 \item{project.id}{project.id}
 }
 \value{
-dataframe of R scripts and descriptions
+dataframe of R scripts, descriptions, run time duration, last run/modification date, number of lines
 }
 \description{
 Lists the R scripts in the adapr project

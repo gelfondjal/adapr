@@ -19,6 +19,7 @@ Loads R object from archivist repository within the results directory of another
 }
 \details{
 For use within R adapr script. This complements the use of arcWrite. The description should match the description in arcWrite.
+Matches "userTags" 'rscript:' and 'aName'.
 }
 \examples{
 \dontrun{

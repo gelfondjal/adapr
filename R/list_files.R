@@ -43,7 +43,7 @@ listBranches <- function(project.id=getProject()){
 list.branches <- listBranches
 #' Lists the R scripts in the adapr project
 #' @param  project.id project.id
-#' @return dataframe of R scripts and descriptions
+#' @return dataframe of R scripts, descriptions, run time duration, last run/modification date, number of lines
 #' @export
 #' @examples 
 #' \dontrun{
@@ -64,7 +64,11 @@ listScripts <- function(project.id=getProject()){
                              last.run.time <- max(difftime(as.POSIXct(x$target.mod.time), 
                                                            as.POSIXct(x$source.run.time), units = "secs"), 
                                                   na.rm = TRUE)
-                             return(data.frame(last.run.time.sec = last.run.time))
+                             n.lines <- length(readLines(file.path(x$source.file.path[1],x$source.file[1]),warn=FALSE))
+                             mod.date <- as.Date(file.info(file.path(x$source.file.path[1],x$source.file[1]))$mtime)
+                             run.date <- as.Date(x$source.run.time[1])   
+                             
+                             return(data.frame(n.lines=n.lines,last.run.time.sec = last.run.time,mod.date=mod.date,run.date=run.date))
                            })
   programs <- merge(programs, run.times, by = "source.file")
   
@@ -205,3 +209,27 @@ resultsDir <- function(sourceInfo = getSourceInfo()){
   return(resultsDir)
   
 }
+
+#' Opens a data frame as a csv file
+#' @param df data frame to write and then open
+#' @details Viewing only. Does not edit the data! Writes into the temp directory and uses system's .csv file browser.
+#' @return path to data directory
+#' @export
+#' @examples 
+#' \dontrun{
+#' viewData(mtcars)
+#'} 
+#'
+viewData <- function(df){
+  
+  fileToWrite <- file.path(tempdir(),"adaprOverwrite.csv")
+  
+  utils::write.csv(df,fileToWrite,row.names=FALSE)
+  
+  utils::browseURL(fileToWrite)
+  
+  
+}
+
+
+

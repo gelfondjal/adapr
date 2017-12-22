@@ -27,6 +27,7 @@ arcWrite <- function(Robj,description){
 #' @param description character description. Need for access with arcRead
 #' @param project.id project to search within
 #' @details For use within R adapr script. This complements the use of arcWrite. The description should match the description in arcWrite.
+#' Matches "userTags" 'rscript:' and 'aName'.
 #' @export
 #' @examples 
 #'\dontrun{
