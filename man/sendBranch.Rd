@@ -2,15 +2,18 @@
 % Please edit documentation in R/send_branch.R
 \name{sendBranch}
 \alias{sendBranch}
-\title{Copy dependent programs to swap directory}
+\title{Copy dependent programs to publication directory}
 \usage{
 sendBranch(branch_cut, all = FALSE)
 }
 \arguments{
-\item{branch_cut}{filename of the base of the branch to send}
+\item{branch_cut}{R Script of the base of the branch to send}
 
 \item{all}{logical indicating whether to send all branches in project}
 }
 \description{
-Copy dependent programs to swap directory
+Copy dependent programs to publication directory
+}
+\details{
+Deprecated and not for direct use.
 }

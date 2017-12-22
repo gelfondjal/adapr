@@ -32,12 +32,11 @@ scriptLoader <- function(projectID,script){
 }	
 #' Checks whether interactive R markdown session is ON
 #' @param changeOption logical to print out and change the Rmdstart option
+#' @details Useful when using the 'knit' button in RStudio.
 #' @return value TRUE if R session in in interactive R markdown mode
 #' @export
 #' @examples 
-#'\dontrun{
 #'  checkRmdMode()
-#'} 
 #'
 checkRmdMode <- function(changeOption=FALSE){
   

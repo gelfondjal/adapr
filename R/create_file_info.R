@@ -4,7 +4,7 @@
 #' @param description is the description of the file
 #' @param dbname is the database name 
 #' @param si is the source_info list default is null
-#' @return file info list with path filename fullname description and db.name
+#' @return file info list with path, filename, fullname, and description and db.name (databse name)
 #' @export
 #' @examples 
 #'\dontrun{

@@ -21,7 +21,7 @@ Makes HTML hyper link
 Used in making HTML files
 }
 \examples{
-\dontrun{
+
  makeHyperlink("myPath","click here to my path")
-}
+
 }

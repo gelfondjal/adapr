@@ -15,9 +15,10 @@ value TRUE if R session in in interactive R markdown mode
 \description{
 Checks whether interactive R markdown session is ON
 }
+\details{
+Useful when using the 'knit' button in RStudio.
+}
 \examples{
-\dontrun{
  checkRmdMode()
-} 
 
 }

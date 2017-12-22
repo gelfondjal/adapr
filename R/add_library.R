@@ -1,7 +1,7 @@
 #' Read library file
 #' @param project.id project.id to read library file 
 #' @return Autoloaded library information data
-#' @details Not for direct use. Uses read.csv to read autoloaded libraries.
+#' @details Deprecated & Not for direct use. Uses read.csv to read autoloaded libraries. 'adapr2.0' no longer autoloads libraries.
 #' @export
 #' @examples 
 #' \dontrun{
@@ -24,7 +24,7 @@ readLibrary <- function(project.id=getProject()){
 #' @param library.install Command to install library: NA for CRAN, bioC for bioconductor
 #' @param library.specific logical indicate whether package is for specific R script
 #' @return Library information data
-#' @details Not for direct use. Installs and loads all packages
+#' @details Deprecated & Not for direct use. Installs and loads all packages in a library file.
 #' @export
 #' @examples 
 #' \dontrun{
@@ -44,7 +44,7 @@ addPackage <- function(project.id=getProject(),library.name,library.install=NA,l
 #' @param project.id project.id to add R package to
 #' @param library.name R package name to add
 #' @return Library information data
-#' @details Not for direct use. Remove line from autoloading packages file.
+#' @details Deprecated & Not for direct use. Remove line from autoloading packages file.
 #' @export
 #' @examples 
 #' \dontrun{

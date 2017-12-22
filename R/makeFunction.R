@@ -3,6 +3,7 @@
 #' @param description character string description of function
 #' @param project.id Name of project
 #' @return Logical indicating success or not
+#' @export
 #' @details Function file will add ".R" extension. Will not overwrite existing program.See makeScript() for making an R script.
 #' 
 makeFunction <- function(functionName=NA,description="",project.id=getProject()){

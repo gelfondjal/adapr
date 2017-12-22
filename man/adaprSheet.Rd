@@ -10,13 +10,12 @@ adaprSheet()
 Browse adapr cheat sheet
 }
 \details{
-Opens pdf from R package within system
+Opens pdf from R package within system. Requires browser assigned to open pdf file.
 }
 \examples{
+# Requires browser assigned to open pdf file.
 \dontrun{
-# Requires pandoc location or RStudio
 adaprSheet()
-
-} 
+}
 
 }

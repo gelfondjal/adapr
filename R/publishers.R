@@ -1,7 +1,8 @@
 #' Read result filepaths to publish
 #' @param project.id Project to publish
 #' @return dataframe of files to publish
-#' @details File is in support directory/files_to_publish.csv
+#' @details File is in support directory/files_to_publish.csv. The specified files can be copied to the
+#' publication directory with 'publishResults()'.
 #' @export
 #' @examples 
 #' \dontrun{
@@ -55,7 +56,8 @@ publishResults <- function(project.id=getProject()){
 #' Browses publication table for editing
 #' @param project.id Project to publish
 #' @return dataframe of files to publish
-#' @details File is in support directory/files_to_publish.csv
+#' @details File is in support directory/files_to_publish.csv. The specified files can be copied to the
+#' publication directory with 'publishResults()'. 
 #' @export
 #' @examples 
 #' \dontrun{
@@ -63,6 +65,7 @@ publishResults <- function(project.id=getProject()){
 #'} 
 #' 
 #' 
+
 browsePubFiles <- function(project.id=getProject()){
   
   source_info <- pullSourceInfo(project.id)

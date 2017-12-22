@@ -16,8 +16,6 @@ Identify adapr Home directory. Location of options file and project listing.
 This is automatically handled by defaultAdaprSetup(), but can be controlled in an "R profile" by adding adaprHomeDir R option ( e.g.,  options(adaprHomeDir="myPath")).
 }
 \examples{
-\dontrun{
  adaprHomeDir()
-} 
 
 }

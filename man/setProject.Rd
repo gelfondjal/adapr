@@ -18,7 +18,9 @@ value is specified project or default project
 Checks or changes the specified adapr project in R option "adaprProject"
 }
 \details{
-Default is adaprHome. Returns default if project does not exist.
+Default project is 'adaprHome'. Returns default if project does not exist. 
+Very useful in conjunction with getProject(). Sets the library if the project is not using the default library.
+Dialogue opens if project.id is empty string.
 }
 \examples{
 \dontrun{

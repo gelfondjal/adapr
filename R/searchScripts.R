@@ -24,7 +24,7 @@ searchScripts <- function(matcher,project.id = getProject(),...){
   
   scripts <- file.path(path,'Programs',filesr)
   
-  top <- lapply(scripts,scan,what=character(),sep="\n")
+  top <- lapply(scripts,readLines)
   
   names(top) <- basename(scripts)
   

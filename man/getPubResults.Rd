@@ -16,7 +16,8 @@ dataframe of files to publish
 Read result filepaths to publish
 }
 \details{
-File is in support directory/files_to_publish.csv
+File is in support directory/files_to_publish.csv. The specified files can be copied to the
+publication directory with 'publishResults()'.
 }
 \examples{
 \dontrun{

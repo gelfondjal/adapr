@@ -19,7 +19,6 @@ Location of options file and project listing. Swap / for \\ in path expand.
 See path.expand() in base R. Can be controlled in R profile by adding adaprHomeDir option. See adaprHomeDir().
 }
 \examples{
-\dontrun{
  path.expand.2("~")
-} 
+
 }

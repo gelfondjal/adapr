@@ -1,17 +1,19 @@
 Package: adapr
 Type: Package
 Title: Implementation of an Accountable Data Analysis Process
-Version: 2.0.0
-Date: 2017-11-28
+Version: 2.0.1
+Date: 2017-12-15
 Author: Jon Gelfond, Martin Goros
 Maintainer: Jonathan Gelfond <gelfondjal@uthscsa.edu>
 BugReports: https://github.com/gelfondjal/adapr/issues
 Description: Tracks reading and writing within R scripts that are organized into
     a directed acyclic graph. Contains an interactive shiny application adaprApp().
-    Uses git2r package, Git and file hashes to track version histories of input
+    Uses 'git2r' package, 'Git' and file hashes to track version histories of input
     and output. See package vignette for how to get started. V1.02 adds parallel
     execution of project scripts and function map in vignette. Makes project
-    specification argument last in order. V2.0 adds project specific libraries, packrat option, and adaprSheet().
+    specification argument last in order. V2.0 adds project specific libraries, 
+    option to use the 'packrat' package, and adaprSheet() providing function overview.
+    Version 2.0.1 has speed up by vectorizing 'Git' calls and bug fixes.
 License: LGPL-2
 Depends:
     R (>= 3.1)

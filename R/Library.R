@@ -83,9 +83,8 @@ Library <- function(package,repository="cran",github="",project.id=getProject())
 #' @return character vector of package names
 #' @export
 #' @examples
-#'\dontrun{
-#' adaprDependencies()
-#'} 
+#'adaprDependencies()
+#' 
 #' 
 adaprDependencies <- function(){
 deps <- c("gdata",
@@ -104,7 +103,8 @@ deps <- c("gdata",
   "parallel",
   "versions",
   "packrat",
-  "doParallel")
+  "doParallel",
+  "archivist")
 
 return(deps)
 

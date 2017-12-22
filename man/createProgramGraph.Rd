@@ -2,8 +2,8 @@
 % Please edit documentation in R/create_program_graph_2.R
 \name{createProgramGraph}
 \alias{createProgramGraph}
-\title{Make plot of project programs only
-Summarize all programs. Sync status is assessed and indicated.}
+\title{Make plot of project R scripts only
+Summarize all programs. Sync status is assessed or not as indicated.}
 \usage{
 createProgramGraph(project.id, testSync = TRUE)
 }
@@ -16,8 +16,8 @@ createProgramGraph(project.id, testSync = TRUE)
 List of data.frame of programs vertices, data.frame of edges, ggplot ,rgrapher=igraph
 }
 \description{
-Make plot of project programs only
-Summarize all programs. Sync status is assessed and indicated.
+Make plot of project R scripts only
+Summarize all programs. Sync status is assessed or not as indicated.
 }
 \details{
 Uses ggplot2

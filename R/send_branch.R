@@ -1,10 +1,10 @@
-#' Copy dependent programs to swap directory
-#' @param branch_cut filename of the base of the branch to send
+#' Copy dependent programs to publication directory
+#' @param branch_cut R Script of the base of the branch to send
 #' @param all logical indicating whether to send all branches in project 
+#' @details Deprecated and not for direct use.
 #' @export
 #' 
 sendBranch <- function(branch_cut,all=FALSE){
-  
   
   source_info <- get("source_info")
   

@@ -16,7 +16,7 @@ Autoloaded library information data
 Read library file
 }
 \details{
-Not for direct use. Uses read.csv to read autoloaded libraries.
+Deprecated & Not for direct use. Uses read.csv to read autoloaded libraries. 'adapr2.0' no longer autoloads libraries.
 }
 \examples{
 \dontrun{

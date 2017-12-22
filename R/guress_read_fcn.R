@@ -4,9 +4,9 @@
 #' @details Uses the file suffix to return csv, read.delim, read.xls
 #' @export
 #' @examples 
-#'\dontrun{
+#'
 #'  identical(utils::read.csv,guess.read.fcn("data.csv"))
-#'}  
+#'
 guess.read.fcn <- function(filename){
   
   # returns the function for reading a file with the suffix in x

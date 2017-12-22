@@ -143,7 +143,7 @@ the ```installLibrary``` function to install all neede R packages. Alternatively
 
 #Summarizing and visualizing projects
 
-All programs and results are summarized within a single HTML document with descriptions, dependency information, and links to programs and results. This information can be obtained within the Report tab of the app. After clicking the “Report” button, the HTML project summary is written to the `Results/Tree_controller.R/` directory. The Report tab also is capable of launching project R Shiny apps that access project data or Results. The Report tab can also check the file provenance within projects. See Figure 3. The function ```create_program_graph(project.id)``` will generate
+All programs and results are summarized within a single HTML document with descriptions, dependency information, and links to programs and results. This information can be obtained within the Report tab of the app. After clicking the “Report” button, the HTML project summary is written to the `Results/Tree_controller.R/` directory. The Report tab also is capable of launching project R Shiny apps that access project data or Results. The Report tab can also check the file provenance within projects. See Figure 3. The function ```graphProject(project.id)``` will generate
 a graph of the project with R scripts and their dependencies.
 
 ![Figure 1. Run report tab. 1. The Create Report button will create an html report listing all R script input/outputs. 2. RunApp selects and launches App within the project App directory. 3. The Identify file button initiates a file select dialogue and the version control history based upon the file hash is given.](project_report_tab.png)
@@ -166,7 +166,7 @@ lists for an R script can overwhelm the visual space of these graphics. This wil
 
 #Sharing Results
 
-The specific results from the project or the entire project can be sent within the Send tab of the app. This tab creates a file within the Programs/Support_functions directory that contains a list of files that are selected for publication (i.e., copied to the project’s publication directory, which may be a shared server folder, a web server, or cloud server such as Dropbox). A button automatically sends these files to the publication directory. Also, the full project can be copied to the publication directory. The data directory is not sent by default to protect potentially sensitive data elements. There is a selector option for sending the data (or not) and a button for sending the full project. See Figure 5. There are 4 functions related to publishing:
+The specific results from the project or the entire project can be sent within the Send tab of the app. This tab creates a file within the Programs/Support_functions directory that contains a list of files that are selected for publication (i.e., copied to the project’s publication directory, which may be a shared server folder, a web server, or cloud server such as Dropbox). A button automatically sends these files to the publication directory. Also, the full project can be copied to the publication directory. The data directory is not sent by default to protect potentially sensitive data elements. There are 4 functions related to publishing:
 
 ```getPubResults(project.id) # Get data frame of files for publication```
 

@@ -4,7 +4,7 @@
 \alias{gitProvenance}
 \title{Identify git provenance of file within a project}
 \usage{
-gitProvenance(project.id, filepath = 0)
+gitProvenance(project.id = getProject(), filepath = 0)
 }
 \arguments{
 \item{project.id}{Project id to search for history within}

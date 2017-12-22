@@ -1,12 +1,11 @@
 #' Browse adapr cheat sheet
-#' @details Opens pdf from R package within system
+#' @details Opens pdf from R package within system. Requires browser assigned to open pdf file.
 #' @export
 #' @examples 
-#'\dontrun{
-#' # Requires pandoc location or RStudio
+#' # Requires browser assigned to open pdf file.
+#' \dontrun{
 #' adaprSheet()
-#'
-#'} 
+#' }
 #'
 
 adaprSheet <- function(){

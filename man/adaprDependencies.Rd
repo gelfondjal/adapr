@@ -13,8 +13,7 @@ character vector of package names
 Returns character string of adapr R package import dependencies
 }
 \examples{
-\dontrun{
 adaprDependencies()
-} 
+
 
 }

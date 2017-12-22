@@ -23,7 +23,7 @@ Library information data
 Add R package to a project
 }
 \details{
-Not for direct use. Installs and loads all packages
+Deprecated & Not for direct use. Installs and loads all packages in a library file.
 }
 \examples{
 \dontrun{

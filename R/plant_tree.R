@@ -126,7 +126,10 @@ plantTree <- function(project.id,project.path=NA,swap.directory=NA,first.program
 #' @details Is wrapper for redirectTree. Does not move the project only indicates new location.
 #' @examples 
 #'\dontrun{
+#' # Change adaprTest project directories to a new directories
 #' relocateProject("adaprTest","mydirectory1","mydirectory2publish")
+#' # Import project just added to default directory
+#' relocateProject("importedProject")
 #'} 
 #' @export
 relocateProject <- function(project.id0,project.path=NA,swap.directory=NA,project.libraryTF=FALSE,

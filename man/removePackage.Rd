@@ -18,7 +18,7 @@ Library information data
 Remove R package to a project
 }
 \details{
-Not for direct use. Remove line from autoloading packages file.
+Deprecated & Not for direct use. Remove line from autoloading packages file.
 }
 \examples{
 \dontrun{

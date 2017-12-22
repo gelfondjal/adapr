@@ -2,7 +2,7 @@
 % Please edit documentation in R/adapr_update.R
 \name{adaprUpdate}
 \alias{adaprUpdate}
-\title{Updates latest adapr from gitHub.}
+\title{Updates latest adapr from GitHub.}
 \usage{
 adaprUpdate()
 }
@@ -10,10 +10,11 @@ adaprUpdate()
 message from github
 }
 \description{
-Updates latest adapr from gitHub.
+Updates latest adapr from GitHub.
 }
 \examples{
 \dontrun{
+# Requires internet connection to access GitHub.
 adaprUpdate()
 } 
 }

@@ -19,7 +19,7 @@ Return function for reading common file types
 Uses the file suffix to return csv, read.delim, read.xls
 }
 \examples{
-\dontrun{
+
  identical(utils::read.csv,guess.read.fcn("data.csv"))
-}  
+
 }

@@ -4,9 +4,8 @@
 #' @details See path.expand() in base R. Can be controlled in R profile by adding adaprHomeDir option. See adaprHomeDir().
 #' @export
 #' @examples 
-#'\dontrun{
 #'  path.expand.2("~")
-#'} 
+#'
 path.expand.2 <- function(x){
   
   # Swap / for \\ in path expand
@@ -31,9 +30,7 @@ path.expand.2 <- function(x){
 #' @details This is automatically handled by defaultAdaprSetup(), but can be controlled in an "R profile" by adding adaprHomeDir R option ( e.g.,  options(adaprHomeDir="myPath")).
 #' @export
 #' @examples 
-#'\dontrun{
 #'  adaprHomeDir()
-#'} 
 #'
 adaprHomeDir <- function(){
   

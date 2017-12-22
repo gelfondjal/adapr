@@ -19,21 +19,7 @@
 projectReportSend <- function (target.directory=get("source_info")$project.path,si,send.data=FALSE, graph.width = 960, graph.height = 500) 
 {
   ##ibrary(pander)
-  make.relative.hyperlink <- function(directory.to.clip,files,links){
-    
-    files <- gsub("^/","",gsub(directory.to.clip,"",files,fixed=TRUE))
-    
-    link.command <- rep("", length(files))
-    
-    if(length(files)==0){stop("projectReportSend: Error no files to link")}
-    
-    for (file.iter in 1:length(files)) {
-      link.command[file.iter] <- paste0("<a href=\"file:", 
-                                        files[file.iter], "\">", links[file.iter], "</a>")
-    }
-    return(link.command)
-    
-  }
+
   
 target.directory2 <- file.path(target.directory,paste0("Results_",si$project.id))
  
@@ -62,7 +48,7 @@ run.times <- plyr::ddply(project.info$tree, "source.file", function(x) {
   return(data.frame(last.run.time.sec = last.run.time))
 })
 tab.out <- merge(programs, run.times, by = "source.file")
-tab.out$source.link <- make.relative.hyperlink(si$project.path,tab.out$source.file.fullname, 
+tab.out$source.link <- makeRelativeHyperlink (si$project.path,tab.out$source.file.fullname, 
                                       tab.out$source.file)
 sorted.names <- igraph::V(project.info$graph)$file[igraph::topological.sort(project.info$graph)]
 sorted.names <- sorted.names[sorted.names %in% tab.out$source.file]
@@ -72,7 +58,7 @@ summaries.out <- lapply(program.split, programIOTable)
 outputs <- list()
 for (source.iter in names(summaries.out)) {
   temp <- summaries.out[[source.iter]]
-  temp$File <- make.relative.hyperlink(si$project.path,temp$Fullname, temp$File)
+  temp$File <- makeRelativeHyperlink (si$project.path,temp$Fullname, temp$File)
   outputs[[source.iter]] <- subset(temp, select = c("IO", 
                                                     "File", "Description"))
   rownames(outputs[[source.iter]])    <- NULL                                                 
@@ -85,7 +71,7 @@ names(tabtopander) <- c("Source","Description","Last run time (sec)")
 write("\n\n",file.path(target.directory2,targetfile),append=TRUE)
 write(knitr::kable(tabtopander),file.path(target.directory2,targetfile),append=TRUE)
 write("\n\n",file.path(target.directory2,targetfile),append=TRUE)
-tabtopander <- data.frame(`Dependency Graph` = make.relative.hyperlink(target.directory2,reduced.project.graph.file,"Project Graph"))
+tabtopander <- data.frame(`Dependency Graph` = makeRelativeHyperlink (target.directory2,reduced.project.graph.file,"Project Graph"))
 rownames(tabtopander) <- 1:nrow(tabtopander)
 write("\n\n",file.path(target.directory2,targetfile),append=TRUE)
 write(knitr::kable(tabtopander),file.path(target.directory2,targetfile),append=TRUE)

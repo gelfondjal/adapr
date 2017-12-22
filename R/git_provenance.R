@@ -10,7 +10,7 @@
 #'  gitProvenance("adaprHome",file.path(projpath,"read_data.R"))
 #'} 
 #' 
-gitProvenance <- function(project.id,filepath=0){
+gitProvenance <- function(project.id=getProject(),filepath=0){
   if(filepath==0){filepath <- file.choose()}
   
   filehash <- Digest(file=filepath)

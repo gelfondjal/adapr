@@ -63,7 +63,7 @@ initialize_dependency_info <- function(source_info_arg){
       
     }
     gitIgnoreLibrary(project.id)
-    gitAdd(project.path,file.path(source.file.info[["path"]],source.file.info[["file"]]))	
+    #gitAdd(project.path,file.path(source.file.info[["path"]],source.file.info[["file"]]))	
     
   })#try get
   }
@@ -92,13 +92,19 @@ initialize_dependency_info <- function(source_info_arg){
   
   #	return(NULL)	
   
-  # add source files to dependency set was	
+  # add source files to dependency tracker	
+  
+  addfiles <- c(grep("(\\.r)|(\\.R)$",support.files,value=TRUE),file.path(source.file.info[["path"]],source.file.info[["file"]]))
+  
+  if(source_info_arg$options$git){try({ gitAdd(project.path,addfiles) })}
   
   for(file.name in support.files){
     print(file.name)
    
     if(grepl("(\\.r)|(\\.R)$",file.name)){
-      if(source_info_arg$options$git){try({ gitAdd(project.path,file.name) })}
+      
+      # vectorized above gitAdds into 1 call to git2r
+      #if(source_info_arg$options$git){try({ gitAdd(project.path,file.name) })}
       
       Read.cap(createFileInfo(dirname(file.name),basename(file.name),"Support file"),I,options()$adaprScriptInfo)
     }

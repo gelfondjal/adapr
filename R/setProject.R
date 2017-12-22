@@ -2,7 +2,9 @@
 #' @param project.id characters specifying project.id of working project
 #' @param quickTest logical whether to check if project exists
 #' @return value is specified project or default project
-#' @details Default is adaprHome. Returns default if project does not exist.
+#' @details Default project is 'adaprHome'. Returns default if project does not exist. 
+#' Very useful in conjunction with getProject(). Sets the library if the project is not using the default library.
+#' Dialogue opens if project.id is empty string.
 #' @export
 #'@examples 
 #'\dontrun{

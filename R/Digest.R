@@ -12,6 +12,7 @@
 #' @return The filehash
 #' @export
 #' @examples 
+#' Digest(file=system.file("adaprTest.zip", package = "adapr"))
 #'\dontrun{
 #'  file0 <- file.path(pullSourceInfo("adaprHome")$project.path,
 #'  project.directory.tree$analysis,"read_data.R")

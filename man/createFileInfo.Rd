@@ -18,7 +18,7 @@ createFileInfo(path, file, description = "", dbname = "", si = NULL)
 \item{si}{is the source_info list default is null}
 }
 \value{
-file info list with path filename fullname description and db.name
+file info list with path, filename, fullname, and description and db.name (databse name)
 }
 \description{
 Creates a list containing information about a file
