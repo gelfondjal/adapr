@@ -54,8 +54,17 @@ getAdaprOptions <- function(setoptions=FALSE){
 #' 
 setAdaprOptions <- function(optionname="",optionvalue=""){
   # 
+  optionvalue <- as.character(optionvalue)
+  optionname <- as.character(optionname)
   
   options <- getAdaprOptions(FALSE)
+  
+  if(!(optionname %in% names(options))){
+    print("Current adapr options:")
+    print(names(options))
+    stop(paste("Not a known adapr option:",optionname))
+    }
+  
   if((as.numeric(version$major) +as.numeric(version$minor)/10)>=3.2){
   
   if(optionname=="project.path"){
