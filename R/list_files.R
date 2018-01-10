@@ -66,9 +66,10 @@ listScripts <- function(project.id=getProject()){
                                                   na.rm = TRUE)
                              n.lines <- length(readLines(file.path(x$source.file.path[1],x$source.file[1]),warn=FALSE))
                              mod.date <- as.Date(file.info(file.path(x$source.file.path[1],x$source.file[1]))$mtime)
-                             run.date <- as.Date(x$source.run.time[1])   
+                             run.date <- as.Date(x$source.run.time[1]) 
+                             run.days.ago <- difftime(Sys.Date(),run.date,units="days")
                              
-                             return(data.frame(n.lines=n.lines,last.run.time.sec = last.run.time,mod.date=mod.date,run.date=run.date))
+                             return(data.frame(n.lines=n.lines,last.run.time.sec = last.run.time,mod.date=mod.date,run.date=run.date,run.days.ago=run.days.ago))
                            })
   programs <- merge(programs, run.times, by = "source.file")
   
