@@ -118,7 +118,7 @@ plantTree <- function(project.id,project.path=NA,swap.directory=NA,first.program
 }
 #' changes project directory/publish directory/library locataion or identifies imported project
 #' @param project.id0 Project name
-#' @param project.path Project home directory
+#' @param project.path Project home PARENT directory
 #' @param swap.directory Project publish directory
 #' @param project.libraryTF Logical to use a local (not default) library
 #' @param library.path = path to local (not default) library

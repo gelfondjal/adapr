@@ -159,7 +159,7 @@ showResults <- function(project.id=getProject(),rscript=getSourceInfo()$file$fil
   
   si <- pullSourceInfo(project.id)
   
-  if(rscript==""){
+  if(is.null(rscript)){
     utils::browseURL(file.path(getProjectPath(project.id),project.directory.tree$results))
   }else{
     resultdir <- file.path(getProjectPath(project.id),project.directory.tree$results,rscript)
@@ -205,6 +205,12 @@ dataDir <- function(project.id =getProject()){
 #'} 
 resultsDir <- function(sourceInfo = getSourceInfo()){
   
+  if(is.null(sourceInfo)){
+    
+    return(file.path(getProjectPath(),project.directory.tree$results))
+    
+  }
+  
   resultsDir <- sourceInfo$results.dir
   
   return(resultsDir)
@@ -213,6 +219,7 @@ resultsDir <- function(sourceInfo = getSourceInfo()){
 
 #' Opens a data frame as a csv file
 #' @param df data frame to write and then open
+#' @param overwriteTF logical to overwrite existing file. Default is FALSE
 #' @details Viewing only. Does not edit the data! Writes into the temp directory and uses system's .csv file browser.
 #' @return path to data directory
 #' @export
@@ -221,14 +228,28 @@ resultsDir <- function(sourceInfo = getSourceInfo()){
 #' viewData(mtcars)
 #'} 
 #'
-viewData <- function(df){
+viewData <- function(df,overwriteTF=FALSE){
   
-  fileToWrite <- file.path(tempdir(),"adaprOverwrite.csv")
+  n <- 1
+  
+  fileToWrite <- file.path(tempdir(),paste0("adaprOverwrite_",n,".csv"))
+  
+  if(!overwriteTF){
+    while(file.exists(fileToWrite)){
+      
+      n <- n + 1
+      
+      fileToWrite <- file.path(tempdir(),paste0("adaprOverwrite_",n,".csv"))
+      
+    }
+  }
+  print(quote(df))
   
   utils::write.csv(df,fileToWrite,row.names=FALSE)
   
   utils::browseURL(fileToWrite)
   
+  return(fileToWrite)
   
 }
 

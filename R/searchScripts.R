@@ -16,36 +16,45 @@
 
 searchScripts <- function(matcher,project.id = getProject(),...){
   
-  path <- getProjectPath(project.id)
+  projects <- data.frame(project.id=unique(project.id))
+  
+  count.dat <- plyr::ddply(projects,"project.id",function(x){
+    count.dat <- data.frame()
+    try({
+    
+    path <- getProjectPath(x$project.id[1])
   
   
-  files <- c(list.files(file.path(path,'Programs'),full.names = TRUE),
+    files <- c(list.files(file.path(path,'Programs'),full.names = TRUE),
              list.files(file.path(path,'Programs','Markdown'),full.names = TRUE),
                         list.files(file.path(path,'Programs','support_functions'),full.names = TRUE))
   
-  filesr <- grep('(\\.R$)|(\\.Rmd$)',files, value=TRUE)
+    filesr <- grep('(\\.R$)|(\\.Rmd$)',files, value=TRUE)
   
-  #scripts <- file.path(path,'Programs',filesr)
-  scripts <- filesr
-  top <- lapply(scripts,function(x){readLines(x)})
+    #scripts <- file.path(path,'Programs',filesr)
+    scripts <- filesr
+    top <- lapply(scripts,function(x){readLines(x)})
   
-  names(top) <- basename(scripts)
+    names(top) <- basename(scripts)
   
-  dirnamer <- basename(dirname(scripts))
+    dirnamer <- basename(dirname(scripts))
   
-  dirs <- data.frame(file=basename(scripts),directory=dirnamer)
+    dirs <- data.frame(file=basename(scripts),directory=dirnamer)
   
-  count.dat <-  plyr::ldply(lapply(top,function(y){return(sum(grepl(matcher,y)))}))
+    count.dat <-  plyr::ldply(lapply(top,function(y){return(sum(grepl(matcher,y)))}))
   
-  count.dat <- subset(count.dat,count.dat$V1>0)
+    count.dat <- subset(count.dat,count.dat$V1>0)
   
-  names(count.dat) <- c("file","count")
+    names(count.dat) <- c("file","count")
   
-  count.dat <- merge(dirs,count.dat)
+    count.dat <- merge(dirs,count.dat)
   
-  count.dat <- count.dat[order(-count.dat$count),]
-  
+    count.dat <- count.dat[order(-count.dat$count),]
+  })
+    return(count.dat)
+    
+  })
+
   return(count.dat)
-  
 }
 

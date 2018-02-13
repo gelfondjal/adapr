@@ -100,6 +100,7 @@ write(knitr::kable(out),file.path(targetdirectory,targetfile),append=TRUE)
 write("\n",file.path(targetdirectory,targetfile),append=TRUE)
 }
 fileout <- file.path(targetdirectory,targetfile)
+Sys.setenv(PATH=getAdaprOptions()$PATH)
 rmarkdown::render(fileout)
 paste("Made",si$project.id,"project summary.")
 return(fileout)

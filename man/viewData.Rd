@@ -4,10 +4,12 @@
 \alias{viewData}
 \title{Opens a data frame as a csv file}
 \usage{
-viewData(df)
+viewData(df, overwriteTF = FALSE)
 }
 \arguments{
 \item{df}{data frame to write and then open}
+
+\item{overwriteTF}{logical to overwrite existing file. Default is FALSE}
 }
 \value{
 path to data directory

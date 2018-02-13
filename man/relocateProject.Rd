@@ -10,7 +10,7 @@ relocateProject(project.id0, project.path = NA, swap.directory = NA,
 \arguments{
 \item{project.id0}{Project name}
 
-\item{project.path}{Project home directory}
+\item{project.path}{Project home PARENT directory}
 
 \item{swap.directory}{Project publish directory}
 
