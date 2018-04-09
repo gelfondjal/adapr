@@ -38,6 +38,11 @@ setProject <- function(project.id="",quickTest=TRUE){
   
   if(test){
     if(project.id==""){
+      
+      if(project.id!=getProject()){
+        options(adaprScriptInfo=NULL)
+      }
+      
       options(adaprProject = defaultProject)
       
       .libPaths(getProjectLibrary(defaultProject))
@@ -56,11 +61,17 @@ setProject <- function(project.id="",quickTest=TRUE){
   if(project.id!=""){
     
     if(project.id %in% projects){
+      if(project.id!=getProject()){
+        options(adaprScriptInfo=NULL)
+      }
       options(adaprProject = project.id)
       .libPaths(getProjectLibrary(project.id))
     }else{
       warning("adapr::setProject project.id does not exist")
       project.id <- defaultProject
+      if(project.id!=getProject()){
+        options(adaprScriptInfo=NULL)
+      }
       options(adaprProject = project.id)
       .libPaths(getProjectLibrary(defaultProject))
     }
