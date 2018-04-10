@@ -67,13 +67,29 @@ setProject <- function(project.id="",quickTest=TRUE){
       options(adaprProject = project.id)
       .libPaths(getProjectLibrary(project.id))
     }else{
-      warning("adapr::setProject project.id does not exist")
-      project.id <- defaultProject
-      if(project.id!=getProject()){
-        options(adaprScriptInfo=NULL)
+      print("adapr::setProject project.id does not exist. Try partial match.")
+      
+      projects <- listProjects()$project.id
+      #print(projects)
+      
+      matches <- adist(substring(projects,1,nchar(project.id)),project.id)
+      projects <- projects[order(matches)][1:min(c(5,length(projects)))]
+      print(projects)
+      n <- (readline("Which project (specify project or row number)?"))
+      
+      
+      
+      if (!(n %in% 1:length(projects))) {
+        warning("adapr::setProject project.id does not exist")
+        project.id <- defaultProject
+        options(adaprProject = project.id)
+        .libPaths(getProjectLibrary(defaultProject))
+      }else {
+        project.id <- projects[as.integer(n)]
+        options(adaprProject = project.id)
+        .libPaths(getProjectLibrary(project.id))
       }
-      options(adaprProject = project.id)
-      .libPaths(getProjectLibrary(defaultProject))
+      
     }
     
   }else{
