@@ -72,7 +72,7 @@ setProject <- function(project.id="",quickTest=TRUE){
       projects <- listProjects()$project.id
       #print(projects)
       
-      matches <- adist(substring(projects,1,nchar(project.id)),project.id)
+      matches <- utils::adist(substring(projects,1,nchar(project.id)),project.id)
       projects <- projects[order(matches)][1:min(c(5,length(projects)))]
       print(projects)
       n <- (readline("Which project (specify project or row number)?"))
