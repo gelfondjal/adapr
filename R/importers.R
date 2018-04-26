@@ -40,7 +40,8 @@ importProject <- function(importer.file = NULL,import.by.Rscript=FALSE){
   test <- FALSE
   try({
     setProject(project.id)
-    graphProject(testSync=FALSE)
+    plotter <- graphProject(testSync=FALSE)
+    print(plotter)
     test <- TRUE	
     
   })
