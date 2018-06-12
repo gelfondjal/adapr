@@ -28,7 +28,7 @@ copyProject <- function(project.id = getProject(),targetDirectory=getProjectPubl
   
   x <- data.frame(file=sample(allfiles)[1])
   
-  copyResults <- ddply(data.frame(file=allfiles),"file",function(x){
+  copyResults <- plyr::ddply(data.frame(file=allfiles),"file",function(x){
     
     copyOut <- FALSE
     
@@ -54,7 +54,7 @@ copyProject <- function(project.id = getProject(),targetDirectory=getProjectPubl
     data.frame(copied=copyOut)
     
     
-  },.progress=progress_text(char = "."))
+  },.progress=plyr::progress_text(char = "."))
   
   return(copyResults)
   

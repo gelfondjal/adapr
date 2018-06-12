@@ -62,7 +62,7 @@ setAdaprOptions <- function(optionname="",optionvalue=""){
   if(!(optionname %in% names(options))){
     print("Current adapr options:")
     print(names(options))
-    stop(paste("Not a known adapr option:",optionname))
+    warning(paste("Setting up new adapr option:",optionname))
     }
   
   if((as.numeric(version$major) +as.numeric(version$minor)/10)>=3.2){
