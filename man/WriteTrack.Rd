@@ -4,12 +4,15 @@
 \alias{WriteTrack}
 \title{Tracks files written by functions not in adapr and captures the file information within dependency object}
 \usage{
-WriteTrack(file.name = "data.csv", description = "Result file")
+WriteTrack(file.name = "data.csv", description = "Result file",
+  date = FALSE)
 }
 \arguments{
 \item{file.name}{name of file}
 
 \item{description}{description of data file}
+
+\item{date}{Logical specifying whether to insert date into file name}
 }
 \value{
 Filepath of file that was written

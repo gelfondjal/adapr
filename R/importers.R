@@ -1,6 +1,6 @@
 #' Imports new project using adapr import file or by selecting any R script within the project
 #' @param importer.file File created by adapr::makeImporter that is selected interactively OR any R script within program directory
-#' @param import.by.Rscript logical indicating whether importer.file parameter is a "adapr_importer.R" file OR any R script within program directory.
+#' @param Rscript logical indicating whether importer.file parameter is a "adapr_importer.R" file OR any R script within program directory.
 #' @return Logical indicating success or not
 #' @export
 #' @details This is a console command. The function adapr::makeImproter will create the "adapr_importer.R" file needed. Function will create an interactive file choosing window.
@@ -8,7 +8,7 @@
 #'\dontrun{
 #' importProject() # Will open window for file selection.
 #'} 
-importProject <- function(importer.file = NULL,import.by.Rscript=FALSE){
+importProject <- function(importer.file = NULL,Rscript=FALSE){
   
   
   if(is.null(importer.file)){
@@ -16,7 +16,7 @@ importProject <- function(importer.file = NULL,import.by.Rscript=FALSE){
     yn <- readline("Import new project into adapr? y or n")
     if(tolower(yn)!="y"){stop("importProject fail. User did not enter y for yes")}
     
-    if(!import.by.Rscript){
+    if(!Rscript){
       print("Browse to project folder and select the 'adapr_importer.R' file within the Project directory:  [Project to Import]/adapr_importer.R")
     }else{
       print("Browse to project folder and any R Script '.R' file within the Project's Programs directory:  [Project to Import]/Programs/*.R")
@@ -27,7 +27,7 @@ importProject <- function(importer.file = NULL,import.by.Rscript=FALSE){
     
   }
   
-  if(!import.by.Rscript){
+  if(!Rscript){
     sourceOut <- source(importer.file)
     project.id <- basename(dirname(importer.file))
   }else{

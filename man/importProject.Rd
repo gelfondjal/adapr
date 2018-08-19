@@ -4,12 +4,12 @@
 \alias{importProject}
 \title{Imports new project using adapr import file or by selecting any R script within the project}
 \usage{
-importProject(importer.file = NULL, import.by.Rscript = FALSE)
+importProject(importer.file = NULL, Rscript = FALSE)
 }
 \arguments{
 \item{importer.file}{File created by adapr::makeImporter that is selected interactively OR any R script within program directory}
 
-\item{import.by.Rscript}{logical indicating whether importer.file parameter is a "adapr_importer.R" file OR any R script within program directory.}
+\item{Rscript}{logical indicating whether importer.file parameter is a "adapr_importer.R" file OR any R script within program directory.}
 }
 \value{
 Logical indicating success or not

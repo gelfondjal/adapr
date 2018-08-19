@@ -16,8 +16,6 @@ defaultAdaprSetup <- function(){
   step <- 1
   #equire(devtools)
 
-
-
   print("Will make project directories in computer Document directory and create adaprHome project.")
   
   print("Easier setup in RStudio.")

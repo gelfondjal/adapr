@@ -30,14 +30,8 @@ Write <- function(obj=NULL,file.name="data.csv",description="Result file",write.
   
   
   
-  if(!exists("source_info")){
-    
-    source_info <- list()
-    
-    stop("Write (adapr) error: source_info not found")
-    
-  }
-  
+   source_info <- getSourceInfo()
+ 
   
   if(date){
     
@@ -45,7 +39,6 @@ Write <- function(obj=NULL,file.name="data.csv",description="Result file",write.
     suffix <- gsub(".*\\.","\\.",file.name)
     
     datestring <- gsub("\\-","_",Sys.Date())
-    
     
     file.name <- paste0(prefix,"_",datestring,suffix)
     
@@ -57,14 +50,14 @@ Write <- function(obj=NULL,file.name="data.csv",description="Result file",write.
   if(dirname(file.name)!="."){
     outpath <- file.path(source_info$results.dir,dirname(file.name))
     
-  }else{outpath <- source_info$results.dir}
+  }else{outpath <- getSourceInfo()$results.dir}
   
   
   outfile <- basename(file.name)
   
   file.info <- createFileInfo(outpath,outfile,description)
   
-  write.obj <-Write.cap(obj,file.info,write.fcn,options()$adaprScriptInfo,...)
+  write.obj <-Write.cap(obj,file.info,write.fcn,getSourceInfo(),...)
   
   return(file.info)
   
@@ -72,6 +65,7 @@ Write <- function(obj=NULL,file.name="data.csv",description="Result file",write.
 #' Tracks files written by functions not in adapr and captures the file information within dependency object
 #' @param file.name name of file
 #' @param description description of data file
+#' @param date Logical specifying whether to insert date into file name
 #' @details Allows tracking of files written by other functions than Write. Assumes file is in Results directory
 #' @return Filepath of file that was written
 #' @export
@@ -83,9 +77,9 @@ Write <- function(obj=NULL,file.name="data.csv",description="Result file",write.
 #' showResults()  
 #'} 
 #'  
-WriteTrack <- function(file.name="data.csv",description="Result file"){
+WriteTrack <- function(file.name="data.csv",description="Result file",date=FALSE){
   
-  out <- Graph(file.name,description,I)
+  out <- Graph(file.name,description,I,date=date)
  
   return(out$fullname)
 }

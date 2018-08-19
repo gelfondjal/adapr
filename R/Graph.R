@@ -19,15 +19,7 @@ Graph <- function(file.name="data.csv",description="Result file",write.fcn=guess
   # used file.name and description create file.information
   
   obj <- NULL
-  
-  if(!exists("source_info")){
-    
-    source_info <- list()
-    
-    stop("Graph (adapr) error: source_info not found")
-    
-  }
-  
+  source_info <- getSourceInfo()
   
   if(date){
     
@@ -44,7 +36,7 @@ Graph <- function(file.name="data.csv",description="Result file",write.fcn=guess
   
   
   if(dirname(file.name)!="."){
-    outpath <- file.path(source_info$results.dir,dirname(file.name))
+    outpath <- file.path(getSourceInfo()$results.dir,dirname(file.name))
     
   }else{outpath <- source_info$results.dir}
   
@@ -53,7 +45,7 @@ Graph <- function(file.name="data.csv",description="Result file",write.fcn=guess
   
   file.info <- createFileInfo(outpath,outfile,description)
   
-  write.obj <-Write.cap(obj,file.info,write.fcn,options()$adaprScriptInfo,...)
+  write.obj <-Write.cap(obj,file.info,write.fcn,getSourceInfo(),...)
   
   return(file.info)
   
