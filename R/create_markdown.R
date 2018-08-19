@@ -40,14 +40,14 @@ createMarkdown <- function(target.file=paste0(getSourceInfo()$file$file,"md"),ta
 							"require(\"knitr\") \n",
               "paste0(\"Created on \",(Sys.time() ))\n",
 							"```\n\n\n",
-							paste0("```{r,echo=FALSE,message=FALSE,warning=FALSE,include=FALSE}\n # if(FALSE){scriptLoader(",
+							paste0("```{r,echo=FALSE,message=FALSE,warning=FALSE,include=FALSE}\n #If TRUE then will "knit" in RStudio \n if(FALSE){scriptLoader(",
 							paste0("\"",si$project.id,"\""),
 							                              ",", 
               paste0("\"",si$file$file  ,"\""),")}","\n",
 							
-							"<!-- Begin R Markdown Body Here --> ",
+						
 							      
-							      "\n```\n\n\n\n"),
+							      "\n```\n\n\n\n"),	"<!-- Begin R Markdown Body Here --> ",
 							
 							"\n```{r,echo=FALSE} \n if(checkRmdMode()){dependency.out <- finalize_dependency() } \n```")
 								
