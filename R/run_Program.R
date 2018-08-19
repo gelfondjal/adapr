@@ -146,7 +146,7 @@ removeScript <- function(source.file=get("source_info")$file$file,project.id=get
   
   while((length(inside.results)>0)&(counter < 1000)){
   
-  inside.out <- file.remove(inside.results)
+  inside.out <- suppressWarnings(file.remove(inside.results))
   
   inside.results <- list.files(results,full.names=TRUE,recursive = TRUE,include.dirs = TRUE)
   
@@ -154,7 +154,7 @@ removeScript <- function(source.file=get("source_info")$file$file,project.id=get
   
   }
   
-  results.out <- file.remove(results,recursive=TRUE,include.dirs = TRUE)
+  if(base::dir.exists(results)){results.out <- file.remove(results)}
   
   results <- file.remove(c(program,dependencyDir,markdownfile))
     

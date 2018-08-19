@@ -13,7 +13,7 @@ scriptLoader <- function(projectID,script){
   
   resultsPath <- file.path(getProjectPath(projectID),project.directory.tree$results,script)
   
-  setwd(resultsPath)
+  #setwd(resultsPath)
   
   if(!file.exists(programPath)){stop("Program file ",programPath," doesn't exist")}
   
