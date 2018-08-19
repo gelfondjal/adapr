@@ -100,7 +100,7 @@ syncProject <- function (project.id = getProject(), ask = FALSE)
       
       
       messageOut <- paste(idSync.out$file[source.iter], paste0(source.iter, 
-                                                               "/", n.scripts.to.sync), wait0, "seconds remaining")
+                                                               "/", n.scripts.to.sync), round(wait0), "seconds remaining")
       
       
       print(rapidPlot(ggproject,message=messageOut))    

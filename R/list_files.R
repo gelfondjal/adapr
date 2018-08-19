@@ -230,24 +230,28 @@ resultsDir <- function(sourceInfo = getSourceInfo()){
 #'
 viewData <- function(df,overwriteTF=FALSE){
   
+  
   n <- 1
   
-  fileToWrite <- file.path(tempdir(),paste0("adaprOverwrite_",n,".csv"))
+  filename <- make.names(as.character(substitute(df)))
+  
+  fileToWrite <- file.path(tempdir(),paste0(filename,"_",n,".csv"))
   
   if(!overwriteTF){
     while(file.exists(fileToWrite)){
       
       n <- n + 1
       
-      fileToWrite <- file.path(tempdir(),paste0("adaprOverwrite_",n,".csv"))
+      fileToWrite <- file.path(tempdir(),paste0(filename,"_",n,".csv"))
       
     }
   }
-  print(quote(df))
+  #print(filename)
   
   utils::write.csv(df,fileToWrite,row.names=FALSE)
   
   utils::browseURL(fileToWrite)
+  
   
   return(fileToWrite)
   

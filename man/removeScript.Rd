@@ -4,13 +4,13 @@
 \alias{removeScript}
 \title{Remove an R script from a project. Removes program, dependency, and results.}
 \usage{
-removeScript(project.id = getProject(),
-  source.file = get("source_info")$file$file, ask = TRUE)
+removeScript(source.file = get("source_info")$file$file,
+  project.id = getProject(), ask = TRUE)
 }
 \arguments{
-\item{project.id}{project id}
-
 \item{source.file}{R script within that project}
+
+\item{project.id}{project id}
 
 \item{ask}{is a logical whether to ask user}
 }

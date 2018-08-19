@@ -117,7 +117,7 @@ runScript <- function(r=getSourceInfo()$file$file,project.id=getProject(),logRmd
 #' 
 #' 
 
-removeScript <- function(project.id=getProject(),source.file=get("source_info")$file$file,ask=TRUE){
+removeScript <- function(source.file=get("source_info")$file$file,project.id=getProject(),ask=TRUE){
   # get project object
   
   if(ask){
