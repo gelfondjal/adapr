@@ -107,7 +107,7 @@ syncProject <- function (project.id = getProject(), ask = FALSE)
       
       last.prog <- ""
       try({
-        devtools::clean_source(file.path(idSync.out$path[source.iter], 
+        callr::rscript(file.path(idSync.out$path[source.iter], 
                                          idSync.out$file[source.iter]))
         last.prog <- idSync.out$file[source.iter]
         
@@ -221,7 +221,7 @@ syncTrunk <- function(rscript,project.id=getProject(),ask=FALSE){
       
       
       try({
-        devtools::clean_source(file.path(idSync.out$path[source.iter],idSync.out$file[source.iter]))
+        callr::rscript(file.path(idSync.out$path[source.iter],idSync.out$file[source.iter]))
         
         #run.program(input$project.id,idSync.out$file[source.iter],TRUE)  
         

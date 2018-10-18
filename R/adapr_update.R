@@ -8,7 +8,7 @@
 #'} 
 adaprUpdate <- function(){
   
-  output <- devtools::install_github("gelfondjal/adapr")
+  output <- remotes::install_github("gelfondjal/adapr")
   
   return(output)
   

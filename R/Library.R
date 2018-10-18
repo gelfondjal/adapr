@@ -66,7 +66,7 @@ Library <- function(package,repository="cran",github="",project.id=getProject())
       
       #install.packages("devtools", lib=.libPaths()[1])
       #withr::with_libpaths(new = .libPaths()[1], devtools::install_github(github))
-      devtools::install_github(github,lib=.libPaths()[1])
+      remotes::install_github(github,lib=.libPaths()[1])
     }   
   # Github
  

@@ -98,7 +98,7 @@ plantTree <- function(project.id,project.path=NA,swap.directory=NA,first.program
     
     test <- sproutProgram(project.id,source.file.name=first.program,description="reads data",seed=2011,capture.load.command="library(\"adapr\")",controller=FALSE)
     try({
-    devtools::clean_source(file.path(project.path,project.directory.tree$analysis,first.program),quiet=TRUE) 
+      callr::rscript(file.path(project.path,project.directory.tree$analysis,first.program),show=FALSE) 
     })
      if(!test){
      

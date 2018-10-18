@@ -1,4 +1,4 @@
-#' Run an R script within a project using devtools::clean_source
+#' Run an R script within a project using callr::rscript
 #' @param r R script within that project (r is short R script for convenience)
 #' @param project.id project id
 #' @param logRmd logical indicating whether to create R markdown log
@@ -41,7 +41,7 @@ runScript <- function(r=getSourceInfo()$file$file,project.id=getProject(),logRmd
   
   # get project object
   if(!logRmd){
-    out <- devtools::clean_source(scriptfile)
+    out <- callr::rscript(scriptfile)
   }else{
     
     results <- file.path(getProjectPath(project.id),project.directory.tree$results,source.file)
@@ -74,7 +74,7 @@ runScript <- function(r=getSourceInfo()$file$file,project.id=getProject(),logRmd
     
     write(renderstatement,executor)
     
-    out <- devtools::clean_source(executor)
+    out <- callr::rscript(executor)
     
     depout <- read.dependency(dependency.file)
     

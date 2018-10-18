@@ -11,7 +11,7 @@ idPackages <- function(library.data.file){
   packages.info.all <- utils::read.csv(library.data.file,as.is=TRUE)
   
   adapr_packs <- c("adapr","stats","graphics","grDevices","utils","base")
-   notadapr <- setdiff(devtools::loaded_packages()$package,adapr_packs)
+   notadapr <- setdiff(loaded_packages()$package,adapr_packs)
    
    missing <- setdiff(notadapr,packages.info.all$Package)   					   					
   
@@ -19,7 +19,7 @@ idPackages <- function(library.data.file){
   
   if(length(missing)){
     
-    packageInfo <- devtools::session_info(include_base = TRUE)$packages
+    packageInfo <- sessioninfo::session_info(include_base = TRUE)$packages
     
     packageInfo <- subset(packageInfo,packageInfo$package %in% missing)
     
@@ -34,4 +34,20 @@ idPackages <- function(library.data.file){
   return(missing)	
   
   
+}
+
+
+# From devtools::loaded_packages
+
+loaded_packages <- function() {
+  attached <- data.frame(
+    package = search(),
+    path = searchpaths(),
+    stringsAsFactors = FALSE
+  )
+  packages <- attached[grepl("^package:", attached$package), , drop = FALSE]
+  rownames(packages) <- NULL
+
+  packages$package <- sub("^package:", "", packages$package)
+  packages
 }
