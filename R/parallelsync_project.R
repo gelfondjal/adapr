@@ -122,7 +122,7 @@ presult <- plyr::ddply(nodes,"compute.node",function(x){
         
         try({
           
-          devtools::clean_source(fullname,quiet=TRUE)
+          callr::rscript(fullname,show=FALSE)
           
           
           success <- TRUE

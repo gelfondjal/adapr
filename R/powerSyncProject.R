@@ -75,7 +75,7 @@
 #'       
 #'       last.prog <- ""
 #'       try({
-#'         devtools::clean_source(file.path(idSync.out$path[source.iter], 
+#'         callr::rscript(file.path(idSync.out$path[source.iter], 
 #'                                          idSync.out$file[source.iter]))
 #'         last.prog <- idSync.out$file[source.iter]
 #'         

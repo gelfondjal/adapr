@@ -96,7 +96,7 @@ sourceSyncSI <- function(source_info,run=TRUE,plot.to.file=FALSE){
       
       if(plot.to.file){grDevices::graphics.off()}
       
-      if(source.iter<=nrow(idSync.out)){devtools::clean_source(file.path(idSync.out$path[source.iter],idSync.out$file[source.iter]))}
+      if(source.iter<=nrow(idSync.out)){callr::rscript(file.path(idSync.out$path[source.iter],idSync.out$file[source.iter]))}
       
       
     }

@@ -16,7 +16,7 @@ successTF <- FALSE
 
  try({
 
-  devtools::install(adaprDependencies(),lib=library.location,dependencies = c("Depends","Imports"))
+  remotes::install_local(adaprDependencies(),lib=library.location,dependencies = c("Depends","Imports"))
 
  },silent = TRUE)
 #
@@ -29,7 +29,7 @@ successTF <- FALSE
  try({
 
  if(betaTF){
-   devtools::install_github("gelfondjal/adapr",lib=library.location,dependencies = c("Depends","Imports"))
+   remotes::install_local("gelfondjal/adapr",lib=library.location,dependencies = c("Depends","Imports"))
  }else{
    utils::install.packages("adapr",lib=library.location,dependencies = c("Depends","Imports"))
  }

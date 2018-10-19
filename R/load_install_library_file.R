@@ -202,7 +202,7 @@ install <- function(package,version=NULL,installVersion=FALSE,lib=.libPaths()[1]
    	
    	if(!installVersion){gitname <- gsub("@.*","",gitname)}
    	
-   	devtools::install_github(gitname)
+   	remotes::install_github(gitname)
 
   }# github package 
     
