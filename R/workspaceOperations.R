@@ -171,5 +171,14 @@ loadWorkspace <- function(file=NA,script=getSourceInfo()$file$file,project=getPr
   
   out <- base::load(fullName,envir=parent.frame())
   
+  file.info <- getFileInfo(options()$adaprScriptInfo, data = "", 
+                           file0 = "", path.grep = fullName)
+  
+  df.update <- data.frame(target.file = file.info[["file"]], 
+                          target.path = file.info[["path"]], target.description = file.info[["description"]], 
+                          dependency = "in", stringsAsFactors = FALSE)
+  
+  options()$adaprScriptInfo$dependency$update(df.update)
+  
   return(out)
 }
