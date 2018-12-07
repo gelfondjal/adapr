@@ -5,7 +5,8 @@
 \title{Make plot of network within html documents.
 Summarize all programs.}
 \usage{
-projectReportMarkdown(source_info, graph.width = 960, graph.height = 500)
+projectReportMarkdown(source_info, graph.width = 960,
+  graph.height = 500)
 }
 \arguments{
 \item{source_info}{Source information list}

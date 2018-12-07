@@ -3,7 +3,7 @@
 \name{runScript}
 \alias{runScript}
 \alias{{run.program}}
-\title{Run an R script within a project using devtools::clean_source}
+\title{Run an R script within a project using runScriptQuiet}
 \usage{
 runScript(r = getSourceInfo()$file$file, project.id = getProject(),
   logRmd = FALSE)
@@ -19,7 +19,7 @@ runScript(r = getSourceInfo()$file$file, project.id = getProject(),
 value from clean_source from devtools package
 }
 \description{
-Run an R script within a project using devtools::clean_source
+Run an R script within a project using runScriptQuiet
 }
 \details{
 Lists scripts if no current script is active or r script is "".

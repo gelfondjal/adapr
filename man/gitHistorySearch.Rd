@@ -4,8 +4,8 @@
 \alias{gitHistorySearch}
 \title{Performes git history search}
 \usage{
-gitHistorySearch(gitdir, pattern, branch = NULL, git_args = character(),
-  git_binary = NULL)
+gitHistorySearch(gitdir, pattern, branch = NULL,
+  git_args = character(), git_binary = NULL)
 }
 \arguments{
 \item{gitdir}{string with git directory}

@@ -1,4 +1,4 @@
-#' Run an R script within a project using callr::rscript
+#' Run an R script within a project using runScriptQuiet
 #' @param r R script within that project (r is short R script for convenience)
 #' @param project.id project id
 #' @param logRmd logical indicating whether to create R markdown log
@@ -35,19 +35,30 @@ runScript <- function(r=getSourceInfo()$file$file,project.id=getProject(),logRmd
   }
   
   
-  source.file <- r
+  
+  source.file <- as.character(r)
   
   scriptfile <- file.path(getProjectPath(project.id),project.directory.tree$analysis,source.file)
   
+  results <- file.path(getProjectPath(project.id),project.directory.tree$results,source.file)
+  
+  dir.create(results,showWarnings=FALSE)
+  
+  
+  
   # get project object
   if(!logRmd){
-    out <- callr::rscript(scriptfile)
+    olddir <- getwd()
+    
+    setwd(results)
+    #print(results)
+    print(source.file)
+    out <- runScriptQuiet(scriptfile,wd=results)
+    setwd(olddir)
+    
   }else{
     
-    results <- file.path(getProjectPath(project.id),project.directory.tree$results,source.file)
-    
-    dir.create(results,showWarnings=FALSE)
-    
+  
     program <- scan(scriptfile,what=character(),sep="\n")
     
     program <- c("```{r}\n\n",paste("\n\n #adapr Run: \n Sys.time() \n\n"),program,"\n\n #adapr Stop: \n Sys.time() \n\n```")
@@ -74,7 +85,7 @@ runScript <- function(r=getSourceInfo()$file$file,project.id=getProject(),logRmd
     
     write(renderstatement,executor)
     
-    out <- callr::rscript(executor)
+    out <- runScriptQuiet(executor)
     
     depout <- read.dependency(dependency.file)
     
@@ -161,3 +172,20 @@ removeScript <- function(source.file=get("source_info")$file$file,project.id=get
   return(c(results,inside.out,results))
 }
 
+
+#' Run an R script in the background using callr::rcmd_safe
+#' @param pathToScript filepath to R script 
+#' @param ... extra arguments to callr::rcmd_safe
+#' @return value from callr::rcmd_safe status of script execution
+#'@examples 
+#'\dontrun{
+#' runScript("pathToMyRscript.R")
+#'} 
+#' 
+
+
+runScriptQuiet <- function(pathToScript,...){
+  #/Volumes/WORKING2/Projects/Gelfond/R_test/Programs/read_data.R
+  valueOut <- callr::rcmd_safe(cmd="Batch",cmdargs = paste(pathToScript,"--no-save --vanilla -sdf"),...)
+  return(valueOut$status)
+}

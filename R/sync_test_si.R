@@ -107,8 +107,11 @@ syncProject <- function (project.id = getProject(), ask = FALSE)
       
       last.prog <- ""
       try({
-        callr::rscript(file.path(idSync.out$path[source.iter], 
-                                         idSync.out$file[source.iter]))
+#        runScriptQuiet(file.path(idSync.out$path[source.iter], 
+#                                         idSync.out$file[source.iter]))
+        
+        runScript(as.character(idSync.out$file[source.iter]),project.id)
+        
         last.prog <- idSync.out$file[source.iter]
         
         ggproject$vertex$synccolor[namer==idSync.out$file[source.iter]] <- "Synchronized"
@@ -221,7 +224,7 @@ syncTrunk <- function(rscript,project.id=getProject(),ask=FALSE){
       
       
       try({
-        callr::rscript(file.path(idSync.out$path[source.iter],idSync.out$file[source.iter]))
+        runScript(as.character(idSync.out$file[source.iter]),project.id)
         
         #run.program(input$project.id,idSync.out$file[source.iter],TRUE)  
         

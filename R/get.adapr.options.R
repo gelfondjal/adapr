@@ -109,7 +109,7 @@ setAdaprOptions <- function(optionname="",optionvalue=""){
       email <- ""
       
       try({
-        email <-  git2r::config()[["global"]]$user.email
+        email <-  paste(git2r::config()[["global"]]$user.email,git2r::config()[["local"]]$user.email)
       })
       
       

@@ -4,7 +4,8 @@
 \alias{AppLoadFlex}
 \title{Loads a single R object from file for a R Shiny app}
 \usage{
-AppLoadFlex(project.id = getProject(), path, file, read.fcn = readRDS, ...)
+AppLoadFlex(project.id = getProject(), path, file, read.fcn = readRDS,
+  ...)
 }
 \arguments{
 \item{project.id}{project name from which to load file}

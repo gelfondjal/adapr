@@ -4,7 +4,8 @@
 \alias{rapidPlot}
 \title{Make project graph with sync status already computed.}
 \usage{
-rapidPlot(previousGraph, project.id = getProject(), message = "Running")
+rapidPlot(previousGraph, project.id = getProject(),
+  message = "Running")
 }
 \arguments{
 \item{previousGraph}{output value of createProjectGraph}
