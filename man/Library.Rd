@@ -4,11 +4,11 @@
 \alias{Library}
 \title{Installs and loads library specific to a project}
 \usage{
-Library(package, repository = "cran", github = "",
+Library(packageList, repository = "cran", github = "",
   project.id = getProject())
 }
 \arguments{
-\item{package}{character for package to load/install}
+\item{packageList}{character for package to load/install}
 
 \item{repository}{character for location of repository. "cran" for CRAN and "bioc" for bioconductor.}
 

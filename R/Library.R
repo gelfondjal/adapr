@@ -1,5 +1,5 @@
 #' Installs and loads library specific to a project
-#' @param package character for package to load/install
+#' @param packageList character for package to load/install
 #' @param repository character for location of repository. "cran" for CRAN and "bioc" for bioconductor.
 #' @param github character for devtools::install_github("xxx")
 #' @param project.id project.id project id install within
@@ -10,8 +10,8 @@
 #' Library("adapr","cran",project.id="adaprHome")
 #'} 
 #' 
-Library <- function(package,repository="cran",github="",project.id=getProject()){
-  
+Library <- function(packageList,repository="cran",github="",project.id=getProject()){
+
   project_path <- getProjectPath(project.id)
   
   subDir <- getProjectLibrary(project.id)
@@ -30,6 +30,10 @@ Library <- function(package,repository="cran",github="",project.id=getProject())
     .libPaths(subDir)
   }
   
+  loadList <- rep(NA,length(packageList))
+  i <- 1
+  for(package in packageList){
+  
   if(package!="adapr"){
     
     loadTest <- is.installed("adapr")
@@ -47,32 +51,36 @@ Library <- function(package,repository="cran",github="",project.id=getProject())
   loadTest <- is.installed(package)
   
   if(loadTest){
-    require(package, lib.loc=.libPaths()[1], character.only=TRUE)
-    return(loadTest)
-    }
+    loadTest <- require(package, lib.loc=.libPaths()[1], character.only=TRUE)
+   # return(loadTest)
+    }else{
   
-  # Check if package is available and install the package in directory Packages
+    # Check if package is available and install the package in directory Packages
   
-  where <- ifelse(github=="",repository,"github")
+    where <- ifelse(github=="",repository,"github")
   
-  # CRAN 
-  if(where %in% c("cran","bioc")){
-    adapr::install(package,version=NULL,lib=subDir,repos=where,
-            show.available=FALSE,dependencies=c("Imports","Depends"))
-    }
-  if(where=="github"){   
-      # Trying github
-      cat("***\nTrying to get package from github...\n\n")
+    # CRAN 
+    if(where %in% c("cran","bioc")){
+      adapr::install(package,version=NULL,lib=subDir,repos=where,
+              show.available=FALSE,dependencies=c("Imports","Depends"))
+      }
+    if(where=="github"){   
+        # Trying github
+        cat("***\nTrying to get package from github...\n\n")
       
-      #install.packages("devtools", lib=.libPaths()[1])
-      #withr::with_libpaths(new = .libPaths()[1], devtools::install_github(github))
-      remotes::install_github(github,lib=.libPaths()[1])
-    }   
-  # Github
+        #install.packages("devtools", lib=.libPaths()[1])
+        #withr::with_libpaths(new = .libPaths()[1], devtools::install_github(github))
+        remotes::install_github(github,lib=.libPaths()[1])
+      }   
+    # Github
  
-  loadTest <- require(package, lib.loc=.libPaths()[1], character.only=TRUE)
- 
-  return(loadTest)
+    loadTest <- require(package, lib.loc=.libPaths()[1], character.only=TRUE)
+    }
+  loadList[i] <- loadTest
+  i <- i+1
+  } # Loop over packages
+  
+  return(loadList)
   
 }  
 
