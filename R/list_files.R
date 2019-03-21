@@ -258,4 +258,26 @@ viewData <- function(df,overwriteTF=FALSE){
 }
 
 
+#' Opens available Branches as a csv file
+#' @param projectId character string specifying project
+#' @details Viewing only. Does not edit the data! Writes into the temp directory and uses system's .csv file browser.
+#' @return 'listBranches' output
+#' @export
+#' @examples 
+#' \dontrun{
+#' viewData("adaprHome")
+#'} 
+#'
+viewBranches <- function(projectId = getProject()){
+  
+  branches <-listBranches(projectId)
+  
+  branches <-  branches[order(branches$path,branches$file),][,c("path","file","description")]
+  
+  viewData(branches)
+  
+  return(branches)
+  
+}
+
 

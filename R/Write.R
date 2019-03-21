@@ -28,15 +28,20 @@ Write <- function(obj=NULL,file.name="data.csv",description="Result file",write.
   # lightweight Write.cap take small number of args
   # used file.name and description create file.information
   
-  
+
   
    source_info <- getSourceInfo()
- 
+   
+   suffix <- gsub(".*\\.","\\.",file.name)
+   
+   if(tolower(suffix) %in% c("rdata","rda")){
+     description <- paste0(description,", ",paste(as.character(class(obj)),collapse=" "))[1]
+                           }
   
   if(date){
     
     prefix <- gsub("\\..*","",file.name)
-    suffix <- gsub(".*\\.","\\.",file.name)
+ 
     
     datestring <- gsub("\\-","_",Sys.Date())
     

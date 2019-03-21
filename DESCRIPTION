@@ -14,7 +14,7 @@ Description: Tracks reading and writing within R scripts that are organized into
     specification argument last in order. V2.0 adds project specific libraries, 
     option to use the 'packrat' package, and adaprSheet() providing function overview.
     Version 2.0 has speed up by vectorizing 'Git' calls and bug fixes. V2.1 adds workspaces
-    and vectorized library calls.
+    and vectorized library calls. Add ezpass Pass and Receive functions.
 License: LGPL-2
 Depends:
     R (>= 3.1)
