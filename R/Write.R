@@ -34,7 +34,7 @@ Write <- function(obj=NULL,file.name="data.csv",description="Result file",write.
    
    suffix <- gsub(".*\\.","\\.",file.name)
    
-   if(tolower(suffix) %in% c("rdata","rda")){
+   if(tolower(suffix) %in% c(".rdata",".rda")){
      description <- paste0(description,", ",paste(as.character(class(obj)),collapse=" "))[1]
                            }
   
