@@ -51,9 +51,9 @@ createMarkdown <- function(target.file=paste0(getSourceInfo()$file$file,"md"),ta
 
 							"printDocId(bornTF = FALSE,gitTF=as.logical(getAdaprOptions()$git))",  
 						  "```\n\n\n",
-							      "\n```\n\n\n\n"),	"<!-- Begin R Markdown Body Here --> ",
+							      "\n\n\n\n"),	"<!-- Begin R Markdown Body Here --> ",
 							
-							"\n```{r,echo=FALSE} \n if(checkRmdMode()){dependency.out <- finalize_dependency() } \n```")
+							"\n```{r,echo=FALSE} \n paste0(\"Finished on \",(Sys.time() ))\n if(checkRmdMode()){dependency.out <- finalize_dependency() } \n```")
 								
 	start.lines.generic <- paste(start.lines.generic,collapse="\n")
 	
