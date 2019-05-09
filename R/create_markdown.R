@@ -44,11 +44,13 @@ createMarkdown <- function(target.file=paste0(getSourceInfo()$file$file,"md"),ta
 							paste0("\"",si$project.id,"\""),
 							                              ",", 
               paste0("\"",si$file$file  ,"\""),")}","\n",
-							"```{r,echo=FALSE,message=FALSE,warning=FALSE,include=TRUE}\n require(\"adapr\") \n require(\"methods\") \n",
+							"\n require(\"adapr\") \n require(\"methods\") \n",
 							"require(\"knitr\") \n",
-							"printDocId(bornTF = FALSE,gitTF=as.logical(getAdaprOptions()$git))",
 							"```\n\n\n",
-							      
+						"```{r,echo=FALSE,message=FALSE,warning=FALSE,include=FALSE}",
+
+							"printDocId(bornTF = FALSE,gitTF=as.logical(getAdaprOptions()$git))",  
+						  "```\n\n\n",
 							      "\n```\n\n\n\n"),	"<!-- Begin R Markdown Body Here --> ",
 							
 							"\n```{r,echo=FALSE} \n if(checkRmdMode()){dependency.out <- finalize_dependency() } \n```")
