@@ -37,6 +37,7 @@ Imports:
     parallel,
     versions,
     archivist,
+    random,
     doParallel
 Suggests:
     packrat
