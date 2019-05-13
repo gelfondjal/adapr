@@ -23,6 +23,7 @@ createMarkdown <- function(target.file=paste0(getSourceInfo()$file$file,"md"),ta
 	target.file <- file.path(target.dir,target.file)
 #	Read.cap(file.information,read.fcn=I,source_info=si)
   
+	docID <- printDocId(bornTF = TRUE,gitTF=TRUE)
 	
 	if((!overwrite)&file.exists(target.file)){return(file.information)}
 	
@@ -39,7 +40,9 @@ createMarkdown <- function(target.file=paste0(getSourceInfo()$file$file,"md"),ta
 							"```{r,echo=FALSE,message=FALSE,warning=FALSE,include=FALSE}\n require(\"adapr\") \n require(\"methods\") \n",
 							"require(\"knitr\") \n",
 #              "paste0(\"Created on \",(Sys.time() ))\n",
+        
 							"```\n\n\n",
+              paste0(docID[1],"\n",docID[2],"\n",docID[3]),
 							paste0("```{r,echo=FALSE,message=FALSE,warning=FALSE,include=FALSE}\n #If TRUE then will \"knit\" in RStudio \n if(FALSE){scriptLoader(",
 							paste0("\"",si$project.id,"\""),
 							                              ",", 
@@ -47,10 +50,11 @@ createMarkdown <- function(target.file=paste0(getSourceInfo()$file$file,"md"),ta
 							"\n require(\"adapr\") \n require(\"methods\") \n",
 							"require(\"knitr\") \n",
 							"```\n\n\n",
-						"```{r,echo=FALSE,message=FALSE,warning=FALSE,include=FALSE}",
+						"```{r,echo=FALSE,message=FALSE,warning=FALSE,include=TRUE}\n",
 
-							"printDocId(bornTF = FALSE,gitTF=as.logical(getAdaprOptions()$git))",  
+							"printDocId(bornTF = FALSE,gitTF=TRUE)\n",  
 						  "```\n\n\n",
+
 							      "\n\n\n\n"),	"<!-- Begin R Markdown Body Here --> ",
 							
 							"\n```{r,echo=FALSE} \n paste0(\"Finished on \",(Sys.time() ))\n if(checkRmdMode()){dependency.out <- finalize_dependency() } \n```")

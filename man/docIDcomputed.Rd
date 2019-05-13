@@ -4,7 +4,7 @@
 \alias{docIDcomputed}
 \title{Create compute DocID with system user and compute time}
 \usage{
-docIDcomputed(gitTF = FALSE, gitRepo = getwd())
+docIDcomputed(gitTF = TRUE, gitRepo = getwd())
 }
 \arguments{
 \item{gitTF}{Logical whether to include git information}

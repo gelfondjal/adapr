@@ -67,21 +67,47 @@ witchUser <- function(userName="Anonymous",setUser=FALSE){
 
 gitSummary <- function(gitRepo="",gitTF=FALSE){
 
+  gitSummary <- ""
+  
   if(gitTF){
-
+  try({
     repo <- git2r::repository(gitRepo)
 
     committed <- git2r::last_commit(repo )
 
     gitSummary <- utils::capture.output(print(committed))
-
+  })
     return(gitSummary)
 
   }else{
 
-    return("")
+    return(gitSummary)
   }
+  return(gitSummary)
 
+}
+
+
+#' sourceFinder creates a filename and hash at runtime
+#' @param parentFile0 path to parent file that creates docutment
+#' @return data.frame with parent file name and its hash (sha1)
+#' @export
+#' @examples
+#'
+#' # Requires internet connection to access GitHub.
+#' sourceFinder(parentFile0=parent.frame(2)$ofile)
+#'
+sourceFinder <- function(parentFile0=parent.frame(2)$ofile){
+
+  parentFile <- ifelse(is.null(parentFile0),"Interactive",parentFile0)
+
+  pHash <- ifelse(is.null(parentFile0),"",digest::digest(file=parentFile,serialize = FALSE,algo="sha1"))
+
+  parentInfo <- data.frame(parentFile=basename(parentFile),parentHash=pHash)
+
+  rownames(parentInfo) <- NULL
+  
+return(parentInfo)
 
 }
 
@@ -97,16 +123,18 @@ gitSummary <- function(gitRepo="",gitTF=FALSE){
 #'
 
 
-docIDcomputed <- function(gitTF=FALSE,gitRepo=getwd()) {
+docIDcomputed <- function(gitTF=TRUE,gitRepo=getwd()) {
 
   user <- witchUser()
   time <- Sys.time()
 
   idFrame <- data.frame(ComputedBy=user,ComputeTime = time)
-
+  
+  
   idFrame$gitInfo <- gitSummary(gitRepo,gitTF)
 
-
+  idFrame <- cbind(idFrame,sourceFinder())
+  
   rownames(idFrame) <- NULL
 
   return(idFrame)
@@ -140,7 +168,7 @@ printDocId <- function(bornTF=FALSE,...){
 #' @examples
 #'
 #' # Requires internet connection to access GitHub.
-#' printDocId()
+#' newlinesDocID()
 #'
 #'
 newlinesDocID <- function(bornTF=TRUE,...){
@@ -149,5 +177,24 @@ newlinesDocID <- function(bornTF=TRUE,...){
 }
 
 
-
-
+#' Generate code to render creation compute time docID
+#' @return Character vector for code chunk for computing docID
+#' @export
+#' @examples
+#'
+#' # Requires internet connection to access GitHub.
+#' codeChunkDocId()
+#'
+#'
+codeChunkDocId <- function(){
+  
+  codeOut <- c("```\n\n\n",
+  "```{r,echo=FALSE,message=FALSE,warning=FALSE,include=TRUE}\n",
+  
+  "printDocId(bornTF = FALSE,gitTF=TRUE))\n",  
+  "```\n\n\n")
+  
+  return(codeOut)
+  
+  
+}
