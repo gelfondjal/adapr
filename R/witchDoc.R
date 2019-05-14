@@ -114,6 +114,8 @@ return(parentInfo)
 #' Create compute DocID with system user and compute time
 #' @param gitTF Logical whether to include git information
 #' @param gitRepo path to git repository (defaults to working directory)
+#' @param parentFile filename of source file
+#' @param ... arguments to sourceFinder
 #' @return data.frame
 #' @export
 #' @examples
@@ -123,7 +125,7 @@ return(parentInfo)
 #'
 
 
-docIDcomputed <- function(gitTF=TRUE,gitRepo=getwd()) {
+docIDcomputed <- function(gitTF=TRUE,gitRepo=getwd(),parentFile) {
 
   user <- witchUser()
   time <- Sys.time()
@@ -133,7 +135,7 @@ docIDcomputed <- function(gitTF=TRUE,gitRepo=getwd()) {
   
   idFrame$gitInfo <- gitSummary(gitRepo,gitTF)
 
-  idFrame <- cbind(idFrame,sourceFinder())
+  idFrame <- cbind(idFrame,sourceFinder(parentFile0 = parentFile,...))
   
   rownames(idFrame) <- NULL
 

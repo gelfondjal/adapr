@@ -4,12 +4,16 @@
 \alias{docIDcomputed}
 \title{Create compute DocID with system user and compute time}
 \usage{
-docIDcomputed(gitTF = TRUE, gitRepo = getwd())
+docIDcomputed(gitTF = TRUE, gitRepo = getwd(), parentFile)
 }
 \arguments{
 \item{gitTF}{Logical whether to include git information}
 
 \item{gitRepo}{path to git repository (defaults to working directory)}
+
+\item{parentFile}{filename of source file}
+
+\item{...}{arguments to sourceFinder}
 }
 \value{
 data.frame
