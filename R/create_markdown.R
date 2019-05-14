@@ -23,6 +23,7 @@ createMarkdown <- function(target.file=paste0(getSourceInfo()$file$file,"md"),ta
 	target.file <- file.path(target.dir,target.file)
 #	Read.cap(file.information,read.fcn=I,source_info=si)
   
+	
 	docID <- printDocId(bornTF = TRUE,gitTF=TRUE)
 	
 	if((!overwrite)&file.exists(target.file)){return(file.information)}
@@ -52,7 +53,7 @@ createMarkdown <- function(target.file=paste0(getSourceInfo()$file$file,"md"),ta
 							"```\n\n\n",
 						"```{r,echo=FALSE,message=FALSE,warning=FALSE,include=TRUE}\n",
 
-							"printDocId(bornTF = FALSE,gitTF=TRUE)\n",  
+							"printDocId(bornTF = FALSE,gitTF=TRUE,parentFile=getSourceInfo()$rmdfile$fullname)\n",  
 						  "```\n\n\n",
 
 							      "\n\n\n\n"),	"<!-- Begin R Markdown Body Here --> ",

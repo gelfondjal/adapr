@@ -125,7 +125,7 @@ return(parentInfo)
 #'
 
 
-docIDcomputed <- function(gitTF=TRUE,gitRepo=getwd(),parentFile) {
+docIDcomputed <- function(gitTF=TRUE,gitRepo=getwd(),parentFile=parent.frame(2)$ofile) {
 
   user <- witchUser()
   time <- Sys.time()
@@ -135,7 +135,7 @@ docIDcomputed <- function(gitTF=TRUE,gitRepo=getwd(),parentFile) {
   
   idFrame$gitInfo <- gitSummary(gitRepo,gitTF)
 
-  idFrame <- cbind(idFrame,sourceFinder(parentFile0 = parentFile,...))
+  idFrame <- cbind(idFrame,sourceFinder(parentFile0 = parentFile))
   
   rownames(idFrame) <- NULL
 
@@ -150,7 +150,7 @@ docIDcomputed <- function(gitTF=TRUE,gitRepo=getwd(),parentFile) {
 #' @export
 #' @examples
 #'
-#' # Requires internet connection to access GitHub.
+#' # Requires internet connection to access true random numbers
 #' printDocId()
 #'
 #'
