@@ -31,25 +31,7 @@ commitProject <- function(commit.message="",project.id=getProject(),addAll = FAL
   }
   
   committed <- git2r::commit(repo,message =paste(synccheck,commit.message))
-  out <- paste("Git",commit2char(committed))
-  return(out)
-  
-}
-#' git2r commit class to character converter
-#' @param commitclass Commit object
-#' @return commit message
-#' @details Uses git2r package.
-#' @examples 
-#' \dontrun{
-#' committed <- git2r::commit(repo,message =commit.message)
-#' out <- paste("Git",commit2char(committed))
-#'} 
-#'
-commit2char <- function(commitclass){
-  
-  out <- paste(commitclass@sha,utils::capture.output(show(commitclass@author@when)),
-               commitclass@author@name,commitclass@message)
-  
+  out <- gitSummary(source_info$project.path,TRUE)
   return(out)
   
 }

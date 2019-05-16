@@ -65,7 +65,7 @@ witchUser <- function(userName="Anonymous",setUser=FALSE){
 #'
 
 
-gitSummary <- function(gitRepo="",gitTF=FALSE){
+gitSummary <- function(gitRepo="",gitTF=TRUE){
 
   gitSummary <- ""
   
@@ -76,7 +76,7 @@ gitSummary <- function(gitRepo="",gitTF=FALSE){
     committed <- git2r::last_commit(repo )
 
     gitSummary <- utils::capture.output(print(committed))
-  })
+  },silent = TRUE)
     return(gitSummary)
 
   }else{

@@ -4,7 +4,7 @@
 \alias{gitSummary}
 \title{Create creation Git summary string with git2r function}
 \usage{
-gitSummary(gitRepo = "", gitTF = FALSE)
+gitSummary(gitRepo = "", gitTF = TRUE)
 }
 \arguments{
 \item{gitRepo}{path to git repository (defaults to working directory)}
