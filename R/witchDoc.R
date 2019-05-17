@@ -20,7 +20,7 @@ docIDborn <- function(nhash=5,gitTF=FALSE,gitRepo=getwd()) {
 
   idFrame <- list(docIDs,Creator=user,DesignedOn = time)
 
-  idFrame <- data.frame(docID=digest::digest(idFrame),Creator=user,DesignedOn = time)
+  idFrame <- data.frame(docID=digest::digest(idFrame),author=user,designedOn = time)
 
   idFrame$gitInfo <- gitSummary(gitRepo,gitTF)
 
@@ -130,7 +130,7 @@ docIDcomputed <- function(gitTF=TRUE,gitRepo=getwd(),parentFile=parent.frame(2)$
   user <- witchUser()
   time <- Sys.time()
 
-  idFrame <- data.frame(ComputedBy=user,ComputeTime = time)
+  idFrame <- data.frame(computedBy=user,computeTime = time)
   
   
   idFrame$gitInfo <- gitSummary(gitRepo,gitTF)
