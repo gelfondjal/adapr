@@ -21,7 +21,8 @@ Create creation DocID based on true random number
 }
 \examples{
 
-# Requires internet connection to access GitHub.
+# Requires internet connection to access random number generator.
+\dontrun{
 docIDborn()
-
+}
 }

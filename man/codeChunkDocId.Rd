@@ -14,8 +14,9 @@ Generate code to render creation compute time docID
 }
 \examples{
 
-# Requires internet connection to access GitHub.
+# Requires internet connection to access random number generator.
+\dontrun{
 codeChunkDocId()
-
+}
 
 }

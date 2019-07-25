@@ -25,6 +25,7 @@ Create compute DocID with system user and compute time
 \examples{
 
 # Requires internet connection to access GitHub.
+\dontrun{
 docIDcomputed()
-
+}
 }

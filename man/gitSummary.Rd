@@ -19,7 +19,8 @@ Create creation Git summary string with git2r function
 }
 \examples{
 
-# Requires internet connection to access GitHub.
+# Requires internet connection to access random number generator.
+\dontrun{
 gitSummary()
-
+}
 }

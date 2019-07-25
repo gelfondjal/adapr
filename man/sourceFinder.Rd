@@ -17,7 +17,8 @@ sourceFinder creates a filename and hash at runtime
 }
 \examples{
 
-# Requires internet connection to access GitHub.
+# Requires internet connection to access random number generator.
+\dontrun{
 sourceFinder(parentFile0=parent.frame(2)$ofile)
-
+}
 }

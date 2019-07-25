@@ -21,5 +21,7 @@ Retrieve or identify a username.
 Accesses the options()$WitchUser variable or the system user name.
 }
 \examples{
+\dontrun{
 witchUser()
+}
 }

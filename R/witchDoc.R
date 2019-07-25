@@ -6,19 +6,23 @@
 #' @export
 #' @examples
 #'
-#' # Requires internet connection to access GitHub.
+#' # Requires internet connection to access random number generator.
+#' \dontrun{
 #' docIDborn()
-#'
+#' }
 
 docIDborn <- function(nhash=5,gitTF=FALSE,gitRepo=getwd()) {
 
-  nhash <- as.integer(nhash)
-
-  docIDs <- random::randomNumbers(n=nhash, min=1, max=1e6,col=1)
   user <- witchUser()
   time <- Sys.time()
 
-  idFrame <- list(docIDs,Creator=user,DesignedOn = time)
+  nhash <- as.integer(nhash)
+  
+  docIDs <- rnorm(nhash)
+  
+  try(docIDs <- random::randomNumbers(n=nhash, min=1, max=1e6,col=1),silent = TRUE)
+  
+  idFrame <- list(docIDs,Creator=user,DraftedOn = time)
 
   idFrame <- data.frame(docID=digest::digest(idFrame),author=user,designedOn = time)
 
@@ -35,7 +39,9 @@ docIDborn <- function(nhash=5,gitTF=FALSE,gitRepo=getwd()) {
 #' @details Accesses the options()$WitchUser variable or the system user name.
 #' @export
 #' @examples
+#' \dontrun{
 #' witchUser()
+#' }
 
 witchUser <- function(userName="Anonymous",setUser=FALSE){
 
@@ -60,9 +66,10 @@ witchUser <- function(userName="Anonymous",setUser=FALSE){
 #' @export
 #' @examples
 #'
-#' # Requires internet connection to access GitHub.
+#' # Requires internet connection to access random number generator.
+#' \dontrun{
 #' gitSummary()
-#'
+#'}
 
 
 gitSummary <- function(gitRepo="",gitTF=TRUE){
@@ -94,9 +101,10 @@ gitSummary <- function(gitRepo="",gitTF=TRUE){
 #' @export
 #' @examples
 #'
-#' # Requires internet connection to access GitHub.
+#' # Requires internet connection to access random number generator.
+#' \dontrun{
 #' sourceFinder(parentFile0=parent.frame(2)$ofile)
-#'
+#' }
 sourceFinder <- function(parentFile0=parent.frame(2)$ofile){
 
   parentFile <- ifelse(is.null(parentFile0),"Interactive",parentFile0)
@@ -121,8 +129,9 @@ return(parentInfo)
 #' @examples
 #'
 #' # Requires internet connection to access GitHub.
+#' \dontrun{
 #' docIDcomputed()
-#'
+#'}
 
 
 docIDcomputed <- function(gitTF=TRUE,gitRepo=getwd(),parentFile=parent.frame(2)$ofile) {
@@ -151,8 +160,9 @@ docIDcomputed <- function(gitTF=TRUE,gitRepo=getwd(),parentFile=parent.frame(2)$
 #' @examples
 #'
 #' # Requires internet connection to access true random numbers
+#' \dontrun{
 #' printDocId()
-#'
+#' }
 #'
 printDocId <- function(bornTF=FALSE,...){
   if(bornTF){
@@ -169,9 +179,10 @@ printDocId <- function(bornTF=FALSE,...){
 #' @export
 #' @examples
 #'
-#' # Requires internet connection to access GitHub.
+#' # Requires internet connection to access random number generator.
+#' \dontrun{
 #' newlinesDocID()
-#'
+#' }
 #'
 newlinesDocID <- function(bornTF=TRUE,...){
   return(paste("\n\n",printDocId(bornTF,...),"\n\n",collapse="\n"))
@@ -184,9 +195,10 @@ newlinesDocID <- function(bornTF=TRUE,...){
 #' @export
 #' @examples
 #'
-#' # Requires internet connection to access GitHub.
+#' # Requires internet connection to access random number generator.
+#' \dontrun{
 #' codeChunkDocId()
-#'
+#' }
 #'
 codeChunkDocId <- function(){
   

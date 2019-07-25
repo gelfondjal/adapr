@@ -20,7 +20,8 @@ Create character strings for DocID with system user and compute time
 \examples{
 
 # Requires internet connection to access true random numbers
+\dontrun{
 printDocId()
-
+}
 
 }

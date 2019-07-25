@@ -2,7 +2,7 @@ Package: adapr
 Type: Package
 Title: Implementation of an Accountable Data Analysis Process
 Version: 2.1.0
-Date: 2019-03-15
+Date: 2019-07-15
 Author: Jon Gelfond, Martin Goros
 Maintainer: Jonathan Gelfond <gelfondjal@uthscsa.edu>
 BugReports: https://github.com/gelfondjal/adapr/issues

@@ -19,8 +19,9 @@ Generate string vector to render creation docID
 }
 \examples{
 
-# Requires internet connection to access GitHub.
+# Requires internet connection to access random number generator.
+\dontrun{
 newlinesDocID()
-
+}
 
 }
