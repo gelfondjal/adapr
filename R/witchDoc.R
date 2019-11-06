@@ -18,7 +18,7 @@ docIDborn <- function(nhash=5,gitTF=FALSE,gitRepo=getwd()) {
 
   nhash <- as.integer(nhash)
   
-  docIDs <- rnorm(nhash)
+  docIDs <- stats::rnorm(nhash)
   
   try(docIDs <- random::randomNumbers(n=nhash, min=1, max=1e6,col=1),silent = TRUE)
   

@@ -115,11 +115,12 @@ writeWorkspace <- function(objectList=ls(envir=parent.frame()),fileOut=NA,descri
 listWorkspaces <- function(project=getProject()){
   
   fileList <- getProjectFiles(project)
+  fileList$preserved <- TRUE
   fileList <- subset(fileList,(fileList$dependency=="out")&(grepl("\\.ws$",fileList$target.file)))
   
+
   fileList <- subset(fileList,select=c("source.file","target.file","target.description","target.mod.time"))
   
-  fileList$preserved <- TRUE
   
   fileListDumps <- grep("\\.ws$",list.files(file.path(getProjectPath(project),project.directory.tree$results),recursive=TRUE,full.names=TRUE),value=TRUE)
   fileListDumps <- data.frame(target.file=fileListDumps,target.description="file dump, not preserved",preserved=FALSE,stringsAsFactors=FALSE)	
