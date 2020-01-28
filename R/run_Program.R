@@ -187,6 +187,6 @@ removeScript <- function(source.file=get("source_info")$file$file,project.id=get
 
 runScriptQuiet <- function(pathToScript,...){
   #/Volumes/WORKING2/Projects/Gelfond/R_test/Programs/read_data.R
-  valueOut <- callr::rcmd_safe(cmd="Batch",cmdargs = paste(pathToScript,"--no-save --vanilla -sdf"),...)
+  valueOut <- callr::rcmd_safe(cmd="BATCH",cmdargs = paste(pathToScript,"--no-save --vanilla -sdf"),...)
   return(valueOut$status)
 }

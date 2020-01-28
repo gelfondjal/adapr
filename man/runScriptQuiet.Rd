@@ -19,7 +19,7 @@ Run an R script in the background using callr::rcmd_safe
 }
 \examples{
 \dontrun{
-runScript("pathToMyRscript.R")
+runScriptQuiet("pathToMyRscript.R")
 } 
 
 }
