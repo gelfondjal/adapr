@@ -4,8 +4,12 @@
 \alias{loadInstallLibraryFile}
 \title{This function is no longer supported. Loads libraries within the file library.list.file}
 \usage{
-loadInstallLibraryFile(library.data.file = NA, subgroup = NULL,
-  verbose = FALSE, install.all = FALSE)
+loadInstallLibraryFile(
+  library.data.file = NA,
+  subgroup = NULL,
+  verbose = FALSE,
+  install.all = FALSE
+)
 }
 \arguments{
 \item{library.data.file}{CSV File with a set of library names and repository locations}

@@ -4,8 +4,7 @@
 \alias{showResults}
 \title{Opens results directory of project or R script within a project}
 \usage{
-showResults(project.id = getProject(),
-  rscript = getSourceInfo()$file$file)
+showResults(project.id = getProject(), rscript = getSourceInfo()$file$file)
 }
 \arguments{
 \item{project.id}{character string specifies project}

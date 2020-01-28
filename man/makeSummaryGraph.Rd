@@ -4,8 +4,11 @@
 \alias{makeSummaryGraph}
 \title{Make.summary graph of projects based on files in dependency directory}
 \usage{
-makeSummaryGraph(dependency.dir = NULL, dependency.object = NULL,
-  plot.graph = FALSE)
+makeSummaryGraph(
+  dependency.dir = NULL,
+  dependency.object = NULL,
+  plot.graph = FALSE
+)
 }
 \arguments{
 \item{dependency.dir}{Dependency directory}

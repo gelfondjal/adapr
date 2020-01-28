@@ -4,9 +4,14 @@
 \alias{Write}
 \title{Write object and capture file information}
 \usage{
-Write(obj = NULL, file.name = "data.csv",
-  description = "Result file", write.fcn = guessWriteFcn(file.name),
-  date = FALSE, ...)
+Write(
+  obj = NULL,
+  file.name = "data.csv",
+  description = "Result file",
+  write.fcn = guessWriteFcn(file.name),
+  date = FALSE,
+  ...
+)
 }
 \arguments{
 \item{obj}{object to write}

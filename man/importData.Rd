@@ -4,8 +4,7 @@
 \alias{importData}
 \title{Import selected file into the project data directory}
 \usage{
-importData(datafile = "", project.id = getProject(),
-  overwriteTF = TRUE)
+importData(datafile = "", project.id = getProject(), overwriteTF = TRUE)
 }
 \arguments{
 \item{datafile}{filename can be unspecified}

@@ -4,9 +4,14 @@
 \alias{plantTree}
 \title{initialize project}
 \usage{
-plantTree(project.id, project.path = NA, swap.directory = NA,
-  first.program = "read_data.R", project.libraryTF = FALSE,
-  library.path = "")
+plantTree(
+  project.id,
+  project.path = NA,
+  swap.directory = NA,
+  first.program = "read_data.R",
+  project.libraryTF = FALSE,
+  library.path = ""
+)
 }
 \arguments{
 \item{project.id}{Project name, if missing then default}

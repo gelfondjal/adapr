@@ -4,8 +4,10 @@
 \alias{openMarkdown}
 \title{Opens R markdown from a project with default R program.}
 \usage{
-openMarkdown(markdownFile = getSourceInfo()$rmdfile$file,
-  project.id = getProject())
+openMarkdown(
+  markdownFile = getSourceInfo()$rmdfile$file,
+  project.id = getProject()
+)
 }
 \arguments{
 \item{markdownFile}{Mardown filename to open, then current R script}

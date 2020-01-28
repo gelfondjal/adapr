@@ -4,8 +4,11 @@
 \alias{installLibrary}
 \title{Install package of specific version}
 \usage{
-installLibrary(input = getLibrary(), lib = getProjectLibrary(),
-  versionCheck = FALSE)
+installLibrary(
+  input = getLibrary(),
+  lib = getProjectLibrary(),
+  versionCheck = FALSE
+)
 }
 \arguments{
 \item{input}{data.frame with 3 columns package version repos to install}

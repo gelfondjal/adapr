@@ -5,8 +5,7 @@
 \title{Make plot of network within html documents.
 Summarize all programs.}
 \usage{
-reportProject(project.id = getProject(), graph.width = 960,
-  graph.height = 500)
+reportProject(project.id = getProject(), graph.width = 960, graph.height = 500)
 }
 \arguments{
 \item{project.id}{Source information list}

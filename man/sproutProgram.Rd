@@ -4,9 +4,14 @@
 \alias{sproutProgram}
 \title{Lower level function that generates the shell of a code that is project specific}
 \usage{
-sproutProgram(project.id = NA, source.file.name = NA,
-  description = "", seed = 2011,
-  capture.load.command = "library(\\"adapr\\")", controller = FALSE)
+sproutProgram(
+  project.id = NA,
+  source.file.name = NA,
+  description = "",
+  seed = 2011,
+  capture.load.command = "library(\\"adapr\\")",
+  controller = FALSE
+)
 }
 \arguments{
 \item{project.id}{Name of project}

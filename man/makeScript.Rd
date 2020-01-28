@@ -4,8 +4,14 @@
 \alias{makeScript}
 \title{Generates the shell of a code that is project specific}
 \usage{
-makeScript(r = "", description = "", project.id = getProject(),
-  seed = 2011, run = TRUE, openTF = TRUE)
+makeScript(
+  r = "",
+  description = "",
+  project.id = getProject(),
+  seed = 2011,
+  run = TRUE,
+  openTF = TRUE
+)
 }
 \arguments{
 \item{r}{is source file name or Filename to create}

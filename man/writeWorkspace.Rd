@@ -4,8 +4,13 @@
 \alias{writeWorkspace}
 \title{Writes R script workspace to file in script's Results directory}
 \usage{
-writeWorkspace(objectList = ls(envir = parent.frame()), fileOut = NA,
-  description = "", limit = 2, preserve = FALSE)
+writeWorkspace(
+  objectList = ls(envir = parent.frame()),
+  fileOut = NA,
+  description = "",
+  limit = 2,
+  preserve = FALSE
+)
 }
 \arguments{
 \item{objectList}{optional character vector of R object names to write to file}

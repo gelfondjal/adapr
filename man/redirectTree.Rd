@@ -4,8 +4,13 @@
 \alias{redirectTree}
 \title{Lower level function that that changes project directory/publish directory or identifies imported project}
 \usage{
-redirectTree(project.id0, project.path = NA, swap.directory = NA,
-  project.libraryTF = FALSE, library.path = "")
+redirectTree(
+  project.id0,
+  project.path = NA,
+  swap.directory = NA,
+  project.libraryTF = FALSE,
+  library.path = ""
+)
 }
 \arguments{
 \item{project.id0}{Project name}

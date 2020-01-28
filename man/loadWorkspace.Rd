@@ -4,8 +4,11 @@
 \alias{loadWorkspace}
 \title{Loads the R script workspace int}
 \usage{
-loadWorkspace(file = NA, script = getSourceInfo()$file$file,
-  project = getProject())
+loadWorkspace(
+  file = NA,
+  script = getSourceInfo()$file$file,
+  project = getProject()
+)
 }
 \arguments{
 \item{file}{character string of workspace file to load. If missing then loads last workspace of current R script.}

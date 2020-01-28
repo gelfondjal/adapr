@@ -4,8 +4,13 @@
 \alias{gitCommit}
 \title{git commit. Requires git installation.}
 \usage{
-gitCommit(gitdir, message, branch = NULL, git_args = character(),
-  git_binary = NULL)
+gitCommit(
+  gitdir,
+  message,
+  branch = NULL,
+  git_args = character(),
+  git_binary = NULL
+)
 }
 \arguments{
 \item{gitdir}{string with git directory}

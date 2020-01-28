@@ -4,8 +4,11 @@
 \alias{arcRead}
 \title{Loads R object from archivist repository within the results directory of another adapr Script}
 \usage{
-arcRead(rscript = "read_data.R", description = "xyplot",
-  project.id = getProject())
+arcRead(
+  rscript = "read_data.R",
+  description = "xyplot",
+  project.id = getProject()
+)
 }
 \arguments{
 \item{rscript}{name of R script that loaded the function}

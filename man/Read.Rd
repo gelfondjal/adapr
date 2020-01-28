@@ -4,8 +4,12 @@
 \alias{Read}
 \title{Read data and capture the file information within dependency object}
 \usage{
-Read(file.name = "data.csv", description = "Data file",
-  read.fcn = guess.read.fcn(file.name), ...)
+Read(
+  file.name = "data.csv",
+  description = "Data file",
+  read.fcn = guess.read.fcn(file.name),
+  ...
+)
 }
 \arguments{
 \item{file.name}{name of file}

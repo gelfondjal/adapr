@@ -4,9 +4,14 @@
 \alias{createMarkdown}
 \title{Creates an Rmarkdown file in specified directory}
 \usage{
-createMarkdown(target.file = paste0(getSourceInfo()$file$file, "md"),
-  target.dir = getSourceInfo()$markdown.dir, style = "html_document",
-  description = "Markdown", si, overwrite = FALSE)
+createMarkdown(
+  target.file = paste0(getSourceInfo()$file$file, "md"),
+  target.dir = getSourceInfo()$markdown.dir,
+  style = "html_document",
+  description = "Markdown",
+  si,
+  overwrite = FALSE
+)
 }
 \arguments{
 \item{target.file}{Markdown file to create}

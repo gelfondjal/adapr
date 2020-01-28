@@ -4,8 +4,13 @@
 \alias{relocateProject}
 \title{changes project directory/publish directory/library locataion or identifies imported project}
 \usage{
-relocateProject(project.id0, project.path = NA, swap.directory = NA,
-  project.libraryTF = FALSE, library.path = "")
+relocateProject(
+  project.id0,
+  project.path = NA,
+  swap.directory = NA,
+  project.libraryTF = FALSE,
+  library.path = ""
+)
 }
 \arguments{
 \item{project.id0}{Project name}

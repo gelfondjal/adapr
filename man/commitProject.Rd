@@ -4,8 +4,12 @@
 \alias{commitProject}
 \title{Git commit of project.}
 \usage{
-commitProject(commit.message = "", project.id = getProject(),
-  addAll = FALSE, checkSync = TRUE)
+commitProject(
+  commit.message = "",
+  project.id = getProject(),
+  addAll = FALSE,
+  checkSync = TRUE
+)
 }
 \arguments{
 \item{commit.message}{message describing edits}

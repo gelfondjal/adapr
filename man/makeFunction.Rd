@@ -4,8 +4,7 @@
 \alias{makeFunction}
 \title{Generates the shell of a R function that is project specific in support_functions folder}
 \usage{
-makeFunction(functionName = NA, description = "",
-  project.id = getProject())
+makeFunction(functionName = NA, description = "", project.id = getProject())
 }
 \arguments{
 \item{functionName}{character string for R function.}

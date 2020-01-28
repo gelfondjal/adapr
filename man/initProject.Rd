@@ -4,9 +4,14 @@
 \alias{initProject}
 \title{initialize project}
 \usage{
-initProject(project.id, project.path = NA, publish.directory = NA,
-  first.program = "read_data.R", project.libraryTF = FALSE,
-  library.path = "")
+initProject(
+  project.id,
+  project.path = NA,
+  publish.directory = NA,
+  first.program = "read_data.R",
+  project.libraryTF = FALSE,
+  library.path = ""
+)
 }
 \arguments{
 \item{project.id}{Project name, if missing then default}

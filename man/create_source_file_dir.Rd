@@ -4,8 +4,11 @@
 \alias{create_source_file_dir}
 \title{Create source file directories}
 \usage{
-create_source_file_dir(project.id0 = get("project.id"),
-  source.file0 = get("source.file"), source.description = "")
+create_source_file_dir(
+  project.id0 = get("project.id"),
+  source.file0 = get("source.file"),
+  source.description = ""
+)
 }
 \arguments{
 \item{project.id0}{project id name string}

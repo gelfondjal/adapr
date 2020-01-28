@@ -4,8 +4,13 @@
 \alias{Graph}
 \title{Write object and capture file information}
 \usage{
-Graph(file.name = "data.csv", description = "Result file",
-  write.fcn = guessWriteFcn(file.name), date = FALSE, ...)
+Graph(
+  file.name = "data.csv",
+  description = "Result file",
+  write.fcn = guessWriteFcn(file.name),
+  date = FALSE,
+  ...
+)
 }
 \arguments{
 \item{file.name}{file to write to the source "Result" directory}

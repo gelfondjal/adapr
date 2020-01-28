@@ -5,8 +5,10 @@
 \title{Install adapr in a library
 adaprInstall.R}
 \usage{
-adaprInstall(library.location = getProjectLibrary("adaprHome"),
-  betaTF = getAdaprOptions()$adaprBeta)
+adaprInstall(
+  library.location = getProjectLibrary("adaprHome"),
+  betaTF = getAdaprOptions()$adaprBeta
+)
 }
 \arguments{
 \item{library.location}{file path to library}

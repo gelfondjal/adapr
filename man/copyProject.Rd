@@ -4,9 +4,13 @@
 \alias{copyProject}
 \title{Copies project to a different directory}
 \usage{
-copyProject(project.id = getProject(),
-  targetDirectory = getProjectPublishPath(project.id), dataCopy = TRUE,
-  programsOnly = FALSE, speedCopy = TRUE)
+copyProject(
+  project.id = getProject(),
+  targetDirectory = getProjectPublishPath(project.id),
+  dataCopy = TRUE,
+  programsOnly = FALSE,
+  speedCopy = TRUE
+)
 }
 \arguments{
 \item{project.id}{character string name of project}

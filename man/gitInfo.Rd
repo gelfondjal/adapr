@@ -4,8 +4,13 @@
 \alias{gitInfo}
 \title{Retrieves the information from git about a file}
 \usage{
-gitInfo(gitdir, filename, branch = NULL, git_args = character(),
-  git_binary = NULL)
+gitInfo(
+  gitdir,
+  filename,
+  branch = NULL,
+  git_args = character(),
+  git_binary = NULL
+)
 }
 \arguments{
 \item{gitdir}{string with git directory}

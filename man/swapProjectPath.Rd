@@ -4,8 +4,10 @@
 \alias{swapProjectPath}
 \title{Lower level function that takes list of dependency file data and changes the project path}
 \usage{
-swapProjectPath(list.deps,
-  new.path = getProjectPath(get("source_info")$project.id))
+swapProjectPath(
+  list.deps,
+  new.path = getProjectPath(get("source_info")$project.id)
+)
 }
 \arguments{
 \item{list.deps}{list of dependency file data}

@@ -4,8 +4,11 @@
 \alias{removeScript}
 \title{Remove an R script from a project. Removes program, dependency, and results.}
 \usage{
-removeScript(source.file = get("source_info")$file$file,
-  project.id = getProject(), ask = TRUE)
+removeScript(
+  source.file = get("source_info")$file$file,
+  project.id = getProject(),
+  ask = TRUE
+)
 }
 \arguments{
 \item{source.file}{R script within that project}

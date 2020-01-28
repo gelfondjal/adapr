@@ -177,9 +177,10 @@ removeScript <- function(source.file=get("source_info")$file$file,project.id=get
 #' @param pathToScript filepath to R script 
 #' @param ... extra arguments to callr::rcmd_safe
 #' @return value from callr::rcmd_safe status of script execution
+#' @export
 #'@examples 
 #'\dontrun{
-#' runScript("pathToMyRscript.R")
+#' runScriptQuiet("pathToMyRscript.R")
 #'} 
 #' 
 

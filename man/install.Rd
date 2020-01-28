@@ -4,9 +4,16 @@
 \alias{install}
 \title{Install package of specific version}
 \usage{
-install(package, version = NULL, installVersion = FALSE,
-  lib = .libPaths()[1], repos = getOption("repos"),
-  show.available = FALSE, packageSource = "", ...)
+install(
+  package,
+  version = NULL,
+  installVersion = FALSE,
+  lib = .libPaths()[1],
+  repos = getOption("repos"),
+  show.available = FALSE,
+  packageSource = "",
+  ...
+)
 }
 \arguments{
 \item{package}{package name to install}

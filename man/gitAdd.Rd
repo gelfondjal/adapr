@@ -4,8 +4,13 @@
 \alias{gitAdd}
 \title{git add to stage the file}
 \usage{
-gitAdd(gitdir, filename, branch = NULL, git_args = character(),
-  git_binary = NULL)
+gitAdd(
+  gitdir,
+  filename,
+  branch = NULL,
+  git_args = character(),
+  git_binary = NULL
+)
 }
 \arguments{
 \item{gitdir}{string with git directory}

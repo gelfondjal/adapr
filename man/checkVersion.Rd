@@ -4,8 +4,12 @@
 \alias{checkVersion}
 \title{Check install of package of specific version}
 \usage{
-checkVersion(package0, version0 = "", versionCheck = FALSE,
-  lib = .libPaths()[1])
+checkVersion(
+  package0,
+  version0 = "",
+  versionCheck = FALSE,
+  lib = .libPaths()[1]
+)
 }
 \arguments{
 \item{package0}{name of package}
